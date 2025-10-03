@@ -1,0 +1,842 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "edit": "Edit",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "continue": "Continue",
+    "yes": "Yes",
+    "no": "No",
+    "noListings": "No listings found",
+    "showDetails": "Show Details",
+    "hideDetails": "Hide Details",
+    "goHome": "Go Home",
+    "welcome": "Welcome",
+    "notSet": "Not set",
+    "pleaseCorrectErrors": "Please correct the following errors:",
+    "unsavedChanges": "You have unsaved changes",
+    "unsavedChangesConfirm": "You have unsaved changes. Are you sure you want to leave?",
+    "dismiss": "Dismiss",
+    "ok": "OK",
+    "saving": "Saving",
+    "draft_saved": "Draft saved",
+    "draft_loaded": "Draft loaded",
+    "selected": "selected",
+    "selectLanguage": "Select Language",
+    "current": "Current",
+    "image": "Image",
+    "confirmDelete": "Confirm Delete"
+  },
+  "navigation": {
+    "home": "Home",
+    "menu": "Menu",
+    "toggleMenu": "Toggle navigation menu",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "account": "Account",
+    "settings": "Settings",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register",
+    "logs": {
+      "menuUnavailable": "Menu controller not available",
+      "menuToggleFailed": "Menu toggle failed"
+    }
+  },
+  "menu": {
+    "marketplace": "Marketplace",
+    "myListings": "My Listings"
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "rememberMe": "Remember Me",
+    "loginButton": "Login",
+    "registerButton": "Sign Up",
+    "logoutButton": "Logout",
+    "signIn": "Sign In",
+    "enterEmail": "Enter your email",
+    "enterPassword": "Enter your password",
+    "enterName": "Enter your name",
+    "dontHaveAccount": "Don't have an account?",
+    "alreadyHaveAccount": "Already have an account?",
+    "signUpLink": "Sign up",
+    "signInLink": "Sign in",
+    "verifyEmail": "Verify Email",
+    "completeProfile": "Complete Profile",
+    "getStarted": "Get Started",
+    "enterEmailToRegister": "Enter your email to create an account",
+    "checkYourEmail": "Check Your Email",
+    "verificationCodeSent": "We've sent a verification code to {email}",
+    "verificationCode": "Verification Code",
+    "enterCodeFromEmail": "Enter code from email",
+    "verifyingEmail": "Verifying your email...",
+    "redirectingToManualEntry": "Redirecting to manual entry...",
+    "didntReceiveCode": "Didn't receive the code?",
+    "sending": "Sending...",
+    "resendCode": "Resend Code",
+    "verificationCodeSentSuccess": "Verification code sent!",
+    "welcomeBack": "Welcome Back",
+    "signInToContinue": "Sign in to continue",
+    "createAccount": "Create Account",
+    "joinUsToday": "Register for free and start selling and connecting with buyers, it's free!",
+    "creatingWorkspace": "Creating your workspace...",
+    "settingUpCompany": "Setting up your company and spaces...",
+    "retryCreation": "Retry",
+    "skipForNow": "Skip for now"
+  },
+  "home": {
+    "title": "BSF Marketplace",
+    "subtitle": "Welcome to BSF Marketplace with products and services related to BSF all around the world.",
+    "welcomeMessage": "Welcome to {appName}",
+    "getStarted": "Get Started",
+    "signIn": "Sign In",
+    "featuresCarousel": "Features carousel",
+    "features": {
+      "secure": {
+        "title": "Find sellers",
+        "description": "Find insect related products and services easily",
+        "iconLabel": "Security icon"
+      },
+      "fast": {
+        "title": "Find buyers",
+        "description": "Advertise and sell your products and services to insect producers",
+        "iconLabel": "Speed icon"
+      },
+      "mobile": {
+        "title": "Free to start",
+        "description": "Browse listings without registering. Register free to get all benefits.",
+        "iconLabel": "Mobile device icon"
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "loadingProfile": "Loading profile...",
+    "errorLoadingProfile": "Error loading profile",
+    "welcome": "Welcome!",
+    "userProfile": "User Profile",
+    "hereIsYourProfile": "Here is your profile overview",
+    "manageAccount": "Manage Account",
+    "profileDetails": "Profile Details",
+    "quickAccess": "Quick Access",
+    "navigateToMarketplace": "Go to Marketplace",
+    "navigateToWanted": "Browse Wanted",
+    "navigateToAccount": "Manage Account"
+  },
+  "profile": {
+    "email": "Email",
+    "name": "Name",
+    "accountType": "Account Type",
+    "creditsBalance": "Credits Balance",
+    "activeCompany": "Active Company",
+    "editProfile": "Edit Profile",
+    "updateProfile": "Update Profile",
+    "company": "Company",
+    "phone": "Phone",
+    "memberSince": "Member Since"
+  },
+  "account": {
+    "title": "Account",
+    "subtitle": "Manage your account settings and profile information",
+    "company": {
+      "title": "Company Information",
+      "edit": "Edit Company",
+      "name": "Company Name",
+      "street": "Street Address",
+      "city": "City",
+      "country": "Country",
+      "timezone": "Timezone",
+      "businessId": "Business ID",
+      "namePlaceholder": "Enter company name",
+      "streetPlaceholder": "Enter street address",
+      "cityPlaceholder": "Enter city",
+      "countryPlaceholder": "Select country",
+      "timezonePlaceholder": "Select timezone",
+      "businessIdPlaceholder": "Enter business ID",
+      "notSet": "Not Set",
+      "updateSuccess": "Company updated successfully",
+      "updateError": "Failed to update company",
+      "permissionDenied": "You do not have permission to edit company"
+    },
+    "profile": {
+      "title": "Profile",
+      "basicDetails": "Profile Details",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "name": "Name",
+      "phone": "Phone",
+      "country": "Country",
+      "city": "City",
+      "firstNamePlaceholder": "Enter your first name",
+      "lastNamePlaceholder": "Enter your last name",
+      "emailPlaceholder": "Enter your email address",
+      "namePlaceholder": "Enter your full name",
+      "phonePlaceholder": "Enter your phone number",
+      "countryPlaceholder": "Select your country",
+      "cityPlaceholder": "Enter your city",
+      "updateSuccess": "Profile updated successfully",
+      "placeholders": {
+        "firstName": "Enter your first name",
+        "lastName": "Enter your last name",
+        "email": "Enter your email address",
+        "phone": "Enter your phone number"
+      },
+      "updateButton": "Update Profile"
+    },
+    "password": {
+      "title": "Password",
+      "current": "Current Password",
+      "new": "New Password",
+      "confirm": "Confirm New Password",
+      "currentPlaceholder": "Enter your current password",
+      "newPlaceholder": "Enter your new password",
+      "confirmPlaceholder": "Confirm your new password",
+      "placeholders": {
+        "current": "Enter your current password",
+        "new": "Enter your new password",
+        "confirm": "Confirm your new password"
+      },
+      "updateButton": "Update Password",
+      "validationError": "Password must be at least 6 characters and passwords must match",
+      "updateSuccess": "Password updated successfully",
+      "updateError": "Failed to update password"
+    },
+    "credits": {
+      "title": "Credits",
+      "currentBalance": "Current Balance",
+      "totalEarned": "Total Earned",
+      "totalSpent": "Total Spent",
+      "showHistory": "Show History",
+      "hideHistory": "Hide History",
+      "history": "Credit History"
+    },
+    "products": {
+      "title": "Products",
+      "andXMore": "and {count} more...",
+      "noProducts": "No products purchased yet",
+      "purchaseDate": "Purchase Date",
+      "status": "Status",
+      "purchased": "Purchased",
+      "unknownProduct": "Unknown Product",
+      "statusLabels": {
+        "active": "Active",
+        "expired": "Expired",
+        "cancelled": "Cancelled"
+      }
+    }
+  },
+  "errors": {
+    "generic": "Something went wrong",
+    "networkError": "Network error. Please check your connection.",
+    "unauthorized": "Unauthorized access",
+    "forbidden": "You don't have permission to access this resource",
+    "notFound": "Resource not found",
+    "serverError": "Server error. Please try again later.",
+    "insufficientPermissions": "Insufficient permissions",
+    "spaceAuthorizationFailed": "You do not have access to this space",
+    "databaseError": "Database operation failed",
+    "databaseRetry": "Database error. Please try again later.",
+    "serviceUnavailable": "Service temporarily unavailable",
+    "aiChatUnavailable": "AI chat temporarily unavailable. Try again.",
+    "validationError": "Please check your input",
+    "failedToLoad": "Failed to load {resource}",
+    "failedToCreateAccount": "Failed to create account",
+    "invalidVerificationCode": "Invalid verification code",
+    "fetchLogs": "Failed to fetch logs",
+    "createLog": "Failed to create log",
+    "deleteLog": "Failed to delete log",
+    "delete_failed": "Failed to delete item",
+    "fetchCreditLogs": "Failed to fetch credit logs",
+    "failedToResendCode": "Failed to resend code",
+    "account": {
+      "requiredFields": "Please fill in required fields",
+      "profileUpdateSuccess": "Profile updated successfully",
+      "profileUpdateFailed": "Failed to update profile",
+      "passwordFieldsInvalid": "Please check your password fields",
+      "passwordUpdateSuccess": "Password updated successfully",
+      "passwordUpdateFailed": "Failed to update password",
+      "loadingFailed": "Failed to load account information",
+      "loadProfileFailed": "Failed to load user profile",
+      "loadProfileLog": "Error loading user profile",
+      "updateProfileFailed": "Failed to update user profile",
+      "updateProfileLog": "Error updating user profile",
+      "updateCompanyLog": "Failed to update company. Check console.",
+      "creditHistoryLog": "Error loading credit history",
+      "sendResetFailed": "Failed to send password reset email",
+      "sendResetLog": "Error sending password reset email",
+      "resetPasswordFailed": "Failed to reset password",
+      "resetPasswordLog": "Error resetting password"
+    },
+    "boundary": {
+      "title": "Something went wrong",
+      "message": "We encountered an unexpected error. Please try again or contact support if the problem persists.",
+      "caughtLog": "Error caught by ErrorBoundary",
+      "infoLog": "Error info"
+    },
+    "api": {
+      "generic": "Server error occurred"
+    },
+    "validation": {
+      "generic": "Please fix the form errors below"
+    },
+    "verificationFailed": "Email verification failed. Please try again.",
+    "resendFailed": "Failed to resend verification code. Please try again.",
+    "permissionDenied": "Permission Denied",
+    "titleMismatch": "Entered title does not match",
+    "deleteFailed": "Failed to delete listing",
+    "loadingFailed": "Failed to load content",
+    "productNotFound": "Product not found",
+    "productNotFoundDescription": "The product you're looking for doesn't exist or has been removed",
+    "companyCreationFailed": "Failed to create company. You can retry or skip for now.",
+    "navigationErrorLog": "Navigation error",
+    "navigationFailed": "Navigation failed",
+    "featuredProductFailed": "Failed to load featured product",
+    "rateLimit": "Too many requests. Please wait a moment and try again.",
+    "market": {
+      "usdConversionFailed": "Failed to fetch USD conversion",
+      "productMissingId": "Product missing ID",
+      "wantedMissingId": "Wanted item missing ID",
+      "loadProductsFailed": "Failed to load products",
+      "loadProductDetailFailed": "Failed to load product detail",
+      "randomProductFailedLog": "Failed to fetch random product"
+    },
+    "wanted": {
+      "createFailedLog": "Failed to create wanted listing",
+      "updateFailedLog": "Failed to update wanted listing",
+      "fetchEditFailedLog": "Failed to fetch wanted listing for editing",
+      "loadFailed": "Failed to load wanted items",
+      "loadDetailFailed": "Failed to load wanted item detail",
+      "deleteFailedLog": "Failed to delete wanted item"
+    },
+    "product": {
+      "createFailedLog": "Failed to create product",
+      "updateFailedLog": "Failed to update product",
+      "fetchEditFailedLog": "Failed to fetch product for editing"
+    },
+    "log": {
+      "unexpectedStatus": "Unexpected response status",
+      "contentActionFailedLog": "Failed to log content action",
+      "userActionFailedLog": "Failed to log user action"
+    },
+    "help": {
+      "createModalFailed": "Unable to create help modal. Please try again.",
+      "openFailed": "Failed to open help."
+    }
+  },
+  "validation": {
+    "required": "This field is required",
+    "invalidEmail": "Please enter a valid email address",
+    "minLength": "Minimum length is {min} characters",
+    "maxLength": "Maximum length is {max} characters",
+    "passwordMatch": "Passwords don't match",
+    "invalidFormat": "Invalid format",
+    "listing": {
+      "titleRequired": "Title is required",
+      "titleMax": "Title must be less than 200 characters",
+      "categoryRequired": "Category is required",
+      "categoryInvalid": "Invalid category '{value}'. Valid categories are: {categories}",
+      "subcategoryRequired": "Subcategory is required",
+      "descriptionRequired": "Description is required",
+      "descriptionMax": "Description must be less than 5000 characters",
+      "priceRequired": "Price is required",
+      "priceType": "Price must be a number",
+      "priceMin": "Price must be 0 or greater",
+      "priceFinite": "Price must be a valid number",
+      "currencyLength": "Currency code must be exactly 3 characters",
+      "currencyFormat": "Currency code must be a valid ISO 4217 code (3 uppercase letters)",
+      "quantityRequired": "Quantity is required",
+      "quantityType": "Quantity must be a number",
+      "quantityMin": "Quantity must be 0 or greater",
+      "quantityFinite": "Quantity must be a valid number",
+      "unitRequired": "Unit is required",
+      "unitMax": "Unit must be less than 20 characters",
+      "countryLength": "Country code must be ISO 3166-1 alpha-2",
+      "countryFormat": "Invalid country code",
+      "countryMin": "At least one country must be selected",
+      "countryMax": "Maximum 250 countries allowed",
+      "additionalInfoMax": "Additional info must be less than 2000 characters",
+      "invalidImages": "Invalid images (max {maxFiles} files, {maxSizeMb}MB each, {maxTotalMb}MB total)",
+      "invalidSubcategory": "Invalid subcategory for the selected category"
+    },
+    "profile": {
+      "nameRequired": "Name is required"
+    },
+    "company": {
+      "nameRequired": "Company name is required",
+      "countryFormat": "Country must be a 2-letter ISO code (e.g., FI)"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "notifications": "Notifications",
+    "privacy": "Privacy",
+    "security": "Security",
+    "about": "About",
+    "version": "Version"
+  },
+  "company": {
+    "name": "Company Name",
+    "description": "Description",
+    "industry": "Industry",
+    "employees": "Employees",
+    "founded": "Founded",
+    "website": "Website"
+  },
+  "market": {
+    "products": "Products",
+    "wanted": "Wanted",
+    "messages": "Messages",
+    "conversations": "Conversations",
+    "contact": "Contact"
+  },
+  "marketplace": {
+    "countries_delivery_help": "Select countries where you can deliver your product or service. This is critical as otherwise you will get unnecessary requests.",
+    "update_company_link": "Update company details",
+    "title": "Title",
+    "products": "Products",
+    "myProducts": "My Products",
+    "myWantedItems": "My Wanted Items",
+    "pageTitle": "Marketplace - Find Products",
+    "pageDescription": "Browse and discover products in our marketplace",
+    "search": "Search products...",
+    "searchPlaceholder": "Search products...",
+    "noResults": "No products found",
+    "noProducts": "No products available",
+    "noProductsDescription": "Try adjusting your filters or search terms",
+    "clearFilters": "Clear Filters",
+    "addListing": "Add Listing",
+    "browseButton": "Browse Marketplace",
+    "browseMarketplace": "Browse All Products",
+    "featuredProduct": "Featured Product",
+    "featuredDescription": "Discover amazing products from our sellers",
+    "contactSeller": "Contact Seller",
+    "contactBuyer": "Contact Buyer",
+    "contactEmail": "Contact Email",
+    "contactInformation": "Contact Information",
+    "loginToContact": "Please log in to view contact information",
+    "links": "Links",
+    "emailSubject": "Inquiry about {product}",
+    "loading": "Loading products...",
+    "loadingProducts": "Loading products...",
+    "loadingProduct": "Loading product details...",
+    "error": "Failed to load products",
+    "backToList": "Back to listings",
+    "backToListings": "Back to Product Listings",
+    "allCategories": "All Categories",
+    "productDetail": "Product Details",
+    "create_listing": "Create Listing",
+    "create_product": "Create Product Listing",
+    "create_wanted": "Create Wanted Listing",
+    "select_listing_type": "Select Listing Type",
+    "select_listing_type_desc": "Choose the type of listing you want to create",
+    "create_product_desc": "List a product or service you want to sell",
+    "create_wanted_desc": "Post a request for something you want to buy",
+    "no_company_permission": "You need to have a company and proper permissions to create listings",
+    "basic_information": "Basic Information",
+    "pricing_quantity": "Pricing & Quantity",
+    "location_shipping": "Location & Shipping",
+    "location": "Location",
+    "images": "Images",
+    "additional_info": "Additional Information",
+    "title_placeholder": "Enter a descriptive title for your product",
+    "wanted_title_placeholder": "What are you looking for?",
+    "select_category": "Select a category",
+    "category_placeholder": "Enter product category (e.g., Electronics, Machinery)",
+    "select_subcategory": "Select a subcategory",
+    "subcategory_placeholder": "Enter product subcategory (e.g., Computers, Tools)",
+    "description_placeholder": "Describe your product in detail",
+    "wanted_description_placeholder": "Describe what you're looking for",
+    "price_placeholder": "0.00",
+    "currency": "Currency",
+    "select_currency": "Select currency",
+    "quantity_placeholder": "0",
+    "unit": "Unit",
+    "select_unit": "Select unit",
+    "countries": "Countries",
+    "select_countries": "Select countries",
+    "countries_wanted_help": "Select countries where you're looking for this item",
+    "product_images": "Product Images",
+    "selectImages": "Select Images",
+    "images_help": "Upload up to 5 images (JPEG, PNG, GIF, WebP). Max 10MB per file.",
+    "additional_details": "Additional Details",
+    "additional_details_placeholder": "Any additional information about your product",
+    "wanted_additional_placeholder": "Specify any special requirements or preferences",
+    "wanted_additional_help": "Include details like desired brands, specifications, or conditions",
+    "contact_email": "Contact Email",
+    "contact_email_placeholder": "Optional contact email",
+    "contact_email_help": "Leave blank to use your account email",
+    "post_wanted": "Post Wanted Request",
+    "product_created_success": "Product listing created successfully",
+    "wanted_created_success": "Wanted request posted successfully",
+    "no_company_selected": "Please select a company before creating a listing",
+    "no_permission": "You don't have permission to create listings",
+    "listing_limit_reached": "You have reached your listing limit. Please upgrade your plan to create more listings.",
+    "images_max_files": "Maximum {max} images allowed",
+    "images_remaining_slots": "You can only add {count} more image(s)",
+    "images_invalid_type": "{name}: Invalid file type. Only JPEG, PNG, GIF, and WebP are allowed",
+    "images_too_large": "{name}: File too large. Maximum size is {max}",
+    "images_total_exceeded": "Cannot add {name}: Total size limit exceeded",
+    "images_total_too_large": "Total size of all images exceeds {max}",
+    "productDetails": "Product Details",
+    "seller": "Seller",
+    "price": "Price",
+    "quantity": "Quantity",
+    "description": "Description",
+    "additionalInfo": "Additional Information",
+    "availableCountries": "Available Countries",
+    "moreCountries": "+{count} more",
+    "showLess": "Show less",
+    "availableIn": "Available In",
+    "postedOn": "Posted on",
+    "filterCategory": "Filter by Category",
+    "filterSubcategory": "Filter by Subcategory",
+    "allSubcategories": "All Subcategories",
+    "searchFor": "Search For",
+    "category": "Category",
+    "subcategory": "Subcategory",
+    "category_bsf": "BSF Products",
+    "category_frass": "Frass",
+    "category_substrate": "Substrate",
+    "category_equipment": "Equipment",
+    "category_services": "Services",
+    "category_load_error": "Failed to load categories",
+    "subcategory_load_error": "Failed to load subcategories",
+    "select_category_first": "Please select a category first",
+    "showing": "Showing",
+    "tryAdjustingFilters": "Try adjusting your filters",
+    "moreImages": "More Images",
+    "authModal": {
+      "title": "Sign In Required",
+      "heading": "Unlock the full potential",
+      "description": "Sign in to view product details, contact sellers, and make purchases.",
+      "signInButton": "Sign In to Continue",
+      "registerButton": "Create New Account",
+      "continueAsGuest": "Not ready to sign up?",
+      "browseOnly": "Continue Browsing",
+      "benefits": {
+        "saveProducts": "Create sales listings for your products",
+        "trackOrders": "Create wanted to buy listings",
+        "getDeals": "Send and receive messages",
+        "personalized": "Advertise to 10,000+ interested insect farmers"
+      },
+      "freeUsage": "Using BSF Marketplace is free"
+    },
+    "priceInUSD": "Approx. in USD",
+    "conversionUnavailable": "USD conversion unavailable",
+    "update_listing": "Update Listing",
+    "update_success": "Listing updated successfully",
+    "update_error": "Failed to update listing",
+    "delete_success": "Listing deleted successfully",
+    "delete_error": "Failed to delete listing",
+    "delete_confirm": "Type \"{title}\" to confirm deletion:",
+    "update_product_desc": "Update the details of your product listing",
+    "update_wanted_desc": "Update the details of your wanted listing",
+    "product_updated": "Product listing updated successfully",
+    "wanted_updated": "Wanted listing updated successfully",
+    "confirmDeleteMessage": "Type \"{title}\" to confirm deletion:",
+    "deleteSuccess": "Listing deleted successfully",
+    "myListingsDescription": "Manage your product listings and wanted items",
+    "confirm_delete_product": "Are you sure you want to delete the product \"{title}\"?",
+    "confirm_delete_wanted": "Are you sure you want to delete the wanted item \"{title}\"?",
+    "product_deleted": "Product deleted successfully",
+    "wanted_item_deleted": "Wanted item deleted successfully",
+    "sortBy": "Sort By",
+    "sortNone": "Default",
+    "sortPriceAsc": "Price: Low to High",
+    "sortPriceDesc": "Price: High to Low",
+    "sortTitleAsc": "Title: A to Z",
+    "sortTitleDesc": "Title: Z to A",
+    "sorted": "Sorted",
+    "filterCountries": "Filter by Countries",
+    "regexMode": "Regex Mode",
+    "toggleRegexSearch": "Toggle regex search mode",
+    "select_all_countries": "Select All Countries",
+    "clear_all_countries": "Clear All",
+    "imageAlt": "Image {index}",
+    "filter": {
+      "invalidFilterType": "Invalid filter type: \"{value}\". Expected \"product\" or \"wanted\"."
+    }
+  },
+  "wanted": {
+    "title": "Wanted Items",
+    "browse": "Browse Wanted",
+    "search": "Search wanted items...",
+    "post": "Post Wanted",
+    "contact": "Contact Buyer",
+    "budget": "Budget",
+    "loading": "Loading wanted items...",
+    "error": "Failed to load wanted items",
+    "empty": "No wanted items found",
+    "quantity": "Quantity Needed",
+    "expires": "Expires",
+    "deleteSuccess": "Wanted listing deleted successfully",
+    "meta": {
+      "title": "Wanted Items - BSF Marketplace",
+      "description": "Browse wanted items and requests in the BSF marketplace"
+    }
+  },
+  "messaging": {
+    "title": "Messages",
+    "send": "Send Message",
+    "cancel": "Cancel",
+    "contact_seller": "Contact Seller",
+    "contact_buyer": "Contact Buyer",
+    "message_placeholder": "Type your message...",
+    "no_conversations": "No conversations yet",
+    "noConversations": "No conversations yet",
+    "noConversationsDescription": "Start a conversation by contacting a seller or buyer",
+    "loadingConversations": "Loading conversations...",
+    "loadingConversation": "Loading conversation...",
+    "marketListing": "Market Listing",
+    "wantedListing": "Wanted Listing",
+    "browseMarketplace": "Browse Marketplace",
+    "last_message": "Last message",
+    "sending": "Sending...",
+    "error_sending": "Failed to send message",
+    "message_sent": "Message sent successfully",
+    "character_limit": "characters remaining",
+    "compose": {
+      "title": "New Message",
+      "messageLabel": "Message",
+      "placeholder": "Type your message...",
+      "send": "Send"
+    },
+    "noMessages": "No messages yet",
+    "roles": {
+      "seller": "Seller",
+      "buyer": "Buyer"
+    },
+    "lastMessagePrefix": "{role}: {message}",
+    "relativeTime": {
+      "yesterday": "Yesterday",
+      "daysAgo": "{count} days ago",
+      "yesterdayAt": "Yesterday {time}",
+      "dateAtTime": "{date} {time}"
+    },
+    "sender": {
+      "you": "You",
+      "unknown": "Unknown"
+    },
+    "conversationNotFound": "Conversation not found"
+  },
+  "metrics": {
+    "title": "Metrics",
+    "userMetrics": "User Metrics",
+    "update": "Update",
+    "export": "Export",
+    "download": "Download"
+  },
+  "footer": {
+    "poweredBy": "Powered by Manna Insect"
+  },
+  "help": {
+    "topics": {
+      "market": {
+        "filtering": {
+          "title": "Market Filtering",
+          "content": "Learn how to filter and search for products in the marketplace.",
+          "sections": [
+            {
+              "title": "Using Filters",
+              "content": "Use the filter button to narrow down products by category, price range, and location."
+            },
+            {
+              "title": "Search Tips",
+              "content": "Enter keywords in the search bar to find specific products. Use quotes for exact matches."
+            },
+            {
+              "title": "Sorting Options",
+              "content": "Sort results by price, date, or relevance using the sort dropdown menu."
+            }
+          ]
+        }
+      },
+      "product": {
+        "contact": {
+          "title": "Contacting Sellers",
+          "content": "How to contact sellers about their products.",
+          "sections": [
+            {
+              "title": "Send a Message",
+              "content": "Click the 'Contact Seller' button on any product page to send a direct message."
+            },
+            {
+              "title": "Message Guidelines",
+              "content": "Be respectful and professional. Include relevant questions about the product."
+            },
+            {
+              "title": "Response Times",
+              "content": "Most sellers respond within 24-48 hours. Check your messages regularly."
+            }
+          ]
+        }
+      },
+      "wanted": {
+        "posting": {
+          "title": "Posting Wanted Ads",
+          "content": "Create wanted ads to let sellers know what you're looking for.",
+          "sections": [
+            {
+              "title": "Creating an Ad",
+              "content": "Click 'Post Wanted' and describe what you're looking for with as much detail as possible."
+            },
+            {
+              "title": "Best Practices",
+              "content": "Include your budget range, preferred condition, and any specific requirements."
+            },
+            {
+              "title": "Managing Ads",
+              "content": "Edit or delete your wanted ads from your profile dashboard."
+            }
+          ]
+        }
+      },
+      "profile": {
+        "settings": {
+          "title": "Profile Settings",
+          "content": "Manage your profile and account settings.",
+          "sections": [
+            {
+              "title": "Personal Information",
+              "content": "Update your name, contact details, and business information."
+            },
+            {
+              "title": "Notifications",
+              "content": "Control email and push notification preferences for messages and updates."
+            },
+            {
+              "title": "Privacy",
+              "content": "Manage who can see your profile and contact you."
+            }
+          ]
+        }
+      }
+    },
+    "title": "Help",
+    "button": {
+      "ariaLabel": "Get help",
+      "genericTopic": "topic"
+    },
+    "noContent": {
+      "title": "No help available",
+      "message": "We couldn't find help for this topic yet."
+    },
+    "errors": {
+      "topicNotFound": "Help topic not found",
+      "loadingError": "Error loading help content"
+    },
+    "topicFallback": "Help",
+    "fallback": {
+      "title": "Help",
+      "content": "Help content is not available for this topic."
+    },
+    "logs": {
+      "invalidTopic": "Invalid help topic: {topic}",
+      "dismissError": "Error dismissing help modal",
+      "scrolledToTopic": "Scrolled to topic: {topic}",
+      "iconShowTopic": "Showing help icon for topic: {topic}",
+      "iconShowError": "Failed to show help popover",
+      "noTopicProvided": "No help topic provided",
+      "invalidTopicType": "Invalid help topic type: {type}",
+      "scrollSaved": "Saved scroll position: {position}",
+      "scrollSaveFailed": "Failed to save scroll position",
+      "scrollRestored": "Restored scroll position: {position}",
+      "scrollRestoreFailed": "Failed to restore scroll position",
+      "focusSaved": "Saved focus element: {element}",
+      "focusSaveFailed": "Failed to save focus element",
+      "focusRestored": "Restored focus element: {element}",
+      "focusRestoreFailed": "Failed to restore focus element",
+      "modalAlreadyOpen": "Help modal already open, preventing duplicate",
+      "focusExistingModalFailed": "Could not focus existing help modal",
+      "openingModal": "Opening help modal for topic: {topic}",
+      "createModalFailed": "Failed to create help modal",
+      "modalDismissed": "Help modal dismissed after {duration}ms",
+      "dismissHandlerError": "Error in help modal dismiss handler",
+      "modalPresented": "Help modal presented in {time}ms",
+      "modalSlow": "Help modal took {time}ms to open",
+      "showModalError": "Error showing help modal",
+      "hidingModal": "Hiding help modal",
+      "noModalToHide": "No help modal to hide",
+      "hideModalError": "Error hiding help modal",
+      "escapePressed": "Escape key pressed, closing help modal"
+    }
+  },
+  "units": {
+    "piece": "Piece(s)",
+    "kg": "Kilogram(s)",
+    "g": "Gram(s)",
+    "lb": "Pound(s)",
+    "oz": "Ounce(s)",
+    "ton": "Ton(s)",
+    "mt": "Metric Ton(s)",
+    "l": "Liter(s)",
+    "ml": "Milliliter(s)",
+    "gal": "Gallon(s)",
+    "m": "Meter(s)",
+    "cm": "Centimeter(s)",
+    "mm": "Millimeter(s)",
+    "ft": "Foot/Feet",
+    "in": "Inch(es)",
+    "unit": "Unit(s)",
+    "box": "Box(es)",
+    "pack": "Pack(s)",
+    "container": "Container(s)",
+    "pallet": "Pallet(s)",
+    "sqm": "Square Meter(s)",
+    "sqft": "Square Foot/Feet",
+    "bag": "Bag(s)"
+  },
+  "forms": {
+    "country": "Country",
+    "countryPlaceholder": "Select a country",
+    "selectPlaceholder": "Select an option",
+    "imagesLabel": "Images"
+  },
+  "currencies": {
+    "USD": "US Dollar",
+    "EUR": "Euro",
+    "GBP": "British Pound",
+    "JPY": "Japanese Yen",
+    "CNY": "Chinese Yuan",
+    "CAD": "Canadian Dollar",
+    "AUD": "Australian Dollar",
+    "CHF": "Swiss Franc",
+    "HKD": "Hong Kong Dollar",
+    "SEK": "Swedish Krona",
+    "NOK": "Norwegian Krone",
+    "DKK": "Danish Krone",
+    "NZD": "New Zealand Dollar",
+    "SGD": "Singapore Dollar",
+    "INR": "Indian Rupee",
+    "BRL": "Brazilian Real",
+    "RUB": "Russian Ruble",
+    "ZAR": "South African Rand",
+    "MXN": "Mexican Peso",
+    "KRW": "South Korean Won"
+  },
+  "translation": {
+    "button": "Translate",
+    "loading": "Translating...",
+    "error": "Translation failed",
+    "openingGoogleTranslate": "Opening Google Translate in new tab...",
+    "rateLimitError": "Translation limit reached (10/hour)",
+    "showOriginal": "Show original",
+    "showTranslated": "Show translation",
+    "genericError": "Translation failed. Please try again later."
+  }
+}

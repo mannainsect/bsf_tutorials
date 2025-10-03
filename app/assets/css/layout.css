@@ -1,0 +1,106 @@
+/* 
+ * Responsive Layout System - Ionic Best Practices
+ * Following official Ionic responsive design patterns and medium tablet constraints
+ */
+
+/* Main content container - constrained to medium tablet width (768px) */
+.content-container {
+  max-width: 768px; /* Medium tablet size as requested */
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 var(--ion-padding, 16px);
+}
+
+/* Content width variants */
+.content-container--wide {
+  max-width: 992px; /* Large tablet/small desktop */
+}
+
+.content-container--narrow {
+  max-width: 480px; /* Mobile-focused content */
+}
+
+.content-container--tight {
+  max-width: 320px; /* Very focused content like forms */
+}
+
+/* Button width constraints following Ionic patterns */
+.button-container {
+  max-width: 400px; /* Optimal for buttons across all screen sizes */
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Form width constraints */
+.form-container {
+  max-width: 480px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Card content constraints */
+.card-content-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Responsive breakpoints matching Ionic's breakpoint system */
+@media (max-width: 575px) {
+  /* Mobile phones - reduce padding */
+  .content-container {
+    padding: 0 var(--ion-padding-xs, 8px);
+  }
+}
+
+@media (min-width: 576px) {
+  /* Small tablets and large phones */
+  .content-container {
+    padding: 0 var(--ion-padding-sm, 12px);
+  }
+}
+
+@media (min-width: 768px) {
+  /* Medium tablets - target size */
+  .content-container {
+    padding: 0 var(--ion-padding, 16px);
+  }
+  
+  /* Allow buttons to be slightly wider on tablets */
+  .button-container {
+    max-width: 480px;
+  }
+}
+
+@media (min-width: 992px) {
+  /* Large tablets and small desktops */
+  .content-container {
+    padding: 0 var(--ion-padding-lg, 24px);
+  }
+  
+  /* Wider content for desktop viewing */
+  .content-container--wide {
+    max-width: 1200px;
+  }
+  
+  .button-container {
+    max-width: 560px;
+  }
+}
+
+@media (min-width: 1200px) {
+  /* Large desktops - maintain medium tablet constraint unless explicitly wide */
+  .content-container {
+    max-width: 768px; /* Keep medium tablet constraint */
+    padding: 0 var(--ion-padding-xl, 32px);
+  }
+}
+
+/* Force Light Mode - Disable Automatic Dark Mode */
+body {
+  --ion-background-color: #ffffff;
+}
+
+/* Override Ionic's automatic dark mode when system preference is dark */
+.ion-palette-dark {
+  --ion-background-color: #ffffff !important;
+}

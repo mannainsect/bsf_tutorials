@@ -1,0 +1,1 @@
+/home/yka/dev/linux_files/claude/shared/agents/issue-analyzer-architect.md

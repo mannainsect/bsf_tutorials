@@ -1,0 +1,822 @@
+{
+  "common": {
+    "loading": "Carregando...",
+    "error": "Erro",
+    "retry": "Tentar novamente",
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "close": "Fechar",
+    "back": "Voltar",
+    "next": "Próximo",
+    "continue": "Continuar",
+    "yes": "Sim",
+    "no": "Não",
+    "noListings": "Nenhum anúncio encontrado",
+    "showDetails": "Mostrar detalhes",
+    "hideDetails": "Ocultar detalhes",
+    "goHome": "Ir para o início",
+    "welcome": "Bem-vindo",
+    "notSet": "Não definido",
+    "pleaseCorrectErrors": "Por favor, corrija os seguintes erros:",
+    "unsavedChanges": "Você tem alterações não salvas",
+    "dismiss": "Dispensar",
+    "ok": "OK",
+    "selectLanguage": "Selecionar Idioma",
+    "current": "Atual",
+    "image": "Imagem",
+    "confirmDelete": "Confirmar exclusão"
+  },
+  "navigation": {
+    "home": "Início",
+    "menu": "Menu",
+    "toggleMenu": "Alternar menu de navegação",
+    "dashboard": "Painel",
+    "profile": "Perfil",
+    "account": "Conta",
+    "settings": "Configurações",
+    "logout": "Sair",
+    "login": "Entrar",
+    "register": "Cadastrar",
+    "logs": {
+      "menuUnavailable": "Controlador de menu indisponível",
+      "menuToggleFailed": "Falha ao alternar o menu"
+    }
+  },
+  "menu": {
+    "marketplace": "Mercado",
+    "myListings": "Meus Anúncios"
+  },
+  "auth": {
+    "email": "E-mail",
+    "password": "Senha",
+    "name": "Nome",
+    "confirmPassword": "Confirmar senha",
+    "forgotPassword": "Esqueceu a senha?",
+    "rememberMe": "Lembrar-me",
+    "loginButton": "Entrar",
+    "registerButton": "Cadastrar",
+    "logoutButton": "Sair",
+    "signIn": "Entrar",
+    "enterEmail": "Digite seu e-mail",
+    "enterPassword": "Digite sua senha",
+    "enterName": "Digite seu nome",
+    "dontHaveAccount": "Não tem uma conta?",
+    "alreadyHaveAccount": "Já tem uma conta?",
+    "signUpLink": "Cadastre-se",
+    "signInLink": "Entre",
+    "verifyEmail": "Verificar e-mail",
+    "completeProfile": "Completar perfil",
+    "getStarted": "Começar",
+    "enterEmailToRegister": "Digite seu e-mail para criar uma conta",
+    "checkYourEmail": "Verifique seu e-mail",
+    "verificationCodeSent": "Enviamos um código de verificação para {email}",
+    "verificationCode": "Código de verificação",
+    "enterCodeFromEmail": "Digite o código do e-mail",
+    "verifyingEmail": "Verificando seu e-mail...",
+    "redirectingToManualEntry": "Redirecionando para entrada manual...",
+    "didntReceiveCode": "Não recebeu o código?",
+    "sending": "Enviando...",
+    "resendCode": "Reenviar código",
+    "verificationCodeSentSuccess": "Código de verificação enviado!",
+    "welcomeBack": "Bem-vindo de volta",
+    "signInToContinue": "Entre para continuar",
+    "createAccount": "Criar Conta",
+    "joinUsToday": "Cadastre-se grátis e comece a vender e se conectar com compradores, é grátis!",
+    "creatingWorkspace": "Criando seu espaço de trabalho...",
+    "settingUpCompany": "Configurando sua empresa e ambientes...",
+    "retryCreation": "Tentar novamente",
+    "skipForNow": "Pular por enquanto"
+  },
+  "home": {
+    "title": "BSF Mercado",
+    "subtitle": "Olá Mundo! Bem-vindo ao nosso incrível modelo de aplicativo.",
+    "welcomeMessage": "Bem-vindo ao {appName}",
+    "getStarted": "Começar",
+    "signIn": "Entrar",
+    "featuresCarousel": "Carrossel de recursos",
+    "features": {
+      "secure": {
+        "title": "Encontre vendedores",
+        "description": "Encontre facilmente produtos e serviços relacionados a insetos",
+        "iconLabel": "Ícone de segurança"
+      },
+      "fast": {
+        "title": "Encontre compradores",
+        "description": "Anuncie e venda seus produtos e serviços para produtores de insetos",
+        "iconLabel": "Ícone de velocidade"
+      },
+      "mobile": {
+        "title": "Grátis para começar",
+        "description": "Navegue pelos anúncios sem se registrar. Registre-se gratuitamente para obter todos os benefícios.",
+        "iconLabel": "Ícone de dispositivo móvel"
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Painel de controle",
+    "loadingProfile": "Carregando perfil...",
+    "errorLoadingProfile": "Erro ao carregar perfil",
+    "welcome": "Bem-vindo!",
+    "userProfile": "Perfil do usuário",
+    "hereIsYourProfile": "Aqui está o resumo do seu perfil",
+    "manageAccount": "Gerenciar Conta",
+    "profileDetails": "Detalhes do Perfil",
+    "quickAccess": "Acesso Rápido",
+    "navigateToMarketplace": "Ir para o Mercado",
+    "navigateToWanted": "Procurar Procurados",
+    "navigateToAccount": "Gerenciar Conta"
+  },
+  "profile": {
+    "email": "E-mail",
+    "name": "Nome",
+    "accountType": "Tipo de conta",
+    "creditsBalance": "Saldo de créditos",
+    "activeCompany": "Empresa ativa",
+    "editProfile": "Editar perfil",
+    "updateProfile": "Atualizar perfil",
+    "company": "Empresa",
+    "phone": "Telefone",
+    "memberSince": "Membro Desde"
+  },
+  "account": {
+    "title": "Conta",
+    "subtitle": "Gerencie as configurações da sua conta e informações do perfil",
+    "company": {
+      "title": "Informações da Empresa",
+      "edit": "Editar Empresa",
+      "name": "Nome da Empresa",
+      "street": "Endereço",
+      "city": "Cidade",
+      "country": "País",
+      "timezone": "Fuso Horário",
+      "business_id": "ID da Empresa",
+      "businessId": "ID da Empresa",
+      "namePlaceholder": "Digite o nome da empresa",
+      "streetPlaceholder": "Digite o endereço",
+      "cityPlaceholder": "Digite a cidade",
+      "countryPlaceholder": "Selecione o país",
+      "timezonePlaceholder": "Selecione o fuso horário",
+      "businessIdPlaceholder": "Digite o ID da empresa",
+      "notSet": "Não definido",
+      "updateSuccess": "Empresa atualizada com sucesso",
+      "updateError": "Falha ao atualizar empresa",
+      "permissionDenied": "Você não tem permissão para editar empresa"
+    },
+    "profile": {
+      "title": "Perfil",
+      "basicDetails": "Detalhes do perfil",
+      "firstName": "Primeiro nome",
+      "lastName": "Sobrenome",
+      "email": "E-mail",
+      "name": "Nome",
+      "phone": "Telefone",
+      "country": "País",
+      "city": "Cidade",
+      "firstNamePlaceholder": "Digite seu primeiro nome",
+      "lastNamePlaceholder": "Digite seu sobrenome",
+      "emailPlaceholder": "Digite seu endereço de e-mail",
+      "namePlaceholder": "Digite seu nome completo",
+      "phonePlaceholder": "Digite seu número de telefone",
+      "countryPlaceholder": "Selecione seu país",
+      "cityPlaceholder": "Digite sua cidade",
+      "updateSuccess": "Perfil atualizado com sucesso",
+      "placeholders": {
+        "firstName": "Digite seu primeiro nome",
+        "lastName": "Digite seu sobrenome",
+        "email": "Digite seu endereço de e-mail",
+        "phone": "Digite seu número de telefone"
+      },
+      "updateButton": "Atualizar perfil"
+    },
+    "password": {
+      "title": "Senha",
+      "current": "Senha atual",
+      "new": "Nova senha",
+      "confirm": "Confirmar nova senha",
+      "currentPlaceholder": "Digite sua senha atual",
+      "newPlaceholder": "Digite sua nova senha",
+      "confirmPlaceholder": "Confirme sua nova senha",
+      "placeholders": {
+        "current": "Digite sua senha atual",
+        "new": "Digite sua nova senha",
+        "confirm": "Confirme sua nova senha"
+      },
+      "updateButton": "Atualizar senha",
+      "validationError": "A senha deve ter pelo menos 6 caracteres e as senhas devem coincidir",
+      "updateSuccess": "Senha atualizada com sucesso",
+      "updateError": "Falha ao atualizar a senha"
+    },
+    "credits": {
+      "title": "Créditos",
+      "currentBalance": "Saldo atual",
+      "totalEarned": "Total ganho",
+      "totalSpent": "Total gasto",
+      "showHistory": "Mostrar histórico",
+      "hideHistory": "Ocultar histórico",
+      "history": "Histórico de créditos"
+    },
+    "products": {
+      "title": "Produtos",
+      "andXMore": "e mais {count}...",
+      "noProducts": "Nenhum produto comprado ainda",
+      "purchaseDate": "Data de compra",
+      "status": "Status",
+      "purchased": "Comprado",
+      "unknownProduct": "Produto desconhecido",
+      "statusLabels": {
+        "active": "Ativo",
+        "expired": "Expirado",
+        "cancelled": "Cancelado"
+      }
+    }
+  },
+  "errors": {
+    "generic": "Algo deu errado",
+    "networkError": "Erro de rede. Por favor, verifique sua conexão.",
+    "unauthorized": "Acesso não autorizado",
+    "forbidden": "Você não tem permissão para acessar este recurso",
+    "notFound": "Recurso não encontrado",
+    "serverError": "Erro no servidor. Por favor, tente novamente mais tarde.",
+    "validationError": "Por favor, verifique sua entrada",
+    "failedToLoad": "Falha ao carregar {resource}",
+    "failedToCreateAccount": "Falha ao criar conta",
+    "invalidVerificationCode": "Código de verificação inválido",
+    "fetchLogs": "Falha ao buscar registros",
+    "createLog": "Falha ao criar registro",
+    "deleteLog": "Falha ao excluir registro",
+    "fetchCreditLogs": "Falha ao buscar registros de créditos",
+    "failedToResendCode": "Falha ao reenviar código",
+    "account": {
+      "requiredFields": "Por favor, preencha os campos obrigatórios",
+      "profileUpdateSuccess": "Perfil atualizado com sucesso",
+      "profileUpdateFailed": "Falha ao atualizar o perfil",
+      "passwordFieldsInvalid": "Por favor, verifique os campos de senha",
+      "passwordUpdateSuccess": "Senha atualizada com sucesso",
+      "passwordUpdateFailed": "Falha ao atualizar a senha",
+      "loadingFailed": "Falha ao carregar informações da conta",
+      "loadProfileFailed": "Não foi possível carregar o perfil do usuário",
+      "loadProfileLog": "Erro ao carregar o perfil do usuário",
+      "updateProfileFailed": "Não foi possível atualizar o perfil do usuário",
+      "updateProfileLog": "Erro ao atualizar o perfil do usuário",
+      "updateCompanyLog": "Erro ao atualizar empresa. Ver console.",
+      "creditHistoryLog": "Erro ao carregar o histórico de créditos",
+      "sendResetFailed": "Não foi possível enviar o e-mail de redefinição de senha",
+      "sendResetLog": "Erro ao enviar o e-mail de redefinição de senha",
+      "resetPasswordFailed": "Não foi possível redefinir a senha",
+      "resetPasswordLog": "Erro ao redefinir a senha"
+    },
+    "verificationFailed": "A verificação por e-mail falhou. Por favor, tente novamente.",
+    "resendFailed": "Falha ao reenviar o código de verificação. Por favor, tente novamente.",
+    "permissionDenied": "Permissão Negada",
+    "titleMismatch": "O título inserido não corresponde",
+    "deleteFailed": "Falha ao excluir o anúncio",
+    "loadingFailed": "Falha ao carregar o conteúdo",
+    "productNotFound": "Produto não encontrado",
+    "productNotFoundDescription": "O produto que você está procurando não existe ou foi removido",
+    "companyCreationFailed": "Não foi possível criar a empresa. Você pode tentar novamente ou pular por enquanto.",
+    "navigationErrorLog": "Erro de navegação",
+    "navigationFailed": "A navegação falhou",
+    "featuredProductFailed": "Não foi possível carregar o produto em destaque",
+    "rateLimit": "Muitas solicitações. Aguarde um momento e tente novamente.",
+    "market": {
+      "usdConversionFailed": "Não foi possível obter a conversão em USD",
+      "productMissingId": "ID do produto ausente",
+      "wantedMissingId": "ID do anúncio ausente",
+      "loadProductsFailed": "Não foi possível carregar os produtos",
+      "loadProductDetailFailed": "Não foi possível carregar os detalhes do produto",
+      "randomProductFailedLog": "Não foi possível obter um produto aleatório"
+    },
+    "wanted": {
+      "createFailedLog": "Não foi possível criar o anúncio",
+      "updateFailedLog": "Não foi possível atualizar o anúncio",
+      "fetchEditFailedLog": "Não foi possível carregar o anúncio para edição",
+      "loadFailed": "Não foi possível carregar os anúncios",
+      "loadDetailFailed": "Não foi possível carregar os detalhes do anúncio",
+      "deleteFailedLog": "Não foi possível excluir o anúncio"
+    },
+    "product": {
+      "createFailedLog": "Não foi possível criar o produto",
+      "updateFailedLog": "Não foi possível atualizar o produto",
+      "fetchEditFailedLog": "Não foi possível carregar o produto para edição"
+    },
+    "log": {
+      "unexpectedStatus": "Status de resposta inesperado",
+      "contentActionFailedLog": "Não foi possível registrar a ação de conteúdo",
+      "userActionFailedLog": "Não foi possível registrar a ação do usuário"
+    },
+    "boundary": {
+      "caughtLog": "Erro capturado pelo ErrorBoundary",
+      "infoLog": "Informações do erro"
+    },
+    "help": {
+      "createModalFailed": "Não foi possível criar a janela de ajuda. Tente novamente.",
+      "openFailed": "Não foi possível abrir a ajuda."
+    }
+  },
+  "validation": {
+    "required": "Este campo é obrigatório",
+    "invalidEmail": "Por favor, insira um endereço de e-mail válido",
+    "minLength": "O comprimento mínimo é de {min} caracteres",
+    "maxLength": "O comprimento máximo é de {max} caracteres",
+    "passwordMatch": "As senhas não coincidem",
+    "invalidFormat": "Formato inválido",
+    "listing": {
+      "titleRequired": "O título é obrigatório",
+      "titleMax": "O título deve ter menos de 200 caracteres",
+      "categoryRequired": "A categoria é obrigatória",
+      "categoryInvalid": "Categoria inválida '{value}'. Categorias válidas: {categories}",
+      "subcategoryRequired": "A subcategoria é obrigatória",
+      "descriptionRequired": "A descrição é obrigatória",
+      "descriptionMax": "A descrição deve ter menos de 5000 caracteres",
+      "priceRequired": "O preço é obrigatório",
+      "priceType": "O preço deve ser um número",
+      "priceMin": "O preço deve ser maior ou igual a 0",
+      "priceFinite": "O preço deve ser um número válido",
+      "currencyLength": "O código da moeda deve ter exatamente 3 caracteres",
+      "currencyFormat": "O código da moeda deve ser um código ISO 4217 válido (3 letras maiúsculas)",
+      "quantityRequired": "A quantidade é obrigatória",
+      "quantityType": "A quantidade deve ser um número",
+      "quantityMin": "A quantidade deve ser maior ou igual a 0",
+      "quantityFinite": "A quantidade deve ser um número válido",
+      "unitRequired": "A unidade é obrigatória",
+      "unitMax": "A unidade deve ter menos de 20 caracteres",
+      "countryLength": "O código do país deve estar no formato ISO 3166-1 alpha-2",
+      "countryFormat": "Código de país inválido",
+      "countryMin": "Selecione pelo menos um país",
+      "countryMax": "Máximo de 250 países permitidos",
+      "additionalInfoMax": "As informações adicionais devem ter menos de 2000 caracteres",
+      "invalidImages": "Imagens inválidas (máx. {maxFiles} arquivos, {maxSizeMb}MB cada, {maxTotalMb}MB no total)",
+      "invalidSubcategory": "Subcategoria inválida para a categoria selecionada"
+    },
+    "profile": {
+      "nameRequired": "O nome é obrigatório"
+    },
+    "company": {
+      "nameRequired": "O nome da empresa é obrigatório",
+      "countryFormat": "País deve ser código ISO de 2 letras (ex. BR)"
+    }
+  },
+  "settings": {
+    "title": "Configurações",
+    "language": "Idioma",
+    "theme": "Tema",
+    "notifications": "Notificações",
+    "privacy": "Privacidade",
+    "security": "Segurança",
+    "about": "Sobre",
+    "version": "Versão"
+  },
+  "company": {
+    "name": "Nome da empresa",
+    "description": "Descrição",
+    "industry": "Indústria",
+    "employees": "Funcionários",
+    "founded": "Fundada",
+    "website": "Site"
+  },
+  "market": {
+    "products": "Produtos",
+    "wanted": "Procurado",
+    "messages": "Mensagens",
+    "conversations": "Conversas",
+    "contact": "Contato"
+  },
+  "marketplace": {
+    "countries_delivery_help": "Selecione os países onde você consegue entregar seu produto ou serviço. Isso é essencial para evitar solicitações desnecessárias.",
+    "update_company_link": "Atualizar dados da empresa",
+    "title": "Título",
+    "products": "Produtos",
+    "myProducts": "Meus Produtos",
+    "myWantedItems": "Meus Itens Procurados",
+    "pageTitle": "Mercado - Encontre Produtos",
+    "pageDescription": "Navegue e descubra produtos em nosso mercado",
+    "search": "Buscar produtos...",
+    "searchPlaceholder": "Buscar produtos...",
+    "noResults": "Nenhum produto encontrado",
+    "noProducts": "Nenhum produto disponível",
+    "noProductsDescription": "Tente ajustar seus filtros ou termos de busca",
+    "clearFilters": "Limpar Filtros",
+    "addListing": "Adicionar anúncio",
+    "browseButton": "Explorar Mercado",
+    "browseMarketplace": "Explorar Todos os Produtos",
+    "featuredProduct": "Produto Destaque",
+    "featuredDescription": "Descubra produtos incríveis de nossos vendedores",
+    "contactSeller": "Contatar Vendedor",
+    "contactBuyer": "Contatar Comprador",
+    "contactEmail": "Email de Contato",
+    "contactInformation": "Informações de Contato",
+    "loginToContact": "Por favor faça login para ver as informações de contato",
+    "links": "Links",
+    "emailSubject": "Consulta sobre {product}",
+    "loading": "Carregando produtos...",
+    "loadingProducts": "Carregando produtos...",
+    "loadingProduct": "Carregando detalhes do produto...",
+    "error": "Falha ao carregar produtos",
+    "backToList": "Voltar aos anúncios",
+    "backToListings": "Voltar aos Anúncios de Produtos",
+    "allCategories": "Todas as Categorias",
+    "productDetail": "Detalhes do Produto",
+    "create_listing": "Criar Anúncio",
+    "create_product": "Criar Anúncio de Produto",
+    "create_wanted": "Criar Anúncio de Procura",
+    "select_listing_type": "Selecionar Tipo de Anúncio",
+    "select_listing_type_desc": "Escolha o tipo de anúncio que você deseja criar",
+    "create_product_desc": "Liste um produto ou serviço que você deseja vender",
+    "create_wanted_desc": "Publique uma solicitação para algo que você deseja comprar",
+    "no_company_permission": "Você precisa ter uma empresa e as permissões adequadas para criar anúncios",
+    "productDetails": "Detalhes do Produto",
+    "seller": "Vendedor",
+    "price": "Preço",
+    "quantity": "Quantidade",
+    "description": "Descrição",
+    "additionalInfo": "Informações Adicionais",
+    "availableCountries": "Países Disponíveis",
+    "moreCountries": "+{count} mais",
+    "showLess": "Mostrar menos",
+    "availableIn": "Disponível em",
+    "postedOn": "Publicado em",
+    "filterCategory": "Filtrar por Categoria",
+    "filterSubcategory": "Filtrar por Subcategoria",
+    "allSubcategories": "Todas as Subcategorias",
+    "searchFor": "Pesquisar",
+    "category": "Categoria",
+    "subcategory": "Subcategoria",
+    "showing": "Mostrando",
+    "tryAdjustingFilters": "Tente ajustar seus filtros",
+    "moreImages": "Mais Imagens",
+    "authModal": {
+      "title": "Login necessário",
+      "heading": "Desbloqueie todo o potencial",
+      "description": "Faça login para ver detalhes do produto, contatar vendedores e fazer compras.",
+      "signInButton": "Fazer login para continuar",
+      "registerButton": "Criar nova conta",
+      "continueAsGuest": "Ainda não está pronto para se cadastrar?",
+      "browseOnly": "Continuar navegando",
+      "benefits": {
+        "saveProducts": "Crie anúncios de venda para seus produtos",
+        "trackOrders": "Crie anúncios de compra (procura-se)",
+        "getDeals": "Envie e receba mensagens",
+        "personalized": "Anuncie para mais de 10.000 produtores de insetos interessados"
+      },
+      "freeUsage": "Usar o BSF Marketplace é gratuito"
+    },
+    "priceInUSD": "Aprox. em USD",
+    "conversionUnavailable": "Conversão USD não disponível",
+    "update_listing": "Atualizar Anúncio",
+    "update_success": "Anúncio atualizado com sucesso",
+    "update_error": "Falha ao atualizar anúncio",
+    "delete_success": "Anúncio excluído com sucesso",
+    "delete_error": "Falha ao excluir anúncio",
+    "delete_confirm": "Digite \"{title}\" para confirmar a exclusão:",
+    "update_product_desc": "Atualize os detalhes do seu anúncio de produto",
+    "deleteSuccess": "Anúncio excluído com sucesso",
+    "update_wanted_desc": "Atualize os detalhes do seu anúncio de procura",
+    "product_updated": "Anúncio de produto atualizado com sucesso",
+    "wanted_updated": "Anúncio de procura atualizado com sucesso",
+    "confirmDeleteMessage": "Digite \"{title}\" para confirmar a exclusão:",
+    "sortBy": "Ordenar por",
+    "sortNone": "Padrão",
+    "sortPriceAsc": "Preço: Menor para Maior",
+    "sortPriceDesc": "Preço: Maior para Menor",
+    "sortTitleAsc": "Título: A a Z",
+    "sortTitleDesc": "Título: Z a A",
+    "sorted": "Ordenado",
+    "filterCountries": "Filtrar por países",
+    "regexMode": "Modo Regex",
+    "toggleRegexSearch": "Alternar modo de pesquisa regex",
+    "select_all_countries": "Selecionar Todos os Países",
+    "clear_all_countries": "Limpar Tudo",
+    "contact_email": "E-mail de contato",
+    "contact_email_placeholder": "E-mail de contato opcional",
+    "contact_email_help": "Deixe em branco para usar o e-mail da sua conta",
+    "basic_information": "Informações Básicas",
+    "pricing_quantity": "Preço e Quantidade",
+    "location_shipping": "Localização e Envio",
+    "location": "Localização",
+    "images": "Imagens",
+    "additional_info": "Informações Adicionais",
+    "title_placeholder": "Digite um título descritivo para seu produto",
+    "wanted_title_placeholder": "O que você está procurando?",
+    "select_category": "Selecionar uma categoria",
+    "category_placeholder": "Digite a categoria do produto (ex: Eletrônicos, Maquinário)",
+    "select_subcategory": "Selecionar uma subcategoria",
+    "subcategory_placeholder": "Digite a subcategoria do produto (ex: Computadores, Ferramentas)",
+    "description_placeholder": "Descreva seu produto em detalhes",
+    "wanted_description_placeholder": "Descreva o que você está procurando",
+    "price_placeholder": "0,00",
+    "currency": "Moeda",
+    "select_currency": "Selecionar moeda",
+    "quantity_placeholder": "0",
+    "unit": "Unidade",
+    "select_unit": "Selecionar unidade",
+    "countries": "Países",
+    "select_countries": "Selecionar países",
+    "countries_wanted_help": "Selecione os países onde você está procurando este item",
+    "product_images": "Imagens do Produto",
+    "selectImages": "Selecionar Imagens",
+    "images_help": "Envie até 5 imagens (JPEG, PNG, GIF, WebP). Máx. 10MB por arquivo.",
+    "additional_details": "Detalhes Adicionais",
+    "additional_details_placeholder": "Qualquer informação adicional sobre seu produto",
+    "wanted_additional_placeholder": "Especifique quaisquer requisitos ou preferências especiais",
+    "wanted_additional_help": "Inclua detalhes como marcas desejadas, especificações ou condições",
+    "post_wanted": "Publicar Solicitação de Procura",
+    "product_created_success": "Anúncio de produto criado com sucesso",
+    "wanted_created_success": "Solicitação de procura publicada com sucesso",
+    "no_company_selected": "Por favor, selecione uma empresa antes de criar um anúncio",
+    "no_permission": "Você não tem permissão para criar anúncios",
+    "listing_limit_reached": "Você atingiu seu limite de anúncios. Por favor, atualize seu plano para criar mais anúncios.",
+    "images_max_files": "Máximo de {max} imagens permitidas",
+    "images_remaining_slots": "Você só pode adicionar mais {count} imagem(ns)",
+    "images_invalid_type": "{name}: Tipo de arquivo inválido. Apenas JPEG, PNG, GIF e WebP são permitidos",
+    "images_too_large": "{name}: Arquivo muito grande. O tamanho máximo é {max}",
+    "images_total_exceeded": "Não é possível adicionar {name}: Limite de tamanho total excedido",
+    "images_total_too_large": "O tamanho total de todas as imagens excede {max}",
+    "category_bsf": "Produtos BSF",
+    "category_frass": "Frass",
+    "category_substrate": "Substrato",
+    "category_equipment": "Equipamento",
+    "category_services": "Serviços",
+    "category_load_error": "Falha ao carregar categorias",
+    "subcategory_load_error": "Falha ao carregar subcategorias",
+    "select_category_first": "Por favor, selecione uma categoria primeiro",
+    "myListingsDescription": "Gerencie suas listagens de produtos e itens procurados",
+    "confirm_delete_product": "Tem certeza de que deseja excluir o produto \"{title}\"?",
+    "confirm_delete_wanted": "Tem certeza de que deseja excluir o item procurado \"{title}\"?",
+    "product_deleted": "Produto excluído com sucesso",
+    "wanted_item_deleted": "Item procurado excluído com sucesso",
+    "imageAlt": "Imagem {index}",
+    "filter": {
+      "invalidFilterType": "Tipo de filtro inválido: \"{value}\". O esperado é \"product\" ou \"wanted\"."
+    }
+  },
+  "wanted": {
+    "title": "Itens Procurados",
+    "deleteSuccess": "Wanted listing deleted successfully",
+    "browse": "Buscar Solicitações",
+    "search": "Pesquisar itens procurados...",
+    "post": "Publicar Solicitação",
+    "contact": "Contatar Comprador",
+    "budget": "Orçamento",
+    "loading": "Carregando itens procurados...",
+    "error": "Falha ao carregar itens procurados",
+    "empty": "Nenhum item procurado encontrado",
+    "quantity": "Quantidade Necessária",
+    "expires": "Expira",
+    "meta": {
+      "title": "Anúncios procurados - BSF Marketplace",
+      "description": "Explore pedidos e anúncios no mercado BSF"
+    }
+  },
+  "messaging": {
+    "title": "Mensagens",
+    "send": "Enviar Mensagem",
+    "cancel": "Cancelar",
+    "contact_seller": "Contatar Vendedor",
+    "contact_buyer": "Contatar Comprador",
+    "message_placeholder": "Digite sua mensagem...",
+    "no_conversations": "Nenhuma conversa ainda",
+    "noConversations": "Nenhuma conversa ainda",
+    "noConversationsDescription": "Inicie uma conversa contactando um vendedor ou comprador",
+    "loadingConversations": "Carregando conversas...",
+    "loadingConversation": "Carregando conversa...",
+    "marketListing": "Anúncio de venda",
+    "wantedListing": "Anúncio de procura",
+    "browseMarketplace": "Explorar Mercado",
+    "last_message": "Última mensagem",
+    "sending": "Enviando...",
+    "error_sending": "Falha ao enviar mensagem",
+    "message_sent": "Mensagem enviada com sucesso",
+    "character_limit": "caracteres restantes",
+    "compose": {
+      "title": "Nova Mensagem",
+      "messageLabel": "Mensagem",
+      "placeholder": "Digite sua mensagem...",
+      "send": "Enviar"
+    },
+    "noMessages": "Nenhuma mensagem ainda",
+    "roles": {
+      "seller": "Vendedor",
+      "buyer": "Comprador"
+    },
+    "lastMessagePrefix": "{role}: {message}",
+    "relativeTime": {
+      "yesterday": "Ontem",
+      "daysAgo": "Há {count} dias",
+      "yesterdayAt": "Ontem {time}",
+      "dateAtTime": "{date} {time}"
+    },
+    "sender": {
+      "you": "Você",
+      "unknown": "Desconhecido"
+    },
+    "conversationNotFound": "Conversa não encontrada"
+  },
+  "metrics": {
+    "title": "Métricas",
+    "userMetrics": "Métricas do usuário",
+    "update": "Atualizar",
+    "export": "Exportar",
+    "download": "Baixar"
+  },
+  "footer": {
+    "poweredBy": "Desenvolvido por Manna Insect"
+  },
+  "help": {
+    "topics": {
+      "market": {
+        "filtering": {
+          "title": "Filtragem do Mercado",
+          "content": "Aprenda a filtrar e pesquisar produtos no mercado.",
+          "sections": [
+            {
+              "title": "Usando Filtros",
+              "content": "Use o botão de filtro para refinar produtos por categoria, faixa de preço e localização."
+            },
+            {
+              "title": "Dicas de Pesquisa",
+              "content": "Digite palavras-chave na barra de pesquisa. Use aspas para correspondências exatas."
+            },
+            {
+              "title": "Opções de Ordenação",
+              "content": "Ordene resultados por preço, data ou relevância usando o menu suspenso."
+            }
+          ]
+        }
+      },
+      "product": {
+        "contact": {
+          "title": "Contatar Vendedores",
+          "content": "Como contatar vendedores sobre seus produtos.",
+          "sections": [
+            {
+              "title": "Enviar uma Mensagem",
+              "content": "Clique em 'Contatar Vendedor' em qualquer página de produto para enviar uma mensagem direta."
+            },
+            {
+              "title": "Diretrizes de Mensagens",
+              "content": "Seja respeitoso e profissional. Inclua perguntas relevantes sobre o produto."
+            },
+            {
+              "title": "Tempos de Resposta",
+              "content": "A maioria dos vendedores responde em 24-48 horas. Verifique suas mensagens regularmente."
+            }
+          ]
+        }
+      },
+      "wanted": {
+        "posting": {
+          "title": "Publicar Anúncios de Procura",
+          "content": "Crie anúncios de procura para que os vendedores saibam o que você está procurando.",
+          "sections": [
+            {
+              "title": "Criar um Anúncio",
+              "content": "Clique em 'Publicar Procura' e descreva o que está procurando com o máximo de detalhes possível."
+            },
+            {
+              "title": "Melhores Práticas",
+              "content": "Inclua sua faixa de orçamento, condição preferida e requisitos específicos."
+            },
+            {
+              "title": "Gerenciar Anúncios",
+              "content": "Edite ou exclua seus anúncios de procura no painel do seu perfil."
+            }
+          ]
+        }
+      },
+      "profile": {
+        "settings": {
+          "title": "Configurações do Perfil",
+          "content": "Gerencie seu perfil e configurações de conta.",
+          "sections": [
+            {
+              "title": "Informações Pessoais",
+              "content": "Atualize seu nome, detalhes de contato e informações comerciais."
+            },
+            {
+              "title": "Notificações",
+              "content": "Controle as preferências de e-mail e notificações push."
+            },
+            {
+              "title": "Privacidade",
+              "content": "Gerencie quem pode ver seu perfil e entrar em contato com você."
+            }
+          ]
+        }
+      }
+    },
+    "title": "Ajuda",
+    "button": {
+      "ariaLabel": "Mostrar ajuda",
+      "genericTopic": "tópico"
+    },
+    "noContent": {
+      "title": "Nenhuma ajuda disponível",
+      "message": "Ainda não temos ajuda para este tópico."
+    },
+    "errors": {
+      "topicNotFound": "Tópico de ajuda não encontrado",
+      "loadingError": "Erro ao carregar o conteúdo de ajuda"
+    },
+    "topicFallback": "Ajuda",
+    "fallback": {
+      "title": "Ajuda",
+      "content": "Não há conteúdo de ajuda disponível para este tópico."
+    },
+    "logs": {
+      "invalidTopic": "Tópico de ajuda inválido: {topic}",
+      "dismissError": "Erro ao fechar a janela de ajuda",
+      "scrolledToTopic": "Rolado até o tópico: {topic}",
+      "iconShowTopic": "Mostrando ajuda para o tópico: {topic}",
+      "iconShowError": "Não foi possível mostrar o ícone de ajuda",
+      "noTopicProvided": "Nenhum tópico de ajuda fornecido",
+      "invalidTopicType": "Tipo de tópico de ajuda inválido: {type}",
+      "scrollSaved": "Posição de rolagem salva: {position}",
+      "scrollSaveFailed": "Não foi possível salvar a posição de rolagem",
+      "scrollRestored": "Posição de rolagem restaurada: {position}",
+      "scrollRestoreFailed": "Não foi possível restaurar a posição de rolagem",
+      "focusSaved": "Elemento em foco salvo: {element}",
+      "focusSaveFailed": "Não foi possível salvar o elemento em foco",
+      "focusRestored": "Elemento em foco restaurado: {element}",
+      "focusRestoreFailed": "Não foi possível restaurar o elemento em foco",
+      "modalAlreadyOpen": "A janela de ajuda já está aberta",
+      "focusExistingModalFailed": "Não foi possível focar a janela de ajuda existente",
+      "openingModal": "Abrindo janela de ajuda para: {topic}",
+      "createModalFailed": "Não foi possível criar a janela de ajuda",
+      "modalDismissed": "Janela de ajuda fechada após {duration} ms",
+      "dismissHandlerError": "Erro no manipulador de fechamento da ajuda",
+      "modalPresented": "Janela de ajuda exibida em {time} ms",
+      "modalSlow": "A janela de ajuda levou {time} ms para abrir",
+      "showModalError": "Erro ao exibir a janela de ajuda",
+      "hidingModal": "Ocultando a janela de ajuda",
+      "noModalToHide": "Nenhuma janela de ajuda para ocultar",
+      "hideModalError": "Erro ao ocultar a janela de ajuda",
+      "escapePressed": "Tecla Escape pressionada, fechando a janela de ajuda"
+    }
+  },
+  "units": {
+    "piece": "Peça(s)",
+    "kg": "Quilograma(s)",
+    "g": "Grama(s)",
+    "lb": "Libra(s)",
+    "oz": "Onça(s)",
+    "ton": "Tonelada(s)",
+    "mt": "Tonelada(s) métrica(s)",
+    "l": "Litro(s)",
+    "ml": "Mililitro(s)",
+    "gal": "Galão(ões)",
+    "m": "Metro(s)",
+    "cm": "Centímetro(s)",
+    "mm": "Milímetro(s)",
+    "ft": "Pé(s)",
+    "in": "Polegada(s)",
+    "unit": "Unidade(s)",
+    "box": "Caixa(s)",
+    "pack": "Pacote(s)",
+    "container": "Contêiner(es)",
+    "pallet": "Palete(s)",
+    "sqm": "Metro quadrado(s)",
+    "sqft": "Pé quadrado(s)",
+    "bag": "Saco(s)"
+  },
+  "forms": {
+    "country": "País",
+    "countryPlaceholder": "Selecione um país",
+    "selectPlaceholder": "Selecione uma opção",
+    "imagesLabel": "Imagens"
+  },
+  "currencies": {
+    "USD": "Dólar americano",
+    "EUR": "Euro",
+    "GBP": "Libra esterlina",
+    "JPY": "Iene japonês",
+    "CNY": "Yuan chinês",
+    "CAD": "Dólar canadense",
+    "AUD": "Dólar australiano",
+    "CHF": "Franco suíço",
+    "HKD": "Dólar de Hong Kong",
+    "SEK": "Coroa sueca",
+    "NOK": "Coroa norueguesa",
+    "DKK": "Coroa dinamarquesa",
+    "NZD": "Dólar neozelandês",
+    "SGD": "Dólar de Cingapura",
+    "INR": "Rúpia indiana",
+    "BRL": "Real brasileiro",
+    "RUB": "Rublo russo",
+    "ZAR": "Rand sul-africano",
+    "MXN": "Peso mexicano",
+    "KRW": "Won sul-coreano"
+  },
+  "translation": {
+    "button": "Traduzir",
+    "loading": "Traduzindo...",
+    "error": "Falha na tradução",
+    "openingGoogleTranslate": "Abrindo Google Translate em nova aba...",
+    "rateLimitError": "Limite de tradução atingido (10/hora)",
+    "showOriginal": "Mostrar original",
+    "showTranslated": "Mostrar tradução",
+    "genericError": "A tradução falhou. Por favor, tente novamente mais tarde."
+  }
+}

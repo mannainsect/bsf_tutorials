@@ -1,0 +1,9 @@
+node_modules
+dist
+.nuxt
+.output
+ios
+android
+coverage
+*.min.js
+*.min.css

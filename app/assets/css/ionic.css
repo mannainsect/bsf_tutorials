@@ -1,0 +1,30 @@
+/* Ionic CSS imports */
+@import '@ionic/vue/css/core.css';
+@import '@ionic/vue/css/normalize.css';
+@import '@ionic/vue/css/structure.css';
+@import '@ionic/vue/css/typography.css';
+@import '@ionic/vue/css/padding.css';
+@import '@ionic/vue/css/float-elements.css';
+@import '@ionic/vue/css/text-alignment.css';
+@import '@ionic/vue/css/text-transformation.css';
+@import '@ionic/vue/css/flex-utils.css';
+@import '@ionic/vue/css/display.css';
+
+/* Optional Ionic theme - Dark Mode */
+/* DARK MODE: Uncomment the line below to enable automatic dark mode based on system preference */
+/* @import '@ionic/vue/css/palettes/dark.system.css'; */
+
+/* Alternative dark mode options for future use:
+ * @import '@ionic/vue/css/palettes/dark.always.css';  // Always dark
+ * @import '@ionic/vue/css/palettes/dark.class.css';   // Class-based toggle (.ion-palette-dark)
+ */
+
+/* Custom global styles */
+:root {
+  --ion-color-primary: #3880ff;
+  --ion-color-primary-rgb: 56, 128, 255;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #3171e0;
+  --ion-color-primary-tint: #4c8dff;
+}

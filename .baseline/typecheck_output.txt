@@ -1,0 +1,209 @@
+
+> typecheck
+> vue-tsc --noEmit
+
+app/components/forms/ImageUploadField.vue(76,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/components/forms/ImageUploadField.vue(118,7): error TS6133: 'resolvedLabel' is declared but its value is never read.
+app/components/layout/PrivateFooter.vue(36,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/components/layout/PrivateHeader.vue(23,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/components/layout/PrivateMenu.vue(47,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/components/layout/PublicFooter.vue(36,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/components/layout/PublicHeader.vue(23,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/components/layout/PublicMenu.vue(39,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/components/marketplace/AuthPromptModal.vue(131,7): error TS6133: 'props' is declared but its value is never read.
+app/components/marketplace/ProductCard.vue(63,62): error TS2339: Property 'contact_email' does not exist on type 'Product'.
+app/components/marketplace/ProductCard.vue(113,7): error TS6133: 't' is declared but its value is never read.
+app/components/marketplace/ProductCard.vue(113,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/components/marketplace/UnifiedSearchFilter.vue(485,1): error TS6133: 'Country' is declared but its value is never read.
+app/components/marketplace/UnifiedSearchFilter.vue(543,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/components/ui/ErrorCard.vue(35,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/components/ui/base/BaseSelect.vue(71,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/components/ui/base/CountrySelector.vue(45,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/components/ui/base/LanguageSwitcher.vue(21,17): error TS2339: Property 'locales' does not exist on type '{ locale: Ref<string, string>; }'.
+app/components/ui/base/LanguageSwitcher.vue(21,26): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/components/ui/base/LanguageSwitcher.vue(27,48): error TS7006: Parameter 'l' implicitly has an 'any' type.
+app/components/ui/feedback/ErrorBoundary.vue(81,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/composables/api/repositories/MessagingRepository.ts(8,3): error TS6196: 'MessageSendResponse' is declared but never used.
+app/composables/auth/useLoginForm.ts(23,11): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/composables/auth/useRegistration.ts(22,11): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/composables/errors/useErrorHandler.ts(11,11): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/composables/useAccount.ts(12,11): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/composables/useHelp.ts(2,15): error TS2305: Module '"@ionic/vue"' has no exported member 'HTMLIonModalElement'.
+app/composables/useHelp.ts(21,11): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/composables/useHelpTopic.ts(15,5): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+app/composables/useI18n.ts(18,12): error TS2551: Property 'setLocale' does not exist on type '{ locale: Ref<string, string>; }'. Did you mean 'locale'?
+app/composables/useI18n.ts(30,18): error TS2551: Property 'setLocale' does not exist on type '{ locale: Ref<string, string>; }'. Did you mean 'locale'?
+app/composables/useListingCreation.ts(3,3): error TS2305: Module '"~/utils/validation/listingSchemas"' has no exported member 'ProductFormData'.
+app/composables/useListingCreation.ts(4,3): error TS2305: Module '"~/utils/validation/listingSchemas"' has no exported member 'WantedFormData'.
+app/composables/useListingCreation.ts(120,30): error TS7006: Parameter 'country' implicitly has an 'any' type.
+app/composables/useListingCreation.ts(187,13): error TS6133: 'responseData' is declared but its value is never read.
+app/composables/useListingCreation.ts(222,31): error TS7030: Not all code paths return a value.
+app/composables/useListingCreation.ts(236,44): error TS6133: 'to' is declared but its value is never read.
+app/composables/useLog.ts(13,11): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/composables/useMarketplace.ts(3,1): error TS6133: 'isAuthenticatedProduct' is declared but its value is never read.
+app/composables/useMarketplace.ts(16,11): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/composables/useMarketplace.ts(148,11): error TS2339: Property 'user_id' does not exist on type 'Product'.
+app/composables/useMarketplace.ts(149,11): error TS2339: Property 'contact_email' does not exist on type 'Product'.
+app/composables/useMessaging.ts(10,3): error TS6196: 'MessageSendResponse' is declared but never used.
+app/composables/useMyListings.ts(15,11): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/composables/useProfile.ts(6,11): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/composables/useProfileEdit.ts(15,11): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/composables/useSafeLocalePath.ts(6,9): error TS2451: Cannot redeclare block-scoped variable 'useLocalePath'.
+app/composables/useSafeLocalePath.ts(10,9): error TS2451: Cannot redeclare block-scoped variable 'useI18n'.
+app/composables/useSearchFilter.ts(210,5): error TS2322: Type 'any' is not assignable to type 'never'.
+app/composables/useTextFormatting.ts(15,5): error TS2353: Object literal may only specify known properties, and 'headerIds' does not exist in type 'MarkedOptions<string, string>'.
+app/composables/useTextFormatting.ts(35,44): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type 'string | Promise<string>' is not assignable to parameter of type 'string | Node'.
+      Type 'Promise<string>' is not assignable to type 'string | Node'.
+app/composables/useTextFormatting.ts(77,21): error TS18048: 'linkText' is possibly 'undefined'.
+app/composables/useTextFormatting.ts(89,27): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+app/composables/useTextFormatting.ts(90,24): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+app/composables/useTextFormatting.ts(94,36): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string | URL'.
+  Type 'undefined' is not assignable to type 'string | URL'.
+app/composables/useTextFormatting.ts(100,18): error TS18048: 'url' is possibly 'undefined'.
+app/composables/useTextFormatting.ts(101,13): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+app/composables/useTranslation.ts(2,1): error TS6133: 'DOMPurify' is declared but its value is never read.
+app/composables/useTranslation.ts(215,9): error TS6133: 'providers' is declared but its value is never read.
+app/composables/useTranslation.ts(297,12): error TS6133: 'cacheTranslation' is declared but its value is never read.
+app/composables/useWanted.ts(3,1): error TS6133: 'isAuthenticatedWanted' is declared but its value is never read.
+app/composables/useWanted.ts(16,11): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/pages/account.vue(267,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/pages/auth/verify-email.vue(79,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/pages/create/index.vue(81,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/pages/create/index.vue(83,7): error TS6133: 'authStore' is declared but its value is never read.
+app/pages/create/product.vue(422,3): error TS2305: Module '"~/utils/validation/listingSchemas"' has no exported member 'ProductFormData'.
+app/pages/create/product.vue(436,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/pages/create/product.vue(539,15): error TS6133: 'listingId' is declared but its value is never read.
+app/pages/create/wanted.vue(319,3): error TS2305: Module '"~/utils/validation/listingSchemas"' has no exported member 'WantedFormData'.
+app/pages/create/wanted.vue(332,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/pages/create/wanted.vue(433,15): error TS6133: 'listingId' is declared but its value is never read.
+app/pages/index.vue(171,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/pages/main.vue(46,22): error TS2322: Type 'string' is not assignable to type '"default" | "clear" | "outline" | "solid" | undefined'.
+app/pages/main.vue(97,3): error TS2339: Property 'list' does not exist on type '{ home: string; person: string; personCircle: string; settings: string; logout: string; menu: string; close: string; closeCircle: string; search: string; searchOutline: string; add: string; addCircle: string; ... 39 more ...; language: string; }'.
+app/pages/main.vue(97,3): error TS6133: 'list' is declared but its value is never read.
+app/pages/main.vue(104,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/pages/main.vue(196,35): error TS2345: Argument of type '(route: string) => Promise<void>' is not assignable to parameter of type '(...args: unknown[]) => unknown'.
+  Types of parameters 'route' and 'args' are incompatible.
+    Type 'unknown' is not assignable to type 'string'.
+app/pages/market/[id].vue(12,10): error TS2322: Type '{ readonly company_id?: string | undefined; readonly active?: boolean | undefined; readonly id: string; readonly title: string; readonly category: string; readonly subcategory: string; ... 9 more ...; readonly created_at: string; } | { ...; } | null' is not assignable to type 'ProductPublicListing | Product | null | undefined'.
+  Type '{ readonly company_id?: string | undefined; readonly active?: boolean | undefined; readonly id: string; readonly title: string; readonly category: string; readonly subcategory: string; ... 9 more ...; readonly created_at: string; }' is not assignable to type 'ProductPublicListing | Product | null | undefined'.
+    Type '{ readonly company_id?: string | undefined; readonly active?: boolean | undefined; readonly id: string; readonly title: string; readonly category: string; readonly subcategory: string; ... 9 more ...; readonly created_at: string; }' is not assignable to type 'Product'.
+      Types of property 'countries' are incompatible.
+        The type 'readonly string[]' is 'readonly' and cannot be assigned to the mutable type 'string[]'.
+app/pages/market/[id].vue(302,62): error TS2339: Property 'contact_email' does not exist on type 'ProductAuthenticated'.
+app/pages/market/[id].vue(303,47): error TS2339: Property 'contact_email' does not exist on type 'ProductAuthenticated'.
+app/pages/market/[id].vue(444,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/pages/market/index.vue(6,10): error TS4104: The type 'readonly ({ readonly company_id?: string | undefined; readonly active?: boolean | undefined; readonly id: string; readonly title: string; readonly category: string; readonly subcategory: string; ... 9 more ...; readonly created_at: string; } | { ...; })[]' is 'readonly' and cannot be assigned to the mutable type 'FilterableItem[]'.
+app/pages/market/index.vue(68,27): error TS2322: Type 'FilterableItem' is not assignable to type 'ProductPublicListing | Product'.
+  Type 'WantedPublicListing' is not assignable to type 'ProductPublicListing | Product'.
+    Type 'WantedPublicListing' is missing the following properties from type 'Product': price, price_currency, quantity
+app/pages/market/index.vue(104,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/pages/market/index.vue(131,21): error TS2345: Argument of type 'Readonly<Ref<readonly ({ readonly company_id?: string | undefined; readonly active?: boolean | undefined; readonly id: string; readonly title: string; readonly category: string; readonly subcategory: string; ... 9 more ...; readonly created_at: string; } | { ...; })[], readonly ({ ...; } | { ...; })[]>>' is not assignable to parameter of type 'Ref<FilterableItem[], FilterableItem[]>'.
+  Types of property 'value' are incompatible.
+    The type 'readonly ({ readonly company_id?: string | undefined; readonly active?: boolean | undefined; readonly id: string; readonly title: string; readonly category: string; readonly subcategory: string; ... 9 more ...; readonly created_at: string; } | { ...; })[]' is 'readonly' and cannot be assigned to the mutable type 'FilterableItem[]'.
+app/pages/market/index.vue(279,15): error TS7022: 'targetScrollTop' implicitly has type 'any' because it does not have a type annotation and is referenced directly or indirectly in its own initializer.
+app/pages/market/index.vue(280,29): error TS2349: This expression is not callable.
+  Type 'Number' has no call signatures.
+app/pages/market/index.vue(282,47): error TS2448: Block-scoped variable 'targetScrollTop' used before its declaration.
+app/pages/messages/[id].vue(110,3): error TS6196: 'Message' is declared but never used.
+app/pages/messages/[id].vue(119,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/pages/messages/[id].vue(214,5): error TS2322: Type '{ _id: string; product_id: string; product_title: string; conversation_type: string; company_id: string; company_name: string; buyer_company_id: string; buyer_company_name: string; messages: readonly { ...; }[]; created_at: string; updated_at: string; }' is not assignable to type 'Conversation | { _id: string; product_id: string; product_title: string; conversation_type: string; company_id: string; company_name: string; buyer_company_id: string; buyer_company_name: string; messages: { ...; }[]; created_at: string; updated_at: string; } | null'.
+  Type '{ _id: string; product_id: string; product_title: string; conversation_type: string; company_id: string; company_name: string; buyer_company_id: string; buyer_company_name: string; messages: readonly { ...; }[]; created_at: string; updated_at: string; }' is not assignable to type '{ _id: string; product_id: string; product_title: string; conversation_type: string; company_id: string; company_name: string; buyer_company_id: string; buyer_company_name: string; messages: { ...; }[]; created_at: string; updated_at: string; }'.
+    Types of property 'messages' are incompatible.
+      The type 'readonly { readonly user_id: string; readonly user_name: string; readonly product_owner: boolean; readonly message: string; readonly created_at: string; }[]' is 'readonly' and cannot be assigned to the mutable type '{ user_id: string; user_name: string; product_owner: boolean; message: string; created_at: string; }[]'.
+app/pages/messages/[id].vue(217,11): error TS2540: Cannot assign to 'value' because it is a read-only property.
+app/pages/messages/index.vue(76,10): error TS2322: Type '() => Promise<void | NavigationFailure | undefined>' is not assignable to type '() => void | Promise<void>'.
+  Type 'Promise<void | NavigationFailure | undefined>' is not assignable to type 'void | Promise<void>'.
+    Type 'Promise<void | NavigationFailure | undefined>' is not assignable to type 'Promise<void>'.
+      Type 'void | NavigationFailure | undefined' is not assignable to type 'void'.
+        Type 'NavigationFailure' is not assignable to type 'void'.
+app/pages/messages/index.vue(96,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/pages/messages/index.vue(109,34): error TS2345: Argument of type '{ readonly _id: string; readonly product_id: string; readonly product_title: string; readonly conversation_type: string; readonly company_id: string; readonly company_name: string; ... 4 more ...; readonly updated_at: string; }[]' is not assignable to parameter of type 'Conversation[]'.
+  Type '{ readonly _id: string; readonly product_id: string; readonly product_title: string; readonly conversation_type: string; readonly company_id: string; readonly company_name: string; ... 4 more ...; readonly updated_at: string; }' is not assignable to type 'Conversation'.
+    Types of property 'messages' are incompatible.
+      The type 'readonly { readonly user_id: string; readonly user_name: string; readonly product_owner: boolean; readonly message: string; readonly created_at: string; }[]' is 'readonly' and cannot be assigned to the mutable type 'Message[]'.
+app/pages/messages/index.vue(160,3): error TS18047: 'event.target' is possibly 'null'.
+app/pages/messages/index.vue(160,16): error TS2339: Property 'complete' does not exist on type 'EventTarget'.
+app/pages/my-listings.vue(65,52): error TS2345: Argument of type '{ readonly company_id?: string | undefined; readonly active?: boolean | undefined; readonly id: string; readonly title: string; readonly category: string; readonly subcategory: string; ... 9 more ...; readonly created_at: string; }' is not assignable to parameter of type 'Product'.
+  Types of property 'countries' are incompatible.
+    The type 'readonly string[]' is 'readonly' and cannot be assigned to the mutable type 'string[]'.
+app/pages/my-listings.vue(137,51): error TS2345: Argument of type '{ readonly company_id: string; readonly active: boolean; readonly user_id?: string | undefined; readonly contact_email?: string | undefined; readonly id: string; readonly title: string; ... 13 more ...; readonly expires_at?: string | ... 1 more ... | undefined; }' is not assignable to parameter of type 'Wanted'.
+  Types of property 'countries' are incompatible.
+    The type 'readonly string[]' is 'readonly' and cannot be assigned to the mutable type 'string[]'.
+app/pages/verify-token.vue(119,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/pages/wanted/[id].vue(10,8): error TS2322: Type '{ readonly company_id: string; readonly active: boolean; readonly id: string; readonly title: string; readonly category: string; readonly subcategory: string; readonly description: string; ... 10 more ...; readonly expires_at?: string | ... 1 more ... | undefined; } | { ...; } | null' is not assignable to type 'WantedPublicListing | Wanted | null | undefined'.
+  Type '{ readonly company_id: string; readonly active: boolean; readonly id: string; readonly title: string; readonly category: string; readonly subcategory: string; readonly description: string; ... 10 more ...; readonly expires_at?: string | ... 1 more ... | undefined; }' is not assignable to type 'WantedPublicListing | Wanted | null | undefined'.
+    Type '{ readonly company_id: string; readonly active: boolean; readonly id: string; readonly title: string; readonly category: string; readonly subcategory: string; readonly description: string; ... 10 more ...; readonly expires_at?: string | ... 1 more ... | undefined; }' is not assignable to type 'WantedPublicListing | Wanted'.
+      Type '{ readonly company_id: string; readonly active: boolean; readonly id: string; readonly title: string; readonly category: string; readonly subcategory: string; readonly description: string; ... 10 more ...; readonly expires_at?: string | ... 1 more ... | undefined; }' is not assignable to type 'Wanted'.
+        Types of property 'countries' are incompatible.
+          The type 'readonly string[]' is 'readonly' and cannot be assigned to the mutable type 'string[]'.
+app/pages/wanted/[id].vue(243,59): error TS2339: Property 'contact_email' does not exist on type 'WantedAuthenticated'.
+app/pages/wanted/[id].vue(244,44): error TS2339: Property 'contact_email' does not exist on type 'WantedAuthenticated'.
+app/pages/wanted/[id].vue(345,3): error TS6196: 'WantedPublicDetail' is declared but never used.
+app/pages/wanted/[id].vue(533,12): error TS2352: Conversion of type '(({ readonly company_id: string; readonly active: boolean; readonly id: string; readonly title: string; readonly category: string; readonly subcategory: string; readonly description: string; ... 10 more ...; readonly expires_at?: string | ... 1 more ... | undefined; } | { ...; }) & Record<...>) & Record<...>' to type 'WantedAuthenticated' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Type '{ readonly company_id: string; readonly active: boolean; readonly id: string; readonly title: string; readonly category: string; readonly subcategory: string; readonly description: string; ... 10 more ...; readonly expires_at?: string | ... 1 more ... | undefined; } & Record<...> & Record<...>' is not comparable to type 'WantedAuthenticated'.
+    Types of property 'countries' are incompatible.
+      The type 'readonly string[]' is 'readonly' and cannot be assigned to the mutable type 'string[]'.
+app/pages/wanted/[id].vue(540,33): error TS2339: Property 'contact_email' does not exist on type 'WantedAuthenticated'.
+app/pages/wanted/index.vue(6,10): error TS4104: The type 'readonly ({ readonly company_id: string; readonly active: boolean; readonly user_id?: string | undefined; readonly contact_email?: string | undefined; readonly id: string; readonly title: string; ... 13 more ...; readonly expires_at?: string | ... 1 more ... | undefined; } | { ...; })[]' is 'readonly' and cannot be assigned to the mutable type 'FilterableItem[]'.
+app/pages/wanted/index.vue(123,21): error TS2345: Argument of type 'Readonly<Ref<readonly ({ readonly company_id: string; readonly active: boolean; readonly user_id?: string | undefined; readonly contact_email?: string | undefined; readonly id: string; readonly title: string; ... 13 more ...; readonly expires_at?: string | ... 1 more ... | undefined; } | { ...; })[], readonly ({ ......' is not assignable to parameter of type 'Ref<FilterableItem[], FilterableItem[]>'.
+  Types of property 'value' are incompatible.
+    The type 'readonly ({ readonly company_id: string; readonly active: boolean; readonly user_id?: string | undefined; readonly contact_email?: string | undefined; readonly id: string; readonly title: string; ... 13 more ...; readonly expires_at?: string | ... 1 more ... | undefined; } | { ...; })[]' is 'readonly' and cannot be assigned to the mutable type 'FilterableItem[]'.
+app/pages/wanted/index.vue(153,9): error TS2339: Property 't' does not exist on type '{ locale: Ref<string, string>; }'.
+app/stores/auth.ts(166,44): error TS2345: Argument of type 'User' is not assignable to parameter of type '{ _id?: string | undefined; id?: string | undefined; }'.
+  Types of property 'id' are incompatible.
+    Type 'string | number | undefined' is not assignable to type 'string | undefined'.
+      Type 'number' is not assignable to type 'string'.
+app/stores/auth.ts(167,13): error TS2345: Argument of type '{ _id?: string | undefined; id?: string | undefined; }' is not assignable to parameter of type 'User'.
+  Type '{ _id?: string | undefined; id?: string | undefined; }' is missing the following properties from type 'User': email, balance, account_type, purchased_products, subscription_valid_until
+app/stores/auth.ts(171,25): error TS2345: Argument of type 'Company' is not assignable to parameter of type '{ _id?: string | undefined; id?: string | undefined; }'.
+  Types of property 'id' are incompatible.
+    Type 'string | number | undefined' is not assignable to type 'string | undefined'.
+      Type 'number' is not assignable to type 'string'.
+app/stores/auth.ts(173,22): error TS2345: Argument of type '{ _id?: string | undefined; id?: string | undefined; } | null' is not assignable to parameter of type 'Company | null'.
+  Property 'name' is missing in type '{ _id?: string | undefined; id?: string | undefined; }' but required in type 'Company'.
+app/stores/auth.ts(177,7): error TS2345: Argument of type 'Company[]' is not assignable to parameter of type '{ _id?: string | undefined; id?: string | undefined; }[]'.
+  Type 'Company' is not assignable to type '{ _id?: string | undefined; id?: string | undefined; }'.
+    Types of property 'id' are incompatible.
+      Type 'string | number | undefined' is not assignable to type 'string | undefined'.
+        Type 'number' is not assignable to type 'string'.
+app/stores/auth.ts(179,23): error TS2345: Argument of type '{ _id?: string | undefined; id?: string | undefined; }[]' is not assignable to parameter of type 'Company[]'.
+  Property 'name' is missing in type '{ _id?: string | undefined; id?: string | undefined; }' but required in type 'Company'.
+app/stores/auth.ts(187,40): error TS2345: Argument of type 'User[]' is not assignable to parameter of type '{ _id?: string | undefined; id?: string | undefined; }[]'.
+  Type 'User' is not assignable to type '{ _id?: string | undefined; id?: string | undefined; }'.
+    Types of property 'id' are incompatible.
+      Type 'string | number | undefined' is not assignable to type 'string | undefined'.
+        Type 'number' is not assignable to type 'string'.
+app/stores/auth.ts(189,13): error TS2345: Argument of type 'User[]' is not assignable to parameter of type '{ _id?: string | undefined; id?: string | undefined; }[]'.
+  Type 'User' is not assignable to type '{ _id?: string | undefined; id?: string | undefined; }'.
+    Types of property 'id' are incompatible.
+      Type 'string | number | undefined' is not assignable to type 'string | undefined'.
+        Type 'number' is not assignable to type 'string'.
+app/stores/auth.ts(192,13): error TS2345: Argument of type 'User[]' is not assignable to parameter of type '{ _id?: string | undefined; id?: string | undefined; }[]'.
+  Type 'User' is not assignable to type '{ _id?: string | undefined; id?: string | undefined; }'.
+    Types of property 'id' are incompatible.
+      Type 'string | number | undefined' is not assignable to type 'string | undefined'.
+        Type 'number' is not assignable to type 'string'.
+app/stores/auth.ts(330,31): error TS2345: Argument of type '{ active_company: { company: Company | undefined; metrics: {}; tasks: never[]; devices: never[]; spaces: never[]; admins: never[]; managers: never[]; operators: never[]; }; user: User; other_companies: Company[]; }' is not assignable to parameter of type 'ProfileResponse'.
+  The types of 'active_company.company' are incompatible between these types.
+    Type 'Company | undefined' is not assignable to type 'Company'.
+      Type 'undefined' is not assignable to type 'Company'.
+app/tests/product-translation.test.ts(1,32): error TS6133: 'vi' is declared but its value is never read.
+app/tests/product-translation.test.ts(11,24): error TS6133: 'isTranslating' is declared but its value is never read.
+app/tests/product-translation.test.ts(51,14): error TS18046: 'err' is of type 'unknown'.
+app/utils/validation/listingSchemas.ts(207,37): error TS2345: Argument of type '"live_larvae" | "whole_dried_larvae" | "defatted_meal" | "eggs" | "neonates" | "5dol" | "pupae" | "oil" | "chitin" | "other" | "unprocessed" | "dried" | "ready_to_use" | "municipal_waste" | ... 18 more ... | "sales"' is not assignable to parameter of type '"other"'.
+  Type '"live_larvae"' is not assignable to type '"other"'.
+app/utils/validation/listingSchemas.ts(232,37): error TS2345: Argument of type '"live_larvae" | "whole_dried_larvae" | "defatted_meal" | "eggs" | "neonates" | "5dol" | "pupae" | "oil" | "chitin" | "other" | "unprocessed" | "dried" | "ready_to_use" | "municipal_waste" | ... 18 more ... | "sales"' is not assignable to parameter of type '"other"'.
+  Type '"live_larvae"' is not assignable to type '"other"'.
+nuxt.config.ts(34,7): error TS2561: Object literal may only specify known properties, but 'scrollBehavior' does not exist in type '{ end?: boolean | undefined; sensitive?: boolean | undefined; strict?: boolean | undefined; linkActiveClass?: string | undefined; linkExactActiveClass?: string | undefined; hashMode?: boolean | undefined; scrollBehaviorType?: "auto" | ... 1 more ... | undefined; }'. Did you mean to write 'scrollBehaviorType'?
+nuxt.config.ts(34,22): error TS7006: Parameter 'to' implicitly has an 'any' type.
+nuxt.config.ts(34,26): error TS6133: 'from' is declared but its value is never read.
+nuxt.config.ts(34,26): error TS7006: Parameter 'from' implicitly has an 'any' type.
+nuxt.config.ts(34,32): error TS7006: Parameter 'savedPosition' implicitly has an 'any' type.
+shared/types/models/MarketplaceProduct.ts(60,3): error TS6133: 'product' is declared but its value is never read.
+shared/types/models/MarketplaceWanted.ts(57,3): error TS6133: 'wanted' is declared but its value is never read.

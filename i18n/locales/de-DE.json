@@ -1,0 +1,822 @@
+{
+  "common": {
+    "loading": "Wird geladen...",
+    "error": "Fehler",
+    "retry": "Erneut versuchen",
+    "submit": "Absenden",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "close": "Schließen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "continue": "Fortfahren",
+    "yes": "Ja",
+    "no": "Nein",
+    "noListings": "Keine Anzeigen gefunden",
+    "showDetails": "Details anzeigen",
+    "hideDetails": "Details ausblenden",
+    "goHome": "Zur Startseite",
+    "welcome": "Willkommen",
+    "notSet": "Nicht festgelegt",
+    "pleaseCorrectErrors": "Bitte korrigieren Sie die folgenden Fehler:",
+    "unsavedChanges": "Sie haben ungespeicherte Änderungen",
+    "dismiss": "Verwerfen",
+    "ok": "OK",
+    "selectLanguage": "Sprache wählen",
+    "current": "Aktuell",
+    "image": "Bild",
+    "confirmDelete": "Löschung bestätigen"
+  },
+  "navigation": {
+    "home": "Startseite",
+    "menu": "Menü",
+    "toggleMenu": "Navigationsmenü umschalten",
+    "dashboard": "Dashboard",
+    "profile": "Profil",
+    "account": "Konto",
+    "settings": "Einstellungen",
+    "logout": "Abmelden",
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "logs": {
+      "menuUnavailable": "Menü-Controller nicht verfügbar",
+      "menuToggleFailed": "Menü konnte nicht umgeschaltet werden"
+    }
+  },
+  "menu": {
+    "marketplace": "Marktplatz",
+    "myListings": "Meine Anzeigen"
+  },
+  "auth": {
+    "email": "E-Mail",
+    "password": "Passwort",
+    "name": "Name",
+    "confirmPassword": "Passwort bestätigen",
+    "forgotPassword": "Passwort vergessen?",
+    "rememberMe": "Angemeldet bleiben",
+    "loginButton": "Anmelden",
+    "registerButton": "Registrieren",
+    "logoutButton": "Abmelden",
+    "signIn": "Anmelden",
+    "enterEmail": "Geben Sie Ihre E-Mail ein",
+    "enterPassword": "Geben Sie Ihr Passwort ein",
+    "enterName": "Geben Sie Ihren Namen ein",
+    "dontHaveAccount": "Noch kein Konto?",
+    "alreadyHaveAccount": "Bereits ein Konto?",
+    "signUpLink": "Registrieren",
+    "signInLink": "Anmelden",
+    "verifyEmail": "E-Mail verifizieren",
+    "completeProfile": "Profil vervollständigen",
+    "getStarted": "Loslegen",
+    "enterEmailToRegister": "Geben Sie Ihre E-Mail-Adresse ein, um ein Konto zu erstellen",
+    "checkYourEmail": "Prüfen Sie Ihre E-Mail",
+    "verificationCodeSent": "Wir haben einen Verifizierungscode an {email} gesendet",
+    "verificationCode": "Verifizierungscode",
+    "enterCodeFromEmail": "Code aus der E-Mail eingeben",
+    "verifyingEmail": "E-Mail wird verifiziert...",
+    "redirectingToManualEntry": "Weiterleitung zur manuellen Eingabe...",
+    "didntReceiveCode": "Code nicht erhalten?",
+    "sending": "Wird gesendet...",
+    "resendCode": "Code erneut senden",
+    "verificationCodeSentSuccess": "Verifizierungscode gesendet!",
+    "welcomeBack": "Willkommen zurück",
+    "signInToContinue": "Melden Sie sich an, um fortzufahren",
+    "createAccount": "Konto Erstellen",
+    "joinUsToday": "Registrieren Sie sich kostenlos und beginnen Sie zu verkaufen und sich mit Käufern zu vernetzen – es ist kostenlos!",
+    "creatingWorkspace": "Ihr Arbeitsbereich wird erstellt...",
+    "settingUpCompany": "Ihr Unternehmen und Ihre Bereiche werden eingerichtet...",
+    "retryCreation": "Erneut versuchen",
+    "skipForNow": "Vorläufig überspringen"
+  },
+  "home": {
+    "title": "BSF Marktplatz",
+    "subtitle": "Hallo Welt! Willkommen zu unserer erstaunlichen App-Vorlage.",
+    "welcomeMessage": "Willkommen bei {appName}",
+    "getStarted": "Loslegen",
+    "signIn": "Anmelden",
+    "featuresCarousel": "Funktionen-Karussell",
+    "features": {
+      "secure": {
+        "title": "Verkäufer finden",
+        "description": "Finden Sie ganz einfach insektenbezogene Produkte und Dienstleistungen",
+        "iconLabel": "Sicherheitssymbol"
+      },
+      "fast": {
+        "title": "Käufer finden",
+        "description": "Bewerben und verkaufen Sie Ihre Produkte und Dienstleistungen an Insektenproduzenten",
+        "iconLabel": "Geschwindigkeitssymbol"
+      },
+      "mobile": {
+        "title": "Kostenlos starten",
+        "description": "Durchsuchen Sie Angebote ohne Registrierung. Registrieren Sie sich kostenlos für alle Vorteile.",
+        "iconLabel": "Mobilgerät-Symbol"
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "loadingProfile": "Profil wird geladen...",
+    "errorLoadingProfile": "Fehler beim Laden des Profils",
+    "welcome": "Willkommen!",
+    "userProfile": "Benutzerprofil",
+    "hereIsYourProfile": "Hier ist Ihre Profilübersicht",
+    "manageAccount": "Konto Verwalten",
+    "profileDetails": "Profildetails",
+    "quickAccess": "Schnellzugriff",
+    "navigateToMarketplace": "Zum Marktplatz",
+    "navigateToWanted": "Gesuche durchsuchen",
+    "navigateToAccount": "Konto Verwalten"
+  },
+  "profile": {
+    "email": "E-Mail",
+    "name": "Name",
+    "accountType": "Kontotyp",
+    "creditsBalance": "Guthaben",
+    "activeCompany": "Aktives Unternehmen",
+    "editProfile": "Profil bearbeiten",
+    "updateProfile": "Profil aktualisieren",
+    "company": "Unternehmen",
+    "phone": "Telefon",
+    "memberSince": "Mitglied Seit"
+  },
+  "account": {
+    "title": "Konto",
+    "subtitle": "Verwalten Sie Ihre Kontoeinstellungen und Profilinformationen",
+    "company": {
+      "title": "Unternehmensinformationen",
+      "edit": "Unternehmen Bearbeiten",
+      "name": "Firmenname",
+      "street": "Straße",
+      "city": "Stadt",
+      "country": "Land",
+      "timezone": "Zeitzone",
+      "business_id": "Unternehmens-ID",
+      "businessId": "Unternehmens-ID",
+      "namePlaceholder": "Firmennamen eingeben",
+      "streetPlaceholder": "Straße eingeben",
+      "cityPlaceholder": "Stadt eingeben",
+      "countryPlaceholder": "Land auswählen",
+      "timezonePlaceholder": "Zeitzone auswählen",
+      "businessIdPlaceholder": "Unternehmens-ID eingeben",
+      "notSet": "Nicht festgelegt",
+      "updateSuccess": "Unternehmen erfolgreich aktualisiert",
+      "updateError": "Fehler beim Aktualisieren des Unternehmens",
+      "permissionDenied": "Keine Berechtigung zum Bearbeiten"
+    },
+    "profile": {
+      "title": "Profil",
+      "basicDetails": "Profildetails",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "email": "E-Mail",
+      "name": "Name",
+      "phone": "Telefon",
+      "country": "Land",
+      "city": "Stadt",
+      "firstNamePlaceholder": "Geben Sie Ihren Vornamen ein",
+      "lastNamePlaceholder": "Geben Sie Ihren Nachnamen ein",
+      "emailPlaceholder": "Geben Sie Ihre E-Mail-Adresse ein",
+      "namePlaceholder": "Geben Sie Ihren vollständigen Namen ein",
+      "phonePlaceholder": "Geben Sie Ihre Telefonnummer ein",
+      "countryPlaceholder": "Wählen Sie Ihr Land",
+      "cityPlaceholder": "Geben Sie Ihre Stadt ein",
+      "updateSuccess": "Profil erfolgreich aktualisiert",
+      "placeholders": {
+        "firstName": "Geben Sie Ihren Vornamen ein",
+        "lastName": "Geben Sie Ihren Nachnamen ein",
+        "email": "Geben Sie Ihre E-Mail-Adresse ein",
+        "phone": "Geben Sie Ihre Telefonnummer ein"
+      },
+      "updateButton": "Profil aktualisieren"
+    },
+    "password": {
+      "title": "Passwort",
+      "current": "Aktuelles Passwort",
+      "new": "Neues Passwort",
+      "confirm": "Neues Passwort bestätigen",
+      "currentPlaceholder": "Geben Sie Ihr aktuelles Passwort ein",
+      "newPlaceholder": "Geben Sie Ihr neues Passwort ein",
+      "confirmPlaceholder": "Bestätigen Sie Ihr neues Passwort",
+      "placeholders": {
+        "current": "Geben Sie Ihr aktuelles Passwort ein",
+        "new": "Geben Sie Ihr neues Passwort ein",
+        "confirm": "Bestätigen Sie Ihr neues Passwort"
+      },
+      "updateButton": "Passwort aktualisieren",
+      "validationError": "Das Passwort muss mindestens 6 Zeichen lang sein und die Passwörter müssen übereinstimmen",
+      "updateSuccess": "Passwort erfolgreich aktualisiert",
+      "updateError": "Fehler beim Aktualisieren des Passworts"
+    },
+    "credits": {
+      "title": "Guthaben",
+      "currentBalance": "Aktueller Saldo",
+      "totalEarned": "Gesamt verdient",
+      "totalSpent": "Gesamt ausgegeben",
+      "showHistory": "Verlauf anzeigen",
+      "hideHistory": "Verlauf ausblenden",
+      "history": "Guthaben-Verlauf"
+    },
+    "products": {
+      "title": "Produkte",
+      "andXMore": "und {count} weitere...",
+      "noProducts": "Noch keine Produkte gekauft",
+      "purchaseDate": "Kaufdatum",
+      "status": "Status",
+      "purchased": "Gekauft",
+      "unknownProduct": "Unbekanntes Produkt",
+      "statusLabels": {
+        "active": "Aktiv",
+        "expired": "Abgelaufen",
+        "cancelled": "Storniert"
+      }
+    }
+  },
+  "errors": {
+    "generic": "Etwas ist schief gelaufen",
+    "networkError": "Netzwerkfehler. Bitte überprüfen Sie Ihre Verbindung.",
+    "unauthorized": "Nicht autorisierter Zugriff",
+    "forbidden": "Sie haben keine Berechtigung, auf diese Ressource zuzugreifen",
+    "notFound": "Ressource nicht gefunden",
+    "serverError": "Serverfehler. Bitte versuchen Sie es später erneut.",
+    "validationError": "Bitte überprüfen Sie Ihre Eingabe",
+    "failedToLoad": "Fehler beim Laden von {resource}",
+    "failedToCreateAccount": "Fehler beim Erstellen des Kontos",
+    "invalidVerificationCode": "Ungültiger Verifizierungscode",
+    "fetchLogs": "Fehler beim Abrufen der Protokolle",
+    "createLog": "Fehler beim Erstellen des Protokolls",
+    "deleteLog": "Fehler beim Löschen des Protokolls",
+    "fetchCreditLogs": "Fehler beim Abrufen der Kreditprotokolle",
+    "failedToResendCode": "Fehler beim erneuten Senden des Codes",
+    "account": {
+      "requiredFields": "Bitte füllen Sie die erforderlichen Felder aus",
+      "profileUpdateSuccess": "Profil erfolgreich aktualisiert",
+      "profileUpdateFailed": "Fehler beim Aktualisieren des Profils",
+      "passwordFieldsInvalid": "Bitte überprüfen Sie Ihre Passwort-Felder",
+      "passwordUpdateSuccess": "Passwort erfolgreich aktualisiert",
+      "passwordUpdateFailed": "Fehler beim Aktualisieren des Passworts",
+      "loadingFailed": "Fehler beim Laden der Kontoinformationen",
+      "loadProfileFailed": "Benutzerprofil konnte nicht geladen werden",
+      "loadProfileLog": "Fehler beim Laden des Benutzerprofils",
+      "updateProfileFailed": "Benutzerprofil konnte nicht aktualisiert werden",
+      "updateProfileLog": "Fehler beim Aktualisieren des Benutzerprofils",
+      "updateCompanyLog": "Fehler Unternehmen aktualisieren. Konsole prüfen.",
+      "creditHistoryLog": "Fehler beim Laden der Kredit-Historie",
+      "sendResetFailed": "E-Mail zum Zurücksetzen des Passworts konnte nicht gesendet werden",
+      "sendResetLog": "Fehler beim Senden der Passwort-Zurücksetzungs-E-Mail",
+      "resetPasswordFailed": "Passwort konnte nicht zurückgesetzt werden",
+      "resetPasswordLog": "Fehler beim Zurücksetzen des Passworts"
+    },
+    "verificationFailed": "E-Mail-Verifizierung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "resendFailed": "Fehler beim erneuten Senden des Verifizierungscodes. Bitte versuchen Sie es erneut.",
+    "permissionDenied": "Zugriff verweigert",
+    "titleMismatch": "Der eingegebene Titel stimmt nicht überein",
+    "deleteFailed": "Fehler beim Löschen der Anzeige",
+    "loadingFailed": "Fehler beim Laden des Inhalts",
+    "productNotFound": "Produkt nicht gefunden",
+    "productNotFoundDescription": "Das gesuchte Produkt existiert nicht oder wurde entfernt",
+    "companyCreationFailed": "Unternehmen konnte nicht erstellt werden. Sie können es erneut versuchen oder vorerst überspringen.",
+    "navigationErrorLog": "Navigationsfehler",
+    "navigationFailed": "Navigation fehlgeschlagen",
+    "featuredProductFailed": "Empfohlenes Produkt konnte nicht geladen werden",
+    "rateLimit": "Zu viele Anfragen. Bitte warten Sie einen Moment und versuchen Sie es erneut.",
+    "market": {
+      "usdConversionFailed": "USD-Umrechnung konnte nicht abgerufen werden",
+      "productMissingId": "Produkt-ID fehlt",
+      "wantedMissingId": "Gesuch-ID fehlt",
+      "loadProductsFailed": "Produkte konnten nicht geladen werden",
+      "loadProductDetailFailed": "Produktdetails konnten nicht geladen werden",
+      "randomProductFailedLog": "Zufallsprodukt konnte nicht abgerufen werden"
+    },
+    "wanted": {
+      "createFailedLog": "Gesuch konnte nicht erstellt werden",
+      "updateFailedLog": "Gesuch konnte nicht aktualisiert werden",
+      "fetchEditFailedLog": "Gesuch zum Bearbeiten konnte nicht geladen werden",
+      "loadFailed": "Gesuche konnten nicht geladen werden",
+      "loadDetailFailed": "Details zum Gesuch konnten nicht geladen werden",
+      "deleteFailedLog": "Gesuch konnte nicht gelöscht werden"
+    },
+    "product": {
+      "createFailedLog": "Produkt konnte nicht erstellt werden",
+      "updateFailedLog": "Produkt konnte nicht aktualisiert werden",
+      "fetchEditFailedLog": "Produkt zum Bearbeiten konnte nicht geladen werden"
+    },
+    "log": {
+      "unexpectedStatus": "Unerwarteter Antwortstatus",
+      "contentActionFailedLog": "Inhaltsaktion konnte nicht protokolliert werden",
+      "userActionFailedLog": "Benutzeraktion konnte nicht protokolliert werden"
+    },
+    "boundary": {
+      "caughtLog": "Fehler vom ErrorBoundary abgefangen",
+      "infoLog": "Fehlerinformation"
+    },
+    "help": {
+      "createModalFailed": "Hilfemodal konnte nicht erstellt werden. Bitte versuchen Sie es erneut.",
+      "openFailed": "Hilfe konnte nicht geöffnet werden."
+    }
+  },
+  "validation": {
+    "required": "Dieses Feld ist erforderlich",
+    "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+    "minLength": "Die Mindestlänge beträgt {min} Zeichen",
+    "maxLength": "Die maximale Länge beträgt {max} Zeichen",
+    "passwordMatch": "Passwörter stimmen nicht überein",
+    "invalidFormat": "Ungültiges Format",
+    "listing": {
+      "titleRequired": "Titel ist erforderlich",
+      "titleMax": "Titel darf höchstens 200 Zeichen haben",
+      "categoryRequired": "Kategorie ist erforderlich",
+      "categoryInvalid": "Ungültige Kategorie '{value}'. Gültige Kategorien sind: {categories}",
+      "subcategoryRequired": "Unterkategorie ist erforderlich",
+      "descriptionRequired": "Beschreibung ist erforderlich",
+      "descriptionMax": "Beschreibung darf höchstens 5000 Zeichen haben",
+      "priceRequired": "Preis ist erforderlich",
+      "priceType": "Preis muss eine Zahl sein",
+      "priceMin": "Preis muss 0 oder größer sein",
+      "priceFinite": "Preis muss eine gültige Zahl sein",
+      "currencyLength": "Währungscode muss genau 3 Zeichen lang sein",
+      "currencyFormat": "Währungscode muss ein gültiger ISO-4217-Code (3 Großbuchstaben) sein",
+      "quantityRequired": "Menge ist erforderlich",
+      "quantityType": "Menge muss eine Zahl sein",
+      "quantityMin": "Menge muss 0 oder größer sein",
+      "quantityFinite": "Menge muss eine gültige Zahl sein",
+      "unitRequired": "Einheit ist erforderlich",
+      "unitMax": "Einheit darf höchstens 20 Zeichen haben",
+      "countryLength": "Ländercode muss ISO 3166-1 Alpha-2 entsprechen",
+      "countryFormat": "Ungültiger Ländercode",
+      "countryMin": "Mindestens ein Land muss ausgewählt werden",
+      "countryMax": "Maximal 250 Länder erlaubt",
+      "additionalInfoMax": "Zusätzliche Informationen dürfen höchstens 2000 Zeichen haben",
+      "invalidImages": "Ungültige Bilder (max. {maxFiles} Dateien, {maxSizeMb} MB je Datei, {maxTotalMb} MB insgesamt)",
+      "invalidSubcategory": "Ungültige Unterkategorie für die ausgewählte Kategorie"
+    },
+    "profile": {
+      "nameRequired": "Name ist erforderlich"
+    },
+    "company": {
+      "nameRequired": "Firmenname ist erforderlich",
+      "countryFormat": "Land muss ISO-Code mit 2 Buchstaben sein (z.B. DE)"
+    }
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "language": "Sprache",
+    "theme": "Design",
+    "notifications": "Benachrichtigungen",
+    "privacy": "Datenschutz",
+    "security": "Sicherheit",
+    "about": "Über",
+    "version": "Version"
+  },
+  "company": {
+    "name": "Firmenname",
+    "description": "Beschreibung",
+    "industry": "Branche",
+    "employees": "Mitarbeiter",
+    "founded": "Gegründet",
+    "website": "Webseite"
+  },
+  "market": {
+    "products": "Produkte",
+    "wanted": "Gesucht",
+    "messages": "Nachrichten",
+    "conversations": "Unterhaltungen",
+    "contact": "Kontakt"
+  },
+  "marketplace": {
+    "countries_delivery_help": "Wählen Sie die Länder aus, in die Sie Ihr Produkt oder Ihre Dienstleistung liefern können. Dies ist wichtig, um unnötige Anfragen zu vermeiden.",
+    "update_company_link": "Firmendaten aktualisieren",
+    "title": "Titel",
+    "products": "Produkte",
+    "myProducts": "Meine Produkte",
+    "myWantedItems": "Meine Gesuchten Artikel",
+    "pageTitle": "Marktplatz - Produkte finden",
+    "pageDescription": "Entdecken Sie Produkte in unserem Marktplatz",
+    "search": "Produkte suchen...",
+    "searchPlaceholder": "Produkte suchen...",
+    "noResults": "Keine Produkte gefunden",
+    "noProducts": "Keine Produkte verfügbar",
+    "noProductsDescription": "Versuchen Sie, Ihre Filter oder Suchbegriffe anzupassen",
+    "clearFilters": "Filter löschen",
+    "addListing": "Anzeige hinzufügen",
+    "browseButton": "Marktplatz durchsuchen",
+    "browseMarketplace": "Alle Produkte durchsuchen",
+    "featuredProduct": "Empfohlenes Produkt",
+    "featuredDescription": "Entdecken Sie großartige Produkte unserer Verkäufer",
+    "contactSeller": "Verkäufer kontaktieren",
+    "contactBuyer": "Käufer kontaktieren",
+    "contactEmail": "Kontakt E-Mail",
+    "contactInformation": "Kontaktinformationen",
+    "loginToContact": "Bitte melden Sie sich an, um Kontaktinformationen anzuzeigen",
+    "links": "Links",
+    "emailSubject": "Anfrage zu {product}",
+    "loading": "Produkte werden geladen...",
+    "loadingProducts": "Produkte werden geladen...",
+    "loadingProduct": "Produktdetails werden geladen...",
+    "error": "Fehler beim Laden der Produkte",
+    "backToList": "Zurück zu den Anzeigen",
+    "backToListings": "Zurück zu den Produktanzeigen",
+    "allCategories": "Alle Kategorien",
+    "productDetail": "Produktdetails",
+    "create_listing": "Anzeige erstellen",
+    "create_product": "Produktanzeige erstellen",
+    "create_wanted": "Suchanzeige erstellen",
+    "select_listing_type": "Anzeigentyp auswählen",
+    "select_listing_type_desc": "Wählen Sie den Typ der Anzeige, die Sie erstellen möchten",
+    "create_product_desc": "Listen Sie ein Produkt oder eine Dienstleistung auf, die Sie verkaufen möchten",
+    "create_wanted_desc": "Veröffentlichen Sie eine Anfrage für etwas, das Sie kaufen möchten",
+    "no_company_permission": "Sie benötigen ein Unternehmen und die entsprechenden Berechtigungen, um Anzeigen zu erstellen",
+    "productDetails": "Produktdetails",
+    "seller": "Verkäufer",
+    "price": "Preis",
+    "quantity": "Menge",
+    "description": "Beschreibung",
+    "additionalInfo": "Zusätzliche Informationen",
+    "availableCountries": "Verfügbare Länder",
+    "moreCountries": "+{count} weitere",
+    "showLess": "Weniger anzeigen",
+    "availableIn": "Verfügbar in",
+    "postedOn": "Veröffentlicht am",
+    "filterCategory": "Nach Kategorie filtern",
+    "filterSubcategory": "Nach Unterkategorie filtern",
+    "allSubcategories": "Alle Unterkategorien",
+    "searchFor": "Suche nach",
+    "category": "Kategorie",
+    "subcategory": "Unterkategorie",
+    "showing": "Zeige",
+    "tryAdjustingFilters": "Versuchen Sie, Ihre Filter anzupassen",
+    "moreImages": "Weitere Bilder",
+    "authModal": {
+      "title": "Anmeldung erforderlich",
+      "heading": "Schalten Sie das volle Potenzial frei",
+      "description": "Melden Sie sich an, um Produktdetails anzuzeigen, Verkäufer zu kontaktieren und Einkäufe zu tätigen.",
+      "signInButton": "Anmelden zum Fortfahren",
+      "registerButton": "Neues Konto erstellen",
+      "continueAsGuest": "Noch nicht bereit zur Anmeldung?",
+      "browseOnly": "Weiter stöbern",
+      "benefits": {
+        "saveProducts": "Erstellen Sie Verkaufsanzeigen für Ihre Produkte",
+        "trackOrders": "Erstellen Sie Gesuche (Kaufanzeigen)",
+        "getDeals": "Nachrichten senden und empfangen",
+        "personalized": "Werben Sie bei über 10.000 interessierten Insektenzüchtern"
+      },
+      "freeUsage": "Die Nutzung des BSF Marketplace ist kostenlos"
+    },
+    "priceInUSD": "Ca. in USD",
+    "conversionUnavailable": "USD-Umrechnung nicht verfügbar",
+    "update_listing": "Anzeige aktualisieren",
+    "update_success": "Anzeige erfolgreich aktualisiert",
+    "update_error": "Fehler beim Aktualisieren der Anzeige",
+    "delete_success": "Anzeige erfolgreich gelöscht",
+    "delete_error": "Fehler beim Löschen der Anzeige",
+    "delete_confirm": "Geben Sie \"{title}\" ein, um das Löschen zu bestätigen:",
+    "update_product_desc": "Aktualisieren Sie die Details Ihrer Produktanzeige",
+    "update_wanted_desc": "Aktualisieren Sie die Details Ihrer Suchanzeige",
+    "product_updated": "Produktanzeige erfolgreich aktualisiert",
+    "wanted_updated": "Suchanzeige erfolgreich aktualisiert",
+    "confirmDeleteMessage": "Geben Sie \"{title}\" ein, um das Löschen zu bestätigen:",
+    "deleteSuccess": "Anzeige erfolgreich gelöscht",
+    "basic_information": "Grundinformationen",
+    "pricing_quantity": "Preis & Menge",
+    "location_shipping": "Standort & Versand",
+    "location": "Standort",
+    "images": "Bilder",
+    "title_placeholder": "Geben Sie einen beschreibenden Titel für Ihr Produkt ein",
+    "wanted_title_placeholder": "Was suchen Sie?",
+    "select_category": "Kategorie auswählen",
+    "category_placeholder": "Produktkategorie eingeben (z.B. Elektronik, Maschinen)",
+    "select_subcategory": "Unterkategorie auswählen",
+    "subcategory_placeholder": "Produktunterkategorie eingeben (z.B. Computer, Werkzeuge)",
+    "description_placeholder": "Beschreiben Sie Ihr Produkt im Detail",
+    "wanted_description_placeholder": "Beschreiben Sie, was Sie suchen",
+    "price_placeholder": "0,00",
+    "currency": "Währung",
+    "select_currency": "Währung auswählen",
+    "quantity_placeholder": "0",
+    "unit": "Einheit",
+    "select_unit": "Einheit auswählen",
+    "countries": "Länder",
+    "select_countries": "Länder auswählen",
+    "countries_wanted_help": "Wählen Sie die Länder aus, in denen Sie diesen Artikel suchen",
+    "product_images": "Produktbilder",
+    "selectImages": "Bilder auswählen",
+    "images_help": "Laden Sie bis zu 5 Bilder hoch (JPEG, PNG, GIF, WebP). Max. 10MB pro Datei.",
+    "additional_details": "Zusätzliche Details",
+    "additional_details_placeholder": "Weitere Informationen zu Ihrem Produkt",
+    "wanted_additional_placeholder": "Geben Sie besondere Anforderungen oder Präferenzen an",
+    "wanted_additional_help": "Fügen Sie Details wie gewünschte Marken, Spezifikationen oder Bedingungen hinzu",
+    "contact_email_placeholder": "Optionale Kontakt-E-Mail",
+    "contact_email_help": "Leer lassen, um Ihre Konto-E-Mail zu verwenden",
+    "post_wanted": "Suchanfrage veröffentlichen",
+    "select_all_countries": "Alle Länder Auswählen",
+    "clear_all_countries": "Alle Löschen",
+    "category_load_error": "Fehler beim Laden der Kategorien",
+    "subcategory_load_error": "Fehler beim Laden der Unterkategorien",
+    "select_category_first": "Bitte wählen Sie zuerst eine Kategorie aus",
+    "product_created_success": "Produktanzeige erfolgreich erstellt",
+    "wanted_created_success": "Suchanfrage erfolgreich veröffentlicht",
+    "no_company_selected": "Bitte wählen Sie ein Unternehmen aus, bevor Sie eine Anzeige erstellen",
+    "no_permission": "Sie haben keine Berechtigung, Anzeigen zu erstellen",
+    "listing_limit_reached": "Sie haben Ihr Anzeigenlimit erreicht. Bitte upgraden Sie Ihren Plan, um weitere Anzeigen zu erstellen.",
+    "images_max_files": "Maximal {max} Bilder erlaubt",
+    "images_remaining_slots": "Sie können nur noch {count} weitere Bild(er) hinzufügen",
+    "images_invalid_type": "{name}: Ungültiger Dateityp. Nur JPEG, PNG, GIF und WebP sind erlaubt",
+    "images_too_large": "{name}: Datei zu groß. Maximale Größe ist {max}",
+    "images_total_exceeded": "Kann {name} nicht hinzufügen: Gesamtgrößenlimit überschritten",
+    "images_total_too_large": "Gesamtgröße aller Bilder überschreitet {max}",
+    "sortBy": "Sortieren nach",
+    "sortNone": "Standard",
+    "sortPriceAsc": "Preis: Niedrig zu Hoch",
+    "sortPriceDesc": "Preis: Hoch zu Niedrig",
+    "sortTitleAsc": "Titel: A bis Z",
+    "sortTitleDesc": "Titel: Z bis A",
+    "sorted": "Sortiert",
+    "filterCountries": "Nach Ländern filtern",
+    "regexMode": "Regex-Modus",
+    "toggleRegexSearch": "Regex-Suchmodus umschalten",
+    "contact_email": "Kontakt-E-Mail",
+    "additional_info": "Zusätzliche Informationen",
+    "category_bsf": "BSF-Produkte",
+    "category_equipment": "Ausrüstung",
+    "category_frass": "Frass",
+    "category_services": "Dienstleistungen",
+    "category_substrate": "Substrat",
+    "confirm_delete_product": "Sind Sie sicher, dass Sie das Produkt \"{title}\" löschen möchten?",
+    "confirm_delete_wanted": "Sind Sie sicher, dass Sie den gesuchten Artikel \"{title}\" löschen möchten?",
+    "myListingsDescription": "Verwalten Sie Ihre Produktanzeigen und gesuchten Artikel",
+    "product_deleted": "Produkt erfolgreich gelöscht",
+    "wanted_item_deleted": "Gesuchter Artikel erfolgreich gelöscht",
+    "imageAlt": "Bild {index}",
+    "filter": {
+      "invalidFilterType": "Ungültiger Filtertyp: \"{value}\". Erwartet wird \"product\" oder \"wanted\"."
+    }
+  },
+  "wanted": {
+    "title": "Gesuchte Artikel",
+    "deleteSuccess": "Suchanzeige erfolgreich gelöscht",
+    "browse": "Gesuche Durchsuchen",
+    "search": "Gesuchte Artikel suchen...",
+    "post": "Gesuch Veröffentlichen",
+    "contact": "Käufer Kontaktieren",
+    "budget": "Budget",
+    "loading": "Gesuchte Artikel werden geladen...",
+    "error": "Fehler beim Laden der gesuchten Artikel",
+    "empty": "Keine gesuchten Artikel gefunden",
+    "quantity": "Benötigte Menge",
+    "expires": "Läuft ab",
+    "meta": {
+      "title": "Gesuche - BSF Marketplace",
+      "description": "Durchsuchen Sie Gesuche und Anfragen im BSF-Marktplatz"
+    }
+  },
+  "messaging": {
+    "title": "Nachrichten",
+    "send": "Nachricht senden",
+    "cancel": "Abbrechen",
+    "contact_seller": "Verkäufer kontaktieren",
+    "contact_buyer": "Käufer kontaktieren",
+    "message_placeholder": "Geben Sie Ihre Nachricht ein...",
+    "no_conversations": "Noch keine Unterhaltungen",
+    "noConversations": "Noch keine Unterhaltungen",
+    "noConversationsDescription": "Starten Sie eine Unterhaltung, indem Sie einen Verkäufer oder Käufer kontaktieren",
+    "loadingConversations": "Unterhaltungen werden geladen...",
+    "loadingConversation": "Unterhaltung wird geladen...",
+    "marketListing": "Marktanzeige",
+    "wantedListing": "Suchanzeige",
+    "browseMarketplace": "Marktplatz durchsuchen",
+    "last_message": "Letzte Nachricht",
+    "sending": "Wird gesendet...",
+    "error_sending": "Fehler beim Senden der Nachricht",
+    "message_sent": "Nachricht erfolgreich gesendet",
+    "character_limit": "Zeichen übrig",
+    "compose": {
+      "title": "Neue Nachricht",
+      "messageLabel": "Nachricht",
+      "placeholder": "Geben Sie Ihre Nachricht ein...",
+      "send": "Senden"
+    },
+    "noMessages": "Noch keine Nachrichten",
+    "roles": {
+      "seller": "Verkäufer",
+      "buyer": "Käufer"
+    },
+    "lastMessagePrefix": "{role}: {message}",
+    "relativeTime": {
+      "yesterday": "Gestern",
+      "daysAgo": "Vor {count} Tagen",
+      "yesterdayAt": "Gestern {time}",
+      "dateAtTime": "{date} {time}"
+    },
+    "sender": {
+      "you": "Sie",
+      "unknown": "Unbekannt"
+    },
+    "conversationNotFound": "Konversation nicht gefunden"
+  },
+  "metrics": {
+    "title": "Metriken",
+    "userMetrics": "Benutzermetriken",
+    "update": "Aktualisieren",
+    "export": "Exportieren",
+    "download": "Herunterladen"
+  },
+  "footer": {
+    "poweredBy": "Betrieben von Manna Insect"
+  },
+  "help": {
+    "topics": {
+      "market": {
+        "filtering": {
+          "title": "Marktfilterung",
+          "content": "Lernen Sie, wie Sie Produkte auf dem Markt filtern und suchen.",
+          "sections": [
+            {
+              "title": "Filter verwenden",
+              "content": "Verwenden Sie die Filtertaste, um Produkte nach Kategorie, Preisspanne und Standort einzugrenzen."
+            },
+            {
+              "title": "Suchtipps",
+              "content": "Geben Sie Schlüsselwörter in die Suchleiste ein. Verwenden Sie Anführungszeichen für genaue Übereinstimmungen."
+            },
+            {
+              "title": "Sortieroptionen",
+              "content": "Sortieren Sie Ergebnisse nach Preis, Datum oder Relevanz mit dem Dropdown-Menü."
+            }
+          ]
+        }
+      },
+      "product": {
+        "contact": {
+          "title": "Verkäufer kontaktieren",
+          "content": "So kontaktieren Sie Verkäufer bezüglich ihrer Produkte.",
+          "sections": [
+            {
+              "title": "Eine Nachricht senden",
+              "content": "Klicken Sie auf 'Verkäufer kontaktieren' auf jeder Produktseite, um eine direkte Nachricht zu senden."
+            },
+            {
+              "title": "Nachrichtenrichtlinien",
+              "content": "Seien Sie respektvoll und professionell. Fügen Sie relevante Fragen zum Produkt hinzu."
+            },
+            {
+              "title": "Antwortzeiten",
+              "content": "Die meisten Verkäufer antworten innerhalb von 24-48 Stunden. Überprüfen Sie regelmäßig Ihre Nachrichten."
+            }
+          ]
+        }
+      },
+      "wanted": {
+        "posting": {
+          "title": "Suchanzeigen veröffentlichen",
+          "content": "Erstellen Sie Suchanzeigen, damit Verkäufer wissen, wonach Sie suchen.",
+          "sections": [
+            {
+              "title": "Eine Anzeige erstellen",
+              "content": "Klicken Sie auf 'Suche veröffentlichen' und beschreiben Sie so detailliert wie möglich, wonach Sie suchen."
+            },
+            {
+              "title": "Beste Praktiken",
+              "content": "Geben Sie Ihr Budget, den gewünschten Zustand und spezifische Anforderungen an."
+            },
+            {
+              "title": "Anzeigen verwalten",
+              "content": "Bearbeiten oder löschen Sie Ihre Suchanzeigen über Ihr Profil-Dashboard."
+            }
+          ]
+        }
+      },
+      "profile": {
+        "settings": {
+          "title": "Profileinstellungen",
+          "content": "Verwalten Sie Ihr Profil und Ihre Kontoeinstellungen.",
+          "sections": [
+            {
+              "title": "Persönliche Informationen",
+              "content": "Aktualisieren Sie Ihren Namen, Kontaktdaten und Geschäftsinformationen."
+            },
+            {
+              "title": "Benachrichtigungen",
+              "content": "Steuern Sie E-Mail- und Push-Benachrichtigungseinstellungen."
+            },
+            {
+              "title": "Privatsphäre",
+              "content": "Verwalten Sie, wer Ihr Profil sehen und Sie kontaktieren kann."
+            }
+          ]
+        }
+      }
+    },
+    "title": "Hilfe",
+    "button": {
+      "ariaLabel": "Hilfe anzeigen",
+      "genericTopic": "Thema"
+    },
+    "noContent": {
+      "title": "Keine Hilfe verfügbar",
+      "message": "Für dieses Thema konnten wir noch keine Hilfe finden."
+    },
+    "errors": {
+      "topicNotFound": "Hilfethema nicht gefunden",
+      "loadingError": "Fehler beim Laden der Hilfeinhalte"
+    },
+    "topicFallback": "Hilfe",
+    "fallback": {
+      "title": "Hilfe",
+      "content": "Für dieses Thema sind keine Hilfetexte verfügbar."
+    },
+    "logs": {
+      "invalidTopic": "Ungültiges Hilfethema: {topic}",
+      "dismissError": "Fehler beim Schließen des Hilfemodals",
+      "scrolledToTopic": "Zum Thema gescrollt: {topic}",
+      "iconShowTopic": "Hilfe-Symbol für Thema {topic} anzeigen",
+      "iconShowError": "Hilfesymbol konnte nicht angezeigt werden",
+      "noTopicProvided": "Kein Hilfethema angegeben",
+      "invalidTopicType": "Ungültiger Typ für Hilfethema: {type}",
+      "scrollSaved": "Scrollposition gespeichert: {position}",
+      "scrollSaveFailed": "Scrollposition konnte nicht gespeichert werden",
+      "scrollRestored": "Scrollposition wiederhergestellt: {position}",
+      "scrollRestoreFailed": "Scrollposition konnte nicht wiederhergestellt werden",
+      "focusSaved": "Fokuselement gespeichert: {element}",
+      "focusSaveFailed": "Fokuselement konnte nicht gespeichert werden",
+      "focusRestored": "Fokuselement wiederhergestellt: {element}",
+      "focusRestoreFailed": "Fokuselement konnte nicht wiederhergestellt werden",
+      "modalAlreadyOpen": "Hilfemodal ist bereits geöffnet",
+      "focusExistingModalFailed": "Bestehendes Hilfemodal konnte nicht fokussiert werden",
+      "openingModal": "Hilfemodal wird geöffnet für Thema: {topic}",
+      "createModalFailed": "Hilfemodal konnte nicht erstellt werden",
+      "modalDismissed": "Hilfemodal nach {duration} ms geschlossen",
+      "dismissHandlerError": "Fehler im Schließen-Handler des Hilfemodals",
+      "modalPresented": "Hilfemodal in {time} ms angezeigt",
+      "modalSlow": "Hilfemodal benötigte {time} ms zum Öffnen",
+      "showModalError": "Fehler beim Anzeigen des Hilfemodals",
+      "hidingModal": "Hilfemodal wird ausgeblendet",
+      "noModalToHide": "Kein Hilfemodal zum Ausblenden",
+      "hideModalError": "Fehler beim Ausblenden des Hilfemodals",
+      "escapePressed": "Escape-Taste gedrückt, Hilfemodal wird geschlossen"
+    }
+  },
+  "units": {
+    "piece": "Stück",
+    "kg": "Kilogramm",
+    "g": "Gramm",
+    "lb": "Pfund",
+    "oz": "Unze(n)",
+    "ton": "Tonne(n)",
+    "mt": "Metrische Tonne(n)",
+    "l": "Liter",
+    "ml": "Milliliter",
+    "gal": "Gallone(n)",
+    "m": "Meter",
+    "cm": "Zentimeter",
+    "mm": "Millimeter",
+    "ft": "Fuß",
+    "in": "Zoll",
+    "unit": "Einheit(en)",
+    "box": "Karton(s)",
+    "pack": "Packung(en)",
+    "container": "Container",
+    "pallet": "Palette(n)",
+    "sqm": "Quadratmeter",
+    "sqft": "Quadratfuß",
+    "bag": "Beutel"
+  },
+  "forms": {
+    "country": "Land",
+    "countryPlaceholder": "Land auswählen",
+    "selectPlaceholder": "Option auswählen",
+    "imagesLabel": "Bilder"
+  },
+  "currencies": {
+    "USD": "US-Dollar",
+    "EUR": "Euro",
+    "GBP": "Britisches Pfund",
+    "JPY": "Japanischer Yen",
+    "CNY": "Chinesischer Yuan",
+    "CAD": "Kanadischer Dollar",
+    "AUD": "Australischer Dollar",
+    "CHF": "Schweizer Franken",
+    "HKD": "Hongkong-Dollar",
+    "SEK": "Schwedische Krone",
+    "NOK": "Norwegische Krone",
+    "DKK": "Dänische Krone",
+    "NZD": "Neuseeländischer Dollar",
+    "SGD": "Singapur-Dollar",
+    "INR": "Indische Rupie",
+    "BRL": "Brasilianischer Real",
+    "RUB": "Russischer Rubel",
+    "ZAR": "Südafrikanischer Rand",
+    "MXN": "Mexikanischer Peso",
+    "KRW": "Südkoreanischer Won"
+  },
+  "translation": {
+    "button": "Übersetzen",
+    "loading": "Übersetze...",
+    "error": "Übersetzung fehlgeschlagen",
+    "openingGoogleTranslate": "Öffne Google Translate in neuem Tab...",
+    "rateLimitError": "Übersetzungslimit erreicht (10/Stunde)",
+    "showOriginal": "Original anzeigen",
+    "showTranslated": "Übersetzung anzeigen",
+    "genericError": "Übersetzung fehlgeschlagen. Bitte später erneut versuchen."
+  }
+}

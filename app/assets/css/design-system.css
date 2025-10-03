@@ -1,0 +1,210 @@
+/**
+ * Global Design System Styles
+ * Modern, clean, mobile-first design
+ */
+
+:root {
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-xxl: 4rem;
+  
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  
+  /* Typography */
+  --font-xs: 0.75rem;
+  --font-sm: 0.875rem;
+  --font-base: 1rem;
+  --font-lg: 1.125rem;
+  --font-xl: 1.25rem;
+  --font-2xl: 1.5rem;
+  --font-3xl: 1.875rem;
+  --font-4xl: 2.25rem;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 300ms ease-in-out;
+  --transition-slow: 500ms ease-in-out;
+}
+
+/* Base Resets and Defaults */
+* {
+  box-sizing: border-box;
+}
+
+/* Ionic Overrides for Consistent Design */
+ion-content {
+  --background: var(--ion-background-color);
+}
+
+ion-card {
+  margin: 0;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+ion-card-header {
+  padding: var(--spacing-md);
+}
+
+ion-card-content {
+  padding: var(--spacing-md);
+  padding-top: 0;
+}
+
+ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+ion-button {
+  --border-radius: var(--radius-md);
+  height: 48px;
+  font-size: var(--font-base);
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+ion-input, ion-textarea, ion-select {
+  --padding-start: var(--spacing-sm);
+  --padding-end: var(--spacing-sm);
+  --padding-top: var(--spacing-sm);
+  --padding-bottom: var(--spacing-sm);
+}
+
+/* Page Container Classes */
+.page-container {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  flex: 1;
+  padding: var(--spacing-md);
+  max-width: 100%;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.page-content--narrow {
+  max-width: 400px;
+}
+
+.page-content--medium {
+  max-width: 600px;
+}
+
+.page-content--wide {
+  max-width: 800px;
+}
+
+/* Loading States */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  text-align: center;
+  gap: var(--spacing-sm);
+}
+
+.loading-container ion-spinner {
+  --color: var(--ion-color-primary);
+}
+
+/* Error States */
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  text-align: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-lg);
+}
+
+.error-container ion-icon {
+  font-size: 48px;
+}
+
+/* Form Styles */
+.form-section {
+  margin-bottom: var(--spacing-lg);
+}
+
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-lg);
+}
+
+/* Link Styles */
+.text-link {
+  color: var(--ion-color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity var(--transition-fast);
+}
+
+.text-link:hover {
+  opacity: 0.8;
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.mt-sm { margin-top: var(--spacing-sm); }
+.mt-md { margin-top: var(--spacing-md); }
+.mt-lg { margin-top: var(--spacing-lg); }
+
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+
+.gap-sm { gap: var(--spacing-sm); }
+.gap-md { gap: var(--spacing-md); }
+.gap-lg { gap: var(--spacing-lg); }
+
+/* Mobile-First Responsive Design */
+@media (max-width: 768px) {
+  .page-content {
+    padding: var(--spacing-sm);
+  }
+  
+  ion-card {
+    border-radius: var(--radius-md);
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  ion-card {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+  }
+}

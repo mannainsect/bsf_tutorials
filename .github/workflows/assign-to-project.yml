@@ -1,0 +1,39 @@
+name: Auto Assign Issues to Project
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  assign-to-project:
+    name: Assign to Manna Dev Board
+    runs-on: ubuntu-latest
+    steps:
+      # Add labels based on issue title
+      - name: Add enhancement label for FEATURE issues
+        if: contains(github.event.issue.title, 'FEATURE')
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          github_token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labels: enhancement
+      
+      - name: Add bug label for BUG issues
+        if: contains(github.event.issue.title, 'BUG')
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          github_token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labels: bug
+      
+      - name: Add issue to project
+        uses: actions/add-to-project@v1.0.2
+        with:
+          # Format: https://github.com/orgs/<orgName>/projects/<projectNumber>
+          # or: https://github.com/users/<userName>/projects/<projectNumber>
+          # Replace with your actual project URL
+          project-url: https://github.com/users/mannainsect/projects/7
+          # GitHub token with project scope
+          # Use ADD_TO_PROJECT_PAT secret for proper permissions
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          # Optional: Only add issues with specific labels
+          # labeled: bug, enhancement
+          # label-operator: OR

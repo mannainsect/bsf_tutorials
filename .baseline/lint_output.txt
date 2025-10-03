@@ -1,0 +1,810 @@
+
+> lint
+> eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts
+
+
+/home/yka/dev/bsf_market/main/app/components/forms/ImageUploadField.vue
+  118:7  error  'resolvedLabel' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/yka/dev/bsf_market/main/app/components/help/HelpIcon.vue
+  71:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/app/components/marketplace/AuthPromptModal.vue
+  127:4   error  This overload and the one on line 126 can be combined into one signature taking `'dismiss' | 'signIn'`    @typescript-eslint/unified-signatures
+  128:4   error  This overload and the one on line 126 can be combined into one signature taking `'dismiss' | 'register'`  @typescript-eslint/unified-signatures
+  128:4   error  This overload and the one on line 127 can be combined into one signature taking `'signIn' | 'register'`   @typescript-eslint/unified-signatures
+  131:7   error  'props' is assigned a value but never used                                                                @typescript-eslint/no-unused-vars
+  134:21  error  Unexpected any. Specify a different type                                                                  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/app/components/marketplace/ProductCard.vue
+  113:9  error  't' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/yka/dev/bsf_market/main/app/components/marketplace/UnifiedSearchFilter.vue
+  485:15  error  'Country' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/yka/dev/bsf_market/main/app/components/messaging/MessageComposer.vue
+  130:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  136:21  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/app/components/ui/ErrorCard.vue
+  22:3  warning  Prop 'retryLabel' requires default value to be set  vue/require-default-prop
+
+/home/yka/dev/bsf_market/main/app/composables/api/repositories/BaseRepository.ts
+  110:22  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/app/composables/api/repositories/MarketplaceRepository.ts
+   16:32  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+   16:38  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+   27:35  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+   70:25  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+   71:28  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  192:38  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  193:37  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  198:13  error  Unexpected lexical declaration in case block  no-case-declarations
+  206:13  error  Unexpected lexical declaration in case block  no-case-declarations
+  210:13  error  Unexpected lexical declaration in case block  no-case-declarations
+  215:13  error  Unexpected lexical declaration in case block  no-case-declarations
+  219:59  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  243:13  error  Unexpected lexical declaration in case block  no-case-declarations
+  280:38  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  281:37  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  286:13  error  Unexpected lexical declaration in case block  no-case-declarations
+  294:13  error  Unexpected lexical declaration in case block  no-case-declarations
+  298:13  error  Unexpected lexical declaration in case block  no-case-declarations
+  303:13  error  Unexpected lexical declaration in case block  no-case-declarations
+  306:59  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  326:13  error  Unexpected lexical declaration in case block  no-case-declarations
+  358:38  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  359:37  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  367:13  error  Unexpected lexical declaration in case block  no-case-declarations
+  371:13  error  Unexpected lexical declaration in case block  no-case-declarations
+  381:13  error  Unexpected lexical declaration in case block  no-case-declarations
+  424:38  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  425:37  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  433:13  error  Unexpected lexical declaration in case block  no-case-declarations
+  437:13  error  Unexpected lexical declaration in case block  no-case-declarations
+  447:13  error  Unexpected lexical declaration in case block  no-case-declarations
+
+/home/yka/dev/bsf_market/main/app/composables/api/repositories/MessagingRepository.ts
+  8:3  error  'MessageSendResponse' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/yka/dev/bsf_market/main/app/composables/api/repositories/WantedRepository.ts
+   13:32  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+   13:38  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+   21:34  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+   59:25  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+   60:28  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  158:38  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  159:37  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  167:13  error  Unexpected lexical declaration in case block  no-case-declarations
+  171:13  error  Unexpected lexical declaration in case block  no-case-declarations
+  184:13  error  Unexpected lexical declaration in case block  no-case-declarations
+  221:38  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  222:37  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  230:13  error  Unexpected lexical declaration in case block  no-case-declarations
+  234:13  error  Unexpected lexical declaration in case block  no-case-declarations
+  244:13  error  Unexpected lexical declaration in case block  no-case-declarations
+  276:38  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  277:37  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  285:13  error  Unexpected lexical declaration in case block  no-case-declarations
+  289:13  error  Unexpected lexical declaration in case block  no-case-declarations
+  299:13  error  Unexpected lexical declaration in case block  no-case-declarations
+
+/home/yka/dev/bsf_market/main/app/composables/api/utils/errorHandler.ts
+  40:37  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  77:29  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/app/composables/useHelp.ts
+    5:1   error  Imports "HelpTopic" are only used as type  @typescript-eslint/consistent-type-imports
+   28:50  error  Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  140:20  error  'error' is defined but never used          @typescript-eslint/no-unused-vars
+  191:49  error  Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  202:24  error  Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/app/composables/useHelpTopic.ts
+  9:9  error  Replace `process.server` with `import.meta.server`  nuxt/prefer-import-meta
+
+/home/yka/dev/bsf_market/main/app/composables/useListingCreation.ts
+   21:33  error  Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+   27:5   error  Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
+   29:5   error  Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
+  187:13  error  'responseData' is assigned a value but never used                                                                    @typescript-eslint/no-unused-vars
+
+/home/yka/dev/bsf_market/main/app/composables/useMarketplace.ts
+    4:3   error  'isAuthenticatedProduct' is defined but never used  @typescript-eslint/no-unused-vars
+  148:11  error  'user_id' is assigned a value but never used        @typescript-eslint/no-unused-vars
+  149:11  error  'contact_email' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/yka/dev/bsf_market/main/app/composables/useMessaging.ts
+  10:3  error  'MessageSendResponse' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/yka/dev/bsf_market/main/app/composables/useSafeLocalePath.ts
+  101:33  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  141:54  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/app/composables/useSearchFilter.ts
+  139:8   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  140:8   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  208:12  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/app/composables/useTextFormatting.ts
+  85:46  error  Unnecessary escape character: \[  no-useless-escape
+
+/home/yka/dev/bsf_market/main/app/composables/useTranslation.ts
+    2:8   error  'DOMPurify' is defined but never used           @typescript-eslint/no-unused-vars
+   47:19  error  Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+  215:9   error  'providers' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  297:12  error  'cacheTranslation' is defined but never used    @typescript-eslint/no-unused-vars
+
+/home/yka/dev/bsf_market/main/app/composables/useWanted.ts
+    4:3   error  'isAuthenticatedWanted' is defined but never used   @typescript-eslint/no-unused-vars
+  123:14  error  'err' is defined but never used                     @typescript-eslint/no-unused-vars
+  134:11  error  'user_id' is assigned a value but never used        @typescript-eslint/no-unused-vars
+  135:11  error  'contact_email' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/yka/dev/bsf_market/main/app/pages/create/index.vue
+  83:7  error  'authStore' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/yka/dev/bsf_market/main/app/pages/create/product.vue
+   50:53  warning  Attribute "class" should go before "@submit.prevent"                         vue/attributes-order
+  275:23  warning  Attribute ":disabled" should go before "@click"                              vue/attributes-order
+  276:23  warning  Attribute "class" should go before "@click"                                  vue/attributes-order
+  285:23  warning  Attribute ":disabled" should go before "@click"                              vue/attributes-order
+  286:23  warning  Attribute "class" should go before "@click"                                  vue/attributes-order
+  539:15  error    'listingId' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  728:64  error    Unexpected any. Specify a different type                                     @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/app/pages/create/wanted.vue
+   50:53  warning  Attribute "class" should go before "@submit.prevent"                         vue/attributes-order
+  180:23  warning  Attribute ":disabled" should go before "@click"                              vue/attributes-order
+  181:23  warning  Attribute "class" should go before "@click"                                  vue/attributes-order
+  190:23  warning  Attribute ":disabled" should go before "@click"                              vue/attributes-order
+  191:23  warning  Attribute "class" should go before "@click"                                  vue/attributes-order
+  433:15  error    'listingId' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  582:63  error    Unexpected any. Specify a different type                                     @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/app/pages/main.vue
+  97:3  error  'list' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/yka/dev/bsf_market/main/app/pages/market/[id].vue
+  186:23  warning  Attribute ":disabled" should go before "@click"  vue/attributes-order
+  187:23  warning  Attribute "class" should go before "@click"      vue/attributes-order
+  198:25  warning  Attribute "slot" should go before "color"        vue/attributes-order
+  212:24  warning  'v-html' directive can lead to XSS attack        vue/no-v-html
+  212:54  warning  Require self-closing on HTML elements (<div>)    vue/html-self-closing
+  352:23  warning  Attribute ":disabled" should go before "@click"  vue/attributes-order
+  353:23  warning  Attribute "class" should go before "@click"      vue/attributes-order
+  364:25  warning  Attribute "slot" should go before "color"        vue/attributes-order
+  378:24  warning  'v-html' directive can lead to XSS attack        vue/no-v-html
+  378:57  warning  Require self-closing on HTML elements (<div>)    vue/html-self-closing
+  608:52  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+  723:19  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+  774:19  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+  830:27  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/app/pages/market/index.vue
+   22:11  warning  Attribute ":disabled" should go before "@click"             vue/attributes-order
+  267:34  error    Unexpected any. Specify a different type                    @typescript-eslint/no-explicit-any
+  273:47  error    Unexpected any. Specify a different type                    @typescript-eslint/no-explicit-any
+  274:33  error    Unexpected any. Specify a different type                    @typescript-eslint/no-explicit-any
+  282:9   error    Unexpected newline between function and ( of function call  no-unexpected-multiline
+  282:25  error    Unexpected any. Specify a different type                    @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/app/pages/messages/[id].vue
+   57:34  warning  Attribute "ref" should go before "class"      vue/attributes-order
+   83:13  warning  Attribute "v-model" should go before "class"  vue/attributes-order
+  110:3   error    'Message' is defined but never used           @typescript-eslint/no-unused-vars
+  138:25  error    Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  217:71  error    Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  263:25  error    Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  275:25  error    Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/app/pages/wanted/[id].vue
+  172:21  warning  Attribute ":disabled" should go before "@click"  vue/attributes-order
+  173:21  warning  Attribute "class" should go before "@click"      vue/attributes-order
+  186:23  warning  Attribute "slot" should go before ":color"       vue/attributes-order
+  200:22  warning  'v-html' directive can lead to XSS attack        vue/no-v-html
+  200:52  warning  Require self-closing on HTML elements (<div>)    vue/html-self-closing
+  345:3   error    'WantedPublicDetail' is defined but never used   @typescript-eslint/no-unused-vars
+  454:44  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+  455:44  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+  456:44  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+  484:44  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+  485:40  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+  521:38  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+  641:19  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+  754:25  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/app/pages/wanted/index.vue
+  22:11  warning  Attribute ":disabled" should go before "@click"  vue/attributes-order
+
+/home/yka/dev/bsf_market/main/app/stores/auth.ts
+   10:43  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  204:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  207:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  210:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/app/tests/product-translation.test.ts
+   1:32  error  'vi' is defined but never used                      @typescript-eslint/no-unused-vars
+  11:24  error  'isTranslating' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/yka/dev/bsf_market/main/shared/types/models/MarketplaceProduct.ts
+  16:35  error  Unexpected any. Specify a different type                          @typescript-eslint/no-explicit-any
+  34:18  error  An interface declaring no members is equivalent to its supertype  @typescript-eslint/no-empty-object-type
+
+/home/yka/dev/bsf_market/main/shared/types/models/MarketplaceWanted.ts
+   8:44  error  Unexpected any. Specify a different type                          @typescript-eslint/no-explicit-any
+  33:18  error  An interface declaring no members is equivalent to its supertype  @typescript-eslint/no-empty-object-type
+
+/home/yka/dev/bsf_market/main/tests/e2e/marketplace.spec.ts
+    1:24  error  'Page' is defined but never used                   @typescript-eslint/no-unused-vars
+  129:17  error  'titleText' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  143:15  error  'productCards' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  166:49  error  Unnecessary escape character: \/                   no-useless-escape
+
+/home/yka/dev/bsf_market/main/tests/integration/marketplace-i18n-navigation.test.ts
+    1:48  error  'afterEach' is defined but never used                                                                                    @typescript-eslint/no-unused-vars
+   31:18  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+  406:14  error  'productNav' is assigned a value but never used                                                                          @typescript-eslint/no-unused-vars
+  406:26  error  'wantedNav' is assigned a value but never used                                                                           @typescript-eslint/no-unused-vars
+
+/home/yka/dev/bsf_market/main/tests/integration/menu-system.test.ts
+   98:31  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   99:33  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  101:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/mocks/api.ts
+  127:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/setup/global.d.ts
+   6:20  error  'ComputedRef' is defined but never used   @typescript-eslint/no-unused-vars
+  20:24  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  27:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  30:26  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/setup/test-setup.ts
+   33:3   error  Useless constructor                                                                                                      @typescript-eslint/no-useless-constructor
+   33:15  error  'callback' is defined but never used. Allowed unused args must match /^_/u                                               @typescript-eslint/no-unused-vars
+   33:25  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+   33:35  error  'options' is defined but never used. Allowed unused args must match /^_/u                                                @typescript-eslint/no-unused-vars
+   33:45  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+   35:59  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+   42:3   error  Useless constructor                                                                                                      @typescript-eslint/no-useless-constructor
+   42:15  error  'callback' is defined but never used. Allowed unused args must match /^_/u                                               @typescript-eslint/no-unused-vars
+   42:25  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+   44:47  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+   74:20  error  Do not delete dynamically computed property keys                                                                         @typescript-eslint/no-dynamic-delete
+  103:20  error  Do not delete dynamically computed property keys                                                                         @typescript-eslint/no-dynamic-delete
+  154:27  error  'name' is defined but never used. Allowed unused args must match /^_/u                                                   @typescript-eslint/no-unused-vars
+  177:29  error  'options' is defined but never used. Allowed unused args must match /^_/u                                                @typescript-eslint/no-unused-vars
+  188:29  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+  281:33  error  'config' is defined but never used. Allowed unused args must match /^_/u                                                 @typescript-eslint/no-unused-vars
+  281:42  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/components/UnifiedSearchFilter.test.ts
+  204:74  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  215:74  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  228:74  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  248:74  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  261:74  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  274:74  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  304:74  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  372:39  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/components/help/HelpIcon.test.ts
+    2:1   error  Imports "VueWrapper" are only used as type  @typescript-eslint/consistent-type-imports
+   36:27  error  Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+   42:53  error  Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+   53:33  error  Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+  237:55  error  Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+  255:55  error  Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/components/help/HelpModal.test.ts
+    2:1   error  Imports "VueWrapper" are only used as type  @typescript-eslint/consistent-type-imports
+   64:1   error  Import in body of module; reorder to top    import/first
+   75:27  error  Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+  284:36  error  Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/components/layout/LayoutPrivateFooter.test.ts
+  56:16  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  57:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/components/messaging/EmptyStateMessage.test.ts
+    1:36  error  'beforeEach' is defined but never used  @typescript-eslint/no-unused-vars
+  253:16  error  'e' is defined but never used           @typescript-eslint/no-unused-vars
+
+/home/yka/dev/bsf_market/main/tests/unit/components/messaging/MessageSkeleton.test.ts
+  210:53  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/composables/useCategories.test.ts
+   21:16  error  Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+   84:13  error  'cached' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  281:27  error  Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/composables/useCurrencyExchange.test.ts
+   13:20  error  Do not delete dynamically computed property keys  @typescript-eslint/no-dynamic-delete
+  180:11  error  'rejectFn' is assigned a value but never used     @typescript-eslint/no-unused-vars
+
+/home/yka/dev/bsf_market/main/tests/unit/composables/useHelp.test.ts
+   43:28  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+   44:16  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+   64:58  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+  124:27  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+  126:26  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+  154:27  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+  156:26  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+  347:27  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+  349:26  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+  382:27  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+  384:26  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+  416:27  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+  418:26  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+  437:28  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+  440:28  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+  466:28  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+  469:28  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+  499:28  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+  502:28  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+  526:26  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+  531:33  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+  553:25  error  'hideHelp' is assigned a value but never used                                                                            @typescript-eslint/no-unused-vars
+  556:27  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+  558:26  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+  597:15  error  'hideHelp' is assigned a value but never used                                                                            @typescript-eslint/no-unused-vars
+  662:28  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+  665:28  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+  697:28  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+  700:28  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+
+/home/yka/dev/bsf_market/main/tests/unit/composables/useHelpTopic.test.ts
+    1:32  error  'vi' is defined but never used            @typescript-eslint/no-unused-vars
+  206:55  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  387:53  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/composables/useListingCreation.test.ts
+    2:15  error  'computed' is defined but never used                                     @typescript-eslint/no-unused-vars
+   18:22  error  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+   19:19  error  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+   20:16  error  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+   21:18  error  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+   44:26  error  'guard' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  321:43  error  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/composables/useMyListings.test.ts
+  233:16  error  'e' is defined but never used             @typescript-eslint/no-unused-vars
+  233:19  error  Empty block statement                     no-empty
+  284:16  error  'e' is defined but never used             @typescript-eslint/no-unused-vars
+  284:19  error  Empty block statement                     no-empty
+  372:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  378:38  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/composables/useSearchFilter.test.ts
+    1:32  error  'beforeEach' is defined but never used            @typescript-eslint/no-unused-vars
+    5:3   error  'ProductPublicListing' is defined but never used  @typescript-eslint/no-unused-vars
+    9:3   error  'WantedPublicListing' is defined but never used   @typescript-eslint/no-unused-vars
+  281:26  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/composables/useTextFormatting.test.ts
+  166:54  error  Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+  170:59  error  Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+  362:51  error  Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+  366:56  error  Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+  376:15  error  'result' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  547:67  error  Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+  548:59  error  Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/composables/useTranslation.test.ts
+   25:20  error  Do not delete dynamically computed property keys  @typescript-eslint/no-dynamic-delete
+   91:41  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  173:42  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  633:46  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  635:55  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  637:55  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  653:27  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/features/help-system.test.ts
+    2:1   error  Imports "VueWrapper" are only used as type                                                                               @typescript-eslint/consistent-type-imports
+    2:35  error  '@vue/test-utils' imported multiple times                                                                                import/no-duplicates
+    3:37  error  'h' is defined but never used                                                                                            @typescript-eslint/no-unused-vars
+   10:24  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+   11:23  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+   12:5   error  'mockModalController' is never reassigned. Use 'const' instead                                                           prefer-const
+   12:5   error  'mockModalController' is assigned a value but never used                                                                 @typescript-eslint/no-unused-vars
+   12:26  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+   20:26  error  Unexpected empty class                                                                                                   @typescript-eslint/no-extraneous-class
+   69:1   error  Import in body of module; reorder to top                                                                                 import/first
+   69:24  error  '@vue/test-utils' imported multiple times                                                                                import/no-duplicates
+   72:21  error  'tag' is defined but never used. Allowed unused args must match /^_/u                                                    @typescript-eslint/no-unused-vars
+  114:27  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+  115:24  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+  116:28  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+  128:58  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+  131:67  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+  137:30  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+  350:16  error  'error' is defined but never used                                                                                        @typescript-eslint/no-unused-vars
+  391:41  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/marketplace/MarketplaceRepository.test.ts
+    6:3   error  'MarketplaceProductsResponse' is defined but never used  @typescript-eslint/no-unused-vars
+   53:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+   91:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  100:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  126:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  135:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  165:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  203:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  227:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  230:25  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  237:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  247:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  344:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  359:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  368:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  378:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  388:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  398:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  408:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  418:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  428:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  438:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  445:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  458:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  470:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  480:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  490:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  500:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  510:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  520:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  530:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  540:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  547:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  568:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  571:42  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  587:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  610:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  619:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  629:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  639:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  649:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  659:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  669:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  679:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  689:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  696:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  708:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  711:42  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  746:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  780:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+  807:30  error  Unexpected any. Specify a different type                 @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/marketplace/ProductCard.i18n.test.ts
+  20:18  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+
+/home/yka/dev/bsf_market/main/tests/unit/marketplace/ProductCard.test.ts
+  49:18  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+
+/home/yka/dev/bsf_market/main/tests/unit/marketplace/createProduct.test.ts
+   32:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   50:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   61:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   62:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   73:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   84:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   95:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  106:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  119:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  130:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  141:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  149:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  160:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/marketplace/useMarketplace.test.ts
+    1:48  error  'afterEach' is defined but never used     @typescript-eslint/no-unused-vars
+   22:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  220:65  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/marketplace/wanted/WantedCard.i18n.test.ts
+   20:18  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+  272:57  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/marketplace/wanted/WantedCard.test.ts
+  52:18  error  The `Function` type accepts any function-like value.
+Prefer explicitly defining any function parameters and return type  @typescript-eslint/no-unsafe-function-type
+  52:28  error  'delay' is defined but never used. Allowed unused args must match /^_/u                                                  @typescript-eslint/no-unused-vars
+  55:27  error  Unexpected any. Specify a different type                                                                                 @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/marketplace/wanted/WantedRepository.test.ts
+    6:3   error  'MarketplaceWantedResponse' is defined but never used  @typescript-eslint/no-unused-vars
+   58:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+   98:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  106:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  128:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  146:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  152:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  176:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  214:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  242:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  272:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  297:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  300:25  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  307:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  322:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  329:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  427:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  442:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  451:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  461:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  471:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  481:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  491:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  501:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  511:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  521:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  528:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  541:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  553:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  563:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  573:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  583:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  593:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  603:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  613:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  623:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  630:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  673:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+  698:30  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/marketplace/wanted/createWanted.test.ts
+   35:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   52:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   63:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   64:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   75:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   86:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   97:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  108:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  121:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  132:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  143:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  151:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  162:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/marketplace/wanted/type-guards.test.ts
+   80:12  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  102:12  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  170:12  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  192:12  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  290:12  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  314:12  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  341:12  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  393:12  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/marketplace/wanted/useWanted.test.ts
+  8:3  error  'WantedAuthenticated' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/yka/dev/bsf_market/main/tests/unit/messaging/MessageComposer.test.ts
+  295:13  error  'originalCanSend' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/yka/dev/bsf_market/main/tests/unit/messaging/MessagingRepository.test.ts
+   11:3   error  'mockMessageSendResponse' is defined but never used  @typescript-eslint/no-unused-vars
+   53:30  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+   64:30  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+   69:30  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+   79:30  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+   88:30  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+   97:30  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  106:45  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  120:30  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  131:30  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  142:30  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  153:46  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  165:30  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  171:30  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  182:30  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  193:30  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  214:46  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  226:30  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  232:30  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  243:30  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  262:46  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  278:46  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  288:29  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  290:29  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  292:29  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  294:29  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  296:29  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  298:29  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  300:29  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  302:29  error  Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/messaging/useMessaging.test.ts
+    2:32  error  'onUnmounted' is defined but never used   @typescript-eslint/no-unused-vars
+  538:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/middleware/layout.test.ts
+    7:31  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   30:18  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   31:22  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   32:24  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   60:56  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   75:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  100:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  107:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  114:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  136:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  143:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  154:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  174:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  179:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  186:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  191:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  196:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  199:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  202:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  205:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  225:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  233:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  244:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  253:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  258:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  270:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  274:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  293:38  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  294:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  303:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  311:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  321:39  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  337:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  365:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  379:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  382:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  392:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/pages/createProduct.test.ts
+   20:15  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+   23:34  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+   28:55  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+   56:1   error  Import in body of module; reorder to top      import/first
+   59:22  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+   60:23  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+   61:28  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+   62:19  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  123:27  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  247:13  error  'wrapper' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  312:13  error  'wrapper' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  323:13  error  'wrapper' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/yka/dev/bsf_market/main/tests/unit/pages/createWanted.test.ts
+   20:15  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+   23:34  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+   28:55  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+   56:1   error  Import in body of module; reorder to top      import/first
+   59:22  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+   60:23  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+   61:28  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+   62:19  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  132:27  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  212:13  error  'wrapper' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  241:13  error  'wrapper' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  371:13  error  'wrapper' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/yka/dev/bsf_market/main/tests/unit/pages/main.test.ts
+   31:24  error  'delay' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+   73:27  error  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+  469:51  error  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/pages/market/id.test.ts
+  205:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  242:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  274:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/pages/market/index.test.ts
+    2:1   error  Imports "VueWrapper" are only used as type  @typescript-eslint/consistent-type-imports
+  192:30  error  Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/pages/messages-detail.test.ts
+    7:3   error  'mockMessages' is defined but never used      @typescript-eslint/no-unused-vars
+  113:38  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  209:13  error  'wrapper' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  695:30  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/pages/messages.test.ts
+  3:20  error  'onMounted' is defined but never used          @typescript-eslint/no-unused-vars
+  5:8   error  'MessageSkeleton' is defined but never used    @typescript-eslint/no-unused-vars
+  7:8   error  'EmptyStateMessage' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/yka/dev/bsf_market/main/tests/unit/pages/my-listings.test.ts
+    3:10  error  'nextTick' is defined but never used      @typescript-eslint/no-unused-vars
+   12:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   58:31  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  293:13  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  317:13  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  373:13  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  401:13  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  425:13  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/pages/product-translation.test.ts
+   1:32  error  'vi' is defined but never used                      @typescript-eslint/no-unused-vars
+  11:24  error  'isTranslating' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/yka/dev/bsf_market/main/tests/unit/pages/wanted/id.test.ts
+  212:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  249:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  281:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/pages/wanted/index.test.ts
+    2:1   error  Imports "VueWrapper" are only used as type  @typescript-eslint/consistent-type-imports
+  192:30  error  Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/stores/auth.test.ts
+   30:31  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+   36:26  error  Do not delete dynamically computed property keys  @typescript-eslint/no-dynamic-delete
+   39:66  error  Do not delete dynamically computed property keys  @typescript-eslint/no-dynamic-delete
+   52:64  error  Do not delete dynamically computed property keys  @typescript-eslint/no-dynamic-delete
+   89:30  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  119:30  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  168:30  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  221:30  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  239:45  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  249:30  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  260:80  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  306:30  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  349:30  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  404:30  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  413:13  error  'startTime' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  450:30  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  493:30  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  553:30  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  583:30  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  604:34  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  612:30  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  628:38  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  653:30  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+
+/home/yka/dev/bsf_market/main/tests/unit/verify-email-page.test.ts
+    4:18  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+    5:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+    6:24  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+    7:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+    8:14  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   58:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   86:18  error  'error' is defined but never used         @typescript-eslint/no-unused-vars
+  138:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  167:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  203:18  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  208:28  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  281:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  342:18  error  'err' is defined but never used           @typescript-eslint/no-unused-vars
+  368:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  402:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  421:18  error  'err' is defined but never used           @typescript-eslint/no-unused-vars
+
+✖ 605 problems (575 errors, 30 warnings)
+  12 errors and 26 warnings potentially fixable with the `--fix` option.
+
