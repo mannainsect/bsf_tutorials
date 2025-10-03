@@ -6,10 +6,9 @@
  * Enum for available help topics throughout the application
  */
 export enum HelpTopic {
-  MARKET_FILTERING = 'market.filtering',
-  PRODUCT_CONTACT = 'product.contact',
-  WANTED_POSTING = 'wanted.posting',
-  PROFILE_SETTINGS = 'profile.settings'
+  GETTING_STARTED = 'gettingStarted.overview',
+  PROFILE_SETTINGS = 'profile.settings',
+  ACCOUNT_SECURITY = 'account.security'
 }
 
 /**

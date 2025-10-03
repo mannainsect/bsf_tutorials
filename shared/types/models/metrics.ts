@@ -30,7 +30,6 @@ export enum MetricCategory {
 
   // Navigation
   PAGE_VIEW = 'page_view',
-  VISIT_MARKETPLACE = 'visit_marketplace',
 
   // User Actions
   CLICK_BUTTON = 'click_button',
@@ -46,44 +45,3 @@ export enum MetricCategory {
   // Errors
   ERROR_OCCURRED = 'error_occurred'
 }
-
-/**
- * Metrics data for marketplace landing page visits
- */
-export interface MarketplaceLandingInfo {
-  view: 'landing'
-  [key: string]: unknown
-}
-
-/**
- * Metrics data for marketplace browse page visits
- */
-export interface MarketplaceBrowseInfo {
-  view: 'browse'
-  list_type: 'products' | 'wanted'
-  category?: string
-  subcategory?: string
-  [key: string]: unknown
-}
-
-/**
- * Metrics data for marketplace detail page visits
- */
-export type MarketplaceDetailInfo =
-  | {
-      view: 'detail'
-      item_type: 'product'
-      product_id: string
-      [key: string]: unknown
-    }
-  | {
-      view: 'detail'
-      item_type: 'wanted'
-      wanted_id: string
-      [key: string]: unknown
-    }
-
-export type MarketplaceExtraInfo =
-  | MarketplaceLandingInfo
-  | MarketplaceBrowseInfo
-  | MarketplaceDetailInfo

@@ -71,9 +71,3 @@ export const REGEX_PATTERNS = {
 
 // Search and filter timeouts
 export const SEARCH_DEBOUNCE_MS = 300 as const // 300ms debounce
-
-// Cache durations
-export const CACHE_DURATION_MARKETPLACE_MS =
-  300000 as const // 5 min
-export const CACHE_DURATION_CATEGORIES_MS =
-  86400000 as const // 24 hr

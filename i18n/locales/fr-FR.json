@@ -14,7 +14,6 @@
     "continue": "Continuer",
     "yes": "Oui",
     "no": "Non",
-    "noListings": "Aucune annonce trouvée",
     "showDetails": "Afficher les détails",
     "hideDetails": "Masquer les détails",
     "goHome": "Aller à l'accueil",
@@ -44,10 +43,6 @@
       "menuUnavailable": "Contrôleur de menu indisponible",
       "menuToggleFailed": "Échec de l'ouverture/fermeture du menu"
     }
-  },
-  "menu": {
-    "marketplace": "Marché",
-    "myListings": "Mes Annonces"
   },
   "auth": {
     "email": "E-mail",
@@ -84,34 +79,37 @@
     "welcomeBack": "Bon retour",
     "signInToContinue": "Connectez-vous pour continuer",
     "createAccount": "Créer un Compte",
-    "joinUsToday": "Inscrivez-vous gratuitement et commencez à vendre et à vous connecter avec des acheteurs, c'est gratuit !",
+    "joinUsToday": "Register for free and start managing your workspace in minutes!",
     "creatingWorkspace": "Création de votre espace de travail...",
     "settingUpCompany": "Configuration de votre entreprise et de vos espaces...",
     "retryCreation": "Réessayer",
     "skipForNow": "Ignorer pour l'instant"
   },
   "home": {
-    "title": "BSF Marché",
-    "subtitle": "Bonjour le monde! Bienvenue dans notre incroyable modèle d'application.",
-    "welcomeMessage": "Bienvenue sur {appName}",
-    "getStarted": "Commencer",
-    "signIn": "Se Connecter",
-    "featuresCarousel": "Carrousel de fonctionnalités",
+    "title": "BSF App",
+    "subtitle": "Welcome to BSF App, a production-ready foundation for account-focused experiences.",
+    "welcomeMessage": "Welcome to {appName}",
+    "heroTitle": "Launch secure account experiences faster",
+    "heroSubtitle": "Start with authentication, localization, metrics, and help tooling already wired in.",
+    "getStarted": "Get Started",
+    "signIn": "Sign In",
+    "manageAccount": "Manage Account",
+    "featuresCarousel": "Features carousel",
     "features": {
       "secure": {
-        "title": "Trouvez des vendeurs",
-        "description": "Trouvez facilement des produits et services liés aux insectes",
-        "iconLabel": "Icône de sécurité"
+        "title": "Secure by design",
+        "description": "Authentication, verification, and account management built into the template.",
+        "iconLabel": "Secure feature icon"
       },
       "fast": {
-        "title": "Trouvez des acheteurs",
-        "description": "Annoncez et vendez vos produits et services aux producteurs d'insectes",
-        "iconLabel": "Icône de vitesse"
+        "title": "Ready to extend",
+        "description": "Composable architecture that accelerates new feature development.",
+        "iconLabel": "Fast feature icon"
       },
       "mobile": {
-        "title": "Gratuit pour commencer",
-        "description": "Parcourez les annonces sans vous inscrire. Inscrivez-vous gratuitement pour tous les avantages.",
-        "iconLabel": "Icône d'appareil mobile"
+        "title": "Responsive everywhere",
+        "description": "Adaptive layouts optimized for web, tablet, and mobile form factors.",
+        "iconLabel": "Mobile feature icon"
       }
     }
   },
@@ -125,8 +123,6 @@
     "manageAccount": "Gérer le Compte",
     "profileDetails": "Détails du Profil",
     "quickAccess": "Accès Rapide",
-    "navigateToMarketplace": "Aller au Marché",
-    "navigateToWanted": "Parcourir Recherchés",
     "navigateToAccount": "Gérer le Compte"
   },
   "profile": {
@@ -272,36 +268,12 @@
     "resendFailed": "Échec du renvoi du code de vérification. Veuillez réessayer.",
     "permissionDenied": "Permission Refusée",
     "titleMismatch": "Le titre saisi ne correspond pas",
-    "deleteFailed": "Échec de la suppression de l'annonce",
+    "deleteFailed": "Failed to delete item",
     "loadingFailed": "Échec du chargement du contenu",
-    "productNotFound": "Produit introuvable",
-    "productNotFoundDescription": "Le produit que vous recherchez n'existe pas ou a été supprimé",
     "companyCreationFailed": "Impossible de créer l'entreprise. Vous pouvez réessayer ou ignorer pour l'instant.",
     "navigationErrorLog": "Erreur de navigation",
     "navigationFailed": "La navigation a échoué",
-    "featuredProductFailed": "Impossible de charger le produit mis en avant",
     "rateLimit": "Trop de requêtes. Veuillez patienter un instant et réessayer.",
-    "market": {
-      "usdConversionFailed": "Échec de la récupération de la conversion USD",
-      "productMissingId": "Identifiant de produit manquant",
-      "wantedMissingId": "Identifiant de l'annonce manquant",
-      "loadProductsFailed": "Impossible de charger les produits",
-      "loadProductDetailFailed": "Impossible de charger les détails du produit",
-      "randomProductFailedLog": "Impossible de récupérer un produit aléatoire"
-    },
-    "wanted": {
-      "createFailedLog": "Impossible de créer l'annonce",
-      "updateFailedLog": "Impossible de mettre à jour l'annonce",
-      "fetchEditFailedLog": "Impossible de récupérer l'annonce à modifier",
-      "loadFailed": "Impossible de charger les annonces",
-      "loadDetailFailed": "Impossible de charger les détails de l'annonce",
-      "deleteFailedLog": "Impossible de supprimer l'annonce"
-    },
-    "product": {
-      "createFailedLog": "Impossible de créer le produit",
-      "updateFailedLog": "Impossible de mettre à jour le produit",
-      "fetchEditFailedLog": "Impossible de récupérer le produit à modifier"
-    },
     "log": {
       "unexpectedStatus": "Statut de réponse inattendu",
       "contentActionFailedLog": "Impossible d'enregistrer l'action de contenu",
@@ -323,34 +295,6 @@
     "maxLength": "La longueur maximale est de {max} caractères",
     "passwordMatch": "Les mots de passe ne correspondent pas",
     "invalidFormat": "Format invalide",
-    "listing": {
-      "titleRequired": "Le titre est obligatoire",
-      "titleMax": "Le titre doit contenir moins de 200 caractères",
-      "categoryRequired": "La catégorie est obligatoire",
-      "categoryInvalid": "Catégorie invalide '{value}'. Les catégories valides sont : {categories}",
-      "subcategoryRequired": "La sous-catégorie est obligatoire",
-      "descriptionRequired": "La description est obligatoire",
-      "descriptionMax": "La description doit contenir moins de 5000 caractères",
-      "priceRequired": "Le prix est obligatoire",
-      "priceType": "Le prix doit être un nombre",
-      "priceMin": "Le prix doit être supérieur ou égal à 0",
-      "priceFinite": "Le prix doit être un nombre valide",
-      "currencyLength": "Le code monnaie doit comporter exactement 3 caractères",
-      "currencyFormat": "Le code monnaie doit être un code ISO 4217 valide (3 lettres majuscules)",
-      "quantityRequired": "La quantité est obligatoire",
-      "quantityType": "La quantité doit être un nombre",
-      "quantityMin": "La quantité doit être supérieure ou égale à 0",
-      "quantityFinite": "La quantité doit être un nombre valide",
-      "unitRequired": "L'unité est obligatoire",
-      "unitMax": "L'unité doit contenir moins de 20 caractères",
-      "countryLength": "Le code pays doit être au format ISO 3166-1 alpha-2",
-      "countryFormat": "Code pays invalide",
-      "countryMin": "Sélectionnez au moins un pays",
-      "countryMax": "Au maximum 250 pays autorisés",
-      "additionalInfoMax": "Les informations supplémentaires doivent contenir moins de 2000 caractères",
-      "invalidImages": "Images invalides (max. {maxFiles} fichiers, {maxSizeMb} Mo chacun, {maxTotalMb} Mo au total)",
-      "invalidSubcategory": "Sous-catégorie invalide pour la catégorie sélectionnée"
-    },
     "profile": {
       "nameRequired": "Le nom est obligatoire"
     },
@@ -377,243 +321,6 @@
     "founded": "Fondée",
     "website": "Site web"
   },
-  "market": {
-    "products": "Produits",
-    "wanted": "Recherché",
-    "messages": "Messages",
-    "conversations": "Conversations",
-    "contact": "Contact"
-  },
-  "marketplace": {
-    "countries_delivery_help": "Sélectionnez les pays où vous pouvez livrer votre produit ou service. Ceci est essentiel, sinon vous recevrez des demandes inutiles.",
-    "update_company_link": "Mettre à jour les informations de l'entreprise",
-    "title": "Titre",
-    "products": "Produits",
-    "myProducts": "Mes Produits",
-    "myWantedItems": "Mes Articles Recherchés",
-    "pageTitle": "Marché - Trouvez des Produits",
-    "pageDescription": "Parcourez et découvrez des produits sur notre marché",
-    "search": "Rechercher des produits...",
-    "searchPlaceholder": "Rechercher des produits...",
-    "noResults": "Aucun produit trouvé",
-    "noProducts": "Aucun produit disponible",
-    "noProductsDescription": "Essayez d'ajuster vos filtres ou termes de recherche",
-    "clearFilters": "Effacer les Filtres",
-    "addListing": "Ajouter une annonce",
-    "browseButton": "Explorer le Marché",
-    "browseMarketplace": "Parcourir Tous les Produits",
-    "featuredProduct": "Produit Vedette",
-    "featuredDescription": "Découvrez des produits exceptionnels de nos vendeurs",
-    "contactSeller": "Contacter le Vendeur",
-    "contactBuyer": "Contacter l'Acheteur",
-    "contactEmail": "Email de Contact",
-    "contactInformation": "Informations de Contact",
-    "loginToContact": "Veuillez vous connecter pour voir les informations de contact",
-    "links": "Liens",
-    "emailSubject": "Demande concernant {product}",
-    "loading": "Chargement des produits...",
-    "loadingProducts": "Chargement des produits...",
-    "loadingProduct": "Chargement des détails du produit...",
-    "error": "Échec du chargement des produits",
-    "backToList": "Retour aux annonces",
-    "backToListings": "Retour aux Annonces de Produits",
-    "allCategories": "Toutes les Catégories",
-    "productDetail": "Détails du Produit",
-    "create_listing": "Créer une Annonce",
-    "create_product": "Créer une Annonce de Produit",
-    "create_wanted": "Créer une Annonce de Recherche",
-    "select_listing_type": "Sélectionner le Type d'Annonce",
-    "select_listing_type_desc": "Choisissez le type d'annonce que vous souhaitez créer",
-    "create_product_desc": "Listez un produit ou un service que vous souhaitez vendre",
-    "create_wanted_desc": "Publiez une demande pour quelque chose que vous souhaitez acheter",
-    "no_company_permission": "Vous devez avoir une entreprise et les autorisations appropriées pour créer des annonces",
-    "basic_information": "Informations de base",
-    "pricing_quantity": "Prix et quantité",
-    "location_shipping": "Localisation et expédition",
-    "location": "Localisation",
-    "images": "Images",
-    "title_placeholder": "Entrez un titre descriptif pour votre produit",
-    "wanted_title_placeholder": "Que recherchez-vous ?",
-    "select_category": "Sélectionner une catégorie",
-    "category_placeholder": "Entrez la catégorie du produit (ex: Électronique, Machines)",
-    "select_subcategory": "Sélectionner une sous-catégorie",
-    "subcategory_placeholder": "Entrez la sous-catégorie du produit (ex: Ordinateurs, Outils)",
-    "description_placeholder": "Décrivez votre produit en détail",
-    "wanted_description_placeholder": "Décrivez ce que vous recherchez",
-    "price_placeholder": "0.00",
-    "currency": "Devise",
-    "select_currency": "Sélectionner la devise",
-    "quantity_placeholder": "0",
-    "unit": "Unité",
-    "select_unit": "Sélectionner l'unité",
-    "countries": "Pays",
-    "select_countries": "Sélectionner les pays",
-    "countries_wanted_help": "Sélectionnez les pays où vous recherchez cet article",
-    "product_images": "Images du produit",
-    "selectImages": "Sélectionner des images",
-    "images_help": "Téléchargez jusqu'à 5 images (JPEG, PNG, GIF, WebP). Max 10 Mo par fichier.",
-    "additional_details": "Détails supplémentaires",
-    "additional_details_placeholder": "Toute information supplémentaire sur votre produit",
-    "wanted_additional_placeholder": "Spécifiez toute exigence ou préférence particulière",
-    "wanted_additional_help": "Incluez des détails comme les marques désirées, spécifications ou conditions",
-    "contact_email_placeholder": "Email de contact optionnel",
-    "contact_email_help": "Laissez vide pour utiliser l'email de votre compte",
-    "post_wanted": "Publier la demande",
-    "select_all_countries": "Sélectionner Tous les Pays",
-    "clear_all_countries": "Tout Effacer",
-    "category_load_error": "Échec du chargement des catégories",
-    "subcategory_load_error": "Échec du chargement des sous-catégories",
-    "select_category_first": "Veuillez d'abord sélectionner une catégorie",
-    "product_created_success": "Annonce de produit créée avec succès",
-    "wanted_created_success": "Demande de recherche publiée avec succès",
-    "no_company_selected": "Veuillez sélectionner une entreprise avant de créer une annonce",
-    "no_permission": "Vous n'avez pas la permission de créer des annonces",
-    "listing_limit_reached": "Vous avez atteint votre limite d'annonces. Veuillez mettre à niveau votre plan pour créer plus d'annonces.",
-    "images_max_files": "Maximum de {max} images autorisées",
-    "images_remaining_slots": "Vous ne pouvez ajouter que {count} image(s) supplémentaire(s)",
-    "images_invalid_type": "{name} : Type de fichier invalide. Seuls JPEG, PNG, GIF et WebP sont autorisés",
-    "images_too_large": "{name} : Fichier trop volumineux. Taille maximale est {max}",
-    "images_total_exceeded": "Impossible d'ajouter {name} : Limite de taille totale dépassée",
-    "images_total_too_large": "La taille totale de toutes les images dépasse {max}",
-    "productDetails": "Détails du Produit",
-    "seller": "Vendeur",
-    "price": "Prix",
-    "quantity": "Quantité",
-    "description": "Description",
-    "additionalInfo": "Informations Supplémentaires",
-    "availableCountries": "Pays Disponibles",
-    "moreCountries": "+{count} de plus",
-    "showLess": "Afficher moins",
-    "availableIn": "Disponible dans",
-    "postedOn": "Publié le",
-    "filterCategory": "Filtrer par catégorie",
-    "filterSubcategory": "Filtrer par sous-catégorie",
-    "allSubcategories": "Toutes les sous-catégories",
-    "searchFor": "Rechercher",
-    "category": "Catégorie",
-    "subcategory": "Sous-catégorie",
-    "showing": "Affichage",
-    "tryAdjustingFilters": "Essayez d'ajuster vos filtres",
-    "moreImages": "Plus d'images",
-    "authModal": {
-      "title": "Connexion requise",
-      "heading": "Débloquez tout le potentiel",
-      "description": "Connectez-vous pour voir les détails du produit, contacter les vendeurs et effectuer des achats.",
-      "signInButton": "Se connecter pour continuer",
-      "registerButton": "Créer un nouveau compte",
-      "continueAsGuest": "Pas encore prêt à vous inscrire?",
-      "browseOnly": "Continuer à parcourir",
-      "benefits": {
-        "saveProducts": "Créez des annonces de vente pour vos produits",
-        "trackOrders": "Créez des annonces d’achat (recherche)",
-        "getDeals": "Envoyez et recevez des messages",
-        "personalized": "Faites de la publicité auprès de plus de 10 000 éleveurs d’insectes intéressés"
-      },
-      "freeUsage": "L'utilisation de BSF Marketplace est gratuite"
-    },
-    "priceInUSD": "Environ en USD",
-    "conversionUnavailable": "Conversion USD non disponible",
-    "update_listing": "Mettre à jour l'annonce",
-    "update_success": "Annonce mise à jour avec succès",
-    "update_error": "Échec de la mise à jour de l'annonce",
-    "delete_success": "Annonce supprimée avec succès",
-    "delete_error": "Échec de la suppression de l'annonce",
-    "delete_confirm": "Tapez \"{title}\" pour confirmer la suppression :",
-    "update_product_desc": "Mettre à jour les détails de votre annonce de produit",
-    "update_wanted_desc": "Mettre à jour les détails de votre annonce de recherche",
-    "product_updated": "Annonce de produit mise à jour avec succès",
-    "wanted_updated": "Annonce recherchée mise à jour avec succès",
-    "confirmDeleteMessage": "Tapez \"{title}\" pour confirmer la suppression :",
-    "deleteSuccess": "Annonce supprimée avec succès",
-    "sortBy": "Trier par",
-    "sortNone": "Par défaut",
-    "sortPriceAsc": "Prix: Croissant",
-    "sortPriceDesc": "Prix: Décroissant",
-    "sortTitleAsc": "Titre: A à Z",
-    "sortTitleDesc": "Titre: Z à A",
-    "sorted": "Trié",
-    "filterCountries": "Filtrer par pays",
-    "regexMode": "Mode Regex",
-    "toggleRegexSearch": "Basculer le mode de recherche regex",
-    "contact_email": "Email de contact",
-    "additional_info": "Informations Supplémentaires",
-    "category_bsf": "Produits BSF",
-    "category_equipment": "Équipement",
-    "category_frass": "Frass",
-    "category_services": "Services",
-    "category_substrate": "Substrat",
-    "confirm_delete_product": "Êtes-vous sûr de vouloir supprimer le produit \"{title}\" ?",
-    "confirm_delete_wanted": "Êtes-vous sûr de vouloir supprimer l'article recherché \"{title}\" ?",
-    "myListingsDescription": "Gérez vos annonces de produits et articles recherchés",
-    "product_deleted": "Produit supprimé avec succès",
-    "wanted_item_deleted": "Article recherché supprimé avec succès",
-    "imageAlt": "Image {index}",
-    "filter": {
-      "invalidFilterType": "Type de filtre invalide : \"{value}\". Valeurs attendues : \"product\" ou \"wanted\"."
-    }
-  },
-  "wanted": {
-    "title": "Articles Recherchés",
-    "browse": "Parcourir les Demandes",
-    "search": "Rechercher des articles demandés...",
-    "post": "Publier une Demande",
-    "contact": "Contacter l'Acheteur",
-    "budget": "Budget",
-    "loading": "Chargement des articles recherchés...",
-    "error": "Échec du chargement des articles recherchés",
-    "deleteSuccess": "Annonce recherchée supprimée avec succès",
-    "empty": "Aucun article recherché trouvé",
-    "quantity": "Quantité Nécessaire",
-    "expires": "Expire",
-    "meta": {
-      "title": "Annonces recherchées - BSF Marketplace",
-      "description": "Parcourez les demandes et annonces sur le marché BSF"
-    }
-  },
-  "messaging": {
-    "title": "Messages",
-    "send": "Envoyer un Message",
-    "cancel": "Annuler",
-    "contact_seller": "Contacter le Vendeur",
-    "contact_buyer": "Contacter l'Acheteur",
-    "message_placeholder": "Écrivez votre message...",
-    "no_conversations": "Pas encore de conversations",
-    "noConversations": "Pas encore de conversations",
-    "noConversationsDescription": "Commencez une conversation en contactant un vendeur ou un acheteur",
-    "loadingConversations": "Chargement des conversations...",
-    "loadingConversation": "Chargement de la conversation...",
-    "marketListing": "Annonce de vente",
-    "wantedListing": "Annonce de recherche",
-    "browseMarketplace": "Parcourir le Marché",
-    "last_message": "Dernier message",
-    "sending": "Envoi...",
-    "error_sending": "Échec de l'envoi du message",
-    "message_sent": "Message envoyé avec succès",
-    "character_limit": "caractères restants",
-    "compose": {
-      "title": "Nouveau Message",
-      "messageLabel": "Message",
-      "placeholder": "Écrivez votre message...",
-      "send": "Envoyer"
-    },
-    "noMessages": "Pas encore de messages",
-    "roles": {
-      "seller": "Vendeur",
-      "buyer": "Acheteur"
-    },
-    "lastMessagePrefix": "{role} : {message}",
-    "relativeTime": {
-      "yesterday": "Hier",
-      "daysAgo": "Il y a {count} jours",
-      "yesterdayAt": "Hier {time}",
-      "dateAtTime": "{date} {time}"
-    },
-    "sender": {
-      "you": "Vous",
-      "unknown": "Inconnu"
-    },
-    "conversationNotFound": "Conversation introuvable"
-  },
   "metrics": {
     "title": "Métriques",
     "userMetrics": "Métriques utilisateur",
@@ -626,82 +333,62 @@
   },
   "help": {
     "topics": {
-      "market": {
-        "filtering": {
-          "title": "Filtrage du Marché",
-          "content": "Apprenez à filtrer et rechercher des produits sur le marché.",
+      "gettingStarted": {
+        "overview": {
+          "title": "Getting started",
+          "content": "Learn how to explore the template and access the core workflows.",
           "sections": [
             {
-              "title": "Utilisation des Filtres",
-              "content": "Utilisez le bouton de filtre pour affiner les produits par catégorie, gamme de prix et localisation."
+              "title": "Sign in or create an account",
+              "content": "Use the Register or Login actions on the homepage to begin evaluating the experience."
             },
             {
-              "title": "Conseils de Recherche",
-              "content": "Entrez des mots-clés dans la barre de recherche. Utilisez des guillemets pour des correspondances exactes."
+              "title": "Explore the main dashboard",
+              "content": "After signing in, visit the main dashboard to access account management tools."
             },
             {
-              "title": "Options de Tri",
-              "content": "Triez les résultats par prix, date ou pertinence en utilisant le menu déroulant."
-            }
-          ]
-        }
-      },
-      "product": {
-        "contact": {
-          "title": "Contacter les Vendeurs",
-          "content": "Comment contacter les vendeurs à propos de leurs produits.",
-          "sections": [
-            {
-              "title": "Envoyer un Message",
-              "content": "Cliquez sur 'Contacter le Vendeur' sur n'importe quelle page de produit pour envoyer un message direct."
-            },
-            {
-              "title": "Directives de Messagerie",
-              "content": "Soyez respectueux et professionnel. Incluez des questions pertinentes sur le produit."
-            },
-            {
-              "title": "Temps de Réponse",
-              "content": "La plupart des vendeurs répondent sous 24-48 heures. Vérifiez vos messages régulièrement."
-            }
-          ]
-        }
-      },
-      "wanted": {
-        "posting": {
-          "title": "Publier des Annonces de Recherche",
-          "content": "Créez des annonces de recherche pour informer les vendeurs de ce que vous cherchez.",
-          "sections": [
-            {
-              "title": "Créer une Annonce",
-              "content": "Cliquez sur 'Publier une Recherche' et décrivez ce que vous cherchez avec le plus de détails possible."
-            },
-            {
-              "title": "Meilleures Pratiques",
-              "content": "Incluez votre fourchette de budget, l'état préféré et toute exigence spécifique."
-            },
-            {
-              "title": "Gérer les Annonces",
-              "content": "Modifiez ou supprimez vos annonces de recherche depuis votre tableau de bord de profil."
+              "title": "Use the help menu any time",
+              "content": "Open the help icon in the header to revisit these guides when you need a refresher."
             }
           ]
         }
       },
       "profile": {
         "settings": {
-          "title": "Paramètres du Profil",
-          "content": "Gérez votre profil et les paramètres de compte.",
+          "title": "Profile settings",
+          "content": "Manage your personal information, company details, and preferences.",
           "sections": [
             {
-              "title": "Informations Personnelles",
-              "content": "Mettez à jour votre nom, coordonnées et informations d'entreprise."
+              "title": "Update personal details",
+              "content": "Edit your name, location, and contact information directly from the account page."
             },
             {
-              "title": "Notifications",
-              "content": "Contrôlez les préférences d'email et de notifications push."
+              "title": "Manage company data",
+              "content": "Administrators can update company information, addresses, and timezones when needed."
             },
             {
-              "title": "Confidentialité",
-              "content": "Gérez qui peut voir votre profil et vous contacter."
+              "title": "Stay informed",
+              "content": "Review credits, metrics, and other account insights to keep your workspace healthy."
+            }
+          ]
+        }
+      },
+      "account": {
+        "security": {
+          "title": "Account security",
+          "content": "Keep your account safe with verification and password controls.",
+          "sections": [
+            {
+              "title": "Verify your email",
+              "content": "Complete the verification flow to activate key account actions and notifications."
+            },
+            {
+              "title": "Rotate passwords",
+              "content": "Use the password section to update credentials regularly and meet security requirements."
+            },
+            {
+              "title": "Monitor sign-in activity",
+              "content": "If you notice unusual activity, update your password and contact support immediately."
             }
           ]
         }

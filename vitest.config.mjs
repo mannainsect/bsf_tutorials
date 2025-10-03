@@ -24,10 +24,7 @@ export default defineConfig({
       'playwright-report/**',
       'tests/e2e/**',
       'tests/integration/**',
-      'tests/unit/**/ProductCard*.test.ts',
-      'tests/unit/**/ProductCard*.i18n.test.ts',
-      'tests/unit/**/WantedCard*.test.ts',
-      'tests/unit/**/WantedCard*.i18n.test.ts'
+      
     ],
     coverage: {
       provider: 'v8',

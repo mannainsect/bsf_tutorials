@@ -90,16 +90,7 @@ definePageMeta({
 })
 
 const { user, loading, error, ensureProfileData } = useProfile()
-const {
-  error: errorIcon,
-  storefront,
-  person,
-  list,
-  documents,
-  chatbubbles,
-  addCircle,
-  search
-} = useIcons()
+const { error: errorIcon, person } = useIcons()
 const router = useRouter()
 const { t } = useI18n()
 const { localePath } = useSafeLocalePath()
@@ -111,58 +102,13 @@ const navigationError = ref<string | null>(null)
 // Navigation items configuration with accessibility
 const navigationItems = ref([
   {
-    id: 'marketplace',
-    icon: storefront,
-    label: 'dashboard.navigateToMarketplace',
-    ariaLabel: 'dashboard.navigateToMarketplace',
-    route: '/market',
-    color: 'primary',
-    fill: 'solid'
-  },
-  {
-    id: 'wanted',
-    icon: search,
-    label: 'dashboard.navigateToWanted',
-    ariaLabel: 'dashboard.navigateToWanted',
-    route: '/wanted',
-    color: 'secondary',
-    fill: 'solid'
-  },
-  {
-    id: 'mylistings',
-    icon: documents,
-    label: 'menu.myListings',
-    ariaLabel: 'menu.myListings',
-    route: '/my-listings',
-    color: 'tertiary',
-    fill: 'solid'
-  },
-  {
-    id: 'messages',
-    icon: chatbubbles,
-    label: 'messaging.title',
-    ariaLabel: 'messaging.title',
-    route: '/messages',
-    color: 'success',
-    fill: 'solid'
-  },
-  {
-    id: 'create',
-    icon: addCircle,
-    label: 'marketplace.create_listing',
-    ariaLabel: 'marketplace.create_listing',
-    route: '/create',
-    color: 'warning',
-    fill: 'solid'
-  },
-  {
     id: 'account',
     icon: person,
     label: 'dashboard.navigateToAccount',
     ariaLabel: 'dashboard.navigateToAccount',
     route: '/account',
-    color: 'medium',
-    fill: 'outline'
+    color: 'primary',
+    fill: 'solid'
   }
 ])
 

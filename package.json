@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-app",
+  "name": "bsf-app-starter",
   "private": true,
   "type": "module",
   "scripts": {
@@ -80,5 +80,6 @@
     "*.{json,md,html,css}": [
       "prettier --write"
     ]
-  }
+  },
+  "description": "Authentication and account management starter built with Nuxt 4 and Ionic"
 }

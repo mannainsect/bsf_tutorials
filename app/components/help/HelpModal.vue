@@ -113,7 +113,7 @@ const availableTopics = Object.values(HelpTopic)
 
 // Selected topic state
 const selectedTopic: Ref<string> = ref(
-  props.topic || HelpTopic.MARKET_FILTERING
+  props.topic || HelpTopic.GETTING_STARTED
 )
 
 // Show navigation only if no specific topic or multiple available

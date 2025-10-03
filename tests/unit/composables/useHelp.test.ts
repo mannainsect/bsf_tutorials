@@ -131,11 +131,11 @@ describe('useHelp', () => {
       })
 
       // Open first modal
-      await showHelp(HelpTopic.MARKET_FILTERING)
+      await showHelp(HelpTopic.GETTING_STARTED)
       expect(mockModalController.create).toHaveBeenCalledTimes(1)
 
       // Try to open second modal while first is still open
-      await showHelp(HelpTopic.PRODUCT_CONTACT)
+      await showHelp(HelpTopic.ACCOUNT_SECURITY)
 
       // Should not create a second modal
       expect(mockModalController.create).toHaveBeenCalledTimes(1)
@@ -163,10 +163,10 @@ describe('useHelp', () => {
       mockModal.querySelector.mockResolvedValue(mockModalElement)
 
       // Open first modal
-      await showHelp(HelpTopic.MARKET_FILTERING)
+      await showHelp(HelpTopic.GETTING_STARTED)
 
       // Try to open second modal while first is still open
-      await showHelp(HelpTopic.PRODUCT_CONTACT)
+      await showHelp(HelpTopic.ACCOUNT_SECURITY)
 
       expect(mockModal.querySelector).toHaveBeenCalledWith(
         '[autofocus], button, [href], input, select, textarea, ' +
@@ -182,12 +182,12 @@ describe('useHelp', () => {
     it('should show help modal with valid topic', async () => {
       const { showHelp } = useHelp()
 
-      await showHelp(HelpTopic.MARKET_FILTERING)
+      await showHelp(HelpTopic.GETTING_STARTED)
 
       expect(mockModalController.create).toHaveBeenCalledWith({
         component: expect.any(Object),
         componentProps: {
-          topic: HelpTopic.MARKET_FILTERING,
+          topic: HelpTopic.GETTING_STARTED,
           fallbackContent: {
             title: 'Help',
             content: 'Help content is not available for this topic.',
@@ -252,7 +252,7 @@ describe('useHelp', () => {
       mockPerformanceNow.mockReturnValueOnce(100) // start
       mockPerformanceNow.mockReturnValueOnce(150) // end
 
-      await showHelp(HelpTopic.MARKET_FILTERING)
+      await showHelp(HelpTopic.GETTING_STARTED)
 
       expect(console.log).toHaveBeenCalledWith(
         '[useHelp] Modal presented successfully',
@@ -268,7 +268,7 @@ describe('useHelp', () => {
       mockPerformanceNow.mockReturnValueOnce(100) // start
       mockPerformanceNow.mockReturnValueOnce(350) // end (250ms)
 
-      await showHelp(HelpTopic.MARKET_FILTERING)
+      await showHelp(HelpTopic.GETTING_STARTED)
 
       expect(console.warn).toHaveBeenCalledWith(
         '[useHelp] Modal took longer than 200ms to open:',
@@ -281,7 +281,7 @@ describe('useHelp', () => {
 
       window.pageYOffset = 500
 
-      await showHelp(HelpTopic.MARKET_FILTERING)
+      await showHelp(HelpTopic.GETTING_STARTED)
 
       expect(console.debug).toHaveBeenCalledWith(
         '[useHelp] Saved scroll position:',
@@ -298,7 +298,7 @@ describe('useHelp', () => {
         configurable: true
       })
 
-      await showHelp(HelpTopic.MARKET_FILTERING)
+      await showHelp(HelpTopic.GETTING_STARTED)
 
       expect(console.debug).toHaveBeenCalledWith(
         '[useHelp] Saved focus element:',
@@ -313,7 +313,7 @@ describe('useHelp', () => {
         new Error('Creation failed')
       )
 
-      await expect(showHelp(HelpTopic.MARKET_FILTERING)).rejects.toThrow(
+      await expect(showHelp(HelpTopic.GETTING_STARTED)).rejects.toThrow(
         'Unable to create help modal. Please try again.'
       )
 
@@ -328,7 +328,7 @@ describe('useHelp', () => {
 
       mockModal.present.mockRejectedValueOnce(new Error('Present failed'))
 
-      await expect(showHelp(HelpTopic.MARKET_FILTERING)).rejects.toThrow(
+      await expect(showHelp(HelpTopic.GETTING_STARTED)).rejects.toThrow(
         'Present failed'
       )
 
@@ -352,7 +352,7 @@ describe('useHelp', () => {
         }
       })
 
-      await showHelp(HelpTopic.MARKET_FILTERING)
+      await showHelp(HelpTopic.GETTING_STARTED)
       await hideHelp()
 
       expect(mockModal.dismiss).toHaveBeenCalled()
@@ -387,7 +387,7 @@ describe('useHelp', () => {
         }
       })
 
-      await showHelp(HelpTopic.MARKET_FILTERING)
+      await showHelp(HelpTopic.GETTING_STARTED)
 
       mockModal.dismiss.mockRejectedValueOnce(new Error('Dismiss failed'))
       await hideHelp()
@@ -421,7 +421,7 @@ describe('useHelp', () => {
         }
       })
 
-      await showHelp(HelpTopic.MARKET_FILTERING)
+      await showHelp(HelpTopic.GETTING_STARTED)
 
       expect(isHelpOpen()).toBe(true)
 
@@ -446,7 +446,7 @@ describe('useHelp', () => {
         }
       })
 
-      await showHelp(HelpTopic.MARKET_FILTERING)
+      await showHelp(HelpTopic.GETTING_STARTED)
 
       // Simulate modal dismiss
       dismissCallback({ data: undefined, role: 'backdrop' })
@@ -475,7 +475,7 @@ describe('useHelp', () => {
         }
       })
 
-      await showHelp(HelpTopic.MARKET_FILTERING)
+      await showHelp(HelpTopic.GETTING_STARTED)
 
       // Simulate modal dismiss
       dismissCallback({ data: undefined, role: 'backdrop' })
@@ -508,7 +508,7 @@ describe('useHelp', () => {
         }
       })
 
-      await showHelp(HelpTopic.MARKET_FILTERING)
+      await showHelp(HelpTopic.GETTING_STARTED)
 
       // Simulate modal dismiss
       dismissCallback({ data: undefined, role: 'backdrop' })
@@ -536,7 +536,7 @@ describe('useHelp', () => {
         }
       })
 
-      await showHelp(HelpTopic.MARKET_FILTERING)
+      await showHelp(HelpTopic.GETTING_STARTED)
 
       // Simulate error in dismiss handler
       catchCallback(new Error('Dismiss handler error'))
@@ -561,7 +561,7 @@ describe('useHelp', () => {
         }
       })
 
-      await showHelp(HelpTopic.MARKET_FILTERING)
+      await showHelp(HelpTopic.GETTING_STARTED)
 
       // Simulate ESC key press
       const event = new KeyboardEvent('keydown', { key: 'Escape' })
@@ -580,7 +580,7 @@ describe('useHelp', () => {
     it('should not close modal on other keys', async () => {
       const { showHelp } = useHelp()
 
-      await showHelp(HelpTopic.MARKET_FILTERING)
+      await showHelp(HelpTopic.GETTING_STARTED)
 
       // Simulate Enter key press
       const event = new KeyboardEvent('keydown', { key: 'Enter' })
@@ -622,7 +622,7 @@ describe('useHelp', () => {
         configurable: true
       })
 
-      await showHelp(HelpTopic.MARKET_FILTERING)
+      await showHelp(HelpTopic.GETTING_STARTED)
 
       expect(console.warn).toHaveBeenCalledWith(
         '[useHelp] Failed to save scroll position:',
@@ -641,7 +641,7 @@ describe('useHelp', () => {
         configurable: true
       })
 
-      await showHelp(HelpTopic.MARKET_FILTERING)
+      await showHelp(HelpTopic.GETTING_STARTED)
 
       expect(console.warn).toHaveBeenCalledWith(
         '[useHelp] Failed to save focus:',
@@ -671,7 +671,7 @@ describe('useHelp', () => {
         }
       })
 
-      await showHelp(HelpTopic.MARKET_FILTERING)
+      await showHelp(HelpTopic.GETTING_STARTED)
       dismissCallback({ data: undefined })
 
       expect(console.warn).toHaveBeenCalledWith(
@@ -706,7 +706,7 @@ describe('useHelp', () => {
         }
       })
 
-      await showHelp(HelpTopic.MARKET_FILTERING)
+      await showHelp(HelpTopic.GETTING_STARTED)
       dismissCallback({ data: undefined })
 
       expect(console.warn).toHaveBeenCalledWith(

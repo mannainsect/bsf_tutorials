@@ -32,17 +32,6 @@ export default defineNuxtConfig({
   router: {
     options: {
       scrollBehavior(to, from, savedPosition) {
-        // For market page with hash, don't auto-scroll (handled in component after products load)
-        if (to.path.endsWith('/market') && to.hash) {
-          return false
-        }
-
-        // For product detail pages, always scroll to top
-        if (to.path.includes('/market/') && to.params.id) {
-          return { top: 0 }
-        }
-
-        // Default: use saved position or scroll to top
         return savedPosition || { top: 0 }
       }
     }
@@ -152,7 +141,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL,
-      domainAlias: process.env.NUXT_PUBLIC_DOMAIN_ALIAS || 'bsfmarket',
+      domainAlias: process.env.NUXT_PUBLIC_DOMAIN_ALIAS || 'bsfapp',
       apiEndpoints: {
         // Authentication (New /auth endpoints)
         authRegister: '/auth/register',
@@ -194,14 +183,6 @@ export default defineNuxtConfig({
         metricsUser: '/metrics/user',
         metricsUpdate: '/metrics/update',
         metricsExcel: '/metrics/excel',
-        
-        // Marketplace
-        marketProducts: '/market/products',
-        marketWanted: '/market/wanted',
-        marketContact: '/market/contact',
-        marketMessages: '/market/messages',
-        marketConversations: '/market/conversations',
-        
         // Products (Learning Content)
         productsContent: '/products/content',
         productsPlaylists: '/products/playlists',

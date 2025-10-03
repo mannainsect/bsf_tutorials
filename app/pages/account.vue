@@ -472,57 +472,6 @@
         </ion-card-content>
       </ion-card>
       
-      <!-- Purchased Products -->
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>{{ $t('account.products.title') }}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <div
-            v-if="profileData?.purchased_products?.length === 0"
-            class="empty-state compact"
-          >
-            <ion-icon :icon="bag" class="empty-icon" />
-            <p>{{ $t('account.products.noProducts') }}</p>
-          </div>
-          <div v-else>
-            <ion-item
-              v-for="product in displayedProducts"
-              :key="product.product"
-            >
-              <ion-label>
-                <h3>
-                  {{
-                    product.product_name ||
-                      $t('account.products.unknownProduct')
-                  }}
-                </h3>
-                <p>{{ formatDate(product.expires_at) }}</p>
-              </ion-label>
-              <ion-chip
-                slot="end"
-                size="small"
-                color="primary"
-              >
-                {{ $t('account.products.purchased') }}
-              </ion-chip>
-            </ion-item>
-
-            <ion-note
-              v-if="hasMoreProducts"
-              class="ion-padding"
-              color="medium"
-            >
-              {{
-                $t('account.products.andXMore', {
-                  count: remainingCount
-                })
-              }}
-            </ion-note>
-          </div>
-        </ion-card-content>
-      </ion-card>
-
       <!-- Password Reset Section -->
       <ion-card class="section">
         <ion-card-header>
@@ -585,7 +534,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 // Use icons from the centralized useIcons composable
-const { alertCircle, create, warning, wallet, bag } = useIcons()
+const { alertCircle, create, warning, wallet } = useIcons()
 
 definePageMeta({
   middleware: 'auth'
@@ -675,18 +624,6 @@ const isPasswordValid = computed(() => {
   )
 })
 
-const displayedProducts = computed(() =>
-  profileData.value?.purchased_products?.slice(0, 3) || []
-)
-
-const hasMoreProducts = computed(() =>
-  (profileData.value?.purchased_products?.length || 0) > 3
-)
-
-const remainingCount = computed(() =>
-  (profileData.value?.purchased_products?.length || 0) - 3
-)
-
 // Methods
 const loadProfileData = async () => {
   try {
@@ -753,11 +690,6 @@ const updatePassword = async () => {
   } finally {
     passwordLoading.value = false
   }
-}
-
-const formatDate = (dateString: string) => {
-  if (!dateString) return ''
-  return new Date(dateString).toLocaleDateString()
 }
 
 

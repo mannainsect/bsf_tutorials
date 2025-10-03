@@ -155,29 +155,6 @@ export const useUserRole = () => {
   }
 
   /**
-   * Check if user has permission to create listings
-   * Required roles: admin, manager, or superadmin
-   *
-   * This method is synchronous and reads from cached state only.
-   * Used by marketplace components to show/hide create buttons.
-   *
-   * @returns true if user can create marketplace listings
-   */
-  const canCreateListings = (): boolean => {
-    if (!authStore.isAuthenticated || !authStore.activeCompany) {
-      return false
-    }
-
-    // Check if user is superadmin
-    if (authStore.user?.superadmin) {
-      return true
-    }
-
-    // Check if user is admin or manager
-    return isCompanyAdmin() || isCompanyManager()
-  }
-
-  /**
    * Check if user has any role in the active company
    */
   const hasAnyRole = (): boolean => {
@@ -200,7 +177,6 @@ export const useUserRole = () => {
     isCompanyAdmin,
     isCompanyManager,
     isCompanyOperator,
-    canCreateListings,
     hasAnyRole,
     getUserRole
   }

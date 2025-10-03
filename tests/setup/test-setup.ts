@@ -283,7 +283,6 @@ global.useApi = () => ({
 
 // Mock useApiEndpoints composable
 global.useApiEndpoints = () => ({
-  marketProducts: '/market/products',
   auth: '/auth',
   users: '/users'
 })
@@ -293,14 +292,48 @@ global.useIcons = () => ({
   mail: 'mail-icon',
   phone: 'phone-icon',
   search: 'search-icon',
-  cart: 'cart-icon',
   home: 'home-icon',
   menu: 'menu-icon',
   close: 'close-icon',
+  closeCircle: 'close-circle-icon',
   add: 'add-icon',
+  addCircle: 'add-circle-icon',
   remove: 'remove-icon',
+  success: 'success-icon',
+  warning: 'warning-icon',
+  error: 'error-icon',
+  alertCircle: 'alert-circle-icon',
+  info: 'info-icon',
+  forward: 'forward-icon',
+  back: 'back-icon',
+  arrowBack: 'arrow-back-icon',
+  eye: 'eye-icon',
+  eyeOff: 'eye-off-icon',
+  lock: 'lock-icon',
+  mobile: 'mobile-icon',
+  fast: 'fast-icon',
+  secure: 'secure-icon',
+  wallet: 'wallet-icon',
+  business: 'business-icon',
+  businessOutline: 'business-outline-icon',
+  calendar: 'calendar-icon',
+  create: 'create-icon',
+  person: 'person-icon',
+  documents: 'documents-icon',
+  chatbubble: 'chatbubble-icon',
+  chatbubbles: 'chatbubbles-icon',
+  send: 'send-icon',
+  filter: 'filter-icon',
+  sort: 'sort-icon',
+  layers: 'layers-icon',
+  options: 'options-icon',
+  helpCircleOutline: 'help-circle-outline-icon',
+  helpCircle: 'help-circle-icon',
+  language: 'language-icon',
+  linkOutline: 'link-outline-icon',
   codeSlash: 'code-slash-icon',
-  businessOutline: 'business-outline-icon'
+  logout: 'logout-icon',
+  searchOutline: 'search-outline-icon'
 })
 
 // Mock useToast composable
@@ -336,7 +369,6 @@ global.useUserRole = () => ({
   isCompanyAdmin: vi.fn(() => false),
   isCompanyManager: vi.fn(() => false),
   isCompanyOperator: vi.fn(() => false),
-  canCreateListings: vi.fn(() => false),
   hasAnyRole: vi.fn(() => false),
   getUserRole: vi.fn(() => null)
 })

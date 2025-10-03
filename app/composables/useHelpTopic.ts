@@ -19,7 +19,7 @@ export const useHelpTopic = () => {
       path = path.slice(0, -1)
     }
 
-    // Remove locale prefix if present (e.g., /es/market -> /market)
+    // Remove locale prefix if present (e.g., /es/account -> /account)
     // Common locale patterns: /xx/, /xx-XX/, /xxx/
     const localeRegex = /^\/[a-z]{2,3}(-[A-Z]{2})?(\/|$)/
     const cleanPath = path.replace(localeRegex, '/')
@@ -27,18 +27,22 @@ export const useHelpTopic = () => {
     // Also check locale-suffixed route names (e.g., market___es)
     const cleanRouteName = routeName.replace(/___[a-z]{2,3}(-[A-Z]{2})?$/, '')
 
-    if (cleanPath === '/market' || cleanPath.startsWith('/market?'))
-      return HelpTopic.MARKET_FILTERING
+    if (cleanPath === '/' || cleanRouteName === 'index')
+      return HelpTopic.GETTING_STARTED
 
-    if (cleanRouteName === 'market-id' ||
-        cleanPath.match(/^\/market\/[^/]+$/))
-      return HelpTopic.PRODUCT_CONTACT
-
-    if (cleanPath === '/wanted' || cleanPath.startsWith('/wanted?'))
-      return HelpTopic.WANTED_POSTING
+    if (cleanPath === '/main' || cleanRouteName === 'main')
+      return HelpTopic.GETTING_STARTED
 
     if (cleanPath === '/account' || cleanPath.startsWith('/account?'))
       return HelpTopic.PROFILE_SETTINGS
+
+    if (
+      cleanPath === '/verify-token' ||
+      cleanRouteName === 'verify-token' ||
+      cleanPath.startsWith('/auth/verify-email')
+    ) {
+      return HelpTopic.ACCOUNT_SECURITY
+    }
 
     return null
   })

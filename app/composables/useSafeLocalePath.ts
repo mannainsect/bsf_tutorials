@@ -31,10 +31,10 @@ const pathCache = new Map<string, string>()
  * ```typescript
  * // Basic usage
  * const { localePath } = useSafeLocalePath()
- * router.push(localePath('/market'))
+ * router.push(localePath('/account'))
  *
  * // With specific locale
- * const spanishPath = localePath('/products', 'es')
+* const spanishPath = localePath('/account', 'es')
  *
  * // Check if i18n is available
  * const { isAvailable } = useSafeLocalePath()

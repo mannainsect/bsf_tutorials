@@ -5,47 +5,11 @@
         <ion-row class="ion-justify-content-center ion-text-center hero-row">
           <ion-col size="12">
             <ion-text class="hero-title">
-              <h2>{{ $t('marketplace.featuredDescription') }}</h2>
+              <h1>{{ t('home.heroTitle') }}</h1>
             </ion-text>
-          </ion-col>
-        </ion-row>
-
-        <ion-row
-          v-if="randomProduct"
-          class="ion-justify-content-center"
-        >
-          <ion-col size="12" size-md="10" size-lg="8" size-xl="6">
-            <ProductCard
-              :product="randomProduct"
-              :is-loading="isLoadingRandomProduct"
-              :error="randomProductError"
-            />
-          </ion-col>
-        </ion-row>
-
-        <ion-row
-          v-else-if="isLoadingRandomProduct"
-          class="ion-justify-content-center"
-        >
-          <ion-col size="12" class="ion-text-center">
-            <ion-spinner color="primary" />
-          </ion-col>
-        </ion-row>
-
-        <ion-row class="ion-justify-content-center featured-actions">
-          <ion-col size="12" size-sm="8" size-md="6" size-lg="4">
-            <ion-button
-              :router-link="localePath('/market')"
-              expand="block"
-              size="large"
-              color="primary"
-            >
-              <ion-icon
-                slot="start"
-                :icon="icons.bag"
-              />
-              {{ $t('marketplace.browseMarketplace') }}
-            </ion-button>
+            <ion-text class="hero-subtitle">
+              <p>{{ t('home.heroSubtitle') }}</p>
+            </ion-text>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -90,22 +54,6 @@
       <ion-grid class="ion-margin-top">
         <ion-row class="ion-justify-content-center">
           <ion-col size="12" size-sm="8" size-md="6" size-lg="4">
-            <!-- Show Create Listing button for authenticated users with company -->
-            <ion-button
-              v-if="hasCompany"
-              :router-link="localePath('/create')"
-              expand="block"
-              size="large"
-              color="primary"
-              class="ion-margin-bottom"
-            >
-              <ion-icon
-                slot="start"
-                :icon="icons.addCircle"
-              />
-              {{ t('marketplace.create_listing') }}
-            </ion-button>
-            <!-- Show Register and Login for unauthenticated users -->
             <ion-button
               v-if="!authStore.isAuthenticated"
               :router-link="localePath('/register')"
@@ -124,6 +72,15 @@
             >
               {{ t('home.signIn') }}
             </ion-button>
+            <ion-button
+              v-else
+              :router-link="localePath('/account')"
+              expand="block"
+              size="large"
+              color="primary"
+            >
+              {{ t('home.manageAccount') }}
+            </ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -135,11 +92,6 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/autoplay'
-import type {
-  ProductPublicListing,
-  Product
-} from '../../shared/types/models/MarketplaceProduct'
-import ProductCard from '../components/marketplace/ProductCard.vue'
 
 interface Feature {
   readonly id: string
@@ -171,32 +123,7 @@ interface SwiperConfig {
 const { t } = useI18n()
 const localePath = useLocalePath()
 const icons = useIcons()
-const { fetchRandomProduct } = useMarketplace()
 const authStore = useAuthStore()
-
-// Check if user has company for create listing button visibility
-const hasCompany = computed(() => {
-  return authStore.isAuthenticated && !!authStore.activeCompany
-})
-
-// Random product state
-const randomProduct = ref<ProductPublicListing | Product | null>(null)
-const isLoadingRandomProduct = ref(false)
-const randomProductError = ref<Error | null>(null)
-
-// Load random product on mount
-onMounted(async () => {
-  isLoadingRandomProduct.value = true
-  try {
-    randomProduct.value = await fetchRandomProduct()
-  } catch (error) {
-    randomProductError.value = error instanceof Error
-      ? error
-      : new Error(t('errors.featuredProductFailed'))
-  } finally {
-    isLoadingRandomProduct.value = false
-  }
-})
 
 const features: readonly Feature[] = [
   {

@@ -14,9 +14,7 @@ import {
   VALIDATION_RULES,
   HTTP_STATUS,
   REGEX_PATTERNS,
-  SEARCH_DEBOUNCE_MS,
-  CACHE_DURATION_MARKETPLACE_MS,
-  CACHE_DURATION_CATEGORIES_MS
+  SEARCH_DEBOUNCE_MS
 } from '~/utils/constants'
 
 describe('constants utility', () => {
@@ -219,80 +217,24 @@ describe('constants utility', () => {
     })
   })
 
-  describe('Cache Duration Constants (Issue #114)', () => {
-    it('should have CACHE_DURATION_MARKETPLACE_MS defined', () => {
-      expect(CACHE_DURATION_MARKETPLACE_MS).toBeDefined()
-      expect(typeof CACHE_DURATION_MARKETPLACE_MS).toBe('number')
-    })
-
-    it('should have CACHE_DURATION_MARKETPLACE_MS equal to 300000',
-    () => {
-      expect(CACHE_DURATION_MARKETPLACE_MS).toBe(300000)
-    })
-
-    it('should equal 5 minutes for marketplace cache', () => {
-      const fiveMinutesInMs = 5 * 60 * 1000
-      expect(CACHE_DURATION_MARKETPLACE_MS).toBe(fiveMinutesInMs)
-    })
-
-    it('should have CACHE_DURATION_CATEGORIES_MS defined', () => {
-      expect(CACHE_DURATION_CATEGORIES_MS).toBeDefined()
-      expect(typeof CACHE_DURATION_CATEGORIES_MS).toBe('number')
-    })
-
-    it('should have CACHE_DURATION_CATEGORIES_MS equal to 86400000',
-    () => {
-      expect(CACHE_DURATION_CATEGORIES_MS).toBe(86400000)
-    })
-
-    it('should equal 24 hours for categories cache', () => {
-      const twentyFourHoursInMs = 24 * 60 * 60 * 1000
-      expect(CACHE_DURATION_CATEGORIES_MS)
-        .toBe(twentyFourHoursInMs)
-    })
-
-    it('should have positive cache durations', () => {
-      expect(CACHE_DURATION_MARKETPLACE_MS).toBeGreaterThan(0)
-      expect(CACHE_DURATION_CATEGORIES_MS).toBeGreaterThan(0)
-    })
-
-    it('should have categories cache longer than marketplace',
-    () => {
-      expect(CACHE_DURATION_CATEGORIES_MS)
-        .toBeGreaterThan(CACHE_DURATION_MARKETPLACE_MS)
-    })
-  })
-
   describe('Constant Values', () => {
     it('should preserve constant primitive values', () => {
       const originalDebounce = SEARCH_DEBOUNCE_MS
-      const originalMarketplace = CACHE_DURATION_MARKETPLACE_MS
-      const originalCategories = CACHE_DURATION_CATEGORIES_MS
       expect(SEARCH_DEBOUNCE_MS).toBe(originalDebounce)
-      expect(CACHE_DURATION_MARKETPLACE_MS)
-        .toBe(originalMarketplace)
-      expect(CACHE_DURATION_CATEGORIES_MS)
-        .toBe(originalCategories)
     })
 
-    it('should have const assertion for immutability intent',
-    () => {
-      const typeCheck1: 300 = SEARCH_DEBOUNCE_MS
-      const typeCheck2: 300000 = CACHE_DURATION_MARKETPLACE_MS
-      const typeCheck3: 86400000 = CACHE_DURATION_CATEGORIES_MS
-      expect(typeCheck1).toBe(300)
-      expect(typeCheck2).toBe(300000)
-      expect(typeCheck3).toBe(86400000)
+    it('should have const assertion for immutability intent', () => {
+      const typeCheck: 300 = SEARCH_DEBOUNCE_MS
+      expect(typeCheck).toBe(300)
     })
   })
 
   describe('Constants Integration', () => {
-    it('should have all new constants exportable', () => {
+    it('should have key numeric constants exportable', () => {
       const constants = {
-        SEARCH_DEBOUNCE_MS,
-        CACHE_DURATION_MARKETPLACE_MS,
-        CACHE_DURATION_CATEGORIES_MS
+        SEARCH_DEBOUNCE_MS
       }
+
       Object.values(constants).forEach(value => {
         expect(value).toBeDefined()
         expect(typeof value).toBe('number')
