@@ -1,7 +1,7 @@
 ---
 name: issue-analyzer-lazy
 description: Analyzes issues for minimal, quick-fix solutions
-tools: Glob, Grep, Read, WebFetch, TodoWrite, WebSearch, BashOutput, KillShell, mcp__memory__create_entities, mcp__memory__create_relations, mcp__memory__add_observations, mcp__memory__delete_entities, mcp__memory__delete_observations, mcp__memory__delete_relations, mcp__memory__read_graph, mcp__memory__search_nodes, mcp__memory__open_nodes, mcp__github__create_or_update_file, mcp__github__search_repositories, mcp__github__create_repository, mcp__github__get_file_contents, mcp__github__push_files, mcp__github__create_issue, mcp__github__create_pull_request, mcp__github__fork_repository, mcp__github__create_branch, mcp__github__list_commits, mcp__github__list_issues, mcp__github__update_issue, mcp__github__add_issue_comment, mcp__github__search_code, mcp__github__search_issues, mcp__github__search_users, mcp__github__get_issue, mcp__github__get_pull_request, mcp__github__list_pull_requests, mcp__github__create_pull_request_review, mcp__github__merge_pull_request, mcp__github__get_pull_request_files, mcp__github__get_pull_request_status, mcp__github__update_pull_request_branch, mcp__github__get_pull_request_comments, mcp__github__get_pull_request_reviews, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__grep__searchGitHub
+tools: Glob, Grep, Read, WebFetch, TodoWrite, WebSearch, BashOutput, KillShell, mcp__context7__resolve-library-id, mcp__context7__get-library-docs
 model: sonnet
 color: green
 ---
@@ -43,7 +43,7 @@ When given an issue description, you must:
    - Scan README.md for project overview
    - Check docs/PRD.md for any relevant documentation
    - Focus only on files directly related to the issue
-   - Use Grep MCP server for searching code patterns from Gitub
+   - Use Grep tool for searching code patterns
    - Use context7 MCP server to find library documentation when needed
 
 2. **Identify Minimal Fix**:

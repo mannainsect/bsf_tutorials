@@ -272,7 +272,7 @@ Follow this procedure:
    - First determine the repository owner and name from git:
      - Use `git remote -v` to get the repository URL
      - Extract owner and repo name from the URL
-   - Use GitHub MCP server to create the issue
+   - Use gh CLI tool to create the issue
    - Add appropriate labels (bug, enhancement, etc.)
    - Include note about multi-perspective analysis
 

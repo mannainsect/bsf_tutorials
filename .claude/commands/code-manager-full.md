@@ -44,11 +44,9 @@ issue and its purpose.
    - First determine the repository owner and name from git:
      - Use `git remote -v` to get the repository URL
      - Extract owner and repo name from the URL
-   - Use GitHub MCP server or gh cli tool to fetch the issue and its comments
-   - As backup you can use gh and git cli tools
+   - Use gh CLI tool to fetch the issue and its comments
    - If issue doesn't exist, report error and stop
    - Extract all requirements, acceptance criteria, and specifications
-   - You also have gh and git cli tools available
 
 3. Create new branch for the issue:
    - Create a new branch from current branch (main or dev)
@@ -124,7 +122,7 @@ issue and its purpose.
 
 10. Post comprehensive summary to GitHub issue:
 
-- Use GitHub MCP server to add comment with:
+- Use gh CLI tool to add comment with:
   - Task breakdown and completion status
   - Summary of implementation by task
   - Quality evaluation results

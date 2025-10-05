@@ -50,7 +50,7 @@ $ARGUMENTS
    - Use `git branch --show-current` to get current branch
 
 2. Fetch all review comments
-   - Use GitHub MCP server to get PR details
+   - Use gh CLI tool to get PR details
    - Fetch all PR comments (CodeRabbit, Copilot, Claude code, human comments)
    - Get review comments and feedback
    - Include any additional guidance from user
@@ -105,7 +105,7 @@ $ARGUMENTS
    - Push to update the PR with all fixes
 
 9. Create new issues for deferred items
-   - Use GitHub MCP server to create issues for:
+   - Use gh CLI tool to create issues for:
      - Comments not addressed in this PR
      - Future enhancements identified
      - Technical debt items noted
@@ -115,11 +115,11 @@ $ARGUMENTS
 
 - Check current branch and PR status:
 
-  Use GitHub MCP server and gh cli tool to list pull requests and get PR status
+  Use gh cli tool to list pull requests and get PR status
 
 - Fetch PR comments:
 
-  Use GitHub MCP server to:
+  Use gh CLI tool to:
   - Get PR details
   - Fetch PR comments
   - Get review comments

@@ -43,7 +43,7 @@ is to assess the current state before proceeding with any new work.
    - First determine the repository owner and name from git:
      - Use `git remote -v` to get the repository URL
      - Extract owner and repo name from the URL
-   - Use GitHub MCP server to fetch the issue and its comments
+   - Use gh CLI tool to fetch the issue and its comments
    - Review any progress comments that may have been posted
    - Extract all requirements and acceptance criteria
 
@@ -97,7 +97,7 @@ is to assess the current state before proceeding with any new work.
    - Make final assessment of implementation readiness
 
 9. Post progress summary to GitHub issue:
-   - Use GitHub MCP server to add comment with:
+   - Use gh CLI tool to add comment with:
      - Summary of what was already implemented
      - What additional work was completed
      - Quality evaluation results

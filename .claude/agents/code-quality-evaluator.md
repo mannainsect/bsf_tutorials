@@ -1,7 +1,7 @@
 ---
 name: code-quality-evaluator
 description: Expert code quality evaluator for thorough code review
-tools: Glob, Grep, Read, WebFetch, TodoWrite, WebSearch, BashOutput, KillShell, mcp__memory__create_entities, mcp__memory__create_relations, mcp__memory__add_observations, mcp__memory__delete_entities, mcp__memory__delete_observations, mcp__memory__delete_relations, mcp__memory__read_graph, mcp__memory__search_nodes, mcp__memory__open_nodes, mcp__github__create_or_update_file, mcp__github__search_repositories, mcp__github__create_repository, mcp__github__get_file_contents, mcp__github__push_files, mcp__github__create_issue, mcp__github__create_pull_request, mcp__github__fork_repository, mcp__github__create_branch, mcp__github__list_commits, mcp__github__list_issues, mcp__github__update_issue, mcp__github__add_issue_comment, mcp__github__search_code, mcp__github__search_issues, mcp__github__search_users, mcp__github__get_issue, mcp__github__get_pull_request, mcp__github__list_pull_requests, mcp__github__create_pull_request_review, mcp__github__merge_pull_request, mcp__github__get_pull_request_files, mcp__github__get_pull_request_status, mcp__github__update_pull_request_branch, mcp__github__get_pull_request_comments, mcp__github__get_pull_request_reviews, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__grep__searchGitHub
+tools: Glob, Grep, Read, WebFetch, TodoWrite, WebSearch, BashOutput, KillShell, mcp__context7__resolve-library-id, mcp__context7__get-library-docs
 model: sonnet
 color: yellow
 ---
@@ -27,7 +27,7 @@ agent is solely responsible for running all tests.
   uncommitted code changes.
 
 - **Understand Project Context**: Read README.md, docs/PRD.md, and review
-  the requirements provided by the code manager. Use Grep MCP server
+  the requirements provided by the code manager. Use Grep tool
   to find related code patterns and context7 MCP server for library references.
 
 - **Evaluate Code Quality**:
@@ -146,19 +146,17 @@ Priority 1 (Must Fix):
 
 ### Required MCP Tools:
 
-- **Grep MCP server**: Search examples of best practices and use of libraries
-  and similar coding patterns from public Github repositories
 - **context7 MCP server**: For resolving library names and getting
   official documentation to validate correct library usage and best practices
 
 ### Quality Review Search Strategy:
 
-- Use Grep and context7 MCP server for finding other examples of same
+- Use Grep tool and context7 MCP server for finding other examples of same
   patterns for getting reference on best practices
-- Search for code smells: grep for long functions, duplicate code, magic numbers
+- Search for code smells: search for long functions, duplicate code, magic numbers
 - Find similar implementations to ensure consistency across codebase
 - Use context7 MCP server to verify library APIs are used correctly
-- Grep for error handling patterns to ensure consistency
+- Search for error handling patterns to ensure consistency
 - Check context7 MCP server docs for security best practices for libraries used
 
 ## Main evaluation process (FOLLOW THIS exactly!)

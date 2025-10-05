@@ -270,7 +270,7 @@ Follow this procedure:
    - Quality gates: From test-driven-engineer
 
 7. **Post Update to GitHub**:
-   - Use `gh issue edit $ARGUMENTS` or GitHub MCP server
+   - Use `gh issue edit $ARGUMENTS`
    - Update title with "(READY) (Multi-perspective analysis)"
    - Replace body with comprehensive documentation
    - Add appropriate labels (bug, enhancement, etc.)
@@ -319,7 +319,7 @@ git log --oneline --all --grep="keyword"
 
 # Find files related to functionality
 find . -name "*.py" -o -name "*.js" -o -name "*.md" | head -20
-# Use Grep MCP server for searching code instead of grep commands
+# Use Grep tool for searching code
 ```
 
 Remember: Your goal is to coordinate multiple analysis perspectives to update
