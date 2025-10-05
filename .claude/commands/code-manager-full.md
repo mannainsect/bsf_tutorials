@@ -133,7 +133,7 @@ issue and its purpose.
 
 11. Create pull request and complete the issue:
     - Commit all changes to the current issue branch (created in step 3)
-      Note! Git has pre-commit check with ruff, so make sure you read the
+      Note! Git may have pre-commit checks, so make sure you read the
       results and verify that everything passes
     - Push the branch to remote repository
     - Create a pull request to the base branch (main or dev from step 1)

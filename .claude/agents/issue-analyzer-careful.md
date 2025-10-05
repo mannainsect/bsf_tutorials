@@ -41,8 +41,8 @@ When given an issue description, you must:
 
 1. **Map Dependencies Thoroughly**:
    - Read README.md and docs/PRD.md for context
-   - Map test coverage of affected areas using Grep tool to find test files
-   - Use context7 MCP server to verify best practices from documentation
+   - Map test coverage using Grep tool to search test files
+   - Use context7 MCP to get library documentation and best practices
 
 2. **Risk Assessment**:
    - What existing functionality could break?

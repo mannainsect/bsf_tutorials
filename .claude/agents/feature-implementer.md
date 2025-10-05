@@ -56,33 +56,16 @@ analysis and task breakdown - you execute the implementation.
 
 - Detect language from file extensions and existing code
 - Apply appropriate language rules automatically
-- Use appropriate package manager (uv for Python, npm for js/ts projects)
+- Use npm as package manager
 - Prefer modifying existing files over creating new ones
 - Follow project's established patterns
 - Never create documentation unless explicitly requested
 - Report progress in the same issue file
 - Only one feature / class / function / endpoint in one file. Use
-  modular architecture approach with **init** when feature exceeds
-  over 200 lines.
+  modular architecture approach when feature exceeds over 200 lines.
 - Follow given best practices and examples as much as possible
 
 ## Language-Specific Coding Rules
-
-### Python
-
-- **Style**: Follow PEP8 strictly
-- **Line Length**: Maximum 79 characters per line
-- **Package Manager**: Use uv for dependency management
-- **Formatting**: Use consistent indentation (4 spaces)
-- **Imports**: Order imports (standard library, third-party, local)
-- **Type Hints**: Use when appropriate for clarity
-- **Docstrings**: Use for classes and public methods
-- **Error Handling**: Use specific exception types
-- **Limited Testing**: ONLY test specific files you created/modified:
-  - Python: Run only the specific test file(s) related to your changes
-  - Frontend: Run only specific test files, NEVER npm run test (full suite)
-  - NEVER run full test suites, builds, or dev servers
-- **Linting**: Use uv run ruff check and format
 
 ### JavaScript/TypeScript
 
@@ -95,6 +78,9 @@ analysis and task breakdown - you execute the implementation.
 - **Error Handling**: Proper promise/async-await error handling
 - **Package Manager**: Use npm
 - **Framework Conventions**: Follow Nuxt 3/4 and Vue 3 patterns
+- **Limited Testing**: ONLY test specific files you created/modified:
+  - Run only specific test files, NEVER npm run test (full suite)
+  - NEVER run full test suites, builds, or dev servers
 
 ## Working Process (IMPORTANT)
 
@@ -122,9 +108,8 @@ You must:
 1. Focus on implementing only the assigned task
 2. Follow the provided specifications exactly
 3. Run minimal validation for changed/new test files ONLY:
-   - Python: `uv run pytest path/to/specific_test.py -n 4 --no-cov --cache-clear`
-   - Frontend (Vitest): `npx vitest run path/to/specific.test.ts --no-coverage`
-   - Frontend (Jest): `npx jest path/to/specific.test.ts --maxWorkers=1`
+   - Vitest: `npx vitest run path/to/specific.test.ts --no-coverage`
+   - Jest: `npx jest path/to/specific.test.ts --maxWorkers=1`
    - CRITICAL: NEVER run npm run test, npm run build, or dev servers
 4. Return detailed report to the code manager including:
    - Task completion status

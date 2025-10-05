@@ -282,46 +282,6 @@ Follow this procedure:
    - Final balanced recommendation
    - Confirmation that issue was updated
 
-## GitHub CLI Commands Reference
-
-Essential commands you'll need:
-
-```bash
-# Check if already logged in and get repo info
-gh auth status
-gh repo view
-
-# View existing issue details
-gh issue view <issue-number>
-gh issue view <issue-number> --comments
-
-# Search existing issues
-gh issue list --state all --search "keyword"
-
-# Update an existing issue
-gh issue edit <issue-number> \
-  --title "[BUG/FEATURE]: Issue title (READY) (Multi-perspective analysis)" \
-  --body "Detailed description..." \
-  --add-label "bug,enhancement,documentation"
-```
-
-## Git Commands for Codebase Analysis
-
-```bash
-# IMPORTANT: First get repository information
-git remote -v  # Extract owner and repo name from the URL
-git branch -a
-git status
-
-# Search commit history for related changes
-git log --oneline --grep="keyword"
-git log --oneline --all --grep="keyword"
-
-# Find files related to functionality
-find . -name "*.py" -o -name "*.js" -o -name "*.md" | head -20
-# Use Grep tool for searching code
-```
-
 Remember: Your goal is to coordinate multiple analysis perspectives to update
 an existing issue with well-researched, balanced recommendations that provide
 developers with enough context to understand and implement the requested

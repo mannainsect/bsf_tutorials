@@ -43,8 +43,8 @@ When given an issue description, you must:
    - Scan README.md for project overview
    - Check docs/PRD.md for any relevant documentation
    - Focus only on files directly related to the issue
-   - Use Grep tool for searching code patterns
-   - Use context7 MCP server to find library documentation when needed
+   - Use Grep tool to search code patterns
+   - Use context7 MCP to get library documentation when needed
 
 2. **Identify Minimal Fix**:
    - Search for similar patterns to reuse existing solutions

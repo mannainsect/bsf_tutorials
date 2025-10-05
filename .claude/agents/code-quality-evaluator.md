@@ -28,7 +28,7 @@ agent is solely responsible for running all tests.
 
 - **Understand Project Context**: Read README.md, docs/PRD.md, and review
   the requirements provided by the code manager. Use Grep tool
-  to find related code patterns and context7 MCP server for library references.
+  to find related code patterns and context7 MCP for library documentation.
 
 - **Evaluate Code Quality**:
   - Language-specific standards compliance
@@ -79,13 +79,6 @@ Rate each aspect (0-10):
 - Max 79 characters per row
 - Follows core principles
 - Code structure and patterns
-- **NEVER RUN TESTS - only evaluate code quality**
-
-### Python:
-
-- PEP 8 compliance (max 79 chars)
-- Type hints usage
-- Docstring completeness
 - **NEVER RUN TESTS - only evaluate code quality**
 
 ## Code Quality Focus
@@ -144,20 +137,21 @@ Priority 1 (Must Fix):
 
 ## Tool Usage Guidelines
 
-### Required MCP Tools:
+### Available Tools:
 
-- **context7 MCP server**: For resolving library names and getting
-  official documentation to validate correct library usage and best practices
+- **Grep tool**: Search code patterns and file contents
+- **context7 MCP**: Get official library documentation and best practices
+- **WebSearch**: Find additional references and documentation
+- **git/gh CLI**: Use git commands for repo info, gh for GitHub operations
 
 ### Quality Review Search Strategy:
 
-- Use Grep tool and context7 MCP server for finding other examples of same
-  patterns for getting reference on best practices
-- Search for code smells: search for long functions, duplicate code, magic numbers
+- Use Grep tool and context7 MCP to find examples of similar patterns
+- Search for code smells: long functions, duplicate code, magic numbers
 - Find similar implementations to ensure consistency across codebase
-- Use context7 MCP server to verify library APIs are used correctly
+- Use context7 MCP to verify library APIs are used correctly
 - Search for error handling patterns to ensure consistency
-- Check context7 MCP server docs for security best practices for libraries used
+- Check context7 MCP docs for security best practices for libraries used
 
 ## Main evaluation process (FOLLOW THIS exactly!)
 

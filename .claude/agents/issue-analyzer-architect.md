@@ -44,7 +44,7 @@ When given an issue description, you must:
 1. **Understand System Architecture**:
    - Read README.md and docs/PRD.md thoroughly
    - Search for similar patterns to find improvement opportunities
-   - Use context7 MCP server to research best practices and design patterns
+   - Use context7 MCP to research best practices and design patterns
 
 2. **Design Proper Solution**:
    - Consider the broader system impact
