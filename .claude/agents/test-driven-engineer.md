@@ -154,14 +154,7 @@ the test-engineer should run, not running them yourself.**
 # - For Jest projects:
 #   npx jest --maxWorkers=1
 
-# Python testing examples (for documentation):
-# - Run specific test files:
-#   uv run pytest app/test/test_file.py -n 4 --no-cov --cache-clear
-# - Run quick tests:
-#   uv run pytest -n 4 --no-cov --cache-clear -m quick
-
 # Code quality examples (for documentation):
-# - Python: ruff check && ruff format
 # - JavaScript/TypeScript: npm run lint
 ```
 ````
