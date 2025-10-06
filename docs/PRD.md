@@ -38,8 +38,13 @@ app/
   pages/             # File-based routes
   stores/            # Pinia stores (auth, metrics, etc.)
 shared/types/        # API + domain type definitions
+  api/               # API request/response types
+    content.types.ts # Content & Products API types
 tests/               # Vitest + Playwright suites
 i18n/locales/        # Translation JSON
+docs/                # Documentation
+  CONTENT_GUIDANCE.md # Content & Products API reference
+  PRD.md             # This file
 ```
 
 ### Naming Conventions
@@ -69,10 +74,13 @@ i18n/locales/        # Translation JSON
 
 ### Component & State Patterns
 
-- Emit events from components; business logic lives in composables/stores.
+- Emit events from components; business logic lives in
+  composables/stores.
 - Use `useIcons()` for all Ionicons.
-- Stores should expose readonly state, derived computed values, and cache timestamps.
-- Authentication store controls profile hydration and automatic company selection.
+- Stores should expose readonly state, derived computed values, and
+  cache timestamps.
+- Authentication store controls profile hydration and automatic
+  company selection.
 
 ### Validation & Error Handling
 
@@ -84,13 +92,15 @@ i18n/locales/        # Translation JSON
 
 - Topics defined in `useHelpTopic` mapping routes → topic keys.
 - Active topics: getting started, profile settings, account security.
-- `useHelp` handles modal lifecycle, performance logging, and accessibility.
+- `useHelp` handles modal lifecycle, performance logging, and
+  accessibility.
 - Help content lives in translation files under `help.topics.*`.
 
 ## 5. Testing Guidelines
 
 - `npm run lint` – ESLint (fails on legacy warnings; fix as touched).
-- `npm run test` – Vitest suites for auth, help, stores, validation, and utilities.
+- `npm run test` – Vitest suites for auth, help, stores, validation,
+  and utilities.
 - `npm run build` – Verify Nuxt production output.
 - `npm run test:e2e` – Playwright specs (start `npm run dev` first).
 
@@ -99,14 +109,46 @@ i18n/locales/        # Translation JSON
 - Auth store bootstrap and caching
 - Help modal behavior and topic resolution
 - Validation schemas for account flows
-- Utility composables (`useUserRole`, `useCurrencyExchange`, etc.)
+- Utility composables (`useUserRole`, `useCurrencyExchange`,
+  etc.)
 
-## 6. Deployment Notes
+## 6. Content & Products API
+
+The application integrates with a backend Content & Products API for
+learning materials, playlists, and tools. See
+`docs/CONTENT_GUIDANCE.md` for complete endpoint documentation.
+
+### Key Features
+
+- Public content catalogue for anonymous users
+- Authenticated content with ownership tracking
+- Playlists with embedded content and tools
+- Credit-based purchasing system
+- Video content with Vimeo player URLs
+
+### TypeScript Integration
+
+- Type definitions in `shared/types/api/content.types.ts`
+- Exported via `shared/types/index.ts` for application-wide use
+- Includes request/response types for all CRUD operations
+
+### API Endpoints (configured in `nuxt.config.ts`)
+
+- `/products/content` – Video and document content
+- `/products/playlists` – Curated learning paths
+- `/products/tools` – Premium tools and features
+- `/products/purchase` – Credit-based purchasing
+
+## 7. Deployment Notes
 
 - Static generation via `npm run build` outputs to `dist/`.
-- PWA service worker generated automatically (workbox warnings expected when payload files are absent).
-- Environment configuration handled by `.env` variables prefixed with `NUXT_PUBLIC_`.
+- PWA service worker generated automatically (workbox warnings
+  expected when payload files are absent).
+- Environment configuration handled by `.env` variables prefixed with
+  `NUXT_PUBLIC_`.
 
 ---
 
-Use this guide as the authoritative reference when extending authentication or account-related features. Remove or refactor any legacy marketplace references encountered during future development.
+Use this guide as the authoritative reference when extending
+authentication or account-related features. Remove or refactor any
+legacy marketplace references encountered during future development.
