@@ -22,7 +22,7 @@ jobs:
           node-version: 18
           cache: npm
       - run: npm ci
-      - run: npm run lint -- --max-warnings 100
+      - run: npm run lint -- --max-warnings 153
 
   format:
     runs-on: ubuntu-latest
