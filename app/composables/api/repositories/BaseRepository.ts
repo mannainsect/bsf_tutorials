@@ -106,7 +106,7 @@ export abstract class BaseRepository {
       error !== null &&
       typeof error === 'object' &&
       'statusCode' in error &&
-      (error as any).statusCode === 429
+      (error as { statusCode: number }).statusCode === 429
     )
   }
 
@@ -119,9 +119,9 @@ export abstract class BaseRepository {
     }
     if (
       'statusCode' in error &&
-      typeof (error as any).statusCode === 'number'
+      typeof (error as { statusCode: unknown }).statusCode === 'number'
     ) {
-      return (error as any).statusCode
+      return (error as { statusCode: number }).statusCode
     }
     return undefined
   }

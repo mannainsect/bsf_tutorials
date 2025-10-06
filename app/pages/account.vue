@@ -259,10 +259,10 @@
             <div class="form-actions">
               <ion-button
                 v-if="canEditCompany"
-                @click="startCompanyEdit"
                 fill="solid"
                 size="small"
                 color="primary"
+                @click="startCompanyEdit"
               >
                 <ion-icon slot="start" :icon="create" />
                 {{ $t('common.edit') }}

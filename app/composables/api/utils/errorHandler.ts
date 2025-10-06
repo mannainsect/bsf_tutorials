@@ -33,7 +33,7 @@ export function handleApiError(
   } else if (typeof error === 'string') {
     errorMessage = error
   } else if (error && typeof error === 'object' && 'message' in error) {
-    errorMessage = String((error as any).message)
+    errorMessage = String((error as { message: unknown }).message)
   } else {
     errorMessage = defaultMessage
   }
@@ -66,7 +66,7 @@ export function extractErrorMessage(error: unknown): string {
   }
 
   if (error && typeof error === 'object' && 'message' in error) {
-    return String((error as any).message)
+    return String((error as { message: unknown }).message)
   }
 
   return 'An unexpected error occurred'

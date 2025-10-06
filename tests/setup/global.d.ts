@@ -3,7 +3,7 @@
  * These match the minimal mocks in test-setup.ts
  */
 
-import type { Ref, ComputedRef } from 'vue'
+import type { Ref } from 'vue'
 import type { Router, RouteLocationNormalizedLoaded } from 'vue-router'
 
 declare global {
@@ -17,17 +17,17 @@ declare global {
   const nextTick: (typeof import('vue'))['nextTick']
 
   // Minimal Nuxt composables (mocked)
-  const useState: <T = any>(key: string, init?: () => T) => Ref<T>
+  const useState: <T = unknown>(key: string, init?: () => T) => Ref<T>
   const useRuntimeConfig: () => {
     public: {
       apiBaseUrl: string
       domainAlias: string
     }
   }
-  const useCookie: (name: string) => Ref<any>
+  const useCookie: (name: string) => Ref<string | null | undefined>
   const useRouter: () => Router
   const useRoute: () => RouteLocationNormalizedLoaded
-  const navigateTo: (to: any) => Promise<void>
+  const navigateTo: (to: string | { path: string }) => Promise<void>
   const $fetch: typeof import('ofetch').$fetch
 
   // Pinia functions (from real Pinia)

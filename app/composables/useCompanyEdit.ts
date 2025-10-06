@@ -1,9 +1,7 @@
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm, useField } from 'vee-validate'
-import {
-  createCompanyEditSchema,
-  type CompanyEditForm
-} from '~/utils/validation/companySchemas'
+import { createCompanyEditSchema } from '~/utils/validation/companySchemas'
+import type { CompanyEditForm } from '~/utils/validation/companySchemas'
 import { CompanyRepository } from './api/repositories/CompanyRepository'
 import type { UpdateCompanyRequest } from './api/repositories/CompanyRepository'
 

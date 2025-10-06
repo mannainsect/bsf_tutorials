@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, beforeEach } from 'vitest'
 import { useTranslation } from '~/composables/useTranslation'
 
 describe('Product Detail Translation', () => {
@@ -8,7 +8,7 @@ describe('Product Detail Translation', () => {
   })
 
   it('should translate product description', async () => {
-    const { translate, isTranslating } = useTranslation()
+    const { translate } = useTranslation()
 
     const testText = 'This is a test product description'
     const result = await translate(testText, 'en', 'es')

@@ -31,15 +31,30 @@ beforeAll(() => {
       const value = mockStorage[key]
       return value ? value : null
     },
-    set: (key: string, value: any) => {
+    set: (key: string, value: unknown) => {
       mockStorage[key] =
         typeof value === 'string' ? value : JSON.stringify(value)
     },
     remove: (key: string) => {
-      delete mockStorage[key]
+      const keys = Object.keys(mockStorage)
+      keys.forEach(k => {
+        if (
+          k === key &&
+          Object.prototype.hasOwnProperty.call(mockStorage, k)
+        ) {
+          // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+          delete mockStorage[k]
+        }
+      })
     },
     clear: () => {
-      Object.keys(mockStorage).forEach(key => delete mockStorage[key])
+      const keys = Object.keys(mockStorage)
+      keys.forEach(k => {
+        if (Object.prototype.hasOwnProperty.call(mockStorage, k)) {
+          // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+          delete mockStorage[k]
+        }
+      })
     }
   })
 })
@@ -52,7 +67,13 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
   let mockSwitchCompany: ReturnType<typeof vi.fn>
   beforeEach(() => {
     vi.clearAllMocks()
-    Object.keys(mockStorage).forEach(key => delete mockStorage[key])
+    const keys = Object.keys(mockStorage)
+    keys.forEach(key => {
+      if (Object.prototype.hasOwnProperty.call(mockStorage, key)) {
+        // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+        delete mockStorage[key]
+      }
+    })
     setActivePinia(createPinia())
     store = useAuthStore()
     store.setToken('test-token')
@@ -90,7 +111,9 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
         .fn()
         .mockResolvedValue(profileWithActiveCompany)
       mockSwitchCompany = vi.fn()
-      ;(ProfileRepository as any).mockImplementation(() => ({
+      ;(
+        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
+      ).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
@@ -122,7 +145,9 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       )
       mockGetCurrentProfile = vi.fn().mockResolvedValue(profileWithNoCompanies)
       mockSwitchCompany = vi.fn()
-      ;(ProfileRepository as any).mockImplementation(() => ({
+      ;(
+        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
+      ).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
@@ -170,7 +195,9 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
         .fn()
         .mockResolvedValue(profileWithoutActiveCompany)
       mockSwitchCompany = vi.fn().mockResolvedValue(updatedProfile)
-      ;(ProfileRepository as any).mockImplementation(() => ({
+      ;(
+        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
+      ).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
@@ -227,7 +254,9 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       )
       mockGetCurrentProfile = vi.fn().mockResolvedValue(profileWithIdField)
       mockSwitchCompany = vi.fn().mockResolvedValue(updatedProfile)
-      ;(ProfileRepository as any).mockImplementation(() => ({
+      ;(
+        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
+      ).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
@@ -248,7 +277,7 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
         },
         active_company: null,
         other_companies: [
-          { name: 'Company without ID' } as any,
+          { name: 'Company without ID' } as { name: string },
           { _id: 'comp2', name: 'Valid Company' }
         ]
       }
@@ -257,7 +286,9 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       )
       mockGetCurrentProfile = vi.fn().mockResolvedValue(profileWithInvalidId)
       mockSwitchCompany = vi.fn()
-      ;(ProfileRepository as any).mockImplementation(() => ({
+      ;(
+        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
+      ).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
@@ -270,7 +301,7 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       expect(consoleErrorSpy).toHaveBeenCalledWith(errorMsg)
       expect(store.activeCompany).toBeNull()
       const normalizedCompanies = profileWithInvalidId.other_companies.map(
-        (c: any) => {
+        (c: { _id?: string; id?: string; name: string }) => {
           if (c._id) return { ...c, id: c._id }
           if (c.id) return { ...c, _id: c.id }
           return c
@@ -317,7 +348,9 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
         .mockRejectedValueOnce(new Error('Timeout'))
         .mockRejectedValueOnce(new Error('Retry'))
         .mockResolvedValueOnce(updatedProfile)
-      ;(ProfileRepository as any).mockImplementation(() => ({
+      ;(
+        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
+      ).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
@@ -366,7 +399,9 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       mockSwitchCompany = vi
         .fn()
         .mockRejectedValue(new Error('Persistent API failure'))
-      ;(ProfileRepository as any).mockImplementation(() => ({
+      ;(
+        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
+      ).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
@@ -428,7 +463,9 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
         .fn()
         .mockResolvedValue(profileWithoutActiveCompany)
       mockSwitchCompany = vi.fn().mockRejectedValue(new Error('Test error'))
-      ;(ProfileRepository as any).mockImplementation(() => ({
+      ;(
+        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
+      ).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
@@ -439,7 +476,6 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
         .spyOn(console, 'error')
         .mockImplementation(() => {})
       const fetchPromise = store.fetchProfile()
-      const startTime = Date.now()
       await vi.runOnlyPendingTimersAsync()
       await vi.advanceTimersByTimeAsync(1000)
       await vi.advanceTimersByTimeAsync(1000)
@@ -475,7 +511,9 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
         '~/composables/api/repositories/ProfileRepository'
       )
       mockGetCurrentProfile = vi.fn().mockResolvedValue(profile)
-      ;(ProfileRepository as any).mockImplementation(() => ({
+      ;(
+        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
+      ).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: vi.fn()
       }))
@@ -515,7 +553,9 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
         .fn()
         .mockResolvedValue(profileWithoutActiveCompany)
       mockSwitchCompany = vi.fn().mockResolvedValue(updatedProfile)
-      ;(ProfileRepository as any).mockImplementation(() => ({
+      ;(
+        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
+      ).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
@@ -576,7 +616,9 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       )
       mockGetCurrentProfile = vi.fn().mockResolvedValue(profile)
       mockSwitchCompany = vi.fn().mockResolvedValue(updatedProfile)
-      ;(ProfileRepository as any).mockImplementation(() => ({
+      ;(
+        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
+      ).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
@@ -608,7 +650,9 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
         '~/composables/api/repositories/ProfileRepository'
       )
       mockGetCurrentProfile = vi.fn().mockRejectedValue(new Error('API Error'))
-      ;(ProfileRepository as any).mockImplementation(() => ({
+      ;(
+        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
+      ).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: vi.fn()
       }))
@@ -630,14 +674,16 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
           balance: 55
         },
         active_company: null,
-        other_companies: null as any
+        other_companies: null as unknown as []
       }
       const { ProfileRepository } = await import(
         '~/composables/api/repositories/ProfileRepository'
       )
       mockGetCurrentProfile = vi.fn().mockResolvedValue(profile)
       mockSwitchCompany = vi.fn()
-      ;(ProfileRepository as any).mockImplementation(() => ({
+      ;(
+        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
+      ).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
@@ -653,7 +699,7 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
           email: 'test@example.com',
           balance: 45
         },
-        active_company: undefined as any,
+        active_company: undefined as unknown as null,
         other_companies: [{ _id: 'comp1', name: 'Company 1' }]
       }
       const updatedProfile: ProfileResponse = {
@@ -674,7 +720,9 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       )
       mockGetCurrentProfile = vi.fn().mockResolvedValue(profile)
       mockSwitchCompany = vi.fn().mockResolvedValue(updatedProfile)
-      ;(ProfileRepository as any).mockImplementation(() => ({
+      ;(
+        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
+      ).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))

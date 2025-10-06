@@ -1,8 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import {
-  CompanyRepository,
-  type UpdateCompanyRequest
-} from '~/composables/api/repositories/CompanyRepository'
+import { CompanyRepository } from '~/composables/api/repositories/CompanyRepository'
+import type { UpdateCompanyRequest } from '~/composables/api/repositories/CompanyRepository'
 import type { Company } from '~/shared/types'
 
 const createMockAuthStore = () => ({
@@ -49,7 +47,10 @@ describe('CompanyRepository', () => {
         business_id: 'BIZ123'
       }
 
-      vi.spyOn(repository as any, 'put').mockResolvedValue(mockResponse)
+      vi.spyOn(
+        repository as unknown as { put: () => unknown },
+        'put'
+      ).mockResolvedValue(mockResponse)
 
       const result = await repository.updateCompany(companyId, updateData)
 
@@ -74,7 +75,10 @@ describe('CompanyRepository', () => {
         city: 'Old City'
       }
 
-      vi.spyOn(repository as any, 'put').mockResolvedValue(mockResponse)
+      vi.spyOn(
+        repository as unknown as { put: () => unknown },
+        'put'
+      ).mockResolvedValue(mockResponse)
 
       const result = await repository.updateCompany(companyId, updateData)
 
@@ -102,7 +106,10 @@ describe('CompanyRepository', () => {
         ...updateData
       }
 
-      vi.spyOn(repository as any, 'put').mockResolvedValue(mockResponse)
+      vi.spyOn(
+        repository as unknown as { put: () => unknown },
+        'put'
+      ).mockResolvedValue(mockResponse)
 
       const result = await repository.updateCompany(companyId, updateData)
 
@@ -120,7 +127,10 @@ describe('CompanyRepository', () => {
         data: { message: 'Unauthorized' }
       }
 
-      vi.spyOn(repository as any, 'put').mockRejectedValue(error)
+      vi.spyOn(
+        repository as unknown as { put: () => unknown },
+        'put'
+      ).mockRejectedValue(error)
 
       await expect(
         repository.updateCompany('company-123', { name: 'Test' })
@@ -133,7 +143,10 @@ describe('CompanyRepository', () => {
         data: { message: 'Permission denied' }
       }
 
-      vi.spyOn(repository as any, 'put').mockRejectedValue(error)
+      vi.spyOn(
+        repository as unknown as { put: () => unknown },
+        'put'
+      ).mockRejectedValue(error)
 
       await expect(
         repository.updateCompany('company-123', { name: 'Test' })
@@ -146,7 +159,10 @@ describe('CompanyRepository', () => {
         data: { message: 'Company not found' }
       }
 
-      vi.spyOn(repository as any, 'put').mockRejectedValue(error)
+      vi.spyOn(
+        repository as unknown as { put: () => unknown },
+        'put'
+      ).mockRejectedValue(error)
 
       await expect(
         repository.updateCompany('company-123', { name: 'Test' })
@@ -159,7 +175,10 @@ describe('CompanyRepository', () => {
         data: { message: 'Internal server error' }
       }
 
-      vi.spyOn(repository as any, 'put').mockRejectedValue(error)
+      vi.spyOn(
+        repository as unknown as { put: () => unknown },
+        'put'
+      ).mockRejectedValue(error)
 
       await expect(
         repository.updateCompany('company-123', { name: 'Test' })
@@ -169,7 +188,10 @@ describe('CompanyRepository', () => {
     it('should handle network errors', async () => {
       const error = new Error('Network connection failed')
 
-      vi.spyOn(repository as any, 'put').mockRejectedValue(error)
+      vi.spyOn(
+        repository as unknown as { put: () => unknown },
+        'put'
+      ).mockRejectedValue(error)
 
       await expect(
         repository.updateCompany('company-123', { name: 'Test' })
@@ -186,7 +208,10 @@ describe('CompanyRepository', () => {
         name: 'Unchanged Company'
       }
 
-      vi.spyOn(repository as any, 'put').mockResolvedValue(mockResponse)
+      vi.spyOn(
+        repository as unknown as { put: () => unknown },
+        'put'
+      ).mockResolvedValue(mockResponse)
 
       const result = await repository.updateCompany(companyId, updateData)
 
@@ -208,7 +233,10 @@ describe('CompanyRepository', () => {
         name: 'MongoDB Company'
       }
 
-      vi.spyOn(repository as any, 'put').mockResolvedValue(mockResponse)
+      vi.spyOn(
+        repository as unknown as { put: () => unknown },
+        'put'
+      ).mockResolvedValue(mockResponse)
 
       const result = await repository.updateCompany(companyId, updateData)
 

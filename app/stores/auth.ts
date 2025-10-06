@@ -7,7 +7,7 @@ export const useAuthStore = defineStore('auth', () => {
   const activeCompany = ref<Company | null>(null)
   const otherCompanies = ref<Company[]>([])
   const lastProfileFetch = ref<number>(0)
-  const profileFetchPromise = ref<Promise<any> | null>(null)
+  const profileFetchPromise = ref<Promise<unknown> | null>(null)
 
   const isAuthenticated = computed(() => !!token.value)
 
@@ -201,13 +201,13 @@ export const useAuthStore = defineStore('auth', () => {
           // Store only IDs if data is too large
           const summaryData = JSON.stringify({
             admins: (profile.active_company.admins || []).map(
-              (a: any) => a._id || a.id
+              (a: { _id?: string; id?: string }) => a._id || a.id
             ),
             managers: (profile.active_company.managers || []).map(
-              (m: any) => m._id || m.id
+              (m: { _id?: string; id?: string }) => m._id || m.id
             ),
             operators: (profile.active_company.operators || []).map(
-              (o: any) => o._id || o.id
+              (o: { _id?: string; id?: string }) => o._id || o.id
             )
           })
           storage.set('auth_active_company_roles', summaryData)

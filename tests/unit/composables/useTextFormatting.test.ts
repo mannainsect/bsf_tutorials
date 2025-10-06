@@ -165,11 +165,15 @@ describe('useTextFormatting', () => {
       })
 
       it('should handle null input', () => {
-        expect(textFormatting.formatMarkdown(null as any)).toBe('')
+        expect(textFormatting.formatMarkdown(null as unknown as string)).toBe(
+          ''
+        )
       })
 
       it('should handle undefined input', () => {
-        expect(textFormatting.formatMarkdown(undefined as any)).toBe('')
+        expect(
+          textFormatting.formatMarkdown(undefined as unknown as string)
+        ).toBe('')
       })
 
       it('should truncate very long input', () => {
@@ -363,11 +367,15 @@ describe('useTextFormatting', () => {
       })
 
       it('should handle null input', () => {
-        expect(textFormatting.extractUrls(null as any)).toEqual([])
+        expect(textFormatting.extractUrls(null as unknown as string)).toEqual(
+          []
+        )
       })
 
       it('should handle undefined input', () => {
-        expect(textFormatting.extractUrls(undefined as any)).toEqual([])
+        expect(
+          textFormatting.extractUrls(undefined as unknown as string)
+        ).toEqual([])
       })
 
       it('should handle text with no URLs', () => {
@@ -376,9 +384,6 @@ describe('useTextFormatting', () => {
       })
 
       it('should trim URLs and text', () => {
-        const input = '[  Spaces  ](  https://example.com  )'
-        const result = textFormatting.extractUrls(input)
-
         // Spaces in markdown are not treated as markdown links
         // They become plain URLs instead
         const plainUrlInput = '[Spaces](https://example.com)'
@@ -548,8 +553,10 @@ https://another-safe.com
       expect(emptyFormatted).toBe('')
       expect(emptyUrls).toEqual([])
 
-      const nullFormatted = textFormatting.formatMarkdown(null as any)
-      const nullUrls = textFormatting.extractUrls(null as any)
+      const nullFormatted = textFormatting.formatMarkdown(
+        null as unknown as string
+      )
+      const nullUrls = textFormatting.extractUrls(null as unknown as string)
 
       expect(nullFormatted).toBe('')
       expect(nullUrls).toEqual([])

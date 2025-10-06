@@ -41,7 +41,7 @@ export const mockValidationError = {
 
 // Mock API functions for testing
 export const mockApiCalls = {
-  login: async (credentials: any) => {
+  login: async (credentials: { email: string; password: string }) => {
     if (credentials.email === 'test@example.com') {
       return { data: mockAuthResponse }
     }
