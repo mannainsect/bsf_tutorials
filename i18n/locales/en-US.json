@@ -92,29 +92,29 @@
     "skipForNow": "Skip for now"
   },
   "home": {
-    "title": "BSF App",
-    "subtitle": "Welcome to BSF App, a production-ready foundation for account-focused experiences.",
+    "title": "BSF Tutorials",
+    "subtitle": "Discover BSF tutorials and courses powered by the Content & Products REST API.",
     "welcomeMessage": "Welcome to {appName}",
-    "heroTitle": "Launch secure account experiences faster",
-    "heroSubtitle": "Start with authentication, localization, metrics, and help tooling already wired in.",
+    "heroTitle": "Learn Black Soldier Fly farming faster",
+    "heroSubtitle": "Stream curated lessons, unlock premium courses, and track your progress across devices.",
     "getStarted": "Get Started",
     "signIn": "Sign In",
     "manageAccount": "Manage Account",
     "featuresCarousel": "Features carousel",
     "features": {
       "secure": {
-        "title": "Secure by design",
-        "description": "Authentication, verification, and account management built into the template.",
-        "iconLabel": "Secure feature icon"
+        "title": "Content for every audience",
+        "description": "Public highlights for newcomers and gated playlists for registered learners.",
+        "iconLabel": "Audience feature icon"
       },
       "fast": {
-        "title": "Ready to extend",
-        "description": "Composable architecture that accelerates new feature development.",
-        "iconLabel": "Fast feature icon"
+        "title": "Track your progress",
+        "description": "Authenticated users keep credits, watch history, and company context in sync.",
+        "iconLabel": "Progress feature icon"
       },
       "mobile": {
-        "title": "Responsive everywhere",
-        "description": "Adaptive layouts optimized for web, tablet, and mobile form factors.",
+        "title": "Mobile ready",
+        "description": "Nuxt + Ionic keeps tutorials feeling native on phones, tablets, and desktop.",
         "iconLabel": "Mobile feature icon"
       }
     }

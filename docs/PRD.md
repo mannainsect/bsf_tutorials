@@ -1,154 +1,163 @@
-# BSF App Developer Guide
+# BSF Tutorials Product Guide
 
 ## 1. Executive Summary
 
-### Core Technology Stack
+### Product Overview
+- Deliver Black Soldier Fly (BSF) tutorials and multi-step courses through a Nuxt 4 + Ionic application targeting web and Capacitor builds.
+- Serve three audiences: public visitors consume highlighted videos, registered-but-logged-out users receive onboarding prompts, and authenticated members unlock full catalogues, company-aware credits, and progress tracking.
+- REST integration is powered by the Content & Products API; request plumbing lives in `useApi`, contracts in `shared/types/api`, and endpoint roots in `nuxt.config.ts`.
 
-| Layer      | Technology          | Purpose                         |
-| ---------- | ------------------- | ------------------------------- |
-| Framework  | Nuxt 4              | SSR/SSG with auto-imports       |
-| UI         | Vue 3 + Ionic       | Cross-platform components       |
-| Types      | TypeScript          | Strict type safety              |
-| State      | Pinia               | Reactive state management       |
-| Validation | Vee-Validate + Zod  | Schema-based validation         |
-| Testing    | Vitest + Playwright | Unit and E2E testing            |
-| i18n       | Nuxt I18n           | Multi-language (EN/ES/FR/PT/DE) |
-| Mobile     | Capacitor           | Native packaging readiness      |
+### Core Stack
 
-### Architecture Philosophy
+| Layer      | Technology          | Purpose                                               |
+| ---------- | ------------------- | ----------------------------------------------------- |
+| Framework  | Nuxt 4 (SPA)        | Routing, auto-imports, SSR-ready hydration            |
+| UI         | Vue 3 + Ionic       | Cross-platform components & responsive layouts        |
+| Language   | TypeScript          | Static typing across composables, stores, and routes  |
+| State      | Pinia               | Auth store, profile cache, reactive feature state     |
+| Testing    | Vitest + Playwright | Unit/regression coverage for logic and UI flows       |
+| i18n       | Nuxt I18n           | Five-locale translation support                       |
+| Mobile     | Capacitor           | Native wrappers, splash handling, plugin access       |
 
-- Single-responsibility modules
-- Type-safe data flows end-to-end
-- Repository and service layers for clean separation
-- Composable-first reactive logic
-- Mobile-friendly Ionic component system
+### Architectural Principles
+- Composable-first: business logic is packaged in `app/composables` and injected into pages.
+- API abstraction: repositories/services separate fetch mechanics from Vue components.
+- Accessibility: Ionic components, focus traps, and locale-aware routing baked in.
+- Observability: metrics and log composables provide non-blocking telemetry hooks.
 
-## 2. Project Structure
+## 2. User Segments & Journeys
+
+| Segment                   | Primary Routes                         | Key Capabilities                                                                 |
+|---------------------------|----------------------------------------|----------------------------------------------------------------------------------|
+| Public visitor            | `index.vue`                            | Marketing hero, feature carousel, CTA to register or sign in; consumes public videos via `/products/content/public`.
+| Registered (logged out)   | `register.vue`, `verify-token.vue`     | Email/password registration, token verification, follow-up login prompt.         |
+| Authenticated member      | `main.vue`, `account.vue`              | Navigation hub, profile & company editors, credit snapshot, password reset, contextual help, content logging hooks. |
+
+`definePageMeta` guards keep `main` and `account` behind `auth` middleware while `guest` middleware protects login/registration routes from logged-in users.
+
+## 3. Project Structure
 
 ```
 app/
   components/
-    auth/            # Authentication forms and flows
-    layout/          # Headers, menus, navigation
-    ui/              # Shared Ionic building blocks
-    help/            # Help modal and triggers
-  composables/       # Stateful logic (auth, help, profile, metrics)
-    api/             # Repository + service layers
-  middleware/        # Guarded routing (auth, guest)
-  pages/             # File-based routes
-  stores/            # Pinia stores (auth, metrics, etc.)
-shared/types/        # API + domain type definitions
-  api/               # API request/response types
-    content.types.ts # Content & Products API types
-tests/               # Vitest + Playwright suites
-i18n/locales/        # Translation JSON
-docs/                # Documentation
-  CONTENT_GUIDANCE.md # Content & Products API reference
-  PRD.md             # This file
+    auth/          # Login + registration forms
+    help/          # Help modal implementation
+    layout/        # Public/private Ionic shells
+    ui/            # Shared Ionic primitives
+  composables/
+    api/           # Repositories & services (auth, profile, metrics, logs)
+    auth/          # Form validation and registration helpers
+    errors/        # Centralised error formatting
+    useHelp*.ts    # Contextual help logic
+    useLog.ts      # Content + credit logging helpers
+    useMetrics.ts  # Client-side metrics collector
+    useProfile.ts  # Profile bootstrap + company switching
+  pages/           # File-based routes listed above
+  stores/          # `useAuthStore` with caching + company hydration
+shared/types/      # DTOs for auth, content, metrics, logs, utilities
+docs/              # Product (this file) and ancillary documentation
+tests/             # Vitest unit suites and Playwright E2E specs
 ```
 
-### Naming Conventions
+## 4. Content & Products API
 
-| Type           | Pattern           | Example               |
-| -------------- | ----------------- | --------------------- |
-| Component      | PascalCase        | `AccountOverview.vue` |
-| Composable     | use prefix        | `useHelp.ts`          |
-| Store          | use prefix        | `useAuthStore.ts`     |
-| Repository     | Repository suffix | `UserRepository.ts`   |
-| Service        | Service suffix    | `AuthService.ts`      |
-| Type/Interface | PascalCase        | `User`, `ApiResponse` |
+### Base Configuration
+- Base path: `/api/v1` (prepend deployment host, e.g. `https://api.example.com/api/v1`).
+- Responses: JSON bodies with FastAPI-style `{"detail": "..."}` error payloads; timestamps are ISO 8601 with trailing `Z`.
+- Authentication: Bearer tokens from `POST /api/v1/auth/login/token` in the `Authorization` header. Only `GET /products/content/public` is anonymous.
+- Superadmin guard: `POST`/`PUT`/`DELETE` endpoints across content, playlists, and tools require `superadmin` role.
 
-## 3. Development Rules
+### Domain Models (see `shared/types/api/content.types.ts`)
+- **Content / ContentPublic**: Metadata for videos, documents, and courses with category (`video`, `document`, `course`, `podcast`, `webinar`, `tech_support`), level (`basic`, `intermediate`, `advanced`), credit cost, Vimeo `url`, ownership flags, and availability windows.
+- **Playlist / PopulatedPlaylist**: Course-like bundles referencing content/tools (`includes`) with category (`course`, `support_mind`, `tech_support`), level, credits, and owned/watched flags.
+- **Tool**: Premium utilities with category (`learn`, `farming`, `business`, `analytics`) and optional `expiry_days`.
+- **PurchasedProduct**: Records `product`, `product_type`, `product_name`, and `expires_at` for ownership checks.
+- Allowed `profile_tags`: `newbie`, `business`, `insect_farmer`, `ngo`, `startup`, `animal_grower`, `other`.
+- Allowed `category_tags`: `pre_processing`, `post_processing`, `breeding`, `rearing`, `nursing`, `sales`, `substrate`, `business`, `financing`, `metrics`, `tech`, `frass`, `sustainability`, `animal_growing`, `insect_farm_hub`, `manna_mind`, `technical_guidance`, `other`.
 
-### Layout System
+### Video URL Contract
+- Backend returns ready-to-embed Vimeo player URLs: `https://player.vimeo.com/video/{VIDEO_ID}?badge=0&autopause=0&player_id=0&app_id=58479`.
+- Use links directly in `<iframe src>`, no extra parsing or `@vimeo/player` dependency needed.
 
-- Layout is assigned automatically via middleware based on auth state.
-- Do **not** add headers/footers inside pages; layouts handle the shell.
-- Pages should render Ionic components inside a simple `<div>` wrapper.
+### Endpoint Reference
 
-### Navigation & i18n
+| Endpoint | Audience | Notes |
+| -------- | -------- | ----- |
+| `GET /products/content/public` | Anonymous | Filters by `category_tags` or `profile_tags`; premium items mask `url` to `null`.
+| `GET /products/content` | Authenticated | Returns `Content[]` with `owned`/`watched`. `filter` query defaults to `video`.
+| `GET /products/content/{id}` | Authenticated | Single content item with ownership metadata. Returns `404` if not found.
+| `POST /products/content` | Superadmin | Requires `ContentCreate` payload; returns `201` + location header.
+| `PUT /products/content/{id}` | Superadmin | Partial updates with `ContentUpdate`; ensure timezone-aware datetimes.
+| `DELETE /products/content/{id}` | Superadmin | Soft-deletes (`active = false`).
+| `GET /products/playlists` | Authenticated | Optional `filter` (`course`, `support_mind`, `tech_support`, `all`).
+| `GET /products/playlists/{id}` | Authenticated | Returns `PopulatedPlaylist` with embedded content/tools.
+| `POST/PUT/DELETE /products/playlists` | Superadmin | Mirror content endpoints; payloads `PlaylistCreate`/`PlaylistUpdate`.
+| `GET /products/tools` | Authenticated | Lists tool catalogue with `owned` flag.
+| `GET /products/tools/{id}` | Authenticated | Single tool detail.
+| `POST/PUT/DELETE /products/tools` | Superadmin | Manage tool definitions.
+| `POST /products/purchase/{product_id}?product_type={type}` | Authenticated | Debits credits and appends `PurchasedProduct`. Guards: `400 Product already purchased`, `404 Product not found`.
 
-- Always use `localePath()` for navigation.
-- Example: `router.push(localePath('/account'))`.
-- Use `$t()` for every user-facing string.
+### Error Handling Patterns
+- `400` for validation, duplicate purchase, or missing timezone.
+- `401` triggers `useApi` interceptor logout + redirect.
+- `403` indicates missing `superadmin` role.
+- `500` surfaces persistence or undefined title errors; log them via `useMetrics.trackError` and `useLog`.
 
-### Component & State Patterns
+## 5. Front-End Modules & Features
 
-- Emit events from components; business logic lives in
-  composables/stores.
-- Use `useIcons()` for all Ionicons.
-- Stores should expose readonly state, derived computed values, and
-  cache timestamps.
-- Authentication store controls profile hydration and automatic
-  company selection.
+### Landing (`app/pages/index.vue`)
+- Swiper-powered feature carousel using Ionic cards.
+- CTA buttons route via Nuxt i18n helpers to register/login or account when authenticated.
 
-### Validation & Error Handling
+### Authentication (`app/pages/login.vue`, `register.vue`, `verify-token.vue`, `auth/verify-email.vue`)
+- `useLoginForm` validates credentials and formats API errors.
+- `useRegistration` orchestrates registration, token delivery, and navigation to verification.
+- Guest middleware prevents logged-in users from re-accessing login/registration.
 
-- Form schemas live in `app/utils/validation` using Zod.
-- Vee-Validate manages form state and error presentation.
-- API errors funnel through repository helpers; handle 401/422/500 explicitly.
+### Dashboard (`app/pages/main.vue`)
+- Protected route with quick navigation buttons (`useSafeLocalePath`) and debounced routing to prevent double taps.
+- Pulls profile state from `useProfile`, capturing API errors and providing retry flows.
 
-## 4. Help System
+### Account Management (`app/pages/account.vue`)
+- Profile editing with validation, unsaved-changes warnings, and toast-driven feedback.
+- Company metadata editor gated by `canEditCompany`; uses `useCountries` and `useTimezones` for select options.
+- Password reset posts to `usersResetPassword` endpoint and clears form state on success.
+- Credit overview chip displays `account_type` with Ionic chips, aligning with `user.balance`.
 
-- Topics defined in `useHelpTopic` mapping routes → topic keys.
-- Active topics: getting started, profile settings, account security.
-- `useHelp` handles modal lifecycle, performance logging, and
-  accessibility.
-- Help content lives in translation files under `help.topics.*`.
+### Help System (`useHelp` + `components/help/HelpModal.vue`)
+- Singleton modal creation with focus/scroll restoration.
+- Topic validation via `useHelpTopic`; localized content pulled from `i18n/locales`.
 
-## 5. Testing Guidelines
+### Analytics & Logging
+- `useMetrics` enriches events with user/company context and throttles network usage.
+- `useLog` supports process logs, credit history, and dedicated `logContentAction` for tutorial events.
+- Repositories under `app/composables/api` share `$fetch` instances with retry and 401 interception.
 
-- `npm run lint` – ESLint (fails on legacy warnings; fix as touched).
-- `npm run test` – Vitest suites for auth, help, stores, validation,
-  and utilities.
-- `npm run build` – Verify Nuxt production output.
-- `npm run test:e2e` – Playwright specs (start `npm run dev` first).
+## 6. Development Workflow
 
-### Unit Test Focus Areas
+### Environment
+```
+cp .env.example .env
+# Set NUXT_PUBLIC_API_BASE_URL, API tokens, feature flags
+```
 
-- Auth store bootstrap and caching
-- Help modal behavior and topic resolution
-- Validation schemas for account flows
-- Utility composables (`useUserRole`, `useCurrencyExchange`,
-  etc.)
+### Commands
+- `npm run dev` — hot reload at http://localhost:3000.
+- `npm run lint` / `npm run lint -- --fix` — ESLint checks.
+- `npm run format` — Prettier formatting.
+- `npm run typecheck` — Vue TSC validation.
+- `npm run test` / `npm run test:coverage` — Vitest unit suites.
+- `npm run test:e2e` — Playwright tests (requires dev server).
+- `npm run generate` — Static export for previews.
 
-## 6. Content & Products API
+### Testing Focus
+- Authentication flows: login, registration, email verification.
+- Profile and company editors: validation, unsaved change warnings, API error handling.
+- Help modal accessibility: focus management and topic fallbacks.
+- Metrics/log instrumentation: ensure non-blocking behaviour and correct payload enrichment.
 
-The application integrates with a backend Content & Products API for
-learning materials, playlists, and tools. See
-`docs/CONTENT_GUIDANCE.md` for complete endpoint documentation.
+## 7. Future Extensions
+- Build dedicated catalogue pages that consume the typed Content & Products endpoints for public and authenticated views.
+- Surface credit-based purchase flows on tutorial detail pages using `useLog.logContentAction` to bridge purchases and watch tracking.
+- Expand localization copy (currently English placeholders in non-English locales) before production release.
 
-### Key Features
-
-- Public content catalogue for anonymous users
-- Authenticated content with ownership tracking
-- Playlists with embedded content and tools
-- Credit-based purchasing system
-- Video content with Vimeo player URLs
-
-### TypeScript Integration
-
-- Type definitions in `shared/types/api/content.types.ts`
-- Exported via `shared/types/index.ts` for application-wide use
-- Includes request/response types for all CRUD operations
-
-### API Endpoints (configured in `nuxt.config.ts`)
-
-- `/products/content` – Video and document content
-- `/products/playlists` – Curated learning paths
-- `/products/tools` – Premium tools and features
-- `/products/purchase` – Credit-based purchasing
-
-## 7. Deployment Notes
-
-- Static generation via `npm run build` outputs to `dist/`.
-- PWA service worker generated automatically (workbox warnings
-  expected when payload files are absent).
-- Environment configuration handled by `.env` variables prefixed with
-  `NUXT_PUBLIC_`.
-
----
-
-Use this guide as the authoritative reference when extending
-authentication or account-related features. Remove or refactor any
-legacy marketplace references encountered during future development.

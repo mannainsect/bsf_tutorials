@@ -4,39 +4,39 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   app: {
     head: {
-      title: 'BSF App - Production-Ready Mobile Template',
+      title: 'BSF Tutorials - REST Video Learning App',
       meta: [
         { name: 'color-scheme', content: 'light' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         {
           name: 'description',
           content:
-            'Production-ready Nuxt 4 + Vue 3 + TypeScript + Ionic + Capacitor mobile template for building cross-platform applications'
+            'Nuxt 4 + Ionic experience for streaming BSF video tutorials and courses via the Content & Products REST API.'
         },
         { name: 'theme-color', content: '#3880ff' },
         { name: 'apple-mobile-web-app-capable', content: 'yes' },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
-        { name: 'apple-mobile-web-app-title', content: 'BSF App' },
+        { name: 'apple-mobile-web-app-title', content: 'BSF Tutorials' },
         { property: 'og:type', content: 'website' },
         {
           property: 'og:title',
-          content: 'BSF App - Production-Ready Mobile Template'
+          content: 'BSF Tutorials - REST Video Learning App'
         },
         {
           property: 'og:description',
           content:
-            'Production-ready Nuxt 4 + Vue 3 + TypeScript + Ionic + Capacitor mobile template'
+            'Cross-platform Ionic interface for anonymous discovery and authenticated learning powered by the BSF Content API.'
         },
-        { property: 'og:site_name', content: 'BSF App' },
+        { property: 'og:site_name', content: 'BSF Tutorials' },
         { name: 'twitter:card', content: 'summary_large_image' },
         {
           name: 'twitter:title',
-          content: 'BSF App - Production-Ready Mobile Template'
+          content: 'BSF Tutorials - REST Video Learning App'
         },
         {
           name: 'twitter:description',
           content:
-            'Production-ready mobile template with Nuxt 4, Vue 3, TypeScript, Ionic & Capacitor'
+            'Deliver BSF tutorials to public and logged-in users with Nuxt 4, TypeScript, Ionic, and Capacitor.'
         }
       ],
       link: [
@@ -243,10 +243,10 @@ export default defineNuxtConfig({
     registerType: 'autoUpdate',
     manifestFilename: 'manifest.webmanifest',
     manifest: {
-      name: 'BSF App',
-      short_name: 'BSF',
+      name: 'BSF Tutorials',
+      short_name: 'BSF Tutor',
       description:
-        'Production-ready Nuxt 4 + Vue 3 + TypeScript + Ionic + Capacitor mobile template',
+        'Cross-platform BSF learning app delivering tutorials and courses from the Content & Products REST API.',
       theme_color: '#3880ff',
       background_color: '#ffffff',
       display: 'standalone',
@@ -255,7 +255,7 @@ export default defineNuxtConfig({
       start_url: '/',
       lang: 'en',
       dir: 'ltr',
-      categories: ['productivity', 'business'],
+      categories: ['education', 'business'],
       icons: [
         {
           src: '/icon-72x72.png',
