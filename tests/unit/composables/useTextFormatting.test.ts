@@ -165,13 +165,15 @@ describe('useTextFormatting', () => {
       })
 
       it('should handle null input', () => {
-        expect(textFormatting.formatMarkdown(null as unknown as string))
-          .toBe('')
+        expect(textFormatting.formatMarkdown(null as unknown as string)).toBe(
+          ''
+        )
       })
 
       it('should handle undefined input', () => {
-        expect(textFormatting.formatMarkdown(undefined as unknown as string))
-          .toBe('')
+        expect(
+          textFormatting.formatMarkdown(undefined as unknown as string)
+        ).toBe('')
       })
 
       it('should truncate very long input', () => {
@@ -365,13 +367,15 @@ describe('useTextFormatting', () => {
       })
 
       it('should handle null input', () => {
-        expect(textFormatting.extractUrls(null as unknown as string))
-          .toEqual([])
+        expect(textFormatting.extractUrls(null as unknown as string)).toEqual(
+          []
+        )
       })
 
       it('should handle undefined input', () => {
-        expect(textFormatting.extractUrls(undefined as unknown as string))
-          .toEqual([])
+        expect(
+          textFormatting.extractUrls(undefined as unknown as string)
+        ).toEqual([])
       })
 
       it('should handle text with no URLs', () => {
@@ -549,8 +553,9 @@ https://another-safe.com
       expect(emptyFormatted).toBe('')
       expect(emptyUrls).toEqual([])
 
-      const nullFormatted = textFormatting.formatMarkdown(null as unknown as
-        string)
+      const nullFormatted = textFormatting.formatMarkdown(
+        null as unknown as string
+      )
       const nullUrls = textFormatting.extractUrls(null as unknown as string)
 
       expect(nullFormatted).toBe('')

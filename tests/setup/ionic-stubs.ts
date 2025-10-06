@@ -58,7 +58,7 @@ export const ionicStubs = {
     props: ['isOpen', 'backdropDismiss', 'keyboardClose'],
     emits: ['ion-modal-did-dismiss'],
     mounted() {
-      ;(this.$el as { dismiss?: (() => void) }).dismiss = vi.fn()
+      ;(this.$el as { dismiss?: () => void }).dismiss = vi.fn()
     }
   },
   'ion-page': {

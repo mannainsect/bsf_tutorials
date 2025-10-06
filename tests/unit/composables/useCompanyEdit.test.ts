@@ -24,7 +24,7 @@ vi.mock('vee-validate', () => ({
         Object.assign(mockFormValues, values)
         Object.keys(values).forEach(key => {
           if (mockFieldRefs[key]) {
-            (mockFieldRefs[key] as { value: unknown }).value = values[key]
+            ;(mockFieldRefs[key] as { value: unknown }).value = values[key]
           }
         })
       },
@@ -34,7 +34,8 @@ vi.mock('vee-validate', () => ({
           Object.assign(mockFormValues, opts.values)
           Object.keys(opts.values).forEach(key => {
             if (mockFieldRefs[key]) {
-              (mockFieldRefs[key] as { value: unknown }).value = opts.values[key]
+              ;(mockFieldRefs[key] as { value: unknown }).value =
+                opts.values[key]
             }
           })
         }
@@ -42,7 +43,7 @@ vi.mock('vee-validate', () => ({
       setFieldValue: (name: string, value: unknown) => {
         mockFormValues[name] = value
         if (mockFieldRefs[name]) {
-          (mockFieldRefs[name] as { value: unknown }).value = value
+          ;(mockFieldRefs[name] as { value: unknown }).value = value
         }
       },
       handleSubmit: (fn: (...args: unknown[]) => unknown) => fn

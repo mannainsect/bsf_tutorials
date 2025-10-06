@@ -44,7 +44,8 @@ class MockIntersectionObserver {
   rootMargin = ''
   thresholds = []
 }
-global.IntersectionObserver = MockIntersectionObserver as unknown as typeof IntersectionObserver
+global.IntersectionObserver =
+  MockIntersectionObserver as unknown as typeof IntersectionObserver
 
 // Mock ResizeObserver
 class MockResizeObserver {

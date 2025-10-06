@@ -61,8 +61,9 @@ describe('useHelp', () => {
 
     // Get mocked modalController
     const ionicModule = await import('@ionic/vue')
-    mockModalController = ionicModule.modalController as
-      { create: ReturnType<typeof vi.fn> }
+    mockModalController = ionicModule.modalController as {
+      create: ReturnType<typeof vi.fn>
+    }
 
     // Setup default mock implementations
     mockModal.present.mockResolvedValue(undefined)
@@ -439,8 +440,10 @@ describe('useHelp', () => {
     it('should handle modal dismissal', async () => {
       const { showHelp } = useHelp()
 
-      let dismissCallback: (value: { data: undefined; role?: string }) =>
-        void = () => {}
+      let dismissCallback: (value: {
+        data: undefined
+        role?: string
+      }) => void = () => {}
       mockModal.onDidDismiss.mockImplementation(() => {
         return {
           then: (callback: (value: { data: undefined }) => void) => {
@@ -469,8 +472,10 @@ describe('useHelp', () => {
       window.pageYOffset = 500
       const scrollToSpy = vi.spyOn(window, 'scrollTo')
 
-      let dismissCallback: (value: { data: undefined; role?: string }) =>
-        void = () => {}
+      let dismissCallback: (value: {
+        data: undefined
+        role?: string
+      }) => void = () => {}
       mockModal.onDidDismiss.mockImplementation(() => {
         return {
           then: (callback: (value: { data: undefined }) => void) => {
@@ -503,8 +508,10 @@ describe('useHelp', () => {
         configurable: true
       })
 
-      let dismissCallback: (value: { data: undefined; role?: string }) =>
-        void = () => {}
+      let dismissCallback: (value: {
+        data: undefined
+        role?: string
+      }) => void = () => {}
       mockModal.onDidDismiss.mockImplementation(() => {
         return {
           then: (callback: (value: { data: undefined }) => void) => {
@@ -669,8 +676,10 @@ describe('useHelp', () => {
         throw new Error('Cannot scroll')
       })
 
-      let dismissCallback: (value: { data: undefined; role?: string }) =>
-        void = () => {}
+      let dismissCallback: (value: {
+        data: undefined
+        role?: string
+      }) => void = () => {}
       mockModal.onDidDismiss.mockImplementation(() => {
         return {
           then: (callback: (value: { data: undefined }) => void) => {
@@ -705,8 +714,10 @@ describe('useHelp', () => {
         configurable: true
       })
 
-      let dismissCallback: (value: { data: undefined; role?: string }) =>
-        void = () => {}
+      let dismissCallback: (value: {
+        data: undefined
+        role?: string
+      }) => void = () => {}
       mockModal.onDidDismiss.mockImplementation(() => {
         return {
           then: (callback: (value: { data: undefined }) => void) => {

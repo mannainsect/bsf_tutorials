@@ -33,7 +33,10 @@ beforeAll(() => {
     remove: (key: string) => {
       const keys = Object.keys(mockStorage)
       keys.forEach(k => {
-        if (k === key && Object.prototype.hasOwnProperty.call(mockStorage, k)) {
+        if (
+          k === key &&
+          Object.prototype.hasOwnProperty.call(mockStorage, k)
+        ) {
           // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
           delete mockStorage[k]
         }
