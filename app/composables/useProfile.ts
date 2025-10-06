@@ -4,7 +4,7 @@ export const useProfile = () => {
   const authStore = useAuthStore()
   const profileRepository = new ProfileRepository()
   const { t } = useI18n()
-  
+
   const loading = ref(false)
   const error = ref<string | null>(null)
 
@@ -54,9 +54,12 @@ export const useProfile = () => {
       const result = await authStore.fetchProfile()
       return result
     } catch (err: unknown) {
-      error.value = err instanceof Error ? err.message : t('errors.failedToLoad', { 
-        resource: t('profile.userProfile').toLowerCase() 
-      })
+      error.value =
+        err instanceof Error
+          ? err.message
+          : t('errors.failedToLoad', {
+              resource: t('profile.userProfile').toLowerCase()
+            })
       throw err
     } finally {
       loading.value = false
@@ -79,9 +82,12 @@ export const useProfile = () => {
 
       return profile
     } catch (err: unknown) {
-      error.value = err instanceof Error ? err.message : t('errors.failedToSwitch', {
-        resource: t('profile.company').toLowerCase()
-      })
+      error.value =
+        err instanceof Error
+          ? err.message
+          : t('errors.failedToSwitch', {
+              resource: t('profile.company').toLowerCase()
+            })
       throw err
     } finally {
       loading.value = false
@@ -106,9 +112,12 @@ export const useProfile = () => {
       const result = await authStore.ensureProfileData()
       return result
     } catch (err: unknown) {
-      error.value = err instanceof Error ? err.message : t('errors.failedToLoad', { 
-        resource: t('profile.userProfile').toLowerCase() 
-      })
+      error.value =
+        err instanceof Error
+          ? err.message
+          : t('errors.failedToLoad', {
+              resource: t('profile.userProfile').toLowerCase()
+            })
       throw err
     } finally {
       loading.value = false
@@ -130,13 +139,13 @@ export const useProfile = () => {
     loading: readonly(loading),
     error: readonly(error),
     hasProfileData: readonly(hasProfileData),
-    
+
     // Methods
     refreshProfile,
     switchCompany,
     ensureProfileData,
     fetchProfile, // Legacy compatibility
-    
+
     // Legacy property (for backward compatibility)
     profile: readonly(user)
   }

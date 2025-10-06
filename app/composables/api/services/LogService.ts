@@ -43,9 +43,11 @@ export class LogService {
   async getCompanyLogs(params?: GetLogsParams): Promise<PopulatedLog[]> {
     const companyId = this.authStore.companyId
     if (!companyId || typeof companyId !== 'string') {
-      throw new Error(`No active company found. User authenticated: ${this.authStore.isAuthenticated}`)
+      throw new Error(
+        `No active company found. User authenticated: ${this.authStore.isAuthenticated}`
+      )
     }
-    
+
     return this.logRepository.getCompanyLogs(companyId, params)
   }
 
@@ -61,7 +63,7 @@ export class LogService {
     if (!this.isValidLogType(logType)) {
       console.warn(`Non-standard log type used: ${logType}`)
     }
-    
+
     const log = this.createLogEntry(logType, content)
     return this.logRepository.createProcessLog(log, { space_id: spaceId })
   }
@@ -81,7 +83,7 @@ export class LogService {
       action,
       ...additionalData
     }
-    
+
     const log = this.createLogEntry('content_' + action, content)
     return this.logRepository.createContentLog(log, {
       content_id: contentId,
@@ -103,7 +105,7 @@ export class LogService {
       metadata,
       timestamp: new Date().toISOString()
     }
-    
+
     // User actions are typically not tied to a specific space
     const log = this.createLogEntry(LogType.USER_ACTION, content)
     return this.logRepository.createContentLog(log)
@@ -124,7 +126,7 @@ export class LogService {
     if (!userId || typeof userId !== 'string') {
       throw new Error('User not authenticated')
     }
-    
+
     return this.logRepository.getCreditLogs(userId)
   }
 
@@ -145,7 +147,7 @@ export class LogService {
   getDateRange(days: number = 30): { start: string; end: string } {
     const end = new Date()
     const start = new Date(end.getTime() - days * 24 * 60 * 60 * 1000)
-    
+
     return {
       start: start.toISOString(),
       end: end.toISOString()
@@ -157,6 +159,8 @@ export class LogService {
    */
   isValidLogType(logType: string): boolean {
     const validTypes = Object.values(LogType)
-    return validTypes.includes(logType as LogType) || logType.startsWith('custom_')
+    return (
+      validTypes.includes(logType as LogType) || logType.startsWith('custom_')
+    )
   }
 }

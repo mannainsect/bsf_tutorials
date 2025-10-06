@@ -1,10 +1,14 @@
 import type { FetchError } from 'ofetch'
-import type { ErrorInput, AppError as BaseAppError, AppErrorDetails } from '../../../shared/types'
+import type {
+  ErrorInput,
+  AppError as BaseAppError,
+  AppErrorDetails
+} from '../../../shared/types'
 
 // Extend the base AppError to ensure required fields for error handling
 interface AppError extends BaseAppError {
-  timestamp: Date  // Make timestamp required
-  source: 'api' | 'validation' | 'system' | 'unknown'  // Make source required
+  timestamp: Date // Make timestamp required
+  source: 'api' | 'validation' | 'system' | 'unknown' // Make source required
 }
 
 export function useErrorHandler() {
@@ -13,14 +17,22 @@ export function useErrorHandler() {
 
   // Type guard for FetchError
   const isFetchError = (error: unknown): error is FetchError => {
-    return error !== null && typeof error === 'object' && 
+    return (
+      error !== null &&
+      typeof error === 'object' &&
       ('data' in error || 'statusCode' in error)
+    )
   }
 
   // Type guard for validation errors
-  const isValidationError = (error: unknown): error is { issues?: unknown; errors?: unknown } => {
-    return error !== null && typeof error === 'object' && 
+  const isValidationError = (
+    error: unknown
+  ): error is { issues?: unknown; errors?: unknown } => {
+    return (
+      error !== null &&
+      typeof error === 'object' &&
       ('issues' in error || 'errors' in error)
+    )
   }
 
   // Type guard for standard Error
@@ -76,27 +88,39 @@ export function useErrorHandler() {
   }
 
   // Handle and display errors appropriately
-  const handleError = (error: ErrorInput, options: {
-    toast?: boolean
-    console?: boolean
-    source?: string
-  } = {}) => {
-    const { toast: showToast = true, console: logToConsole = true, source } = options
+  const handleError = (
+    error: ErrorInput,
+    options: {
+      toast?: boolean
+      console?: boolean
+      source?: string
+    } = {}
+  ) => {
+    const {
+      toast: showToast = true,
+      console: logToConsole = true,
+      source
+    } = options
     const normalizedError = normalizeError(error)
 
     // Log to console in development
     if (logToConsole && import.meta.dev) {
-      console.error(`[${normalizedError.source.toUpperCase()}] Error${source ? ` in ${source}` : ''}:`, normalizedError)
+      console.error(
+        `[${normalizedError.source.toUpperCase()}] Error${source ? ` in ${source}` : ''}:`,
+        normalizedError
+      )
     }
 
     // Show user-friendly message
     if (showToast) {
-      toast.create({
-        message: normalizedError.message,
-        color: 'danger',
-        duration: 4000,
-        position: 'top'
-      }).then(t => t.present())
+      toast
+        .create({
+          message: normalizedError.message,
+          color: 'danger',
+          duration: 4000,
+          position: 'top'
+        })
+        .then(t => t.present())
     }
 
     return normalizedError

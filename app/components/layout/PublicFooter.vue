@@ -6,7 +6,7 @@
           <ion-icon :icon="home" />
         </ion-button>
       </ion-buttons>
-      
+
       <ion-title size="small">
         <a
           href="https://www.mannainsect.com"
@@ -17,7 +17,7 @@
         </a>
       </ion-title>
       <ion-buttons slot="end">
-        <ion-button 
+        <ion-button
           :aria-label="t('navigation.toggleMenu')"
           :aria-expanded="isMenuOpen"
           aria-controls="main-content"
@@ -47,7 +47,7 @@ const toggleMenu = async () => {
   if (document.activeElement instanceof HTMLElement) {
     document.activeElement.blur()
   }
-  
+
   // Toggle menu and update state
   await menuController.toggle('end')
   isMenuOpen.value = await menuController.isOpen('end')

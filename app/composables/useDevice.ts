@@ -16,6 +16,6 @@ export const useDevice = () => {
   return {
     getInfo,
     getBatteryInfo,
-    getLanguageCode,
+    getLanguageCode
   }
 }

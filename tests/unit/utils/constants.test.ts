@@ -81,10 +81,8 @@ describe('constants utility', () => {
     })
 
     it('should have durations in ascending order', () => {
-      expect(ANIMATION_DURATION.FAST)
-        .toBeLessThan(ANIMATION_DURATION.NORMAL)
-      expect(ANIMATION_DURATION.NORMAL)
-        .toBeLessThan(ANIMATION_DURATION.SLOW)
+      expect(ANIMATION_DURATION.FAST).toBeLessThan(ANIMATION_DURATION.NORMAL)
+      expect(ANIMATION_DURATION.NORMAL).toBeLessThan(ANIMATION_DURATION.SLOW)
     })
 
     it('should have positive duration values', () => {
@@ -151,8 +149,7 @@ describe('constants utility', () => {
     })
 
     it('should have positive length constraints', () => {
-      expect(VALIDATION_RULES.PASSWORD_MIN_LENGTH)
-        .toBeGreaterThan(0)
+      expect(VALIDATION_RULES.PASSWORD_MIN_LENGTH).toBeGreaterThan(0)
       expect(VALIDATION_RULES.NAME_MAX_LENGTH).toBeGreaterThan(0)
       expect(VALIDATION_RULES.MESSAGE_MAX_LENGTH).toBeGreaterThan(0)
     })
@@ -196,8 +193,7 @@ describe('constants utility', () => {
     })
   })
 
-  describe('Search and Filter Constants (Issue #114)',
-  () => {
+  describe('Search and Filter Constants (Issue #114)', () => {
     it('should have SEARCH_DEBOUNCE_MS constant defined', () => {
       expect(SEARCH_DEBOUNCE_MS).toBeDefined()
       expect(typeof SEARCH_DEBOUNCE_MS).toBe('number')

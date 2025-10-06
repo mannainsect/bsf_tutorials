@@ -16,14 +16,14 @@ jobs:
         with:
           github_token: ${{ secrets.ADD_TO_PROJECT_PAT }}
           labels: enhancement
-      
+
       - name: Add bug label for BUG issues
         if: contains(github.event.issue.title, 'BUG')
         uses: actions-ecosystem/action-add-labels@v1
         with:
           github_token: ${{ secrets.ADD_TO_PROJECT_PAT }}
           labels: bug
-      
+
       - name: Add issue to project
         uses: actions/add-to-project@v1.0.2
         with:

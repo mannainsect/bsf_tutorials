@@ -123,9 +123,8 @@ const navigateToRoute = async (route: string) => {
     } catch (err) {
       console.error(t('errors.navigationErrorLog'), err)
       // Set error message for screen readers
-      const fallbackMessage = err instanceof Error
-        ? err.message
-        : t('errors.navigationFailed')
+      const fallbackMessage =
+        err instanceof Error ? err.message : t('errors.navigationFailed')
       navigationError.value = `${t('common.error')}: ${fallbackMessage}`
 
       // Clear error after 5 seconds
@@ -165,7 +164,7 @@ ion-button:focus-visible {
 }
 
 /* RTL-aware spacing */
-[dir="rtl"] ion-icon[slot="start"] {
+[dir='rtl'] ion-icon[slot='start'] {
   margin-inline-end: 8px;
   margin-inline-start: 0;
 }

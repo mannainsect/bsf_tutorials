@@ -5,77 +5,77 @@
 
 export const designSystem = {
   spacing: {
-    xs: '0.5rem',    // 8px
-    sm: '1rem',      // 16px
-    md: '1.5rem',    // 24px
-    lg: '2rem',      // 32px
-    xl: '3rem',      // 48px
-    xxl: '4rem',     // 64px
+    xs: '0.5rem', // 8px
+    sm: '1rem', // 16px
+    md: '1.5rem', // 24px
+    lg: '2rem', // 32px
+    xl: '3rem', // 48px
+    xxl: '4rem' // 64px
   },
-  
+
   layout: {
     maxWidth: {
       xs: '320px',
       sm: '400px',
       md: '600px',
       lg: '800px',
-      xl: '1200px',
+      xl: '1200px'
     },
     padding: {
       page: '1rem',
       section: '1.5rem',
-      card: '1rem',
+      card: '1rem'
     },
     radius: {
       sm: '8px',
       md: '12px',
       lg: '16px',
-      xl: '24px',
-    },
+      xl: '24px'
+    }
   },
-  
+
   typography: {
     sizes: {
-      xs: '0.75rem',   // 12px
-      sm: '0.875rem',  // 14px
-      base: '1rem',    // 16px
-      lg: '1.125rem',  // 18px
-      xl: '1.25rem',   // 20px
+      xs: '0.75rem', // 12px
+      sm: '0.875rem', // 14px
+      base: '1rem', // 16px
+      lg: '1.125rem', // 18px
+      xl: '1.25rem', // 20px
       '2xl': '1.5rem', // 24px
       '3xl': '1.875rem', // 30px
-      '4xl': '2.25rem',  // 36px
+      '4xl': '2.25rem' // 36px
     },
     lineHeight: {
       tight: '1.25',
       normal: '1.5',
-      relaxed: '1.75',
+      relaxed: '1.75'
     },
     weight: {
       normal: '400',
       medium: '500',
       semibold: '600',
-      bold: '700',
-    },
+      bold: '700'
+    }
   },
-  
+
   shadows: {
     sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
     md: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-    lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+    lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
   },
-  
+
   transitions: {
     fast: '150ms ease-in-out',
     normal: '300ms ease-in-out',
-    slow: '500ms ease-in-out',
+    slow: '500ms ease-in-out'
   },
-  
+
   breakpoints: {
     sm: '640px',
     md: '768px',
     lg: '1024px',
-    xl: '1280px',
-  },
+    xl: '1280px'
+  }
 }
 
 // CSS Variables for easy access in components

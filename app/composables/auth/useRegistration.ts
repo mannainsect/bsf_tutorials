@@ -20,7 +20,7 @@ export interface UseRegistrationReturn {
  */
 export function useRegistration(): UseRegistrationReturn {
   const { t } = useI18n()
-  
+
   const loading = ref(false)
   const error = ref('')
 
@@ -32,9 +32,8 @@ export function useRegistration(): UseRegistrationReturn {
     const emailPrefix = email.split('@')[0] || email
     return emailPrefix
       .replace(/[._-]/g, ' ')
-      .replace(/\b\w/g, (l) => l.toUpperCase())
+      .replace(/\b\w/g, l => l.toUpperCase())
   }
-
 
   /**
    * Store email in local storage for verification page
@@ -49,13 +48,16 @@ export function useRegistration(): UseRegistrationReturn {
    * @param email - User's email address
    * @param password - User's password
    */
-  const registerUser = async (email: string, password: string): Promise<void> => {
+  const registerUser = async (
+    email: string,
+    password: string
+  ): Promise<void> => {
     loading.value = true
     error.value = ''
-    
+
     try {
       const { register } = useAuth()
-      
+
       const registrationData: RegistrationData = {
         email,
         password,
@@ -63,10 +65,9 @@ export function useRegistration(): UseRegistrationReturn {
       }
 
       await register(registrationData)
-      
+
       // Store email for use in verification page
       storeEmailForVerification(email)
-      
     } catch (err: unknown) {
       const errorObj = err as { data?: { detail?: string } }
       error.value = errorObj.data?.detail || t('errors.failedToCreateAccount')

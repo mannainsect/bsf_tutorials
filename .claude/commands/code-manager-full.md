@@ -47,16 +47,11 @@ issue and its purpose.
    - Use gh CLI tool to fetch the issue and its comments
    - If issue doesn't exist, report error and stop
    - Extract all requirements, acceptance criteria, and specifications
-   - Check for and download any attachments in the issue:
-     - Create temporary directory: `mkdir -p /tmp/issue-attachments`
-     - Extract attachment URLs from issue body using:
-       `gh issue view <number> --json body -q .body | grep -oE
-       'https://github\.com/user-attachments/assets/[a-f0-9-]+'`
-     - Download each attachment with authentication:
-       `curl -L -H "Authorization: token $(gh auth token)" -o
-       /tmp/issue-attachments/<filename> "<url>"`
-     - Use Read tool to review downloaded images and text files
-     - Include insights from attachments in task analysis
+   - Check for and download any attachments in the issue: - Create temporary directory: `mkdir -p /tmp/issue-attachments` - Extract attachment URLs from issue body using:
+     `gh issue view <number> --json body -q .body | grep -oE
+'https://github\.com/user-attachments/assets/[a-f0-9-]+'` - Download each attachment with authentication:
+     `curl -L -H "Authorization: token $(gh auth token)" -o
+/tmp/issue-attachments/<filename> "<url>"` - Use Read tool to review downloaded images and text files - Include insights from attachments in task analysis
 
 3. Create new branch for the issue:
    - Create a new branch from current branch (main or dev)

@@ -39,20 +39,20 @@ import type { LoginCredentials } from '~/composables/auth/useLoginForm'
 // Page configuration
 definePageMeta({
   layout: 'public',
-  middleware: 'guest',
+  middleware: 'guest'
 })
 
 // Composables
 const { login } = useAuth()
 const localePath = useLocalePath()
-const { 
-  validateCredentials, 
-  formatErrorMessage, 
-  loading, 
-  error, 
-  setLoading, 
-  setError, 
-  clearError 
+const {
+  validateCredentials,
+  formatErrorMessage,
+  loading,
+  error,
+  setLoading,
+  setError,
+  clearError
 } = useLoginForm()
 
 /**
@@ -64,15 +64,15 @@ const handleLogin = async (credentials: LoginCredentials) => {
   if (!validateCredentials(credentials)) {
     return
   }
-  
+
   // Clear any previous errors
   clearError()
   setLoading(true)
-  
+
   try {
     // Perform authentication
     await login(credentials)
-    
+
     // Navigate to main page on success
     await navigateTo(localePath('/main'))
   } catch (err: unknown) {
@@ -83,4 +83,3 @@ const handleLogin = async (credentials: LoginCredentials) => {
   }
 }
 </script>
-

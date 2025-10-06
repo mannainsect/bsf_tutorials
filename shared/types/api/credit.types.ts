@@ -1,12 +1,17 @@
 import type { ApiResponse, PaginatedResponse } from './common.types'
-import type { Credit, CreditBalance, CreditTransaction } from '../models/Credit'
+import type {
+  Credit,
+  CreditBalance,
+  CreditTransaction
+} from '../models/Credit'
 
 // Credit API response types
 export type GetCreditsResponse = PaginatedResponse<Credit>
 
 export type GetCreditBalanceResponse = ApiResponse<CreditBalance>
 
-export type GetCreditTransactionsResponse = PaginatedResponse<CreditTransaction>
+export type GetCreditTransactionsResponse =
+  PaginatedResponse<CreditTransaction>
 
 // Credit API request types
 export interface GetCreditsRequest {

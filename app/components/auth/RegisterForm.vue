@@ -65,4 +65,3 @@ const handleSubmit = () => {
   emit('submit', { email: email.value, password: password.value })
 }
 </script>
-

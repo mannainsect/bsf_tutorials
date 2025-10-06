@@ -17,10 +17,10 @@ export class AuthService {
    */
   async login(credentials: LoginRequest) {
     const response = await this.authRepository.login(credentials)
-    
+
     // Set token in store
     this.authStore.setToken(response.access_token)
-    
+
     // Fetch user profile data and store it using centralized method
     await this.authStore.fetchProfile()
 
@@ -41,7 +41,7 @@ export class AuthService {
   async logout() {
     // Clear local authentication state (no API call needed)
     this.authStore.logout()
-    
+
     // Navigate to index page
     const localePath = useLocalePath()
     await navigateTo(localePath('/'))
@@ -78,10 +78,10 @@ export class AuthService {
    */
   async loginWithToken(token: string) {
     const response = await this.authRepository.loginWithToken(token)
-    
+
     // Set token in store
     this.authStore.setToken(response.access_token)
-    
+
     // Fetch user profile data and store it using centralized method
     await this.authStore.fetchProfile()
 
@@ -95,7 +95,6 @@ export class AuthService {
 
     return response
   }
-
 
   /**
    * Check if user is authenticated
@@ -117,5 +116,4 @@ export class AuthService {
   get token() {
     return this.authStore.token
   }
-
 }

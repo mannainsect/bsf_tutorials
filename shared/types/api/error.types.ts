@@ -1,8 +1,8 @@
 import type { FetchError } from 'ofetch'
 
-export type ErrorInput = 
-  | Error 
-  | FetchError 
+export type ErrorInput =
+  | Error
+  | FetchError
   | { data?: unknown; statusCode?: number; status?: number }
   | { issues?: unknown[]; errors?: unknown[] }
   | { message?: string; code?: string | number }

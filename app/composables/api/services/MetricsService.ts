@@ -1,5 +1,8 @@
 import { MetricsRepository } from '../repositories/MetricsRepository'
-import type { MetricData, MetricsResponse } from '../../../../shared/types/models/metrics'
+import type {
+  MetricData,
+  MetricsResponse
+} from '../../../../shared/types/models/metrics'
 
 export class MetricsService {
   private metricsRepository: MetricsRepository
@@ -17,14 +20,14 @@ export class MetricsService {
       if (!data.category) {
         throw new Error('Metric category is required')
       }
-      
+
       return await this.metricsRepository.sendMetric(data)
     } catch (error) {
       // Log but don't throw for metrics - they should never break the app
       console.error('MetricsService error:', error)
-      return { 
-        success: false, 
-        message: error instanceof Error ? error.message : 'Unknown error' 
+      return {
+        success: false,
+        message: error instanceof Error ? error.message : 'Unknown error'
       }
     }
   }

@@ -24,7 +24,6 @@ export const useAuth = () => {
     return authService.verifyEmail(token)
   }
 
-
   const setToken = (token: string) => {
     authStore.setToken(token)
   }
@@ -37,6 +36,6 @@ export const useAuth = () => {
     verifyEmail,
     setToken,
     user: computed(() => authStore.user),
-    isAuthenticated: computed(() => authStore.isAuthenticated),
+    isAuthenticated: computed(() => authStore.isAuthenticated)
   }
 }

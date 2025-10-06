@@ -8,8 +8,25 @@ import { vi, beforeEach, afterEach } from 'vitest'
 import { config } from '@vue/test-utils'
 
 // Import Vue and Pinia for global use
-import { ref, computed, reactive, readonly, watch, watchEffect, nextTick, toRef, toRefs, shallowRef } from 'vue'
-import { defineStore, createPinia, setActivePinia, getActivePinia, storeToRefs } from 'pinia'
+import {
+  ref,
+  computed,
+  reactive,
+  readonly,
+  watch,
+  watchEffect,
+  nextTick,
+  toRef,
+  toRefs,
+  shallowRef
+} from 'vue'
+import {
+  defineStore,
+  createPinia,
+  setActivePinia,
+  getActivePinia,
+  storeToRefs
+} from 'pinia'
 import { ionicStubs } from './ionic-stubs'
 
 // Mock browser APIs that don't exist in jsdom
@@ -40,13 +57,13 @@ class MockResizeObserver {
 global.ResizeObserver = MockResizeObserver as any
 
 // Mock requestAnimationFrame
-global.requestAnimationFrame = vi.fn((cb) => setTimeout(cb, 0))
-global.cancelAnimationFrame = vi.fn((id) => clearTimeout(id))
+global.requestAnimationFrame = vi.fn(cb => setTimeout(cb, 0))
+global.cancelAnimationFrame = vi.fn(id => clearTimeout(id))
 
 // Mock matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: vi.fn().mockImplementation((query) => ({
+  value: vi.fn().mockImplementation(query => ({
     matches: false,
     media: query,
     onchange: null,
@@ -147,7 +164,7 @@ global.useRuntimeConfig = vi.fn(() => ({
   }
 }))
 
-global.useCookie = vi.fn((name) => {
+global.useCookie = vi.fn(name => {
   return ref(null)
 })
 
@@ -211,10 +228,22 @@ global.useAuthStore = () => {
 
 // Create useAuthService that returns mock functions
 global.useAuthService = () => ({
-  login: vi.fn(() => Promise.resolve({ token: 'test-token', user: { id: 1, email: 'test@example.com' } })),
+  login: vi.fn(() =>
+    Promise.resolve({
+      token: 'test-token',
+      user: { id: 1, email: 'test@example.com' }
+    })
+  ),
   logout: vi.fn(() => Promise.resolve()),
-  register: vi.fn(() => Promise.resolve({ token: 'test-token', user: { id: 1, email: 'test@example.com' } })),
-  getProfile: vi.fn(() => Promise.resolve({ id: 1, email: 'test@example.com' })),
+  register: vi.fn(() =>
+    Promise.resolve({
+      token: 'test-token',
+      user: { id: 1, email: 'test@example.com' }
+    })
+  ),
+  getProfile: vi.fn(() =>
+    Promise.resolve({ id: 1, email: 'test@example.com' })
+  ),
   sendPasswordReset: vi.fn(() => Promise.resolve()),
   verifyEmail: vi.fn(() => Promise.resolve())
 })
@@ -235,8 +264,6 @@ global.useAuth = () => {
     isAuthenticated: computed(() => authStore.isAuthenticated)
   }
 }
-
-
 
 // Configure Vue Test Utils
 config.global.stubs = {
@@ -386,11 +413,11 @@ global.useLocalePath = () => (path: string) => path
 
 // Mock useErrorHandler composable
 global.useErrorHandler = () => ({
-  normalizeError: vi.fn((error) => error),
-  handleError: vi.fn((error) => error),
-  handleApiError: vi.fn((error) => error),
-  handleValidationError: vi.fn((error) => error),
-  handleSilentError: vi.fn((error) => error)
+  normalizeError: vi.fn(error => error),
+  handleError: vi.fn(error => error),
+  handleApiError: vi.fn(error => error),
+  handleValidationError: vi.fn(error => error),
+  handleSilentError: vi.fn(error => error)
 })
 
 // Export utilities

@@ -7,14 +7,17 @@ export const groupBy = <T, K extends string | number>(
   array: T[],
   keyFn: (item: T) => K
 ): Record<K, T[]> => {
-  return array.reduce((groups, item) => {
-    const key = keyFn(item)
-    if (!groups[key]) {
-      groups[key] = []
-    }
-    groups[key].push(item)
-    return groups
-  }, {} as Record<K, T[]>)
+  return array.reduce(
+    (groups, item) => {
+      const key = keyFn(item)
+      if (!groups[key]) {
+        groups[key] = []
+      }
+      groups[key].push(item)
+      return groups
+    },
+    {} as Record<K, T[]>
+  )
 }
 
 export const sortBy = <T>(
@@ -25,7 +28,7 @@ export const sortBy = <T>(
   return [...array].sort((a, b) => {
     const aVal = keyFn(a)
     const bVal = keyFn(b)
-    
+
     if (direction === 'asc') {
       return aVal > bVal ? 1 : aVal < bVal ? -1 : 0
     } else {
@@ -75,7 +78,7 @@ export const debounce = <T extends (...args: unknown[]) => unknown>(
   wait: number
 ): ((...args: Parameters<T>) => void) => {
   let timeout: NodeJS.Timeout | null = null
-  
+
   return (...args: Parameters<T>) => {
     if (timeout) clearTimeout(timeout)
     timeout = setTimeout(() => func(...args), wait)
@@ -87,12 +90,12 @@ export const throttle = <T extends (...args: unknown[]) => unknown>(
   limit: number
 ): ((...args: Parameters<T>) => void) => {
   let inThrottle = false
-  
+
   return (...args: Parameters<T>) => {
     if (!inThrottle) {
       func(...args)
       inThrottle = true
-      setTimeout(() => inThrottle = false, limit)
+      setTimeout(() => (inThrottle = false), limit)
     }
   }
 }

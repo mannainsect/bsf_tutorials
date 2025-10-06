@@ -183,7 +183,7 @@ When invoked by the code manager, you will receive:
      `app/test/`)
 
 5. **Review Test Configuration**:
-   - JavaScript/TypeScript: Check vitest.config.*, jest.config.*
+   - JavaScript/TypeScript: Check vitest.config._, jest.config._
    - Identify parallel execution settings, coverage settings, test markers
 
 6. **Verify Best Practices with Research** (CRITICAL STEP):

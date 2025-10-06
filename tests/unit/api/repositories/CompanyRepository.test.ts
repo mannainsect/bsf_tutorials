@@ -49,14 +49,9 @@ describe('CompanyRepository', () => {
         business_id: 'BIZ123'
       }
 
-      vi.spyOn(repository as any, 'put').mockResolvedValue(
-        mockResponse
-      )
+      vi.spyOn(repository as any, 'put').mockResolvedValue(mockResponse)
 
-      const result = await repository.updateCompany(
-        companyId,
-        updateData
-      )
+      const result = await repository.updateCompany(companyId, updateData)
 
       expect(result).toEqual(mockResponse)
       expect(repository.put).toHaveBeenCalledWith(
@@ -79,14 +74,9 @@ describe('CompanyRepository', () => {
         city: 'Old City'
       }
 
-      vi.spyOn(repository as any, 'put').mockResolvedValue(
-        mockResponse
-      )
+      vi.spyOn(repository as any, 'put').mockResolvedValue(mockResponse)
 
-      const result = await repository.updateCompany(
-        companyId,
-        updateData
-      )
+      const result = await repository.updateCompany(companyId, updateData)
 
       expect(result.name).toBe('New Company Name')
       expect(repository.put).toHaveBeenCalledWith(
@@ -112,14 +102,9 @@ describe('CompanyRepository', () => {
         ...updateData
       }
 
-      vi.spyOn(repository as any, 'put').mockResolvedValue(
-        mockResponse
-      )
+      vi.spyOn(repository as any, 'put').mockResolvedValue(mockResponse)
 
-      const result = await repository.updateCompany(
-        companyId,
-        updateData
-      )
+      const result = await repository.updateCompany(companyId, updateData)
 
       expect(result.name).toBe(updateData.name)
       expect(result.street).toBe(updateData.street)
@@ -201,14 +186,9 @@ describe('CompanyRepository', () => {
         name: 'Unchanged Company'
       }
 
-      vi.spyOn(repository as any, 'put').mockResolvedValue(
-        mockResponse
-      )
+      vi.spyOn(repository as any, 'put').mockResolvedValue(mockResponse)
 
-      const result = await repository.updateCompany(
-        companyId,
-        updateData
-      )
+      const result = await repository.updateCompany(companyId, updateData)
 
       expect(result).toEqual(mockResponse)
       expect(repository.put).toHaveBeenCalledWith(
@@ -228,14 +208,9 @@ describe('CompanyRepository', () => {
         name: 'MongoDB Company'
       }
 
-      vi.spyOn(repository as any, 'put').mockResolvedValue(
-        mockResponse
-      )
+      vi.spyOn(repository as any, 'put').mockResolvedValue(mockResponse)
 
-      const result = await repository.updateCompany(
-        companyId,
-        updateData
-      )
+      const result = await repository.updateCompany(companyId, updateData)
 
       expect(result).toHaveProperty('_id', companyId)
       expect(result.name).toBe('MongoDB Company')

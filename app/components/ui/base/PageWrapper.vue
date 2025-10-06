@@ -6,7 +6,7 @@
         <ion-spinner name="crescent" />
         <p>{{ loadingText || $t('common.loading') }}</p>
       </div>
-      
+
       <!-- Error State -->
       <div v-else-if="error" class="error-container">
         <ion-icon :icon="errorIcon" />
@@ -16,7 +16,7 @@
           {{ retryText || $t('common.retry') }}
         </ion-button>
       </div>
-      
+
       <!-- Content -->
       <div v-else>
         <!-- Page Header -->
@@ -26,7 +26,7 @@
             <p v-if="subtitle" class="page-subtitle">{{ subtitle }}</p>
           </slot>
         </section>
-        
+
         <!-- Main Content -->
         <slot />
       </div>
@@ -93,7 +93,7 @@ const contentClass = computed(() => {
   .page-title {
     font-size: var(--font-2xl);
   }
-  
+
   .page-subtitle {
     font-size: var(--font-base);
   }

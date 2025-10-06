@@ -23,11 +23,13 @@
         <h1>{{ $t('account.title') }}</h1>
         <p>{{ $t('account.subtitle') }}</p>
       </ion-text>
-      
+
       <!-- Basic User Details -->
       <ion-card>
         <ion-card-header>
-          <ion-card-title>{{ $t('account.profile.basicDetails') }}</ion-card-title>
+          <ion-card-title>{{
+            $t('account.profile.basicDetails')
+          }}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <div v-if="!isEditing">
@@ -55,16 +57,16 @@
                 <p>
                   {{
                     getCountryName(profileData?.country || '') ||
-                      $t('common.notSet')
+                    $t('common.notSet')
                   }}
                 </p>
               </ion-label>
             </ion-item>
-            
+
             <div class="form-actions">
-              <ion-button 
-                fill="solid" 
-                size="small" 
+              <ion-button
+                fill="solid"
+                size="small"
                 :disabled="loading"
                 color="primary"
                 @click="startEdit"
@@ -74,7 +76,7 @@
               </ion-button>
             </div>
           </div>
-          
+
           <form v-else @submit.prevent="handleSubmit">
             <!-- Show validation errors -->
             <div v-if="hasErrors" class="form-errors">
@@ -99,25 +101,16 @@
               <ion-label position="stacked">
                 {{ $t('account.profile.email') }}
               </ion-label>
-              <ion-input
-                :value="profileData?.email"
-                type="email"
-                disabled
-              />
+              <ion-input :value="profileData?.email" type="email" disabled />
             </ion-item>
 
-            <ion-item
-              lines="none"
-              :class="{ 'ion-invalid': nameError }"
-            >
+            <ion-item lines="none" :class="{ 'ion-invalid': nameError }">
               <ion-label position="stacked">
                 {{ $t('account.profile.name') }} *
               </ion-label>
               <ion-input
                 v-model="name"
-                :placeholder="
-                  $t('account.profile.namePlaceholder')
-                "
+                :placeholder="$t('account.profile.namePlaceholder')"
                 required
               />
               <ion-note v-if="nameError" slot="error">
@@ -125,16 +118,13 @@
               </ion-note>
             </ion-item>
 
-
             <ion-item lines="none">
               <ion-label position="stacked">
                 {{ $t('account.profile.city') }}
               </ion-label>
               <ion-input
                 v-model="city"
-                :placeholder="
-                  $t('account.profile.cityPlaceholder')
-                "
+                :placeholder="$t('account.profile.cityPlaceholder')"
               />
             </ion-item>
 
@@ -144,9 +134,7 @@
               </ion-label>
               <ion-select
                 v-model="country"
-                :placeholder="
-                  $t('account.profile.countryPlaceholder')
-                "
+                :placeholder="$t('account.profile.countryPlaceholder')"
                 interface="action-sheet"
               >
                 <ion-select-option
@@ -159,7 +147,7 @@
                 </ion-select-option>
               </ion-select>
             </ion-item>
-            
+
             <div class="form-actions">
               <ion-button
                 type="submit"
@@ -186,7 +174,7 @@
                 {{ $t('common.cancel') }}
               </ion-button>
             </div>
-            
+
             <!-- Show unsaved changes warning -->
             <div v-if="isDirty" class="unsaved-changes-warning">
               <ion-item color="warning" lines="none">
@@ -237,9 +225,8 @@
                 <h3>{{ $t('account.company.country') }}</h3>
                 <p>
                   {{
-                    getCountryName(
-                      activeCompany.country || ''
-                    ) || $t('account.company.notSet')
+                    getCountryName(activeCompany.country || '') ||
+                    $t('account.company.notSet')
                   }}
                 </p>
               </ion-label>
@@ -263,8 +250,7 @@
                 <h3>{{ $t('account.company.businessId') }}</h3>
                 <p>
                   {{
-                    activeCompany.business_id ||
-                      $t('account.company.notSet')
+                    activeCompany.business_id || $t('account.company.notSet')
                   }}
                 </p>
               </ion-label>
@@ -357,9 +343,7 @@
               </ion-label>
               <ion-select
                 v-model="companyCountry"
-                :placeholder="
-                  $t('account.company.countryPlaceholder')
-                "
+                :placeholder="$t('account.company.countryPlaceholder')"
                 interface="action-sheet"
               >
                 <ion-select-option
@@ -378,9 +362,7 @@
               </ion-label>
               <ion-select
                 v-model="companyTimezone"
-                :placeholder="
-                  $t('account.company.timezonePlaceholder')
-                "
+                :placeholder="$t('account.company.timezonePlaceholder')"
                 interface="action-sheet"
               >
                 <ion-select-option
@@ -399,9 +381,7 @@
               </ion-label>
               <ion-input
                 v-model="companyBusinessId"
-                :placeholder="
-                  $t('account.company.businessIdPlaceholder')
-                "
+                :placeholder="$t('account.company.businessIdPlaceholder')"
               />
             </ion-item>
 
@@ -459,11 +439,7 @@
             </ion-label>
             <ion-chip
               slot="end"
-              :color="
-                getAccountTypeColor(
-                  profileData?.account_type || ''
-                )
-              "
+              :color="getAccountTypeColor(profileData?.account_type || '')"
               size="small"
             >
               {{ profileData?.account_type?.toUpperCase() }}
@@ -471,7 +447,7 @@
           </ion-item>
         </ion-card-content>
       </ion-card>
-      
+
       <!-- Password Reset Section -->
       <ion-card class="section">
         <ion-card-header>
@@ -485,9 +461,7 @@
               </ion-label>
               <ion-input
                 v-model="passwordForm.newPassword"
-                :placeholder="
-                  $t('account.password.newPlaceholder')
-                "
+                :placeholder="$t('account.password.newPlaceholder')"
                 type="password"
               />
             </ion-item>
@@ -498,21 +472,17 @@
               </ion-label>
               <ion-input
                 v-model="passwordForm.confirmPassword"
-                :placeholder="
-                  $t('account.password.confirmPlaceholder')
-                "
+                :placeholder="$t('account.password.confirmPlaceholder')"
                 type="password"
               />
             </ion-item>
-            
+
             <div class="form-actions">
               <div class="button-container">
                 <ion-button
                   expand="block"
                   type="submit"
-                  :disabled="
-                    passwordLoading || !isPasswordValid
-                  "
+                  :disabled="passwordLoading || !isPasswordValid"
                   size="large"
                 >
                   <ion-spinner
@@ -618,8 +588,7 @@ const { timezones, getTimezoneLabel } = useTimezones()
 const isPasswordValid = computed(() => {
   return (
     passwordForm.value.newPassword &&
-    passwordForm.value.newPassword ===
-      passwordForm.value.confirmPassword &&
+    passwordForm.value.newPassword === passwordForm.value.confirmPassword &&
     passwordForm.value.newPassword.length >= 6
   )
 })
@@ -647,18 +616,18 @@ const updatePassword = async () => {
 
   try {
     passwordLoading.value = true
-    
+
     // Use the API client directly for the new password reset endpoint
     const { api } = useApi()
     const endpoints = useApiEndpoints()
-    
+
     await api(endpoints.usersResetPassword, {
       method: 'POST',
-      body: { 
-        new_password: passwordForm.value.newPassword 
+      body: {
+        new_password: passwordForm.value.newPassword
       }
     })
-    
+
     const successToast = await useToast().create({
       message: t('account.password.updateSuccess'),
       duration: 3000,
@@ -666,7 +635,7 @@ const updatePassword = async () => {
       position: 'top'
     })
     await successToast.present()
-    
+
     // Clear form
     passwordForm.value = {
       newPassword: '',
@@ -692,13 +661,16 @@ const updatePassword = async () => {
   }
 }
 
-
 const getAccountTypeColor = (accountType: string) => {
   switch (accountType?.toLowerCase()) {
-    case 'pro': return 'success'
-    case 'premium': return 'warning'
-    case 'basic': return 'medium'
-    default: return 'medium'
+    case 'pro':
+      return 'success'
+    case 'premium':
+      return 'warning'
+    case 'basic':
+      return 'medium'
+    default:
+      return 'medium'
   }
 }
 
@@ -719,7 +691,7 @@ ion-item.ion-invalid ion-input {
   --border-color: var(--ion-color-danger);
 }
 
-ion-note[slot="error"] {
+ion-note[slot='error'] {
   color: var(--ion-color-danger);
   font-size: 0.75rem;
   margin-top: 0.25rem;

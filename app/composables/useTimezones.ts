@@ -39,9 +39,7 @@ export const useTimezones = () => {
     return tzList.sort((a, b) => a.label.localeCompare(b.label))
   })
 
-  const getTimezoneByValue = (
-    value: string
-  ): Timezone | undefined => {
+  const getTimezoneByValue = (value: string): Timezone | undefined => {
     if (!value) return undefined
     return timezones.value.find(tz => tz.value === value)
   }
@@ -53,9 +51,9 @@ export const useTimezones = () => {
   }
 
   const getPopularTimezones = (): Timezone[] => {
-    return POPULAR_TIMEZONE_VALUES
-      .map(value => getTimezoneByValue(value))
-      .filter((tz): tz is Timezone => tz !== undefined)
+    return POPULAR_TIMEZONE_VALUES.map(value =>
+      getTimezoneByValue(value)
+    ).filter((tz): tz is Timezone => tz !== undefined)
   }
 
   return {

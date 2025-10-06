@@ -20,9 +20,10 @@ export class LogRepository extends BaseRepository {
   ): Promise<PopulatedLog[]> {
     const endpoints = useApiEndpoints()
     const query: Record<
-      string, string | number | boolean | string[] | number[]
+      string,
+      string | number | boolean | string[] | number[]
     > = {}
-    
+
     if (params?.start_datetime) query.start_datetime = params.start_datetime
     if (params?.end_datetime) query.end_datetime = params.end_datetime
     if (params?.spaceId) query.space_id = params.spaceId
@@ -44,11 +45,9 @@ export class LogRepository extends BaseRepository {
     params: CreateProcessLogParams
   ): Promise<CreateLogResponse> {
     const endpoints = useApiEndpoints()
-    return await this.post<CreateLogResponse>(
-      endpoints.logsProcess,
-      log,
-      { space_id: params.space_id }
-    )
+    return await this.post<CreateLogResponse>(endpoints.logsProcess, log, {
+      space_id: params.space_id
+    })
   }
 
   /**
@@ -60,17 +59,14 @@ export class LogRepository extends BaseRepository {
   ): Promise<CreateLogResponse> {
     const endpoints = useApiEndpoints()
     const query: Record<
-      string, string | number | boolean | string[] | number[]
+      string,
+      string | number | boolean | string[] | number[]
     > = {}
-    
+
     if (params?.content_id) query.content_id = params.content_id
     if (params?.content_type) query.content_type = params.content_type
-    
-    return this.post<CreateLogResponse>(
-      endpoints.logsContent,
-      log,
-      query
-    )
+
+    return this.post<CreateLogResponse>(endpoints.logsContent, log, query)
   }
 
   /**
@@ -101,12 +97,13 @@ export class LogRepository extends BaseRepository {
   ): Promise<PopulatedLog[]> {
     const endpoints = useApiEndpoints()
     const query: Record<
-      string, string | number | boolean | string[] | number[]
+      string,
+      string | number | boolean | string[] | number[]
     > = { device_id: deviceId }
-    
+
     if (startDate) query.start_datetime = startDate
     if (endDate) query.end_datetime = endDate
-    
+
     return this.get<PopulatedLog[]>(endpoints.logsDevice, query)
   }
 

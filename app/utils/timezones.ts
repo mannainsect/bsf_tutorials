@@ -441,4 +441,4 @@ export const POPULAR_TIMEZONE_VALUES = [
   'Australia/Sydney'
 ] as const
 
-export type TimezoneIdentifier = typeof TIMEZONE_IDENTIFIERS[number]
+export type TimezoneIdentifier = (typeof TIMEZONE_IDENTIFIERS)[number]

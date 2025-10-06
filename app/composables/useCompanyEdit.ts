@@ -5,9 +5,7 @@ import {
   type CompanyEditForm
 } from '~/utils/validation/companySchemas'
 import { CompanyRepository } from './api/repositories/CompanyRepository'
-import type {
-  UpdateCompanyRequest
-} from './api/repositories/CompanyRepository'
+import type { UpdateCompanyRequest } from './api/repositories/CompanyRepository'
 
 export const useCompanyEdit = () => {
   const { activeCompany } = useProfile()
@@ -38,34 +36,26 @@ export const useCompanyEdit = () => {
   })
 
   // Form fields
-  const { value: name, errorMessage: nameError } = useField<string>(
-    'name'
-  )
+  const { value: name, errorMessage: nameError } = useField<string>('name')
   const { value: street, errorMessage: streetError } =
     useField<string>('street')
-  const { value: city, errorMessage: cityError } = useField<string>(
-    'city'
-  )
+  const { value: city, errorMessage: cityError } = useField<string>('city')
   const { value: country, errorMessage: countryError } =
     useField<string>('country')
   const { value: timezone, errorMessage: timezoneError } =
     useField<string>('timezone')
-  const {
-    value: business_id,
-    errorMessage: businessIdError
-  } = useField<string>('business_id')
+  const { value: business_id, errorMessage: businessIdError } =
+    useField<string>('business_id')
 
   // Computed values
   const isValid = computed(() => form.meta.value.valid)
   const isDirty = computed(() => form.meta.value.dirty)
-  const hasErrors = computed(() =>
-    !form.meta.value.valid && form.meta.value.touched
+  const hasErrors = computed(
+    () => !form.meta.value.valid && form.meta.value.touched
   )
 
   // Check permissions
-  const canEdit = computed(() =>
-    isCompanyAdmin() || isCompanyManager()
-  )
+  const canEdit = computed(() => isCompanyAdmin() || isCompanyManager())
 
   // Get all form errors
   const allErrors = computed(() => {
@@ -159,28 +149,22 @@ export const useCompanyEdit = () => {
         return
       }
 
-      const companyId = activeCompany.value._id ||
-        activeCompany.value.id
+      const companyId = activeCompany.value._id || activeCompany.value.id
       await companyRepository.updateCompany(companyId, updateData)
 
       // CRITICAL: Invalidate cache and refresh profile
       await authStore.refreshProfile({ force: true })
 
       // Success feedback
-      await toast.showSuccess(
-        t('account.company.updateSuccess')
-      )
+      await toast.showSuccess(t('account.company.updateSuccess'))
 
       isEditing.value = false
-
     } catch (err: unknown) {
       console.error(t('errors.account.updateCompanyLog'), err)
-      error.value = err instanceof Error ? err.message :
-        t('account.company.updateError')
+      error.value =
+        err instanceof Error ? err.message : t('account.company.updateError')
 
-      await toast.showError(
-        error.value || t('common.error')
-      )
+      await toast.showError(error.value || t('common.error'))
     } finally {
       isSubmitting.value = false
     }

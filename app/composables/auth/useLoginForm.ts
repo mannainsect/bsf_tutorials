@@ -21,7 +21,7 @@ export interface UseLoginFormReturn {
  */
 export function useLoginForm(): UseLoginFormReturn {
   const { t } = useI18n()
-  
+
   const loading = ref(false)
   const error = ref('')
 
@@ -35,14 +35,14 @@ export function useLoginForm(): UseLoginFormReturn {
       error.value = t('validation.required')
       return false
     }
-    
+
     // Basic email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(credentials.email)) {
       error.value = t('validation.invalidEmail')
       return false
     }
-    
+
     return true
   }
 
@@ -52,25 +52,28 @@ export function useLoginForm(): UseLoginFormReturn {
    * @returns Formatted error message
    */
   const formatErrorMessage = (err: unknown): string => {
-    const errorObj = err as { data?: { detail?: string; message?: string }; statusCode?: number }
-    
+    const errorObj = err as {
+      data?: { detail?: string; message?: string }
+      statusCode?: number
+    }
+
     // Handle various error formats
     if (errorObj.data?.detail) {
       return errorObj.data.detail
     }
-    
+
     if (errorObj.data?.message) {
       return errorObj.data.message
     }
-    
+
     if (errorObj.statusCode === 401) {
       return t('errors.unauthorized')
     }
-    
+
     if (errorObj.statusCode === 404) {
       return t('errors.userNotFound')
     }
-    
+
     // Default error message
     return t('errors.loginFailed')
   }

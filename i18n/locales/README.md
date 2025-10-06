@@ -18,7 +18,7 @@ Each locale file follows this structure:
 {
   "common": {
     "loading": "Loading...",
-    "error": "Error",
+    "error": "Error"
     // Common UI strings
   },
   "navigation": {
@@ -29,7 +29,7 @@ Each locale file follows this structure:
   },
   "home": {
     // Home page specific strings
-  },
+  }
   // Other sections...
 }
 ```
@@ -37,6 +37,7 @@ Each locale file follows this structure:
 ## Usage in Components
 
 ### Template
+
 ```vue
 <template>
   <h1>{{ $t('home.title') }}</h1>
@@ -45,6 +46,7 @@ Each locale file follows this structure:
 ```
 
 ### Script Setup
+
 ```vue
 <script setup lang="ts">
 const { t } = useI18n()
@@ -66,6 +68,7 @@ The `LanguageSwitcher` component is available globally and can be placed in head
 ## URL Structure
 
 By default, the default locale (English) has no prefix, while other languages use prefixes:
+
 - `/` - English
 - `/es/` - Spanish
 - `/fr/` - French

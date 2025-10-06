@@ -9,37 +9,37 @@
             {{ title || $t('errors.boundary.title') }}
           </ion-card-title>
         </ion-card-header>
-        
+
         <ion-card-content>
           <p>{{ message || $t('errors.boundary.message') }}</p>
-          
+
           <div v-if="showDetails && errorDetails" class="error-details">
-            <ion-button 
-              fill="clear" 
-              size="small" 
+            <ion-button
+              fill="clear"
+              size="small"
               @click="showErrorDetails = !showErrorDetails"
             >
-              {{ showErrorDetails ? $t('common.hideDetails') : $t('common.showDetails') }}
+              {{
+                showErrorDetails
+                  ? $t('common.hideDetails')
+                  : $t('common.showDetails')
+              }}
             </ion-button>
-            
+
             <div v-if="showErrorDetails" class="error-code">
               <pre>{{ errorDetails }}</pre>
             </div>
           </div>
-          
+
           <div class="error-actions">
-            <ion-button 
-              fill="solid" 
-              color="primary" 
-              @click="handleRetry"
-            >
+            <ion-button fill="solid" color="primary" @click="handleRetry">
               {{ retryText || $t('common.retry') }}
             </ion-button>
-            
-            <ion-button 
+
+            <ion-button
               v-if="showGoHome"
-              fill="outline" 
-              color="medium" 
+              fill="outline"
+              color="medium"
               @click="goHome"
             >
               {{ $t('common.goHome') }}
@@ -88,15 +88,15 @@ const showErrorDetails = ref(false)
 onErrorCaptured((error: Error, _instance, errorInfo) => {
   hasError.value = true
   errorDetails.value = `${error.message}\n\nStack: ${error.stack}`
-  
+
   emit('error', error, errorInfo)
-  
+
   // Log error in development
   if (import.meta.dev) {
     console.error(t('errors.boundary.caughtLog'), error)
     console.error(t('errors.boundary.infoLog'), errorInfo)
   }
-  
+
   return false // Prevent error from propagating
 })
 

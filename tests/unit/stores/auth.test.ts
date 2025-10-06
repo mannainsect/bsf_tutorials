@@ -1,12 +1,16 @@
 import {
-  describe, it, expect, beforeEach,
-  vi, afterEach, beforeAll, afterAll
+  describe,
+  it,
+  expect,
+  beforeEach,
+  vi,
+  afterEach,
+  beforeAll,
+  afterAll
 } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { useAuthStore } from '~/stores/auth'
-import type {
-  ProfileResponse
-} from '~/composables/api/repositories/ProfileRepository'
+import type { ProfileResponse } from '~/composables/api/repositories/ProfileRepository'
 vi.mock('~/composables/api/repositories/ProfileRepository', () => ({
   ProfileRepository: vi.fn().mockImplementation(() => ({
     getCurrentProfile: vi.fn(),
@@ -28,9 +32,8 @@ beforeAll(() => {
       return value ? value : null
     },
     set: (key: string, value: any) => {
-      mockStorage[key] = typeof value === 'string'
-        ? value
-        : JSON.stringify(value)
+      mockStorage[key] =
+        typeof value === 'string' ? value : JSON.stringify(value)
     },
     remove: (key: string) => {
       delete mockStorage[key]
@@ -83,7 +86,8 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       const { ProfileRepository } = await import(
         '~/composables/api/repositories/ProfileRepository'
       )
-      mockGetCurrentProfile = vi.fn()
+      mockGetCurrentProfile = vi
+        .fn()
         .mockResolvedValue(profileWithActiveCompany)
       mockSwitchCompany = vi.fn()
       ;(ProfileRepository as any).mockImplementation(() => ({
@@ -92,8 +96,11 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       }))
       await store.fetchProfile()
       expect(mockSwitchCompany).not.toHaveBeenCalled()
-      expect(store.activeCompany)
-        .toEqual({ _id: 'comp1', id: 'comp1', name: 'Active Co' })
+      expect(store.activeCompany).toEqual({
+        _id: 'comp1',
+        id: 'comp1',
+        name: 'Active Co'
+      })
       expect(store.otherCompanies).toHaveLength(2)
       expect(store.user).toEqual({
         ...profileWithActiveCompany.user,
@@ -113,8 +120,7 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       const { ProfileRepository } = await import(
         '~/composables/api/repositories/ProfileRepository'
       )
-      mockGetCurrentProfile = vi.fn()
-        .mockResolvedValue(profileWithNoCompanies)
+      mockGetCurrentProfile = vi.fn().mockResolvedValue(profileWithNoCompanies)
       mockSwitchCompany = vi.fn()
       ;(ProfileRepository as any).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
@@ -131,8 +137,7 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
     })
   })
   describe('Auto-selection functionality', () => {
-    it('should auto-select first company when no active_company exists',
-      async () => {
+    it('should auto-select first company when no active_company exists', async () => {
       const profileWithoutActiveCompany: ProfileResponse = {
         user: {
           _id: 'user1',
@@ -161,10 +166,10 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       const { ProfileRepository } = await import(
         '~/composables/api/repositories/ProfileRepository'
       )
-      mockGetCurrentProfile = vi.fn()
+      mockGetCurrentProfile = vi
+        .fn()
         .mockResolvedValue(profileWithoutActiveCompany)
-      mockSwitchCompany = vi.fn()
-        .mockResolvedValue(updatedProfile)
+      mockSwitchCompany = vi.fn().mockResolvedValue(updatedProfile)
       ;(ProfileRepository as any).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
@@ -172,12 +177,18 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       await store.fetchProfile()
       expect(mockSwitchCompany).toHaveBeenCalledWith('comp1')
       expect(mockSwitchCompany).toHaveBeenCalledTimes(1)
-      expect(store.activeCompany).toEqual({ _id: 'comp1', id: 'comp1', name: 'First Co' })
-      const otherComps = profileWithoutActiveCompany.other_companies.map(c => ({
-        ...c,
-        id: c._id || c.id,
-        _id: c._id || c.id
-      }))
+      expect(store.activeCompany).toEqual({
+        _id: 'comp1',
+        id: 'comp1',
+        name: 'First Co'
+      })
+      const otherComps = profileWithoutActiveCompany.other_companies.map(
+        c => ({
+          ...c,
+          id: c._id || c.id,
+          _id: c._id || c.id
+        })
+      )
       expect(store.otherCompanies).toEqual(otherComps)
       expect(store.user).toEqual({
         ...updatedProfile.user,
@@ -214,18 +225,19 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       const { ProfileRepository } = await import(
         '~/composables/api/repositories/ProfileRepository'
       )
-      mockGetCurrentProfile = vi.fn()
-        .mockResolvedValue(profileWithIdField)
-      mockSwitchCompany = vi.fn()
-        .mockResolvedValue(updatedProfile)
+      mockGetCurrentProfile = vi.fn().mockResolvedValue(profileWithIdField)
+      mockSwitchCompany = vi.fn().mockResolvedValue(updatedProfile)
       ;(ProfileRepository as any).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
       await store.fetchProfile()
       expect(mockSwitchCompany).toHaveBeenCalledWith('comp1')
-      expect(store.activeCompany)
-        .toEqual({ id: 'comp1', _id: 'comp1', name: 'Company with id' })
+      expect(store.activeCompany).toEqual({
+        id: 'comp1',
+        _id: 'comp1',
+        name: 'Company with id'
+      })
     })
     it('should use local fallback when company has no valid ID', async () => {
       const profileWithInvalidId: ProfileResponse = {
@@ -243,25 +255,27 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       const { ProfileRepository } = await import(
         '~/composables/api/repositories/ProfileRepository'
       )
-      mockGetCurrentProfile = vi.fn()
-        .mockResolvedValue(profileWithInvalidId)
+      mockGetCurrentProfile = vi.fn().mockResolvedValue(profileWithInvalidId)
       mockSwitchCompany = vi.fn()
       ;(ProfileRepository as any).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
-      const consoleErrorSpy = vi.spyOn(console, 'error')
+      const consoleErrorSpy = vi
+        .spyOn(console, 'error')
         .mockImplementation(() => {})
       await store.fetchProfile()
       expect(mockSwitchCompany).not.toHaveBeenCalled()
       const errorMsg = '[AUTH] First company has no valid ID'
       expect(consoleErrorSpy).toHaveBeenCalledWith(errorMsg)
       expect(store.activeCompany).toBeNull()
-      const normalizedCompanies = profileWithInvalidId.other_companies.map((c: any) => {
-        if (c._id) return { ...c, id: c._id }
-        if (c.id) return { ...c, _id: c.id }
-        return c
-      })
+      const normalizedCompanies = profileWithInvalidId.other_companies.map(
+        (c: any) => {
+          if (c._id) return { ...c, id: c._id }
+          if (c.id) return { ...c, _id: c.id }
+          return c
+        }
+      )
       expect(store.otherCompanies).toEqual(normalizedCompanies)
       consoleErrorSpy.mockRestore()
     })
@@ -276,9 +290,7 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
           balance: 90
         },
         active_company: null,
-        other_companies: [
-          { _id: 'comp1', name: 'First Co' }
-        ]
+        other_companies: [{ _id: 'comp1', name: 'First Co' }]
       }
       const updatedProfile: ProfileResponse = {
         ...profileWithoutActiveCompany,
@@ -296,9 +308,11 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       const { ProfileRepository } = await import(
         '~/composables/api/repositories/ProfileRepository'
       )
-      mockGetCurrentProfile = vi.fn()
+      mockGetCurrentProfile = vi
+        .fn()
         .mockResolvedValue(profileWithoutActiveCompany)
-      mockSwitchCompany = vi.fn()
+      mockSwitchCompany = vi
+        .fn()
         .mockRejectedValueOnce(new Error('Network error'))
         .mockRejectedValueOnce(new Error('Timeout'))
         .mockRejectedValueOnce(new Error('Retry'))
@@ -307,7 +321,8 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
-      const consoleLogSpy = vi.spyOn(console, 'log')
+      const consoleLogSpy = vi
+        .spyOn(console, 'log')
         .mockImplementation(() => {})
       const fetchPromise = store.fetchProfile()
       await vi.runOnlyPendingTimersAsync()
@@ -320,12 +335,15 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       expect(consoleLogSpy).toHaveBeenCalledWith(
         '[AUTH] Successfully auto-selected company'
       )
-      expect(store.activeCompany).toEqual({ _id: 'comp1', id: 'comp1', name: 'First Co' })
+      expect(store.activeCompany).toEqual({
+        _id: 'comp1',
+        id: 'comp1',
+        name: 'First Co'
+      })
       consoleLogSpy.mockRestore()
       vi.useRealTimers()
     })
-    it('should fall back to local selection after all retries fail',
-      async () => {
+    it('should fall back to local selection after all retries fail', async () => {
       vi.useFakeTimers()
       const profileWithoutActiveCompany: ProfileResponse = {
         user: {
@@ -342,17 +360,21 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       const { ProfileRepository } = await import(
         '~/composables/api/repositories/ProfileRepository'
       )
-      mockGetCurrentProfile = vi.fn()
+      mockGetCurrentProfile = vi
+        .fn()
         .mockResolvedValue(profileWithoutActiveCompany)
-      mockSwitchCompany = vi.fn()
+      mockSwitchCompany = vi
+        .fn()
         .mockRejectedValue(new Error('Persistent API failure'))
       ;(ProfileRepository as any).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
-      const consoleLogSpy = vi.spyOn(console, 'log')
+      const consoleLogSpy = vi
+        .spyOn(console, 'log')
         .mockImplementation(() => {})
-      const consoleErrorSpy = vi.spyOn(console, 'error')
+      const consoleErrorSpy = vi
+        .spyOn(console, 'error')
         .mockImplementation(() => {})
       const fetchPromise = store.fetchProfile()
       await vi.runOnlyPendingTimersAsync()
@@ -367,12 +389,18 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       )
       const fallbackMsg = '[AUTH] Using local fallback for company selection'
       expect(consoleLogSpy).toHaveBeenCalledWith(fallbackMsg)
-      expect(store.activeCompany).toEqual({ _id: 'comp1', id: 'comp1', name: 'First Co' })
-      const otherComps = profileWithoutActiveCompany.other_companies.map(c => ({
-        ...c,
-        id: c._id || c.id,
-        _id: c._id || c.id
-      }))
+      expect(store.activeCompany).toEqual({
+        _id: 'comp1',
+        id: 'comp1',
+        name: 'First Co'
+      })
+      const otherComps = profileWithoutActiveCompany.other_companies.map(
+        c => ({
+          ...c,
+          id: c._id || c.id,
+          _id: c._id || c.id
+        })
+      )
       expect(store.otherCompanies).toEqual(otherComps)
       expect(store.user).toEqual({
         ...profileWithoutActiveCompany.user,
@@ -391,23 +419,24 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
           balance: 85
         },
         active_company: null,
-        other_companies: [
-          { _id: 'comp1', name: 'Test Co' }
-        ]
+        other_companies: [{ _id: 'comp1', name: 'Test Co' }]
       }
       const { ProfileRepository } = await import(
         '~/composables/api/repositories/ProfileRepository'
       )
-      mockGetCurrentProfile = vi.fn()
+      mockGetCurrentProfile = vi
+        .fn()
         .mockResolvedValue(profileWithoutActiveCompany)
       mockSwitchCompany = vi.fn().mockRejectedValue(new Error('Test error'))
       ;(ProfileRepository as any).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
-      const consoleLogSpy = vi.spyOn(console, 'log')
+      const consoleLogSpy = vi
+        .spyOn(console, 'log')
         .mockImplementation(() => {})
-      const consoleErrorSpy = vi.spyOn(console, 'error')
+      const consoleErrorSpy = vi
+        .spyOn(console, 'error')
         .mockImplementation(() => {})
       const fetchPromise = store.fetchProfile()
       const startTime = Date.now()
@@ -445,8 +474,7 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       const { ProfileRepository } = await import(
         '~/composables/api/repositories/ProfileRepository'
       )
-      mockGetCurrentProfile = vi.fn()
-        .mockResolvedValue(profile)
+      mockGetCurrentProfile = vi.fn().mockResolvedValue(profile)
       ;(ProfileRepository as any).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: vi.fn()
@@ -457,8 +485,7 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       expect(afterFetch).toBeGreaterThan(beforeFetch)
       expect(mockStorage['auth_last_profile_fetch']).toBeDefined()
     })
-    it('should persist state to storage after auto-selection',
-      async () => {
+    it('should persist state to storage after auto-selection', async () => {
       const profileWithoutActiveCompany: ProfileResponse = {
         user: {
           _id: 'user1',
@@ -466,9 +493,7 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
           balance: 70
         },
         active_company: null,
-        other_companies: [
-          { _id: 'comp1', name: 'Selected Co' }
-        ]
+        other_companies: [{ _id: 'comp1', name: 'Selected Co' }]
       }
       const updatedProfile: ProfileResponse = {
         ...profileWithoutActiveCompany,
@@ -486,10 +511,10 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       const { ProfileRepository } = await import(
         '~/composables/api/repositories/ProfileRepository'
       )
-      mockGetCurrentProfile = vi.fn()
+      mockGetCurrentProfile = vi
+        .fn()
         .mockResolvedValue(profileWithoutActiveCompany)
-      mockSwitchCompany = vi.fn()
-        .mockResolvedValue(updatedProfile)
+      mockSwitchCompany = vi.fn().mockResolvedValue(updatedProfile)
       ;(ProfileRepository as any).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
@@ -509,13 +534,18 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
         ...updatedProfile.user,
         id: updatedProfile.user._id
       })
-      expect(storedActiveCompany)
-        .toEqual({ _id: 'comp1', id: 'comp1', name: 'Selected Co' })
-      const otherComps = profileWithoutActiveCompany.other_companies.map(c => ({
-        ...c,
-        id: c._id || c.id,
-        _id: c._id || c.id
-      }))
+      expect(storedActiveCompany).toEqual({
+        _id: 'comp1',
+        id: 'comp1',
+        name: 'Selected Co'
+      })
+      const otherComps = profileWithoutActiveCompany.other_companies.map(
+        c => ({
+          ...c,
+          id: c._id || c.id,
+          _id: c._id || c.id
+        })
+      )
       expect(storedOtherCompanies).toEqual(otherComps)
     })
     it('should return correct data structure from fetchProfile', async () => {
@@ -526,9 +556,7 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
           balance: 65
         },
         active_company: null,
-        other_companies: [
-          { _id: 'comp1', name: 'Auto Selected' }
-        ]
+        other_companies: [{ _id: 'comp1', name: 'Auto Selected' }]
       }
       const updatedProfile: ProfileResponse = {
         ...profile,
@@ -546,10 +574,8 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       const { ProfileRepository } = await import(
         '~/composables/api/repositories/ProfileRepository'
       )
-      mockGetCurrentProfile = vi.fn()
-        .mockResolvedValue(profile)
-      mockSwitchCompany = vi.fn()
-        .mockResolvedValue(updatedProfile)
+      mockGetCurrentProfile = vi.fn().mockResolvedValue(profile)
+      mockSwitchCompany = vi.fn().mockResolvedValue(updatedProfile)
       ;(ProfileRepository as any).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
@@ -563,8 +589,11 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
         ...updatedProfile.user,
         id: updatedProfile.user._id
       })
-      expect(result.activeCompany)
-        .toEqual({ _id: 'comp1', id: 'comp1', name: 'Auto Selected' })
+      expect(result.activeCompany).toEqual({
+        _id: 'comp1',
+        id: 'comp1',
+        name: 'Auto Selected'
+      })
       const normalizedOthers = profile.other_companies.map(c => ({
         ...c,
         id: c._id || c.id,
@@ -578,13 +607,13 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       const { ProfileRepository } = await import(
         '~/composables/api/repositories/ProfileRepository'
       )
-      mockGetCurrentProfile = vi.fn()
-        .mockRejectedValue(new Error('API Error'))
+      mockGetCurrentProfile = vi.fn().mockRejectedValue(new Error('API Error'))
       ;(ProfileRepository as any).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: vi.fn()
       }))
-      const consoleErrorSpy = vi.spyOn(console, 'error')
+      const consoleErrorSpy = vi
+        .spyOn(console, 'error')
         .mockImplementation(() => {})
       await expect(store.fetchProfile()).rejects.toThrow('API Error')
       expect(consoleErrorSpy).toHaveBeenCalledWith(
@@ -606,8 +635,7 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       const { ProfileRepository } = await import(
         '~/composables/api/repositories/ProfileRepository'
       )
-      mockGetCurrentProfile = vi.fn()
-        .mockResolvedValue(profile)
+      mockGetCurrentProfile = vi.fn().mockResolvedValue(profile)
       mockSwitchCompany = vi.fn()
       ;(ProfileRepository as any).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
@@ -626,9 +654,7 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
           balance: 45
         },
         active_company: undefined as any,
-        other_companies: [
-          { _id: 'comp1', name: 'Company 1' }
-        ]
+        other_companies: [{ _id: 'comp1', name: 'Company 1' }]
       }
       const updatedProfile: ProfileResponse = {
         ...profile,
@@ -646,18 +672,19 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       const { ProfileRepository } = await import(
         '~/composables/api/repositories/ProfileRepository'
       )
-      mockGetCurrentProfile = vi.fn()
-        .mockResolvedValue(profile)
-      mockSwitchCompany = vi.fn()
-        .mockResolvedValue(updatedProfile)
+      mockGetCurrentProfile = vi.fn().mockResolvedValue(profile)
+      mockSwitchCompany = vi.fn().mockResolvedValue(updatedProfile)
       ;(ProfileRepository as any).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
       await store.fetchProfile()
       expect(mockSwitchCompany).toHaveBeenCalledWith('comp1')
-      expect(store.activeCompany)
-        .toEqual({ _id: 'comp1', id: 'comp1', name: 'Company 1' })
+      expect(store.activeCompany).toEqual({
+        _id: 'comp1',
+        id: 'comp1',
+        name: 'Company 1'
+      })
     })
   })
 })

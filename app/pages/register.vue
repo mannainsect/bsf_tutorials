@@ -53,7 +53,7 @@ const handleSubmit = async (formData: { email: string; password: string }) => {
   try {
     // Register user using composable
     await registerUser(formData.email, formData.password)
-    
+
     // Navigate to verification page on success
     await navigateTo(localePath('/verify-token'))
   } catch {
@@ -62,4 +62,3 @@ const handleSubmit = async (formData: { email: string; password: string }) => {
   }
 }
 </script>
-

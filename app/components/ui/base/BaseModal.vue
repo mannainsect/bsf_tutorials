@@ -15,15 +15,12 @@
         <ion-title v-if="title">{{ title }}</ion-title>
         <slot name="header" />
         <template #end>
-<ion-buttons v-if="showCloseButton" >
-          <ion-button
-            fill="clear"
-            @click="dismiss"
-          >
-            <ion-icon :icon="closeIcon" />
-          </ion-button>
-        </ion-buttons>
-</template>
+          <ion-buttons v-if="showCloseButton">
+            <ion-button fill="clear" @click="dismiss">
+              <ion-icon :icon="closeIcon" />
+            </ion-button>
+          </ion-buttons>
+        </template>
       </ion-toolbar>
     </ion-header>
 
@@ -97,4 +94,3 @@ defineExpose({
   present
 })
 </script>
-

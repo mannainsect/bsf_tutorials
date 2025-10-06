@@ -1,7 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
-import { BaseRepository } from
-  '~/composables/api/repositories/BaseRepository'
+import { BaseRepository } from '~/composables/api/repositories/BaseRepository'
 
 // Mock the useApi composable
 vi.mock('~/composables/useApi', () => ({
@@ -385,10 +384,8 @@ describe('BaseRepository', () => {
     })
 
     it('should return false for 400-level errors', () => {
-      expect(repository.testIsServerError({ statusCode: 400 }))
-        .toBe(false)
-      expect(repository.testIsServerError({ statusCode: 404 }))
-        .toBe(false)
+      expect(repository.testIsServerError({ statusCode: 400 })).toBe(false)
+      expect(repository.testIsServerError({ statusCode: 404 })).toBe(false)
     })
 
     it('should return false for null', () => {
@@ -447,8 +444,7 @@ describe('BaseRepository', () => {
       const error = new Error('API Error')
       mockApi.mockRejectedValue(error)
 
-      await expect(repository.testGet('/test'))
-        .rejects.toThrow('API Error')
+      await expect(repository.testGet('/test')).rejects.toThrow('API Error')
     })
 
     it('should detect error types correctly', () => {
@@ -460,8 +456,7 @@ describe('BaseRepository', () => {
       expect(repository.testIsRateLimitError(error429)).toBe(true)
       expect(repository.testIsForbiddenError(error403)).toBe(true)
       expect(repository.testIsServerError(error500)).toBe(true)
-      expect(repository.testIsServiceUnavailableError(error503))
-        .toBe(true)
+      expect(repository.testIsServiceUnavailableError(error503)).toBe(true)
     })
 
     it('should handle array query parameters', async () => {
@@ -531,12 +526,9 @@ describe('BaseRepository', () => {
     })
 
     it('should distinguish between similar error codes', () => {
-      expect(repository.testIsRateLimitError({ statusCode: 429 }))
-        .toBe(true)
-      expect(repository.testIsRateLimitError({ statusCode: 420 }))
-        .toBe(false)
-      expect(repository.testIsRateLimitError({ statusCode: 430 }))
-        .toBe(false)
+      expect(repository.testIsRateLimitError({ statusCode: 429 })).toBe(true)
+      expect(repository.testIsRateLimitError({ statusCode: 420 })).toBe(false)
+      expect(repository.testIsRateLimitError({ statusCode: 430 })).toBe(false)
     })
 
     it('should handle error objects with extra properties', () => {

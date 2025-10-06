@@ -1,5 +1,4 @@
-import type { CompanyCreationResponse } from
-  '../../shared/types/models/Company'
+import type { CompanyCreationResponse } from '../../shared/types/models/Company'
 import { useErrorHandler } from './errors/useErrorHandler'
 
 /**
@@ -36,8 +35,7 @@ export const useCompanyInitialization = () => {
     const capitalized = cleanName
       .split(' ')
       .filter(word => word.length > 0)
-      .map(word => word.charAt(0).toUpperCase() +
-                   word.slice(1).toLowerCase())
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
       .join(' ')
 
     return capitalized ? `${capitalized}'s Farm` : "User's Farm"
@@ -80,8 +78,10 @@ export const useCompanyInitialization = () => {
         // Company created successfully
 
         if (response.failed_space_types?.length) {
-          console.warn('[CompanyInit] Some spaces failed to create:',
-                       response.failed_space_types)
+          console.warn(
+            '[CompanyInit] Some spaces failed to create:',
+            response.failed_space_types
+          )
         }
       }
 
@@ -123,10 +123,7 @@ export const useCompanyInitialization = () => {
           // Attempt to create company
         }
 
-        const response = await createCompanyWithSpaces(
-          token as string,
-          email
-        )
+        const response = await createCompanyWithSpaces(token as string, email)
 
         // Success - refresh profile to include new company
         await authStore.fetchProfile()
@@ -152,10 +149,7 @@ export const useCompanyInitialization = () => {
     }
 
     // Log final failure
-    handleSilentError(
-      lastError,
-      'CompanyInit: All attempts failed'
-    )
+    handleSilentError(lastError, 'CompanyInit: All attempts failed')
     return null
   }
 

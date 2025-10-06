@@ -25,8 +25,12 @@
         {{ option.label }}
       </ion-select-option>
     </ion-select>
-    <ion-note v-if="hasError" slot="error" color="danger">{{ errorMessage }}</ion-note>
-    <ion-note v-else-if="helpText" slot="helper" color="medium">{{ helpText }}</ion-note>
+    <ion-note v-if="hasError" slot="error" color="danger">{{
+      errorMessage
+    }}</ion-note>
+    <ion-note v-else-if="helpText" slot="helper" color="medium">{{
+      helpText
+    }}</ion-note>
   </ion-item>
 </template>
 
@@ -71,7 +75,9 @@ const emit = defineEmits<Emits>()
 const { t } = useI18n()
 
 const hasError = computed(() => !!props.errorMessage)
-const resolvedPlaceholder = computed(() => props.placeholder || t('forms.selectPlaceholder'))
+const resolvedPlaceholder = computed(
+  () => props.placeholder || t('forms.selectPlaceholder')
+)
 
 const handleChange = (event: CustomEvent) => {
   emit('update:modelValue', event.detail.value)

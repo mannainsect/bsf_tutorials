@@ -170,7 +170,7 @@ describe('useHelp', () => {
 
       expect(mockModal.querySelector).toHaveBeenCalledWith(
         '[autofocus], button, [href], input, select, textarea, ' +
-        '[tabindex]:not([tabindex="-1"])'
+          '[tabindex]:not([tabindex="-1"])'
       )
 
       // Cleanup
@@ -233,9 +233,7 @@ describe('useHelp', () => {
 
       await showHelp(undefined)
 
-      expect(console.debug).toHaveBeenCalledWith(
-        '[useHelp] No topic provided'
-      )
+      expect(console.debug).toHaveBeenCalledWith('[useHelp] No topic provided')
 
       expect(mockModalController.create).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -356,9 +354,7 @@ describe('useHelp', () => {
       await hideHelp()
 
       expect(mockModal.dismiss).toHaveBeenCalled()
-      expect(console.log).toHaveBeenCalledWith(
-        '[useHelp] Hiding help modal'
-      )
+      expect(console.log).toHaveBeenCalledWith('[useHelp] Hiding help modal')
 
       // Cleanup
       if (dismissResolve) dismissResolve({ data: undefined })
@@ -370,9 +366,7 @@ describe('useHelp', () => {
       await hideHelp()
 
       expect(mockModal.dismiss).not.toHaveBeenCalled()
-      expect(console.log).toHaveBeenCalledWith(
-        '[useHelp] No modal to hide'
-      )
+      expect(console.log).toHaveBeenCalledWith('[useHelp] No modal to hide')
     })
 
     it('should handle dismiss error gracefully', async () => {

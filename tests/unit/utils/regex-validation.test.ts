@@ -42,13 +42,19 @@ describe('Regex Validation', () => {
 
     it('validates complex but safe patterns', () => {
       // Email-like pattern
-      expect(isValidRegex('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')).toBe(true)
+      expect(
+        isValidRegex('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')
+      ).toBe(true)
 
       // URL-like pattern
       expect(isValidRegex('https?://[\\w.-]+(/[\\w.-]*)*')).toBe(true)
 
       // Phone number pattern
-      expect(isValidRegex('\\+?\\d{1,3}[-.\\s]?\\(?\\d{1,4}\\)?[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,9}')).toBe(true)
+      expect(
+        isValidRegex(
+          '\\+?\\d{1,3}[-.\\s]?\\(?\\d{1,4}\\)?[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,9}'
+        )
+      ).toBe(true)
     })
 
     it('handles empty string', () => {

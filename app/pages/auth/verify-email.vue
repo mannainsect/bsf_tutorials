@@ -2,7 +2,10 @@
   <ion-grid class="ion-padding">
     <ion-row class="ion-justify-content-center">
       <ion-col size="12" size-sm="6" size-md="5">
-        <div v-if="creatingCompany" class="ion-text-center ion-padding-vertical">
+        <div
+          v-if="creatingCompany"
+          class="ion-text-center ion-padding-vertical"
+        >
           <ion-icon
             :icon="businessOutline"
             size="large"
@@ -25,12 +28,7 @@
             size="large"
             color="primary"
           />
-          <ion-icon
-            v-else
-            :icon="closeCircle"
-            size="large"
-            color="danger"
-          />
+          <ion-icon v-else :icon="closeCircle" size="large" color="danger" />
           <ion-text>
             <h2 v-if="!error">
               {{ $t('auth.verifyingEmail') }}
@@ -41,7 +39,10 @@
           </ion-text>
         </div>
 
-        <div v-if="companyCreationError" class="ion-text-center ion-margin-top">
+        <div
+          v-if="companyCreationError"
+          class="ion-text-center ion-margin-top"
+        >
           <ion-text color="danger">
             <p>{{ companyCreationError }}</p>
           </ion-text>
@@ -91,7 +92,6 @@ if (!token) {
   await navigateTo(localePath('/verify-token'))
 }
 
-
 // Company initialization
 const { initializeCompany } = useCompanyInitialization()
 const storage = useStorage()
@@ -132,10 +132,8 @@ onMounted(async () => {
     // Show error with proper type handling
     if (err && typeof err === 'object' && 'data' in err) {
       const errorData = err as { data?: { detail?: string } }
-      error.value = errorData.data?.detail ||
-                    t('errors.verificationFailed')
+      error.value = errorData.data?.detail || t('errors.verificationFailed')
     } else {
-
       error.value = t('errors.verificationFailed')
     }
 
@@ -168,7 +166,6 @@ const retryCompanyCreation = async () => {
 const skipCompanyCreation = async () => {
   await navigateTo(localePath('/main'))
 }
-
 
 // Cleanup on unmount
 onUnmounted(() => {

@@ -21,9 +21,6 @@ export class CompanyRepository extends BaseRepository {
     data: UpdateCompanyRequest
   ): Promise<Company> {
     const endpoints = useApiEndpoints()
-    return this.put<Company>(
-      `${endpoints.companies}/${companyId}`,
-      data
-    )
+    return this.put<Company>(`${endpoints.companies}/${companyId}`, data)
   }
 }

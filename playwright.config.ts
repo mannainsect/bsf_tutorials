@@ -37,10 +37,7 @@ export default defineConfig({
   workers: 1,
 
   // Reporter to use
-  reporter: [
-    ['html', { outputFolder: 'playwright-report' }],
-    ['list']
-  ],
+  reporter: [['html', { outputFolder: 'playwright-report' }], ['list']],
 
   // Shared settings for all the projects below
   use: {
@@ -82,21 +79,26 @@ export default defineConfig({
   },
 
   // Configure projects: default minimal (Chromium only). Set PW_ALL=1 to run across all browsers/devices
-  projects: process.env.PW_ALL === '1'
-    ? [
-        { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-        { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
-        { name: 'webkit', use: { ...devices['Desktop Safari'] } },
-        // Mobile viewports
-        { name: 'Mobile Chrome', use: { ...devices['Pixel 5'] } },
-        { name: 'Mobile Safari', use: { ...devices['iPhone 12'] } },
-        // Branded browsers
-        { name: 'Microsoft Edge', use: { ...devices['Desktop Edge'], channel: 'msedge' } },
-        { name: 'Google Chrome', use: { ...devices['Desktop Chrome'], channel: 'chrome' } }
-      ]
-    : [
-        { name: 'chromium', use: { ...devices['Desktop Chrome'] } }
-      ],
+  projects:
+    process.env.PW_ALL === '1'
+      ? [
+          { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+          { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
+          { name: 'webkit', use: { ...devices['Desktop Safari'] } },
+          // Mobile viewports
+          { name: 'Mobile Chrome', use: { ...devices['Pixel 5'] } },
+          { name: 'Mobile Safari', use: { ...devices['iPhone 12'] } },
+          // Branded browsers
+          {
+            name: 'Microsoft Edge',
+            use: { ...devices['Desktop Edge'], channel: 'msedge' }
+          },
+          {
+            name: 'Google Chrome',
+            use: { ...devices['Desktop Chrome'], channel: 'chrome' }
+          }
+        ]
+      : [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
 
   // Output folder for test artifacts
   outputDir: 'test-results',

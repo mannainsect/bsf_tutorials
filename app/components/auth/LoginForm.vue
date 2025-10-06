@@ -8,9 +8,11 @@
         :placeholder="$t('auth.enterEmail')"
         required
       />
-      <ion-note v-if="errors.email" color="danger">{{ errors.email }}</ion-note>
+      <ion-note v-if="errors.email" color="danger">{{
+        errors.email
+      }}</ion-note>
     </ion-item>
-    
+
     <ion-item>
       <ion-label position="stacked">{{ $t('auth.password') }}</ion-label>
       <ion-input
@@ -19,9 +21,11 @@
         :placeholder="$t('auth.enterPassword')"
         required
       />
-      <ion-note v-if="errors.password" color="danger">{{ errors.password }}</ion-note>
+      <ion-note v-if="errors.password" color="danger">{{
+        errors.password
+      }}</ion-note>
     </ion-item>
-    
+
     <div class="button-container">
       <ion-button
         expand="block"
@@ -33,7 +37,7 @@
         <span v-else>{{ $t('auth.loginButton') }}</span>
       </ion-button>
     </div>
-    
+
     <ion-text v-if="error" color="danger" class="ion-margin-top">
       <p>{{ error }}</p>
     </ion-text>
@@ -42,7 +46,10 @@
 
 <script setup lang="ts">
 import type { LoginCredentials } from '../../../shared/types'
-import { loginSchema, useFormValidation } from '~/composables/validation/useFormValidation'
+import {
+  loginSchema,
+  useFormValidation
+} from '~/composables/validation/useFormValidation'
 
 interface Props {
   loading?: boolean
@@ -60,12 +67,15 @@ withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<Emits>()
 
-const { handleSubmit, defineField, errors, isValid } = useFormValidation(loginSchema, { email: '', password: '' })
+const { handleSubmit, defineField, errors, isValid } = useFormValidation(
+  loginSchema,
+  { email: '', password: '' }
+)
 
 const [email] = defineField('email' as const)
 const [password] = defineField('password' as const)
 
-const onSubmit = handleSubmit((values) => {
+const onSubmit = handleSubmit(values => {
   emit('submit', values as unknown as LoginCredentials)
 })
 </script>

@@ -32,11 +32,7 @@ export function handleApiError(
     errorMessage = error.message
   } else if (typeof error === 'string') {
     errorMessage = error
-  } else if (
-    error &&
-    typeof error === 'object' &&
-    'message' in error
-  ) {
+  } else if (error && typeof error === 'object' && 'message' in error) {
     errorMessage = String((error as any).message)
   } else {
     errorMessage = defaultMessage
@@ -69,11 +65,7 @@ export function extractErrorMessage(error: unknown): string {
     return error
   }
 
-  if (
-    error &&
-    typeof error === 'object' &&
-    'message' in error
-  ) {
+  if (error && typeof error === 'object' && 'message' in error) {
     return String((error as any).message)
   }
 

@@ -55,31 +55,50 @@ describe('useHelpTopic logic', () => {
     })
 
     it('maps account routes to PROFILE_SETTINGS', () => {
-      expect(getHelpTopicForRoute({ path: '/account' })).toBe(HelpTopic.PROFILE_SETTINGS)
-      expect(getHelpTopicForRoute({ path: '/account?tab=settings' })).toBe(HelpTopic.PROFILE_SETTINGS)
+      expect(getHelpTopicForRoute({ path: '/account' })).toBe(
+        HelpTopic.PROFILE_SETTINGS
+      )
+      expect(getHelpTopicForRoute({ path: '/account?tab=settings' })).toBe(
+        HelpTopic.PROFILE_SETTINGS
+      )
     })
 
     it('maps verification routes to ACCOUNT_SECURITY', () => {
-      expect(getHelpTopicForRoute({ path: '/verify-token' })).toBe(HelpTopic.ACCOUNT_SECURITY)
-      expect(getHelpTopicForRoute({ path: '/auth/verify-email?token=abc' })).toBe(HelpTopic.ACCOUNT_SECURITY)
+      expect(getHelpTopicForRoute({ path: '/verify-token' })).toBe(
+        HelpTopic.ACCOUNT_SECURITY
+      )
       expect(
-        getHelpTopicForRoute({ path: '/auth/verify-email', name: 'verify-token___es' })
+        getHelpTopicForRoute({ path: '/auth/verify-email?token=abc' })
+      ).toBe(HelpTopic.ACCOUNT_SECURITY)
+      expect(
+        getHelpTopicForRoute({
+          path: '/auth/verify-email',
+          name: 'verify-token___es'
+        })
       ).toBe(HelpTopic.ACCOUNT_SECURITY)
     })
   })
 
   describe('Locale-prefixed routes', () => {
     it('handles locale prefixes for root and main routes', () => {
-      expect(getHelpTopicForRoute({ path: '/es/' })).toBe(HelpTopic.GETTING_STARTED)
-      expect(getHelpTopicForRoute({ path: '/fr/main' })).toBe(HelpTopic.GETTING_STARTED)
+      expect(getHelpTopicForRoute({ path: '/es/' })).toBe(
+        HelpTopic.GETTING_STARTED
+      )
+      expect(getHelpTopicForRoute({ path: '/fr/main' })).toBe(
+        HelpTopic.GETTING_STARTED
+      )
     })
 
     it('handles locale prefixes for account routes', () => {
-      expect(getHelpTopicForRoute({ path: '/de/account' })).toBe(HelpTopic.PROFILE_SETTINGS)
+      expect(getHelpTopicForRoute({ path: '/de/account' })).toBe(
+        HelpTopic.PROFILE_SETTINGS
+      )
     })
 
     it('handles locale prefixes for verify routes', () => {
-      expect(getHelpTopicForRoute({ path: '/pt/verify-token' })).toBe(HelpTopic.ACCOUNT_SECURITY)
+      expect(getHelpTopicForRoute({ path: '/pt/verify-token' })).toBe(
+        HelpTopic.ACCOUNT_SECURITY
+      )
     })
   })
 

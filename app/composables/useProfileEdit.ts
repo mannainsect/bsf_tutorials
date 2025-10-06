@@ -20,12 +20,12 @@ export const useProfileEdit = () => {
     city: z.string().optional(),
     country: z.string().optional()
   })
-  
+
   // Edit state
   const isEditing = ref(false)
   const isSubmitting = ref(false)
   const error = ref<string | null>(null)
-  
+
   // Form setup with validation
   const form = useForm({
     validationSchema: toTypedSchema(profileEditSchema),
@@ -35,17 +35,20 @@ export const useProfileEdit = () => {
       country: ''
     }
   })
-  
+
   // Form fields
   const { value: name, errorMessage: nameError } = useField<string>('name')
   const { value: city, errorMessage: cityError } = useField<string>('city')
-  const { value: country, errorMessage: countryError } = useField<string>('country')
-  
+  const { value: country, errorMessage: countryError } =
+    useField<string>('country')
+
   // Computed values
   const isValid = computed(() => form.meta.value.valid)
   const isDirty = computed(() => form.meta.value.dirty)
-  const hasErrors = computed(() => !form.meta.value.valid && form.meta.value.touched)
-  
+  const hasErrors = computed(
+    () => !form.meta.value.valid && form.meta.value.touched
+  )
+
   // Get all form errors
   const allErrors = computed(() => {
     const errors: string[] = []
@@ -54,17 +57,17 @@ export const useProfileEdit = () => {
     if (countryError.value) errors.push(countryError.value)
     return errors
   })
-  
+
   // Populate form with current user data
   const populateForm = () => {
     if (!user.value) return
-    
+
     form.setValues({
       name: user.value.name || '',
       city: user.value.city || '',
       country: user.value.country || ''
     })
-    
+
     // Reset form state
     form.resetForm({
       values: {
@@ -74,47 +77,48 @@ export const useProfileEdit = () => {
       }
     })
   }
-  
+
   // Start editing mode
   const startEdit = () => {
     populateForm()
     isEditing.value = true
     error.value = null
   }
-  
+
   // Cancel editing
   const cancelEdit = () => {
     isEditing.value = false
     populateForm() // Reset to original values
   }
-  
+
   // Save profile changes
   const saveProfile = async () => {
     if (!isValid.value || !user.value) return
-    
+
     isSubmitting.value = true
     error.value = null
-    
+
     try {
       const formData = form.values as ProfileEditForm
-      
+
       // Only send changed fields
       const updateData: UpdateUserRequest = {}
       if (formData.name !== user.value.name) updateData.name = formData.name
       if (formData.city !== user.value.city) updateData.city = formData.city
-      if (formData.country !== user.value.country) updateData.country = formData.country
-      
+      if (formData.country !== user.value.country)
+        updateData.country = formData.country
+
       // Only make API call if there are actual changes
       if (Object.keys(updateData).length === 0) {
         isEditing.value = false
         return
       }
-      
+
       await userService.updateCurrentUser(updateData)
-      
+
       // Refresh profile data to get updated info
       await refreshProfile()
-      
+
       // Success feedback
       const toast = await useToast().create({
         message: t('account.profile.updateSuccess'),
@@ -123,13 +127,13 @@ export const useProfileEdit = () => {
         position: 'top'
       })
       await toast.present()
-      
+
       isEditing.value = false
-      
     } catch (err: unknown) {
       console.error(t('errors.account.updateProfileLog'), err)
-      error.value = err instanceof Error ? err.message : t('account.profile.updateError')
-      
+      error.value =
+        err instanceof Error ? err.message : t('account.profile.updateError')
+
       const toast = await useToast().create({
         message: error.value || t('common.error'),
         duration: 4000,
@@ -147,10 +151,10 @@ export const useProfileEdit = () => {
       isSubmitting.value = false
     }
   }
-  
+
   // Handle form submission
   const handleSubmit = form.handleSubmit(saveProfile)
-  
+
   return {
     // State
     isEditing: readonly(isEditing),
@@ -160,24 +164,24 @@ export const useProfileEdit = () => {
     isDirty,
     hasErrors,
     allErrors,
-    
+
     // Form fields
     name,
     city,
     country,
-    
+
     // Field errors
     nameError: readonly(nameError),
     cityError: readonly(cityError),
     countryError: readonly(countryError),
-    
+
     // Methods
     startEdit,
     cancelEdit,
     saveProfile,
     handleSubmit,
     populateForm,
-    
+
     // Form utilities
     resetForm: form.resetForm,
     setFieldValue: form.setFieldValue,

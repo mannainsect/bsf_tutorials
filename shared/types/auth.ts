@@ -3,7 +3,6 @@ export interface LoginCredentials {
   password: string
 }
 
-
 export interface RegistrationData {
   email: string
   password: string

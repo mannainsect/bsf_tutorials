@@ -68,8 +68,8 @@ export const useHelp = () => {
    */
   const saveScrollPosition = (): void => {
     try {
-      savedScrollPosition = window.pageYOffset ||
-                           document.documentElement.scrollTop
+      savedScrollPosition =
+        window.pageYOffset || document.documentElement.scrollTop
       console.debug('[useHelp] Saved scroll position:', savedScrollPosition)
     } catch (error) {
       console.warn('[useHelp] Failed to save scroll position:', error)
@@ -83,7 +83,10 @@ export const useHelp = () => {
     try {
       if (savedScrollPosition > 0) {
         window.scrollTo(0, savedScrollPosition)
-        console.debug('[useHelp] Restored scroll position:', savedScrollPosition)
+        console.debug(
+          '[useHelp] Restored scroll position:',
+          savedScrollPosition
+        )
         savedScrollPosition = 0
       }
     } catch (error) {
@@ -97,7 +100,10 @@ export const useHelp = () => {
   const saveFocus = (): void => {
     try {
       previousActiveElement = document.activeElement as HTMLElement
-      console.debug('[useHelp] Saved focus element:', previousActiveElement?.tagName ?? '')
+      console.debug(
+        '[useHelp] Saved focus element:',
+        previousActiveElement?.tagName ?? ''
+      )
     } catch (error) {
       console.warn('[useHelp] Failed to save focus:', error)
     }
@@ -110,7 +116,10 @@ export const useHelp = () => {
     try {
       if (previousActiveElement && previousActiveElement.focus) {
         previousActiveElement.focus()
-        console.debug('[useHelp] Restored focus to:', previousActiveElement.tagName)
+        console.debug(
+          '[useHelp] Restored focus to:',
+          previousActiveElement.tagName
+        )
         previousActiveElement = null
       }
     } catch (error) {
@@ -134,7 +143,7 @@ export const useHelp = () => {
             // Try to focus first focusable element within the modal
             const el = currentModal.querySelector<HTMLElement>(
               '[autofocus], button, [href], input, select, textarea, ' +
-              '[tabindex]:not([tabindex="-1"])'
+                '[tabindex]:not([tabindex="-1"])'
             )
             el?.focus()
           } catch (error) {
@@ -188,23 +197,26 @@ export const useHelp = () => {
       modalOpenTime.value = Date.now()
 
       // Enhanced dismissal handling
-      currentModal.onDidDismiss().then((result: any) => {
-        const duration = Date.now() - modalOpenTime.value
-        console.log('[useHelp] Modal dismissed', { duration, result })
-        // Modal dismissed
-        currentModal = null
-        isModalOpen.value = false
-        modalOpenTime.value = 0
+      currentModal
+        .onDidDismiss()
+        .then((result: any) => {
+          const duration = Date.now() - modalOpenTime.value
+          console.log('[useHelp] Modal dismissed', { duration, result })
+          // Modal dismissed
+          currentModal = null
+          isModalOpen.value = false
+          modalOpenTime.value = 0
 
-        // Restore previous state
-        restoreScrollPosition()
-        restoreFocus()
-      }).catch((error: any) => {
-        console.error('[useHelp] Error in dismiss handler:', error)
-        currentModal = null
-        isModalOpen.value = false
-        modalOpenTime.value = 0
-      })
+          // Restore previous state
+          restoreScrollPosition()
+          restoreFocus()
+        })
+        .catch((error: any) => {
+          console.error('[useHelp] Error in dismiss handler:', error)
+          currentModal = null
+          isModalOpen.value = false
+          modalOpenTime.value = 0
+        })
 
       // Present with error handling
       await currentModal.present()
@@ -218,7 +230,10 @@ export const useHelp = () => {
 
       // Performance warning
       if (loadTime > 200) {
-        console.warn('[useHelp] Modal took longer than 200ms to open:', `${formattedLoadTime}ms`)
+        console.warn(
+          '[useHelp] Modal took longer than 200ms to open:',
+          `${formattedLoadTime}ms`
+        )
       }
     } catch (error) {
       console.error('[useHelp] Error showing help modal:', error)
@@ -307,14 +322,12 @@ export const useHelp = () => {
     previousActiveElement = null
   }
 
-
   return {
     showHelp,
     hideHelp,
     isHelpOpen,
     __resetHelpForTests
   }
-
 }
 
 // Test-only reset helper to avoid cross-test leakage

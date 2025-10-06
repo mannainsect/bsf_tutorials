@@ -7,10 +7,7 @@
     class="help-icon-button"
     @click.stop="handleClick"
   >
-    <ion-icon
-      slot="icon-only"
-      :icon="helpCircleOutline"
-    />
+    <ion-icon slot="icon-only" :icon="helpCircleOutline" />
   </ion-button>
 </template>
 
@@ -79,7 +76,7 @@ const formatTopic = (topic?: string | null): string => {
 
   return topic
     .split('.')
-    .flatMap((segment) => segment.split(/[-_]/))
+    .flatMap(segment => segment.split(/[-_]/))
     .filter(Boolean)
     .join(' ')
     .toLowerCase()
@@ -103,10 +100,7 @@ const ariaLabel: ComputedRef<string> = computed(() => {
 
   // Fallback to generic help label
   const fallbackTopicTitle = props.topic
-    ? translate(
-        `help.topics.${topicPath}.title`,
-        formatTopic(topicPath)
-      )
+    ? translate(`help.topics.${topicPath}.title`, formatTopic(topicPath))
     : translate('help.button.genericTopic', 'topic')
 
   return translate(
@@ -147,11 +141,11 @@ const handleClick = async (event: Event) => {
   font-size: 1.2rem;
 }
 
-.help-icon-button[size="small"] ion-icon {
+.help-icon-button[size='small'] ion-icon {
   font-size: 1rem;
 }
 
-.help-icon-button[size="large"] ion-icon {
+.help-icon-button[size='large'] ion-icon {
   font-size: 1.5rem;
 }
 </style>

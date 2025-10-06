@@ -4,7 +4,10 @@ export const formatDate = (date: Date | string, locale = 'en-US'): string => {
   return d.toLocaleDateString(locale)
 }
 
-export const formatDateTime = (date: Date | string, locale = 'en-US'): string => {
+export const formatDateTime = (
+  date: Date | string,
+  locale = 'en-US'
+): string => {
   const d = typeof date === 'string' ? new Date(date) : date
   return d.toLocaleString(locale)
 }
@@ -29,10 +32,14 @@ export const formatNumber = (num: number, locale = 'en-US'): string => {
   return num.toLocaleString(locale)
 }
 
-export const formatCurrency = (amount: number, currency = 'USD', locale = 'en-US'): string => {
+export const formatCurrency = (
+  amount: number,
+  currency = 'USD',
+  locale = 'en-US'
+): string => {
   return new Intl.NumberFormat(locale, {
     style: 'currency',
-    currency,
+    currency
   }).format(amount)
 }
 

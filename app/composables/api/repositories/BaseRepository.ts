@@ -2,7 +2,7 @@ import type { HttpMethod, RequestConfig } from '../../../../shared/types'
 
 export abstract class BaseRepository {
   protected api: ReturnType<typeof useApi>['api']
-  
+
   constructor() {
     const { api } = useApi()
     this.api = api
@@ -20,19 +20,19 @@ export abstract class BaseRepository {
     } = {}
   ): Promise<T> {
     const { method = 'GET', body, query } = options
-    
+
     const config: RequestConfig = {
       method
     }
-    
+
     if (body !== undefined) {
       config.body = body as Record<string, unknown> | string | FormData | null
     }
-    
+
     if (query) {
       config.query = query
     }
-    
+
     return await this.api<T>(endpoint, config)
   }
 
@@ -79,9 +79,7 @@ export abstract class BaseRepository {
   /**
    * DELETE request helper
    */
-  protected async delete<T = unknown>(
-    endpoint: string
-  ): Promise<T> {
+  protected async delete<T = unknown>(endpoint: string): Promise<T> {
     return this.request<T>(endpoint, { method: 'DELETE' })
   }
 
@@ -104,10 +102,12 @@ export abstract class BaseRepository {
    * Check if error is a rate limit error (429)
    */
   protected isRateLimitError(error: unknown): boolean {
-    return error !== null &&
-           typeof error === 'object' &&
-           'statusCode' in error &&
-           (error as any).statusCode === 429
+    return (
+      error !== null &&
+      typeof error === 'object' &&
+      'statusCode' in error &&
+      (error as any).statusCode === 429
+    )
   }
 
   /**
@@ -117,8 +117,10 @@ export abstract class BaseRepository {
     if (error === null || typeof error !== 'object') {
       return undefined
     }
-    if ('statusCode' in error &&
-        typeof (error as any).statusCode === 'number') {
+    if (
+      'statusCode' in error &&
+      typeof (error as any).statusCode === 'number'
+    ) {
       return (error as any).statusCode
     }
     return undefined

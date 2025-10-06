@@ -1,9 +1,5 @@
 import { ref, computed, readonly } from 'vue'
-import type { 
-  User, 
-  UpdateUserRequest, 
-  Credit
-} from '../../shared/types'
+import type { User, UpdateUserRequest, Credit } from '../../shared/types'
 import { UserRepository } from './api/repositories/UserRepository'
 import { CreditRepository } from './api/repositories/CreditRepository'
 import { AuthRepository } from './api/repositories/AuthRepository'
@@ -22,22 +18,31 @@ export const useAccount = () => {
   const authRepository = new AuthRepository()
 
   // Computed
-  const hasCredits = computed(() => user.value?.credits_balance && user.value.credits_balance > 0)
+  const hasCredits = computed(
+    () => user.value?.credits_balance && user.value.credits_balance > 0
+  )
   const currentBalance = computed(() => user.value?.credits_balance || 0)
-  const purchasedProducts = computed(() => user.value?.purchased_products || [])
+  const purchasedProducts = computed(
+    () => user.value?.purchased_products || []
+  )
 
   // User Profile Methods
   const loadCurrentUser = async () => {
     try {
       isLoading.value = true
       error.value = ''
-      
+
       // Use centralized profile data from auth store
       const authStore = useAuthStore()
-      await authStore.ensureProfileData()  // Uses cached data or fetches if needed
-      user.value = authStore.user ? JSON.parse(JSON.stringify(authStore.user)) : null
+      await authStore.ensureProfileData() // Uses cached data or fetches if needed
+      user.value = authStore.user
+        ? JSON.parse(JSON.stringify(authStore.user))
+        : null
     } catch (err: unknown) {
-      error.value = err instanceof Error ? err.message : t('errors.account.loadProfileFailed')
+      error.value =
+        err instanceof Error
+          ? err.message
+          : t('errors.account.loadProfileFailed')
       console.error(t('errors.account.loadProfileLog'), err)
     } finally {
       isLoading.value = false
@@ -48,19 +53,22 @@ export const useAccount = () => {
     try {
       isLoading.value = true
       error.value = ''
-      
+
       const response = await userRepository.updateCurrentUser(userData)
       user.value = response.user || null
-      
+
       // Update auth store
       const authStore = useAuthStore()
       if (user.value) {
         authStore.setUser(user.value)
       }
-      
+
       return response
     } catch (err: unknown) {
-      error.value = err instanceof Error ? err.message : t('errors.account.updateProfileFailed')
+      error.value =
+        err instanceof Error
+          ? err.message
+          : t('errors.account.updateProfileFailed')
       console.error(t('errors.account.updateProfileLog'), err)
       throw err
     } finally {
@@ -75,7 +83,7 @@ export const useAccount = () => {
       if (!user.value) {
         await loadCurrentUser()
       }
-      
+
       const response = await creditRepository.getCurrentUserCredits()
       creditHistory.value = response.data || []
     } catch (err: unknown) {
@@ -93,11 +101,14 @@ export const useAccount = () => {
     try {
       isLoading.value = true
       error.value = ''
-      
+
       const response = await authRepository.sendPasswordReset(email)
       return response
     } catch (err: unknown) {
-      error.value = err instanceof Error ? err.message : t('errors.account.sendResetFailed')
+      error.value =
+        err instanceof Error
+          ? err.message
+          : t('errors.account.sendResetFailed')
       console.error(t('errors.account.sendResetLog'), err)
       throw err
     } finally {
@@ -105,15 +116,24 @@ export const useAccount = () => {
     }
   }
 
-  const resetPassword = async (currentPassword: string, newPassword: string) => {
+  const resetPassword = async (
+    currentPassword: string,
+    newPassword: string
+  ) => {
     try {
       isLoading.value = true
       error.value = ''
-      
-      const response = await authRepository.resetUserPassword(currentPassword, newPassword)
+
+      const response = await authRepository.resetUserPassword(
+        currentPassword,
+        newPassword
+      )
       return response
     } catch (err: unknown) {
-      error.value = err instanceof Error ? err.message : t('errors.account.resetPasswordFailed')
+      error.value =
+        err instanceof Error
+          ? err.message
+          : t('errors.account.resetPasswordFailed')
       console.error(t('errors.account.resetPasswordLog'), err)
       throw err
     } finally {
@@ -125,7 +145,7 @@ export const useAccount = () => {
   const loadAccountData = async () => {
     // Load user data first (required)
     await loadCurrentUser()
-    
+
     // Only load credits if user data is available
     if (user.value) {
       await loadCreditHistory()

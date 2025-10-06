@@ -1,4 +1,4 @@
-import type { 
+import type {
   User,
   GetUserResponse,
   GetUsersResponse,
@@ -32,7 +32,9 @@ export class UserRepository extends BaseRepository {
   /**
    * Get list of users with pagination and filters
    */
-  async getUsers(searchParams: UserSearchRequest = {}): Promise<GetUsersResponse> {
+  async getUsers(
+    searchParams: UserSearchRequest = {}
+  ): Promise<GetUsersResponse> {
     const endpoints = useApiEndpoints()
     const {
       page = 1,
@@ -72,7 +74,10 @@ export class UserRepository extends BaseRepository {
   /**
    * Update user profile
    */
-  async updateUser(id: string | number, userData: UpdateUserRequest): Promise<UpdateUserResponse> {
+  async updateUser(
+    id: string | number,
+    userData: UpdateUserRequest
+  ): Promise<UpdateUserResponse> {
     const endpoints = useApiEndpoints()
     return this.put<UpdateUserResponse>(`${endpoints.users}/${id}`, userData)
   }
@@ -80,16 +85,21 @@ export class UserRepository extends BaseRepository {
   /**
    * Update current user profile
    */
-  async updateCurrentUser(userData: UpdateUserRequest): Promise<UpdateUserResponse> {
+  async updateCurrentUser(
+    userData: UpdateUserRequest
+  ): Promise<UpdateUserResponse> {
     const endpoints = useApiEndpoints()
     const authStore = useAuthStore()
     const userId = authStore.user?.id || authStore.user?._id
-    
+
     if (!userId) {
       throw new Error('User ID not found')
     }
-    
-    return this.put<UpdateUserResponse>(`${endpoints.users}/${userId}`, userData)
+
+    return this.put<UpdateUserResponse>(
+      `${endpoints.users}/${userId}`,
+      userData
+    )
   }
 
   /**
@@ -103,10 +113,15 @@ export class UserRepository extends BaseRepository {
   /**
    * Switch active company for current user
    */
-  async switchCompany(companyId: string | number): Promise<{ user: User; message: string }> {
+  async switchCompany(
+    companyId: string | number
+  ): Promise<{ user: User; message: string }> {
     const endpoints = useApiEndpoints()
-    return this.post<{ user: User; message: string }>(endpoints.profilesSwitchCompany, {
-      company_id: companyId
-    })
+    return this.post<{ user: User; message: string }>(
+      endpoints.profilesSwitchCompany,
+      {
+        company_id: companyId
+      }
+    )
   }
 }

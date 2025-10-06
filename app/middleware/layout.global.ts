@@ -1,4 +1,4 @@
-export default defineNuxtRouteMiddleware((to) => {
+export default defineNuxtRouteMiddleware(to => {
   if (import.meta.server) {
     return
   }
@@ -26,9 +26,7 @@ export default defineNuxtRouteMiddleware((to) => {
 
     authStore.initializeAuth()
 
-    to.meta.layout = authStore.isAuthenticated
-      ? 'private'
-      : 'public'
+    to.meta.layout = authStore.isAuthenticated ? 'private' : 'public'
   } catch (error) {
     console.error('Layout middleware error:', error)
     to.meta.layout = 'public'

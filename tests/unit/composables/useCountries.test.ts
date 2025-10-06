@@ -1,7 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
-import { COUNTRIES_DATA, POPULAR_COUNTRY_CODES }
-from '~/utils/countries'
+import { COUNTRIES_DATA, POPULAR_COUNTRY_CODES } from '~/utils/countries'
 import { useCountries } from '~/composables/useCountries'
 
 describe('useCountries composable (data layer tests)', () => {
@@ -31,10 +30,9 @@ describe('useCountries composable (data layer tests)', () => {
       expect(allCodes).toContain('CA')
     })
 
-    it('should verify popular countries exist in main data',
-    () => {
+    it('should verify popular countries exist in main data', () => {
       const allCodes = COUNTRIES_DATA.map(c => c.code)
-      POPULAR_COUNTRY_CODES.forEach((code) => {
+      POPULAR_COUNTRY_CODES.forEach(code => {
         expect(allCodes).toContain(code)
       })
     })
@@ -55,11 +53,11 @@ describe('useCountries composable (data layer tests)', () => {
     })
 
     it('should validate popular countries extraction', () => {
-      const popularCountries = POPULAR_COUNTRY_CODES
-        .map(code => COUNTRIES_DATA.find(c => c.code === code))
-        .filter(c => c !== undefined)
+      const popularCountries = POPULAR_COUNTRY_CODES.map(code =>
+        COUNTRIES_DATA.find(c => c.code === code)
+      ).filter(c => c !== undefined)
       expect(popularCountries.length).toBe(10)
-      popularCountries.forEach((country) => {
+      popularCountries.forEach(country => {
         expect(country).toHaveProperty('code')
         expect(country).toHaveProperty('name')
         expect(country).toHaveProperty('flag')
@@ -103,7 +101,7 @@ describe('useCountries composable (data layer tests)', () => {
     })
 
     it('should maintain ISO code integrity', () => {
-      COUNTRIES_DATA.forEach((country) => {
+      COUNTRIES_DATA.forEach(country => {
         expect(country.code).toMatch(/^[A-Z]{2}$/)
       })
     })
@@ -118,8 +116,7 @@ describe('useCountries composable (data layer tests)', () => {
     })
 
     it('should handle non-existent country codes', () => {
-      const result = COUNTRIES_DATA.find(c =>
-        c.code === 'INVALID')
+      const result = COUNTRIES_DATA.find(c => c.code === 'INVALID')
       expect(result).toBeUndefined()
     })
   })
@@ -129,8 +126,8 @@ describe('useCountries composable (data layer tests)', () => {
       const start = performance.now()
       const data = COUNTRIES_DATA
       const popular = POPULAR_COUNTRY_CODES
-      data.forEach((country) => country.code)
-      popular.forEach((code) => code)
+      data.forEach(country => country.code)
+      popular.forEach(code => code)
       const end = performance.now()
       expect(end - start).toBeLessThan(50)
     })
@@ -184,7 +181,7 @@ describe('useCountries composable (data layer tests)', () => {
       expect(popular).toBeDefined()
       expect(Array.isArray(popular)).toBe(true)
       expect(popular.length).toBe(10)
-      popular.forEach((country) => {
+      popular.forEach(country => {
         expect(country).toHaveProperty('code')
         expect(country).toHaveProperty('name')
         expect(country).toHaveProperty('flag')

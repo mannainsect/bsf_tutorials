@@ -24,7 +24,9 @@ const currentLocale = ref(locale.value)
 const availableLocales = computed(() => locales.value)
 
 const currentLanguageName = computed(() => {
-  const current = availableLocales.value.find((l) => l.code === currentLocale.value)
+  const current = availableLocales.value.find(
+    l => l.code === currentLocale.value
+  )
   return current?.name || t('common.language')
 })
 
@@ -40,12 +42,12 @@ const route = useRoute()
 const changeLanguage = async (event: CustomEvent) => {
   const newLocale = event.detail.value
   currentLocale.value = newLocale
-  
+
   // Navigate to the same page but with the new locale
   await navigateTo(localePath(route.path, newLocale))
 }
 
-watch(locale, (newLocale) => {
+watch(locale, newLocale => {
   currentLocale.value = newLocale
 })
 </script>

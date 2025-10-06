@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import type { Country } from '~/utils/countries'
-import { COUNTRIES_DATA, POPULAR_COUNTRY_CODES }
-from '~/utils/countries'
+import { COUNTRIES_DATA, POPULAR_COUNTRY_CODES } from '~/utils/countries'
 
 describe('countries utility', () => {
   describe('COUNTRIES_DATA', () => {
@@ -15,20 +14,28 @@ describe('countries utility', () => {
       expect(uniqueCodes.size).toBe(codes.length)
     })
 
-    it('should have all required fields for each country',
-    () => {
+    it('should have all required fields for each country', () => {
       COUNTRIES_DATA.forEach((country, index) => {
-        expect(country.code, `Country at index ${index}
-should have code`).toBeTruthy()
-        expect(country.name, `Country at index ${index}
-should have name`).toBeTruthy()
-        expect(country.flag, `Country at index ${index}
-should have flag`).toBeTruthy()
+        expect(
+          country.code,
+          `Country at index ${index}
+should have code`
+        ).toBeTruthy()
+        expect(
+          country.name,
+          `Country at index ${index}
+should have name`
+        ).toBeTruthy()
+        expect(
+          country.flag,
+          `Country at index ${index}
+should have flag`
+        ).toBeTruthy()
       })
     })
 
     it('should have non-empty strings for all fields', () => {
-      COUNTRIES_DATA.forEach((country) => {
+      COUNTRIES_DATA.forEach(country => {
         expect(typeof country.code).toBe('string')
         expect(typeof country.name).toBe('string')
         expect(typeof country.flag).toBe('string')
@@ -40,13 +47,13 @@ should have flag`).toBeTruthy()
 
     it('should have valid ISO 3166-1 alpha-2 codes', () => {
       const isoCodePattern = /^[A-Z]{2}$/
-      COUNTRIES_DATA.forEach((country) => {
+      COUNTRIES_DATA.forEach(country => {
         expect(country.code).toMatch(isoCodePattern)
       })
     })
 
     it('should have flag emojis present', () => {
-      COUNTRIES_DATA.forEach((country) => {
+      COUNTRIES_DATA.forEach(country => {
         const codePoints = country.flag.codePointAt(0)
         expect(codePoints).toBeDefined()
         expect(codePoints).toBeGreaterThan(0)
@@ -55,10 +62,19 @@ should have flag`).toBeTruthy()
 
     it('should include common countries', () => {
       const codes = COUNTRIES_DATA.map(c => c.code)
-      const commonCountries =
-        ['US', 'GB', 'CA', 'DE', 'FR', 'ES', 'IT', 'JP', 'CN',
-        'BR']
-      commonCountries.forEach((code) => {
+      const commonCountries = [
+        'US',
+        'GB',
+        'CA',
+        'DE',
+        'FR',
+        'ES',
+        'IT',
+        'JP',
+        'CN',
+        'BR'
+      ]
+      commonCountries.forEach(code => {
         expect(codes).toContain(code)
       })
     })
@@ -88,15 +104,14 @@ should have flag`).toBeTruthy()
 
     it('should contain valid 2-letter uppercase codes', () => {
       const isoCodePattern = /^[A-Z]{2}$/
-      POPULAR_COUNTRY_CODES.forEach((code) => {
+      POPULAR_COUNTRY_CODES.forEach(code => {
         expect(code).toMatch(isoCodePattern)
       })
     })
 
-    it('should only contain codes that exist in COUNTRIES_DATA',
-    () => {
+    it('should only contain codes that exist in COUNTRIES_DATA', () => {
       const allCodes = COUNTRIES_DATA.map(c => c.code)
-      POPULAR_COUNTRY_CODES.forEach((code) => {
+      POPULAR_COUNTRY_CODES.forEach(code => {
         expect(allCodes).toContain(code)
       })
     })
@@ -148,25 +163,24 @@ should have flag`).toBeTruthy()
         oceania: ['AU', 'NZ', 'FJ']
       }
 
-      Object.values(continentSamples).forEach((samples) => {
-        samples.forEach((code) => {
+      Object.values(continentSamples).forEach(samples => {
+        samples.forEach(code => {
           expect(codes).toContain(code)
         })
       })
     })
 
     it('should have consistent flag emoji format', () => {
-      COUNTRIES_DATA.forEach((country) => {
+      COUNTRIES_DATA.forEach(country => {
         expect(country.flag.length).toBeGreaterThanOrEqual(2)
         const codePoint = country.flag.codePointAt(0)
         expect(codePoint).toBeDefined()
-        expect(codePoint).toBeGreaterThanOrEqual(0x1F1E6)
-        expect(codePoint).toBeLessThanOrEqual(0x1F1FF)
+        expect(codePoint).toBeGreaterThanOrEqual(0x1f1e6)
+        expect(codePoint).toBeLessThanOrEqual(0x1f1ff)
       })
     })
 
-    it('should alphabetically sort sample after localization',
-    () => {
+    it('should alphabetically sort sample after localization', () => {
       const codes = COUNTRIES_DATA.map(c => c.code)
       expect(codes.length).toBeGreaterThan(0)
       expect(codes.includes('AF')).toBe(true)

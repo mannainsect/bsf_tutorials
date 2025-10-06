@@ -12,6 +12,6 @@ export const useCapacitor = () => {
     platform,
     isAndroid,
     isIOS,
-    isWeb,
+    isWeb
   }
 }

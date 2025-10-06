@@ -1,7 +1,7 @@
-import type { 
-  LoginRequest, 
-  LoginResponse, 
-  RegisterRequest, 
+import type {
+  LoginRequest,
+  LoginResponse,
+  RegisterRequest,
   RegisterResponse,
   RefreshTokenRequest,
   RefreshTokenResponse
@@ -14,7 +14,7 @@ export class AuthRepository extends BaseRepository {
    */
   async login(credentials: LoginRequest): Promise<LoginResponse> {
     const endpoints = useApiEndpoints()
-    
+
     // Use new /auth/login endpoint with JSON body
     return await this.post<LoginResponse>(endpoints.authLogin, {
       email: credentials.email,
@@ -24,7 +24,7 @@ export class AuthRepository extends BaseRepository {
 
   /**
    * Register new user using new /auth/register endpoint
-  */
+   */
   async register(userData: RegisterRequest): Promise<RegisterResponse> {
     const endpoints = useApiEndpoints()
     const { public: runtimePublicConfig } = useRuntimeConfig()
@@ -33,7 +33,7 @@ export class AuthRepository extends BaseRepository {
     return this.request<RegisterResponse>(endpoints.authRegister, {
       method: 'POST',
       body: userData,
-      query: domainAlias ? { domain_alias: domainAlias } : undefined,
+      query: domainAlias ? { domain_alias: domainAlias } : undefined
     })
   }
 
@@ -58,10 +58,9 @@ export class AuthRepository extends BaseRepository {
    */
   async sendPasswordReset(email: string): Promise<{ message: string }> {
     const endpoints = useApiEndpoints()
-    return this.post<{ message: string }>(
-      endpoints.authResetPassword,
-      { email }
-    )
+    return this.post<{ message: string }>(endpoints.authResetPassword, {
+      email
+    })
   }
 
   /**
@@ -114,5 +113,4 @@ export class AuthRepository extends BaseRepository {
     const endpoints = useApiEndpoints()
     return this.post<LoginResponse>(endpoints.authLoginToken, { token })
   }
-
 }
