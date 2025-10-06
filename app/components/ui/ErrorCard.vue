@@ -21,7 +21,8 @@ interface Props {
 
 withDefaults(defineProps<Props>(), {
   showRetry: true,
-  compact: true
+  compact: true,
+  retryLabel: undefined
 })
 
 defineEmits<{

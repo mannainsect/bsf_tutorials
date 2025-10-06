@@ -26,15 +26,27 @@ beforeAll(() => {
       const value = mockStorage[key]
       return value ? value : null
     },
-    set: (key: string, value: any) => {
+    set: (key: string, value: unknown) => {
       mockStorage[key] =
         typeof value === 'string' ? value : JSON.stringify(value)
     },
     remove: (key: string) => {
-      delete mockStorage[key]
+      const keys = Object.keys(mockStorage)
+      keys.forEach(k => {
+        if (k === key && Object.prototype.hasOwnProperty.call(mockStorage, k)) {
+          // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+          delete mockStorage[k]
+        }
+      })
     },
     clear: () => {
-      Object.keys(mockStorage).forEach(key => delete mockStorage[key])
+      const keys = Object.keys(mockStorage)
+      keys.forEach(k => {
+        if (Object.prototype.hasOwnProperty.call(mockStorage, k)) {
+          // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+          delete mockStorage[k]
+        }
+      })
     }
   })
 })
@@ -52,7 +64,13 @@ describe('useUserRole', () => {
 
   beforeEach(() => {
     vi.clearAllMocks()
-    Object.keys(mockStorage).forEach(key => delete mockStorage[key])
+    const keys = Object.keys(mockStorage)
+    keys.forEach(key => {
+      if (Object.prototype.hasOwnProperty.call(mockStorage, key)) {
+        // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+        delete mockStorage[key]
+      }
+    })
     setActivePinia(createPinia())
     authStore = realUseAuthStore()
     // Set default token for authenticated tests
@@ -360,7 +378,7 @@ describe('useUserRole', () => {
     it('should handle localStorage disabled gracefully', () => {
       // Mock window being undefined (SSR)
       const originalWindow = global.window
-      ;(global as any).window = undefined
+      ;(global as { window: typeof globalThis.window }).window = undefined
 
       authStore.setUser({ _id: 'user1', id: 'user1', email: 'u@test.com' })
       authStore.setActiveCompany({ _id: 'comp1', id: 'comp1' })

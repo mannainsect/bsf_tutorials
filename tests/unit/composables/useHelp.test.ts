@@ -40,8 +40,8 @@ const mockModal = {
 const mockPerformanceNow = vi.spyOn(performance, 'now')
 
 describe('useHelp', () => {
-  let mockModalController: any
-  let useHelp: any
+  let mockModalController: { create: ReturnType<typeof vi.fn> }
+  let useHelp: typeof import('~/composables/useHelp').useHelp
   let originalConsole: {
     log: typeof console.log
     warn: typeof console.warn
@@ -61,7 +61,8 @@ describe('useHelp', () => {
 
     // Get mocked modalController
     const ionicModule = await import('@ionic/vue')
-    mockModalController = ionicModule.modalController as any
+    mockModalController = ionicModule.modalController as
+      { create: ReturnType<typeof vi.fn> }
 
     // Setup default mock implementations
     mockModal.present.mockResolvedValue(undefined)
@@ -121,12 +122,12 @@ describe('useHelp', () => {
       const { showHelp } = useHelp()
 
       // Setup modal to stay open
-      let dismissResolve: any
+      let dismissResolve: ((value: { data: undefined }) => void) | null = null
       mockModal.onDidDismiss.mockReturnValue({
-        then: (callback: Function) => {
+        then: (callback: (value: { data: undefined }) => void) => {
           // Don't call callback immediately to keep modal "open"
           dismissResolve = callback
-          return { catch: vi.fn() }
+          return { catch: vi.fn() as () => void }
         }
       })
 
@@ -144,18 +145,20 @@ describe('useHelp', () => {
       )
 
       // Cleanup - simulate dismiss
-      if (dismissResolve) dismissResolve({ data: undefined })
+      if (dismissResolve) {
+        dismissResolve({ data: undefined })
+      }
     })
 
     it('should focus existing modal if already open', async () => {
       const { showHelp } = useHelp()
 
       // Setup modal to stay open
-      let dismissResolve: any
+      let dismissResolve: ((value: { data: undefined }) => void) | null = null
       mockModal.onDidDismiss.mockReturnValue({
-        then: (callback: Function) => {
+        then: (callback: (value: { data: undefined }) => void) => {
           dismissResolve = callback
-          return { catch: vi.fn() }
+          return { catch: vi.fn() as () => void }
         }
       })
 
@@ -174,7 +177,9 @@ describe('useHelp', () => {
       )
 
       // Cleanup
-      if (dismissResolve) dismissResolve({ data: undefined })
+      if (dismissResolve) {
+        dismissResolve({ data: undefined })
+      }
     })
   })
 
@@ -342,11 +347,11 @@ describe('useHelp', () => {
       const { showHelp, hideHelp } = useHelp()
 
       // Setup modal to stay open
-      let dismissResolve: any
+      let dismissResolve: ((value: { data: undefined }) => void) | null = null
       mockModal.onDidDismiss.mockReturnValue({
-        then: (callback: Function) => {
+        then: (callback: (value: { data: undefined }) => void) => {
           dismissResolve = callback
-          return { catch: vi.fn() }
+          return { catch: vi.fn() as () => void }
         }
       })
 
@@ -357,7 +362,9 @@ describe('useHelp', () => {
       expect(console.log).toHaveBeenCalledWith('[useHelp] Hiding help modal')
 
       // Cleanup
-      if (dismissResolve) dismissResolve({ data: undefined })
+      if (dismissResolve) {
+        dismissResolve({ data: undefined })
+      }
     })
 
     it('should handle no modal to hide', async () => {
@@ -373,11 +380,11 @@ describe('useHelp', () => {
       const { showHelp, hideHelp } = useHelp()
 
       // Setup modal to stay open
-      let dismissResolve: any
+      let dismissResolve: ((value: { data: undefined }) => void) | null = null
       mockModal.onDidDismiss.mockReturnValue({
-        then: (callback: Function) => {
+        then: (callback: (value: { data: undefined }) => void) => {
           dismissResolve = callback
-          return { catch: vi.fn() }
+          return { catch: vi.fn() as () => void }
         }
       })
 
@@ -392,7 +399,9 @@ describe('useHelp', () => {
       )
 
       // Cleanup
-      if (dismissResolve) dismissResolve({ data: undefined })
+      if (dismissResolve) {
+        dismissResolve({ data: undefined })
+      }
     })
   })
 
@@ -407,11 +416,11 @@ describe('useHelp', () => {
       const { showHelp, isHelpOpen } = useHelp()
 
       // Setup modal to stay open
-      let dismissResolve: any
+      let dismissResolve: ((value: { data: undefined }) => void) | null = null
       mockModal.onDidDismiss.mockReturnValue({
-        then: (callback: Function) => {
+        then: (callback: (value: { data: undefined }) => void) => {
           dismissResolve = callback
-          return { catch: vi.fn() }
+          return { catch: vi.fn() as () => void }
         }
       })
 
@@ -420,7 +429,9 @@ describe('useHelp', () => {
       expect(isHelpOpen()).toBe(true)
 
       // Cleanup
-      if (dismissResolve) dismissResolve({ data: undefined })
+      if (dismissResolve) {
+        dismissResolve({ data: undefined })
+      }
     })
   })
 
@@ -428,10 +439,11 @@ describe('useHelp', () => {
     it('should handle modal dismissal', async () => {
       const { showHelp } = useHelp()
 
-      let dismissCallback: Function = () => {}
+      let dismissCallback: (value: { data: undefined; role?: string }) =>
+        void = () => {}
       mockModal.onDidDismiss.mockImplementation(() => {
         return {
-          then: (callback: Function) => {
+          then: (callback: (value: { data: undefined }) => void) => {
             dismissCallback = callback
             return {
               catch: vi.fn()
@@ -457,10 +469,11 @@ describe('useHelp', () => {
       window.pageYOffset = 500
       const scrollToSpy = vi.spyOn(window, 'scrollTo')
 
-      let dismissCallback: Function = () => {}
+      let dismissCallback: (value: { data: undefined; role?: string }) =>
+        void = () => {}
       mockModal.onDidDismiss.mockImplementation(() => {
         return {
-          then: (callback: Function) => {
+          then: (callback: (value: { data: undefined }) => void) => {
             dismissCallback = callback
             return {
               catch: vi.fn()
@@ -490,10 +503,11 @@ describe('useHelp', () => {
         configurable: true
       })
 
-      let dismissCallback: Function = () => {}
+      let dismissCallback: (value: { data: undefined; role?: string }) =>
+        void = () => {}
       mockModal.onDidDismiss.mockImplementation(() => {
         return {
-          then: (callback: Function) => {
+          then: (callback: (value: { data: undefined }) => void) => {
             dismissCallback = callback
             return {
               catch: vi.fn()
@@ -517,12 +531,12 @@ describe('useHelp', () => {
     it('should handle dismiss callback error', async () => {
       const { showHelp } = useHelp()
 
-      let catchCallback: Function = () => {}
+      let catchCallback: (error: Error) => void = () => {}
       mockModal.onDidDismiss.mockImplementation(() => {
         return {
           then: () => {
             return {
-              catch: (callback: Function) => {
+              catch: (callback: (error: Error) => void) => {
                 catchCallback = callback
               }
             }
@@ -544,14 +558,14 @@ describe('useHelp', () => {
 
   describe('Keyboard handling', () => {
     it('should close modal on ESC key', async () => {
-      const { showHelp, hideHelp } = useHelp()
+      const { showHelp } = useHelp()
 
       // Setup modal to stay open
-      let dismissResolve: any
+      let dismissResolve: ((value: { data: undefined }) => void) | null = null
       mockModal.onDidDismiss.mockReturnValue({
-        then: (callback: Function) => {
+        then: (callback: (value: { data: undefined }) => void) => {
           dismissResolve = callback
-          return { catch: vi.fn() }
+          return { catch: vi.fn() as () => void }
         }
       })
 
@@ -568,7 +582,9 @@ describe('useHelp', () => {
       )
 
       // Cleanup
-      if (dismissResolve) dismissResolve({ data: undefined })
+      if (dismissResolve) {
+        dismissResolve({ data: undefined })
+      }
     })
 
     it('should not close modal on other keys', async () => {
@@ -588,7 +604,7 @@ describe('useHelp', () => {
     })
 
     it('should not close modal if no modal is open', async () => {
-      const { hideHelp, isHelpOpen } = useHelp()
+      const { isHelpOpen } = useHelp()
 
       // Ensure modal is not open
       expect(isHelpOpen()).toBe(false)
@@ -653,10 +669,11 @@ describe('useHelp', () => {
         throw new Error('Cannot scroll')
       })
 
-      let dismissCallback: Function = () => {}
+      let dismissCallback: (value: { data: undefined; role?: string }) =>
+        void = () => {}
       mockModal.onDidDismiss.mockImplementation(() => {
         return {
-          then: (callback: Function) => {
+          then: (callback: (value: { data: undefined }) => void) => {
             dismissCallback = callback
             return {
               catch: vi.fn()
@@ -688,10 +705,11 @@ describe('useHelp', () => {
         configurable: true
       })
 
-      let dismissCallback: Function = () => {}
+      let dismissCallback: (value: { data: undefined; role?: string }) =>
+        void = () => {}
       mockModal.onDidDismiss.mockImplementation(() => {
         return {
-          then: (callback: Function) => {
+          then: (callback: (value: { data: undefined }) => void) => {
             dismissCallback = callback
             return {
               catch: vi.fn()

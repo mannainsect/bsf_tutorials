@@ -96,7 +96,7 @@ export const useTextFormatting = () => {
       }
 
       // Extract plain URLs from text
-      const plainUrlRegex = /(?:^|[\s])(https?:\/\/[^\s<>"{}|\\^`\[\]]+)/g
+      const plainUrlRegex = /(?:^|[\s])(https?:\/\/[^\s<>"{}|\\^`[\]]+)/g
 
       while ((match = plainUrlRegex.exec(text)) !== null) {
         const url = match[1]

@@ -43,18 +43,16 @@ class MockIntersectionObserver {
   root = null
   rootMargin = ''
   thresholds = []
-  constructor(callback: Function, options?: any) {}
 }
-global.IntersectionObserver = MockIntersectionObserver as any
+global.IntersectionObserver = MockIntersectionObserver as unknown as typeof IntersectionObserver
 
 // Mock ResizeObserver
 class MockResizeObserver {
   observe = vi.fn()
   unobserve = vi.fn()
   disconnect = vi.fn()
-  constructor(callback: Function) {}
 }
-global.ResizeObserver = MockResizeObserver as any
+global.ResizeObserver = MockResizeObserver as unknown as typeof ResizeObserver
 
 // Mock requestAnimationFrame
 global.requestAnimationFrame = vi.fn(cb => setTimeout(cb, 0))
@@ -77,14 +75,20 @@ Object.defineProperty(window, 'matchMedia', {
 
 // Mock localStorage with working implementation
 const localStorageMock = (() => {
-  let store: { [key: string]: string } = {}
+  let store: Record<string, string> = {}
   return {
     getItem: vi.fn((key: string) => store[key] || null),
     setItem: vi.fn((key: string, value: string) => {
       store[key] = value.toString()
     }),
     removeItem: vi.fn((key: string) => {
-      delete store[key]
+      const newStore: Record<string, string> = {}
+      Object.keys(store).forEach(k => {
+        if (k !== key) {
+          newStore[k] = store[k]
+        }
+      })
+      store = newStore
     }),
     clear: vi.fn(() => {
       store = {}
@@ -106,14 +110,20 @@ Object.defineProperty(window, 'localStorage', {
 
 // Mock sessionStorage
 const sessionStorageMock = (() => {
-  let store: { [key: string]: string } = {}
+  let store: Record<string, string> = {}
   return {
     getItem: vi.fn((key: string) => store[key] || null),
     setItem: vi.fn((key: string, value: string) => {
       store[key] = value.toString()
     }),
     removeItem: vi.fn((key: string) => {
-      delete store[key]
+      const newStore: Record<string, string> = {}
+      Object.keys(store).forEach(k => {
+        if (k !== key) {
+          newStore[k] = store[k]
+        }
+      })
+      store = newStore
     }),
     clear: vi.fn(() => {
       store = {}
@@ -153,7 +163,7 @@ global.getActivePinia = getActivePinia
 global.storeToRefs = storeToRefs
 
 // Mock Nuxt composables with sensible defaults
-global.useState = vi.fn((key, init) => {
+global.useState = vi.fn((_key, init) => {
   return ref(init ? init() : null)
 })
 
@@ -164,7 +174,7 @@ global.useRuntimeConfig = vi.fn(() => ({
   }
 }))
 
-global.useCookie = vi.fn(name => {
+global.useCookie = vi.fn(_name => {
   return ref(null)
 })
 
@@ -187,8 +197,7 @@ global.useRoute = vi.fn(() => ({
 global.navigateTo = vi.fn()
 
 // Mock $fetch for API calls - this MUST be mocked to avoid real HTTP calls
-global.$fetch = vi.fn((url, options) => {
-  console.log('Mocked $fetch called:', url)
+global.$fetch = vi.fn((_url, _options) => {
   return Promise.resolve({})
 })
 
@@ -198,7 +207,7 @@ global.useStorage = () => ({
     const value = localStorage.getItem(key)
     return value ? JSON.parse(value) : null
   },
-  set: (key: string, value: any) => {
+  set: (key: string, value: unknown) => {
     localStorage.setItem(key, JSON.stringify(value))
   },
   remove: (key: string) => {
@@ -302,8 +311,7 @@ afterEach(() => {
 
 // Mock useApi composable
 global.useApi = () => ({
-  api: vi.fn((endpoint: string, config?: any) => {
-    console.log('Mocked useApi called:', endpoint)
+  api: vi.fn((_endpoint: string, _config?: unknown) => {
     return Promise.resolve({})
   })
 })

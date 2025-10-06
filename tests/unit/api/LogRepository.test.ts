@@ -52,7 +52,8 @@ describe('LogRepository', () => {
         _id: 'log-mongo-id-789'
       }
 
-      vi.spyOn(repository as any, 'request').mockResolvedValue(mockResponse)
+      vi.spyOn(repository as unknown as { request: () => unknown }, 'request')
+        .mockResolvedValue(mockResponse)
 
       const result = await repository.createProcessLog(logData, params)
 
@@ -74,7 +75,8 @@ describe('LogRepository', () => {
         _id: 'log-legacy-id'
       }
 
-      vi.spyOn(repository as any, 'request').mockResolvedValue(mockResponse)
+      vi.spyOn(repository as unknown as { request: () => unknown }, 'request')
+        .mockResolvedValue(mockResponse)
 
       const result = await repository.createProcessLog(logData, params)
 
@@ -94,13 +96,18 @@ describe('LogRepository', () => {
 
       const params = { space_id: 'space-null' }
 
-      const mockResponse: any = {
+      const mockResponse: {
+        status: string
+        log_id: string | null
+        _id: string
+      } = {
         status: 'Process log created',
         log_id: null,
         _id: 'log-null-id'
       }
 
-      vi.spyOn(repository as any, 'request').mockResolvedValue(mockResponse)
+      vi.spyOn(repository as unknown as { request: () => unknown }, 'request')
+        .mockResolvedValue(mockResponse)
 
       const result = await repository.createProcessLog(logData, params)
 
@@ -119,13 +126,18 @@ describe('LogRepository', () => {
 
       const params = { space_id: 'space-empty' }
 
-      const mockResponse: any = {
+      const mockResponse: {
+        status: string
+        log_id: string | null
+        _id: string
+      } = {
         status: 'Process log created',
         log_id: '',
         _id: 'log-empty-id'
       }
 
-      vi.spyOn(repository as any, 'request').mockResolvedValue(mockResponse)
+      vi.spyOn(repository as unknown as { request: () => unknown }, 'request')
+        .mockResolvedValue(mockResponse)
 
       const result = await repository.createProcessLog(logData, params)
 
@@ -149,7 +161,8 @@ describe('LogRepository', () => {
         _id: 'log-content-123'
       }
 
-      vi.spyOn(repository as any, 'request').mockResolvedValue(mockResponse)
+      vi.spyOn(repository as unknown as { request: () => unknown }, 'request')
+        .mockResolvedValue(mockResponse)
 
       const result = await repository.createContentLog(logData)
 
@@ -173,7 +186,8 @@ describe('LogRepository', () => {
         _id: 'log-content-456'
       }
 
-      vi.spyOn(repository as any, 'request').mockResolvedValue(mockResponse)
+      vi.spyOn(repository as unknown as { request: () => unknown }, 'request')
+        .mockResolvedValue(mockResponse)
 
       const result = await repository.createContentLog(logData, params)
 

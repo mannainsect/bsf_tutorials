@@ -12,19 +12,19 @@ vi.mock('~/composables/useApi', () => ({
 // Test implementation of BaseRepository
 class TestRepository extends BaseRepository {
   // Expose protected methods for testing
-  public async testGet<T>(endpoint: string, query?: any): Promise<T> {
+  public async testGet<T>(endpoint: string, query?: unknown): Promise<T> {
     return this.get<T>(endpoint, query)
   }
 
-  public async testPost<T>(endpoint: string, body?: any): Promise<T> {
+  public async testPost<T>(endpoint: string, body?: unknown): Promise<T> {
     return this.post<T>(endpoint, body)
   }
 
-  public async testPut<T>(endpoint: string, body?: any): Promise<T> {
+  public async testPut<T>(endpoint: string, body?: unknown): Promise<T> {
     return this.put<T>(endpoint, body)
   }
 
-  public async testPatch<T>(endpoint: string, body?: any): Promise<T> {
+  public async testPatch<T>(endpoint: string, body?: unknown): Promise<T> {
     return this.patch<T>(endpoint, body)
   }
 
@@ -69,7 +69,7 @@ describe('BaseRepository', () => {
     vi.clearAllMocks()
     setActivePinia(createPinia())
     repository = new TestRepository()
-    mockApi = repository['api'] as any
+    mockApi = repository['api'] as ReturnType<typeof vi.fn>
   })
 
   describe('HTTP methods', () => {

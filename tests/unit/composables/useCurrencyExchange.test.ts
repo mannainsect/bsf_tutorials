@@ -10,7 +10,13 @@ const localStorageMock = (() => {
       store[key] = value
     }),
     removeItem: vi.fn((key: string) => {
-      delete store[key]
+      const newStore: Record<string, string> = {}
+      Object.keys(store).forEach(k => {
+        if (k !== key) {
+          newStore[k] = store[k]
+        }
+      })
+      store = newStore
     }),
     clear: vi.fn(() => {
       store = {}
@@ -181,11 +187,8 @@ describe('useCurrencyExchange', () => {
       expect(mockFetch).toHaveBeenCalledTimes(1)
     })
     it('should handle timeout properly', async () => {
-      let rejectFn: ((error: Error) => void) | null = null
-      mockFetch.mockImplementation((url, options) => {
-        return new Promise((resolve, reject) => {
-          rejectFn = reject
-
+      mockFetch.mockImplementation((_url, options) => {
+        return new Promise((_resolve, reject) => {
           if (options?.signal) {
             options.signal.addEventListener('abort', () => {
               reject(new Error('AbortError'))

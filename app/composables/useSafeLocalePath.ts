@@ -96,16 +96,16 @@ export const useSafeLocalePath = () => {
 
     // Handle complex route objects
     if (typeof route === 'object' && route !== null) {
-      const routeObj = route as any
+      const routeObj = route as Record<string, unknown>
 
       // If it has a path property, process it
-      if (routeObj.path) {
+      if (routeObj.path && typeof routeObj.path === 'string') {
         return fallbackPathResolver(routeObj.path, locale)
       }
 
       // If it has a name property, return as is
       // (named routes need proper i18n setup)
-      if (routeObj.name) {
+      if (routeObj.name && typeof routeObj.name === 'string') {
         console.warn(`Named route "${routeObj.name}" requires i18n setup`)
         return routeObj.name
       }
@@ -134,7 +134,7 @@ export const useSafeLocalePath = () => {
       // Try to use native localePath if available
       if (localePath) {
         try {
-          resolvedPath = localePath(route, locale as any)
+          resolvedPath = localePath(route, locale)
         } catch (error) {
           console.warn('Failed to resolve path with localePath:', error)
           resolvedPath = fallbackPathResolver(route, locale)

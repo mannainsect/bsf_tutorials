@@ -26,7 +26,7 @@ export const useHelp = () => {
     fallback: string,
     params?: Record<string, unknown>
   ): string => {
-    const translated = params ? t(key, params as any) : t(key)
+    const translated = params ? t(key, params) : t(key)
     return translated === key ? fallback : translated
   }
 
@@ -147,7 +147,7 @@ export const useHelp = () => {
                 '[tabindex]:not([tabindex="-1"])'
             )
             el?.focus()
-          } catch (error) {
+          } catch {
             console.debug('[useHelp] Could not focus existing help modal')
           }
         }
@@ -200,7 +200,7 @@ export const useHelp = () => {
       // Enhanced dismissal handling
       currentModal
         .onDidDismiss()
-        .then((result: any) => {
+        .then((result: unknown) => {
           const duration = Date.now() - modalOpenTime.value
           console.log('[useHelp] Modal dismissed', { duration, result })
           // Modal dismissed
@@ -212,7 +212,7 @@ export const useHelp = () => {
           restoreScrollPosition()
           restoreFocus()
         })
-        .catch((error: any) => {
+        .catch((error: unknown) => {
           console.error('[useHelp] Error in dismiss handler:', error)
           currentModal = null
           isModalOpen.value = false

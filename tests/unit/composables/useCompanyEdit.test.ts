@@ -7,8 +7,8 @@ import { CompanyRepository } from '~/composables/api/repositories/CompanyReposit
 import type { Company } from '~/shared/types'
 
 // Create a shared form state for vee-validate mocks
-let mockFormValues: Record<string, any> = {}
-let mockFieldRefs: Record<string, any> = {}
+let mockFormValues: Record<string, unknown> = {}
+let mockFieldRefs: Record<string, unknown> = {}
 const mockFormMeta = ref({ valid: true, dirty: false, touched: false })
 
 // Mock vee-validate
@@ -19,37 +19,33 @@ vi.mock('vee-validate', () => ({
         return mockFormValues
       },
       meta: mockFormMeta,
-      setValues: (values: any) => {
-        Object.keys(mockFormValues).forEach(key => {
-          delete mockFormValues[key]
-        })
+      setValues: (values: Record<string, unknown>) => {
+        mockFormValues = {}
         Object.assign(mockFormValues, values)
         Object.keys(values).forEach(key => {
           if (mockFieldRefs[key]) {
-            mockFieldRefs[key].value = values[key]
+            (mockFieldRefs[key] as { value: unknown }).value = values[key]
           }
         })
       },
-      resetForm: (opts?: any) => {
+      resetForm: (opts?: { values?: Record<string, unknown> }) => {
         if (opts?.values) {
-          Object.keys(mockFormValues).forEach(key => {
-            delete mockFormValues[key]
-          })
+          mockFormValues = {}
           Object.assign(mockFormValues, opts.values)
           Object.keys(opts.values).forEach(key => {
             if (mockFieldRefs[key]) {
-              mockFieldRefs[key].value = opts.values[key]
+              (mockFieldRefs[key] as { value: unknown }).value = opts.values[key]
             }
           })
         }
       },
-      setFieldValue: (name: string, value: any) => {
+      setFieldValue: (name: string, value: unknown) => {
         mockFormValues[name] = value
         if (mockFieldRefs[name]) {
-          mockFieldRefs[name].value = value
+          (mockFieldRefs[name] as { value: unknown }).value = value
         }
       },
-      handleSubmit: (fn: any) => fn
+      handleSubmit: (fn: (...args: unknown[]) => unknown) => fn
     }
     return formInstance
   }),
@@ -134,14 +130,14 @@ describe('useCompanyEdit', () => {
         user: computed(() => authStore.user),
         userId: computed(() => authStore.userId),
         companyId: computed(() => authStore.companyId)
-      }) as any
+      }) as ReturnType<typeof useProfile>
 
     // Override useUserRole to return admin permissions
     global.useUserRole = () =>
       ({
         isCompanyAdmin: vi.fn(() => true),
         isCompanyManager: vi.fn(() => false)
-      }) as any
+      }) as ReturnType<typeof useUserRole>
   })
 
   it('should allow admin to start editing', () => {
@@ -158,7 +154,7 @@ describe('useCompanyEdit', () => {
       ({
         isCompanyAdmin: vi.fn(() => false),
         isCompanyManager: vi.fn(() => false)
-      }) as any
+      }) as ReturnType<typeof useUserRole>
 
     const { startEdit, isEditing, error } = useCompanyEdit()
 
@@ -176,7 +172,7 @@ describe('useCompanyEdit', () => {
       () =>
         ({
           updateCompany: mockUpdateCompany
-        }) as any
+        }) as ReturnType<typeof useUserRole>
     )
 
     authStore.refreshProfile = mockRefreshProfile
@@ -185,7 +181,7 @@ describe('useCompanyEdit', () => {
       ({
         showSuccess: mockShowSuccess,
         showError: vi.fn()
-      }) as any
+      }) as ReturnType<typeof useUserRole>
 
     const { startEdit, name, saveCompany } = useCompanyEdit()
 
@@ -209,14 +205,14 @@ describe('useCompanyEdit', () => {
       () =>
         ({
           updateCompany: mockUpdateCompany
-        }) as any
+        }) as ReturnType<typeof useUserRole>
     )
 
     global.useToast = () =>
       ({
         showSuccess: vi.fn(),
         showError: mockShowError
-      }) as any
+      }) as ReturnType<typeof useUserRole>
 
     const { startEdit, name, saveCompany } = useCompanyEdit()
 
@@ -234,7 +230,7 @@ describe('useCompanyEdit', () => {
       () =>
         ({
           updateCompany: mockUpdateCompany
-        }) as any
+        }) as ReturnType<typeof useUserRole>
     )
 
     authStore.refreshProfile = vi.fn().mockResolvedValue({})

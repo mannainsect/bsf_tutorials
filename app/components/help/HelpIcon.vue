@@ -65,7 +65,7 @@ const translate = (
   fallback: string,
   params?: Record<string, unknown>
 ): string => {
-  const translated = params ? t(key, params as any) : t(key)
+  const translated = params ? t(key, params) : t(key)
   return translated === key ? fallback : translated
 }
 
