@@ -429,13 +429,13 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
         id: 'comp1',
         name: 'First Co'
       })
-      const otherComps = profileWithoutActiveCompany.other_companies.map(
-        c => ({
+      const otherComps = profileWithoutActiveCompany.other_companies
+        .filter(c => c._id !== 'comp1')
+        .map(c => ({
           ...c,
           id: c._id || c.id,
           _id: c._id || c.id
-        })
-      )
+        }))
       expect(store.otherCompanies).toEqual(otherComps)
       expect(store.user).toEqual({
         ...profileWithoutActiveCompany.user,

@@ -202,15 +202,15 @@ export const useAuthStore = defineStore('auth', () => {
           )
           // Store only IDs if data is too large
           const summaryData = JSON.stringify({
-            admins: (profile.active_company.admins || []).map(
-              a => a._id || String(a.id)
-            ),
-            managers: (profile.active_company.managers || []).map(
-              m => m._id || String(m.id)
-            ),
-            operators: (profile.active_company.operators || []).map(
-              o => o._id || String(o.id)
-            )
+            admins: (profile.active_company.admins || [])
+              .map(a => a._id ?? (a.id != null ? String(a.id) : null))
+              .filter((id): id is string => !!id),
+            managers: (profile.active_company.managers || [])
+              .map(m => m._id ?? (m.id != null ? String(m.id) : null))
+              .filter((id): id is string => !!id),
+            operators: (profile.active_company.operators || [])
+              .map(o => o._id ?? (o.id != null ? String(o.id) : null))
+              .filter((id): id is string => !!id)
           })
           storage.set('auth_active_company_roles', summaryData)
         } else {
@@ -318,6 +318,9 @@ export const useAuthStore = defineStore('auth', () => {
               // Fallback: set company locally without API update
               // Using local fallback for company selection
               // Manually construct the active_company structure
+              const activeCompanyId =
+                firstCompany?._id ??
+                (firstCompany?.id != null ? String(firstCompany.id) : null)
               const fallbackProfile: import('../composables/api/repositories/ProfileRepository').ProfileResponse =
                 {
                   ...profile,
@@ -334,7 +337,15 @@ export const useAuthStore = defineStore('auth', () => {
                     admins: [],
                     managers: [],
                     operators: []
-                  }
+                  },
+                  other_companies: (profile.other_companies || []).filter(
+                    other => {
+                      const otherId =
+                        other._id ??
+                        (other.id != null ? String(other.id) : null)
+                      return !activeCompanyId || otherId !== activeCompanyId
+                    }
+                  )
                 }
               console.log('[AUTH] Using local fallback for company selection')
               setProfileState(fallbackProfile)
