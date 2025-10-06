@@ -19,10 +19,10 @@ export const useMetrics = () => {
   const metricsService = useState<MetricsService>('metricsService', () => {
     return new MetricsService()
   })
-  
+
   const authStore = useAuthStore()
   const config = useRuntimeConfig()
-  
+
   /**
    * Enrich metric data with user and session context
    */
@@ -37,7 +37,7 @@ export const useMetrics = () => {
       }
     }
   }
-  
+
   /**
    * Send a metric to the backend
    * Uses fire-and-forget pattern to avoid blocking the user experience
@@ -48,31 +48,36 @@ export const useMetrics = () => {
       // Skipping - device offline
       return false
     }
-    
+
     // Skip metrics in development unless explicitly enabled
     if (import.meta.dev && !config.public.enableDevMetrics) {
       // Would send metric in development
       return true
     }
-    
+
     try {
       // Determine timeout based on connection quality
       let timeoutDuration = 3000 // Default 3s
       if (import.meta.client && 'connection' in navigator) {
-        const connection = (navigator as Navigator & { connection?: NetworkInformation }).connection
-        if (connection?.effectiveType === 'slow-2g' || connection?.effectiveType === '2g') {
+        const connection = (
+          navigator as Navigator & { connection?: NetworkInformation }
+        ).connection
+        if (
+          connection?.effectiveType === 'slow-2g' ||
+          connection?.effectiveType === '2g'
+        ) {
           timeoutDuration = 2000 // 2s for slow connections
         }
       }
-      
+
       // Create an AbortController for proper cancellation
       const controller = new AbortController()
       const timeoutId = setTimeout(() => controller.abort(), timeoutDuration)
-      
+
       try {
         // Enrich metric with context before sending
         const enrichedMetric = enrichMetricWithContext(metricData)
-        
+
         // Note: We need to update the repository to support abort signal
         const response = await metricsService.value.sendMetric(enrichedMetric)
         clearTimeout(timeoutId)
@@ -90,7 +95,7 @@ export const useMetrics = () => {
       return false
     }
   }
-  
+
   /**
    * Track a user login event
    */
@@ -101,15 +106,18 @@ export const useMetrics = () => {
         method
       }
     }
-    
+
     // Fire and forget
     sendMetric(metricData)
   }
-  
+
   /**
    * Track a page view
    */
-  const trackPageView = async (page: string, additionalInfo?: Record<string, unknown>) => {
+  const trackPageView = async (
+    page: string,
+    additionalInfo?: Record<string, unknown>
+  ) => {
     const metricData: MetricData = {
       category: MetricCategory.PAGE_VIEW,
       extra_info: {
@@ -117,15 +125,18 @@ export const useMetrics = () => {
         ...additionalInfo
       }
     }
-    
+
     // Fire and forget
     sendMetric(metricData)
   }
-  
+
   /**
    * Track a button click
    */
-  const trackButtonClick = async (buttonName: string, additionalInfo?: Record<string, unknown>) => {
+  const trackButtonClick = async (
+    buttonName: string,
+    additionalInfo?: Record<string, unknown>
+  ) => {
     const metricData: MetricData = {
       category: MetricCategory.CLICK_BUTTON,
       extra_info: {
@@ -133,15 +144,18 @@ export const useMetrics = () => {
         ...additionalInfo
       }
     }
-    
+
     // Fire and forget
     sendMetric(metricData)
   }
-  
+
   /**
    * Track a feature usage
    */
-  const trackFeatureUsage = async (feature: string, additionalInfo?: Record<string, unknown>) => {
+  const trackFeatureUsage = async (
+    feature: string,
+    additionalInfo?: Record<string, unknown>
+  ) => {
     const metricData: MetricData = {
       category: MetricCategory.FEATURE_USED,
       extra_info: {
@@ -149,11 +163,11 @@ export const useMetrics = () => {
         ...additionalInfo
       }
     }
-    
+
     // Fire and forget
     sendMetric(metricData)
   }
-  
+
   /**
    * Track an error occurrence
    */
@@ -166,11 +180,11 @@ export const useMetrics = () => {
         context
       }
     }
-    
+
     // Fire and forget
     sendMetric(metricData)
   }
-  
+
   /**
    * Track session activity
    */
@@ -179,11 +193,11 @@ export const useMetrics = () => {
       category: MetricCategory.ACTIVE_SESSION,
       extra_info: {}
     }
-    
+
     // Fire and forget
     sendMetric(metricData)
   }
-  
+
   return {
     sendMetric,
     trackLogin,

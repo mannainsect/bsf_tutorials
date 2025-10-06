@@ -167,7 +167,7 @@ describe('formatters', () => {
       expect(result).toBe('$0.00')
     })
     it('should handle negative amounts', () => {
-      const result = formatUSDConversion(-500.50)
+      const result = formatUSDConversion(-500.5)
       expect(result).toBe('-$500.50')
     })
     it('should round to 2 decimal places', () => {

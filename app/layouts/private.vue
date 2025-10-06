@@ -1,10 +1,10 @@
 <template>
   <div>
     <LayoutPrivateMenu />
-    
+
     <ion-page id="main-content">
       <LayoutPrivateHeader />
-      
+
       <ion-content class="ion-padding">
         <ion-grid fixed>
           <ion-row class="ion-justify-content-center">
@@ -14,7 +14,7 @@
           </ion-row>
         </ion-grid>
       </ion-content>
-      
+
       <LayoutPrivateFooter />
     </ion-page>
   </div>

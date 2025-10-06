@@ -18,7 +18,9 @@ export interface FormState<T extends Record<string, unknown>> {
 
 // Validation types
 export type ValidatorFn<T = unknown> = (value: T) => string | null
-export type AsyncValidatorFn<T = unknown> = (value: T) => Promise<string | null>
+export type AsyncValidatorFn<T = unknown> = (
+  value: T
+) => Promise<string | null>
 
 export interface ValidationRule<T = unknown> {
   validator: ValidatorFn<T> | AsyncValidatorFn<T>

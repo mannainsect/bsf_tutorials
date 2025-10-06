@@ -1,5 +1,11 @@
 import {
-  describe, it, expect, beforeEach, vi, beforeAll, afterAll
+  describe,
+  it,
+  expect,
+  beforeEach,
+  vi,
+  beforeAll,
+  afterAll
 } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { useAuthStore as realUseAuthStore } from '~/stores/auth'
@@ -21,9 +27,8 @@ beforeAll(() => {
       return value ? value : null
     },
     set: (key: string, value: any) => {
-      mockStorage[key] = typeof value === 'string'
-        ? value
-        : JSON.stringify(value)
+      mockStorage[key] =
+        typeof value === 'string' ? value : JSON.stringify(value)
     },
     remove: (key: string) => {
       delete mockStorage[key]
@@ -333,8 +338,7 @@ describe('useUserRole', () => {
   })
 
   describe('getUserRole', () => {
-    it('should return "superadmin" for superadmin user', () => {
-    })
+    it('should return "superadmin" for superadmin user', () => {})
 
     it('should return null for user with no role', () => {
       authStore.setUser({
@@ -361,7 +365,8 @@ describe('useUserRole', () => {
       authStore.setUser({ _id: 'user1', id: 'user1', email: 'u@test.com' })
       authStore.setActiveCompany({ _id: 'comp1', id: 'comp1' })
 
-      const consoleWarnSpy = vi.spyOn(console, 'warn')
+      const consoleWarnSpy = vi
+        .spyOn(console, 'warn')
         .mockImplementation(() => {})
 
       const { hasAnyRole } = useUserRole()
@@ -380,7 +385,8 @@ describe('useUserRole', () => {
 
       mockStorage['auth_active_company_roles'] = '{ invalid json }'
 
-      const consoleErrorSpy = vi.spyOn(console, 'error')
+      const consoleErrorSpy = vi
+        .spyOn(console, 'error')
         .mockImplementation(() => {})
 
       const { hasAnyRole } = useUserRole()
@@ -411,7 +417,8 @@ describe('useUserRole', () => {
         invalid: 'structure'
       })
 
-      const consoleWarnSpy = vi.spyOn(console, 'warn')
+      const consoleWarnSpy = vi
+        .spyOn(console, 'warn')
         .mockImplementation(() => {})
 
       const { hasAnyRole } = useUserRole()
@@ -441,7 +448,8 @@ describe('useUserRole', () => {
         clear: vi.fn()
       })
 
-      const consoleErrorSpy = vi.spyOn(console, 'error')
+      const consoleErrorSpy = vi
+        .spyOn(console, 'error')
         .mockImplementation(() => {})
 
       const { hasAnyRole } = useUserRole()
@@ -476,7 +484,8 @@ describe('useUserRole', () => {
         clear: vi.fn()
       })
 
-      const consoleErrorSpy = vi.spyOn(console, 'error')
+      const consoleErrorSpy = vi
+        .spyOn(console, 'error')
         .mockImplementation(() => {})
 
       const { hasAnyRole } = useUserRole()
@@ -494,7 +503,8 @@ describe('useUserRole', () => {
 
       mockStorage['auth_active_company_roles'] = 'invalid json'
 
-      const consoleErrorSpy = vi.spyOn(console, 'error')
+      const consoleErrorSpy = vi
+        .spyOn(console, 'error')
         .mockImplementation(() => {})
 
       const { hasAnyRole } = useUserRole()

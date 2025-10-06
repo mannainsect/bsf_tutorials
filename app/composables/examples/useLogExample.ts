@@ -11,17 +11,20 @@ import { useLog } from '../useLog'
  */
 export const useActivityLogger = () => {
   const { logUserAction, logContentAction } = useLog()
-  
+
   /**
    * Log page views
    */
-  const logPageView = async (pageName: string, metadata?: Record<string, unknown>) => {
+  const logPageView = async (
+    pageName: string,
+    metadata?: Record<string, unknown>
+  ) => {
     await logUserAction('page_view', pageName, {
       ...metadata,
       timestamp: new Date().toISOString()
     })
   }
-  
+
   /**
    * Log button clicks
    */
@@ -31,7 +34,7 @@ export const useActivityLogger = () => {
       timestamp: new Date().toISOString()
     })
   }
-  
+
   /**
    * Log video watch progress
    */
@@ -44,7 +47,7 @@ export const useActivityLogger = () => {
       progress_percentage: progressPercentage,
       duration_seconds: durationSeconds
     })
-    
+
     // If video is completed
     if (progressPercentage >= 95) {
       await logContentAction(videoId, 'video', 'completed', {
@@ -52,7 +55,7 @@ export const useActivityLogger = () => {
       })
     }
   }
-  
+
   return {
     logPageView,
     logButtonClick,
@@ -65,7 +68,7 @@ export const useActivityLogger = () => {
  */
 export const useProcessLogger = () => {
   const { postLog } = useLog()
-  
+
   /**
    * Log a task completion
    */
@@ -82,7 +85,7 @@ export const useProcessLogger = () => {
         completed_at: new Date().toISOString()
       }
     }
-    
+
     try {
       const response = await postLog(logData, spaceId)
       // Task logged successfully
@@ -92,7 +95,7 @@ export const useProcessLogger = () => {
       throw error
     }
   }
-  
+
   /**
    * Log a process start
    */
@@ -110,10 +113,10 @@ export const useProcessLogger = () => {
         started_at: new Date().toISOString()
       }
     }
-    
+
     return postLog(logData, spaceId)
   }
-  
+
   return {
     logTaskComplete,
     logProcessStart
@@ -124,8 +127,9 @@ export const useProcessLogger = () => {
  * Example: Viewing logs with filters
  */
 export const useLogViewer = () => {
-  const { getLogs, setLogFilters, clearLogFilters, logs, loading, error } = useLog()
-  
+  const { getLogs, setLogFilters, clearLogFilters, logs, loading, error } =
+    useLog()
+
   /**
    * Get logs for today
    */
@@ -134,36 +138,36 @@ export const useLogViewer = () => {
     today.setHours(0, 0, 0, 0)
     const tomorrow = new Date(today)
     tomorrow.setDate(tomorrow.getDate() + 1)
-    
+
     await getLogs(today.toISOString(), tomorrow.toISOString())
   }
-  
+
   /**
    * Get logs for a specific space
    */
   const getSpaceLogs = async (spaceId: string, days = 7) => {
     setLogFilters({ spaceId })
-    
+
     const endDate = new Date()
     const startDate = new Date()
     startDate.setDate(startDate.getDate() - days)
-    
+
     await getLogs(startDate.toISOString(), endDate.toISOString())
   }
-  
+
   /**
    * Get logs by type
    */
   const getLogsByType = async (logType: string, days = 30) => {
     setLogFilters({ log_type: logType })
-    
+
     const endDate = new Date()
     const startDate = new Date()
     startDate.setDate(startDate.getDate() - days)
-    
+
     await getLogs(startDate.toISOString(), endDate.toISOString())
   }
-  
+
   return {
     logs,
     loading,

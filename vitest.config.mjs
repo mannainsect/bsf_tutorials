@@ -7,7 +7,7 @@ export default defineConfig({
     vue({
       template: {
         compilerOptions: {
-          isCustomElement: (tag) => tag.startsWith('ion-')
+          isCustomElement: tag => tag.startsWith('ion-')
         }
       }
     })
@@ -23,8 +23,7 @@ export default defineConfig({
       '.nuxt/**',
       'playwright-report/**',
       'tests/e2e/**',
-      'tests/integration/**',
-      
+      'tests/integration/**'
     ],
     coverage: {
       provider: 'v8',

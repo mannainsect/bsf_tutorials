@@ -34,7 +34,7 @@ const pathCache = new Map<string, string>()
  * router.push(localePath('/account'))
  *
  * // With specific locale
-* const spanishPath = localePath('/account', 'es')
+ * const spanishPath = localePath('/account', 'es')
  *
  * // Check if i18n is available
  * const { isAvailable } = useSafeLocalePath()
@@ -63,9 +63,7 @@ export const useSafeLocalePath = () => {
     route: RouteInput,
     locale?: LocalePathOptions
   ): string => {
-    const routeStr = typeof route === 'string'
-      ? route
-      : JSON.stringify(route)
+    const routeStr = typeof route === 'string' ? route : JSON.stringify(route)
     const localeStr = locale || currentLocale?.value || 'default'
     return `${localeStr}:${routeStr}`
   }
@@ -108,9 +106,7 @@ export const useSafeLocalePath = () => {
       // If it has a name property, return as is
       // (named routes need proper i18n setup)
       if (routeObj.name) {
-        console.warn(
-          `Named route "${routeObj.name}" requires i18n setup`
-        )
+        console.warn(`Named route "${routeObj.name}" requires i18n setup`)
         return routeObj.name
       }
     }
@@ -140,10 +136,7 @@ export const useSafeLocalePath = () => {
         try {
           resolvedPath = localePath(route, locale as any)
         } catch (error) {
-          console.warn(
-            'Failed to resolve path with localePath:',
-            error
-          )
+          console.warn('Failed to resolve path with localePath:', error)
           resolvedPath = fallbackPathResolver(route, locale)
         }
       } else {

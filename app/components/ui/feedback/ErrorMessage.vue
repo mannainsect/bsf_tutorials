@@ -2,14 +2,16 @@
   <ion-card v-if="message" :color="color">
     <ion-card-content>
       <div class="ion-display-flex ion-align-items-start">
-        <ion-icon 
-          v-if="showIcon" 
-          :icon="warning" 
-          :color="color" 
+        <ion-icon
+          v-if="showIcon"
+          :icon="warning"
+          :color="color"
           class="ion-margin-end"
         />
         <div class="ion-flex">
-          <ion-card-title v-if="title" :color="color">{{ title }}</ion-card-title>
+          <ion-card-title v-if="title" :color="color">{{
+            title
+          }}</ion-card-title>
           <ion-text :color="color">
             <p class="ion-no-margin">{{ message }}</p>
           </ion-text>
@@ -36,4 +38,3 @@ withDefaults(defineProps<Props>(), {
   color: 'danger'
 })
 </script>
-

@@ -18,8 +18,7 @@ describe('User type with onboarding_email_sent field', () => {
     expect(typeof user.onboarding_email_sent).toBe('string')
   })
 
-  it('should handle user without onboarding_email_sent (backward compat)',
-  () => {
+  it('should handle user without onboarding_email_sent (backward compat)', () => {
     const user: User = {
       _id: 'user-456',
       email: 'legacy@example.com',
@@ -48,8 +47,7 @@ describe('User type with onboarding_email_sent field', () => {
     expect(user.onboarding_email_sent).toBeNull()
   })
 
-  it('should preserve other user fields with onboarding_email_sent',
-  () => {
+  it('should preserve other user fields with onboarding_email_sent', () => {
     const user: User = {
       _id: 'user-complete',
       email: 'complete@example.com',

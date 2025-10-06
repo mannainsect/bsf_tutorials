@@ -27,8 +27,7 @@ describe('useCurrencyExchange', () => {
     localStorageMock.clear()
     mockFetch.mockClear()
     vi.useFakeTimers()
-    
-    
+
     global.useRuntimeConfig.mockReturnValue({
       public: {
         featureFlags: {
@@ -83,10 +82,13 @@ describe('useCurrencyExchange', () => {
       const cache = {
         EUR: {
           rate: 1.2,
-          timestamp: Date.now() - 1000 
+          timestamp: Date.now() - 1000
         }
       }
-      localStorageMock.setItem('currency_exchange_rates', JSON.stringify(cache))
+      localStorageMock.setItem(
+        'currency_exchange_rates',
+        JSON.stringify(cache)
+      )
       const { getUSDRate } = useCurrencyExchange()
       const rate = await getUSDRate('EUR')
       expect(rate).toBe(1.2)
@@ -96,10 +98,13 @@ describe('useCurrencyExchange', () => {
       const cache = {
         EUR: {
           rate: 1.2,
-          timestamp: Date.now() - (25 * 60 * 60 * 1000) 
+          timestamp: Date.now() - 25 * 60 * 60 * 1000
         }
       }
-      localStorageMock.setItem('currency_exchange_rates', JSON.stringify(cache))
+      localStorageMock.setItem(
+        'currency_exchange_rates',
+        JSON.stringify(cache)
+      )
       const mockResponse = {
         ok: true,
         json: vi.fn().mockResolvedValue({
@@ -163,7 +168,7 @@ describe('useCurrencyExchange', () => {
       }
       mockFetch.mockResolvedValue(mockResponse)
       const { getUSDRate } = useCurrencyExchange()
-      
+
       const [rate1, rate2, rate3] = await Promise.all([
         getUSDRate('EUR'),
         getUSDRate('EUR'),
@@ -172,16 +177,15 @@ describe('useCurrencyExchange', () => {
       expect(rate1).toBe(1.18)
       expect(rate2).toBe(1.18)
       expect(rate3).toBe(1.18)
-      
+
       expect(mockFetch).toHaveBeenCalledTimes(1)
     })
     it('should handle timeout properly', async () => {
-      
       let rejectFn: ((error: Error) => void) | null = null
       mockFetch.mockImplementation((url, options) => {
         return new Promise((resolve, reject) => {
           rejectFn = reject
-          
+
           if (options?.signal) {
             options.signal.addEventListener('abort', () => {
               reject(new Error('AbortError'))
@@ -190,11 +194,11 @@ describe('useCurrencyExchange', () => {
         })
       })
       const { getUSDRate } = useCurrencyExchange()
-      
+
       const promise = getUSDRate('EUR')
-      
+
       await vi.advanceTimersByTimeAsync(5001)
-      
+
       const result = await promise
       expect(result).toBe(null)
     })
@@ -208,7 +212,7 @@ describe('useCurrencyExchange', () => {
       mockFetch.mockResolvedValueOnce(mockResponse)
       const { getUSDRate } = useCurrencyExchange()
       await getUSDRate('EUR')
-      
+
       expect(localStorageMock.setItem).toHaveBeenCalled()
       const savedCache = localStorageMock.setItem.mock.calls[0]
       expect(savedCache).toBeDefined()

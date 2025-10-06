@@ -20,20 +20,19 @@ export interface ActiveCompany {
   operators: User[]
 }
 
-
 export interface Task {
   task_type: TaskType
   spaces: Space[]
 }
 
-export type TaskType = 
-  | "breeding"
-  | "nursing" 
-  | "rearing"
-  | "pupa_rearing"
-  | "pre_processing"
-  | "post_processing"
-  | "storage"
+export type TaskType =
+  | 'breeding'
+  | 'nursing'
+  | 'rearing'
+  | 'pupa_rearing'
+  | 'pre_processing'
+  | 'post_processing'
+  | 'storage'
 
 export interface Device {
   _id: string
@@ -67,7 +66,7 @@ export interface User {
   onboarding_email_sent?: string | null
   purchased_products: PurchasedProduct[]
   subscription_valid_until: string
-  
+
   // Legacy fields for backward compatibility
   id?: string | number
   first_name?: string
@@ -94,7 +93,6 @@ export interface UserPreferences {
     sms?: boolean
   }
 }
-
 
 // User profile update types - updated to match actual API
 export interface UpdateUserRequest {

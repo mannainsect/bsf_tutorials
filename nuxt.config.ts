@@ -8,23 +8,46 @@ export default defineNuxtConfig({
       meta: [
         { name: 'color-scheme', content: 'light' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Production-ready Nuxt 4 + Vue 3 + TypeScript + Ionic + Capacitor mobile template for building cross-platform applications' },
+        {
+          name: 'description',
+          content:
+            'Production-ready Nuxt 4 + Vue 3 + TypeScript + Ionic + Capacitor mobile template for building cross-platform applications'
+        },
         { name: 'theme-color', content: '#3880ff' },
         { name: 'apple-mobile-web-app-capable', content: 'yes' },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
         { name: 'apple-mobile-web-app-title', content: 'BSF App' },
         { property: 'og:type', content: 'website' },
-        { property: 'og:title', content: 'BSF App - Production-Ready Mobile Template' },
-        { property: 'og:description', content: 'Production-ready Nuxt 4 + Vue 3 + TypeScript + Ionic + Capacitor mobile template' },
+        {
+          property: 'og:title',
+          content: 'BSF App - Production-Ready Mobile Template'
+        },
+        {
+          property: 'og:description',
+          content:
+            'Production-ready Nuxt 4 + Vue 3 + TypeScript + Ionic + Capacitor mobile template'
+        },
         { property: 'og:site_name', content: 'BSF App' },
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: 'BSF App - Production-Ready Mobile Template' },
-        { name: 'twitter:description', content: 'Production-ready mobile template with Nuxt 4, Vue 3, TypeScript, Ionic & Capacitor' }
+        {
+          name: 'twitter:title',
+          content: 'BSF App - Production-Ready Mobile Template'
+        },
+        {
+          name: 'twitter:description',
+          content:
+            'Production-ready mobile template with Nuxt 4, Vue 3, TypeScript, Ionic & Capacitor'
+        }
       ],
       link: [
         { rel: 'manifest', href: '/manifest.webmanifest' },
         { rel: 'apple-touch-icon', href: '/icon-192x192.png' },
-        { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          sizes: '32x32',
+          href: '/favicon-32x32.png'
+        },
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
       ]
     }
@@ -47,13 +70,13 @@ export default defineNuxtConfig({
     integrations: {
       icons: true,
       meta: true,
-      router: true,
+      router: true
     },
     css: {
       core: true,
       basic: true,
-      utilities: false,
-    },
+      utilities: false
+    }
   },
   css: [
     './app/assets/css/ionic.css',
@@ -151,25 +174,25 @@ export default defineNuxtConfig({
         authResetPassword: '/auth/reset-password',
         authResetPasswordConfirm: '/auth/reset-password/confirm',
         authSendToken: '/auth/send-token',
-        
+
         // Legacy endpoints (still available)
         login: '/login',
         loginToken: '/login/token',
-        
+
         // User Management
         users: '/users',
         usersResetPassword: '/users/reset_password',
-        
+
         // Profile Management
         profilesMe: '/profiles/me',
         profilesSwitchCompany: '/profiles/switch-company',
-        
+
         // Company Management
         companies: '/companies',
-        
+
         // Space Management
         spaces: '/spaces',
-        
+
         // Device Management
         devices: '/devices',
         devicesClimate: '/devices/climate',
@@ -177,7 +200,7 @@ export default defineNuxtConfig({
         supportedSensors: '/supported_sensors',
         supportedControllers: '/supported_controllers',
         globalConfigs: '/global_configs',
-        
+
         // Metrics Management
         metrics: '/metrics',
         metricsUser: '/metrics/user',
@@ -188,7 +211,7 @@ export default defineNuxtConfig({
         productsPlaylists: '/products/playlists',
         productsTools: '/products/tools',
         productsPurchase: '/products/purchase',
-        
+
         // Helper Endpoints
         helpersCalculateMetricsEggs: '/helpers/calculate_metrics_nro_eggs',
         helpersCalculateMetrics5DOL: '/helpers/calculate_metrics_nro_5dol',
@@ -196,26 +219,24 @@ export default defineNuxtConfig({
         helpersCalculateMetricsRearing: '/helpers/calculate_metrics_rearing',
         helpersCalculate5DOL: '/helpers/calculate_5dol',
         helpersCalculateRearingResults: '/helpers/calculate_rearing_results',
-        
+
         // Logs Management
         logsCompany: '/logs/company',
         logsProcess: '/logs/process',
         logsDevice: '/logs/device',
         logsContent: '/logs/content',
         logsCredits: '/logs/credits',
-        
+
         // AI & Chat
         aiChat: '/ai/chat',
         aiAgent: '/ai/agent'
       },
       // Feature Flags
       featureFlags: {
-        enableUSDConversion:
-          process.env.ENABLE_USD_CONVERSION !== 'false'
+        enableUSDConversion: process.env.ENABLE_USD_CONVERSION !== 'false'
       },
       // External API Configuration
-      exchangeRateApiKey:
-        process.env.EXCHANGE_RATE_API_KEY || ''
+      exchangeRateApiKey: process.env.EXCHANGE_RATE_API_KEY || ''
     }
   },
   pwa: {
@@ -224,7 +245,8 @@ export default defineNuxtConfig({
     manifest: {
       name: 'BSF App',
       short_name: 'BSF',
-      description: 'Production-ready Nuxt 4 + Vue 3 + TypeScript + Ionic + Capacitor mobile template',
+      description:
+        'Production-ready Nuxt 4 + Vue 3 + TypeScript + Ionic + Capacitor mobile template',
       theme_color: '#3880ff',
       background_color: '#ffffff',
       display: 'standalone',

@@ -6,11 +6,11 @@
         <ion-card-subtitle v-if="subtitle">{{ subtitle }}</ion-card-subtitle>
       </slot>
     </ion-card-header>
-    
+
     <ion-card-content v-if="$slots.default">
       <slot />
     </ion-card-content>
-    
+
     <div v-if="$slots.actions" class="ion-padding">
       <slot name="actions" />
     </div>
@@ -28,4 +28,3 @@ withDefaults(defineProps<Props>(), {
   subtitle: ''
 })
 </script>
-

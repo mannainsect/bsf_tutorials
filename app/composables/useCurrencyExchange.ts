@@ -15,9 +15,7 @@ const pendingRequests = new Map<string, Promise<number | null>>()
 export const useCurrencyExchange = () => {
   const config = useRuntimeConfig()
 
-  const getUSDRate = async (
-    currency: string
-  ): Promise<number | null> => {
+  const getUSDRate = async (currency: string): Promise<number | null> => {
     // Check feature flag
     if (!config.public.featureFlags?.enableUSDConversion) {
       return null
@@ -52,10 +50,7 @@ export const useCurrencyExchange = () => {
 
       // Fetch from API with timeout
       const controller = new AbortController()
-      const timeoutId = setTimeout(
-        () => controller.abort(),
-        API_TIMEOUT
-      )
+      const timeoutId = setTimeout(() => controller.abort(), API_TIMEOUT)
 
       // Use v6 API if key is available, otherwise use v4 (no key)
       const apiKey = config.public.exchangeRateApiKey
@@ -92,10 +87,7 @@ export const useCurrencyExchange = () => {
       return null
     } catch (error) {
       // Silent failure - return null
-      console.warn(
-        `Currency conversion failed for ${currency}:`,
-        error
-      )
+      console.warn(`Currency conversion failed for ${currency}:`, error)
       return null
     }
   }
@@ -125,9 +117,7 @@ export const useCurrencyExchange = () => {
   const saveToCache = (currency: string, rate: number) => {
     try {
       const cacheStr = localStorage.getItem(CACHE_KEY)
-      const cache: ExchangeRateCache = cacheStr
-        ? JSON.parse(cacheStr)
-        : {}
+      const cache: ExchangeRateCache = cacheStr ? JSON.parse(cacheStr) : {}
 
       cache[currency] = {
         rate,

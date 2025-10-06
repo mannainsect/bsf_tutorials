@@ -5,13 +5,19 @@ test.describe('Homepage', () => {
     await page.waitForLoadState('networkidle')
     const heading = page.locator('h1')
     await expect(heading).toBeVisible()
-    await expect(heading).toHaveText(/Launch secure account experiences faster/i)
+    await expect(heading).toHaveText(
+      /Launch secure account experiences faster/i
+    )
   })
 
   test('should show authentication actions', async ({ page }) => {
     await page.goto('/')
-    const registerButton = page.locator('a[href="/register"], button:has-text("Get Started")')
-    const loginButton = page.locator('a[href="/login"], button:has-text("Sign In")')
+    const registerButton = page.locator(
+      'a[href="/register"], button:has-text("Get Started")'
+    )
+    const loginButton = page.locator(
+      'a[href="/login"], button:has-text("Sign In")'
+    )
     await expect(registerButton).toBeVisible()
     await expect(loginButton).toBeVisible()
   })

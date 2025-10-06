@@ -9,38 +9,47 @@ import { vi } from 'vitest'
  */
 export const ionicStubs = {
   'ion-textarea': {
-    template: '<textarea class="ion-textarea" ' +
-              ':value="modelValue" ' +
-              '@input="$emit(\'update:modelValue\', ' +
-              '$event.target.value)" ' +
-              '@keydown="$emit(\'keydown\', $event)" ' +
-              ':placeholder="placeholder" ' +
-              ':maxlength="maxlength" ' +
-              ':disabled="disabled" ' +
-              ':rows="rows"></textarea>',
-    props: ['modelValue', 'placeholder', 'disabled', 'maxlength',
-            'rows', 'autoGrow'],
+    template:
+      '<textarea class="ion-textarea" ' +
+      ':value="modelValue" ' +
+      "@input=\"$emit('update:modelValue', " +
+      '$event.target.value)" ' +
+      '@keydown="$emit(\'keydown\', $event)" ' +
+      ':placeholder="placeholder" ' +
+      ':maxlength="maxlength" ' +
+      ':disabled="disabled" ' +
+      ':rows="rows"></textarea>',
+    props: [
+      'modelValue',
+      'placeholder',
+      'disabled',
+      'maxlength',
+      'rows',
+      'autoGrow'
+    ],
     emits: ['update:modelValue', 'keydown']
   },
   'ion-input': {
-    template: '<input class="ion-input" ' +
-              ':value="modelValue" ' +
-              '@input="$emit(\'update:modelValue\', ' +
-              '$event.target.value)" ' +
-              ':placeholder="placeholder" ' +
-              ':type="type" ' +
-              ':disabled="disabled" />',
+    template:
+      '<input class="ion-input" ' +
+      ':value="modelValue" ' +
+      "@input=\"$emit('update:modelValue', " +
+      '$event.target.value)" ' +
+      ':placeholder="placeholder" ' +
+      ':type="type" ' +
+      ':disabled="disabled" />',
     props: ['modelValue', 'placeholder', 'type', 'disabled'],
     emits: ['update:modelValue']
   },
   'ion-button': {
-    template: '<button class="ion-button" ' +
-              '@click="$emit(\'click\')" ' +
-              ':disabled="disabled" ' +
-              ':size="size" ' +
-              ':shape="shape" ' +
-              ':fill="fill" ' +
-              ':color="color"><slot /></button>',
+    template:
+      '<button class="ion-button" ' +
+      '@click="$emit(\'click\')" ' +
+      ':disabled="disabled" ' +
+      ':size="size" ' +
+      ':shape="shape" ' +
+      ':fill="fill" ' +
+      ':color="color"><slot /></button>',
     props: ['disabled', 'size', 'shape', 'fill', 'color'],
     emits: ['click']
   },
@@ -49,7 +58,7 @@ export const ionicStubs = {
     props: ['isOpen', 'backdropDismiss', 'keyboardClose'],
     emits: ['ion-modal-did-dismiss'],
     mounted() {
-      (this.$el as any).dismiss = vi.fn()
+      ;(this.$el as any).dismiss = vi.fn()
     }
   },
   'ion-page': {

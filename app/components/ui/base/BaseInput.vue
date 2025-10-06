@@ -17,8 +17,12 @@
       @ion-blur="handleBlur"
       @ion-focus="handleFocus"
     />
-    <ion-note v-if="hasError" slot="error" color="danger">{{ errorMessage }}</ion-note>
-    <ion-note v-else-if="helpText" slot="helper" color="medium">{{ helpText }}</ion-note>
+    <ion-note v-if="hasError" slot="error" color="danger">{{
+      errorMessage
+    }}</ion-note>
+    <ion-note v-else-if="helpText" slot="helper" color="medium">{{
+      helpText
+    }}</ion-note>
   </ion-item>
 </template>
 
@@ -73,4 +77,3 @@ const handleFocus = (event: CustomEvent) => {
   emit('focus', event)
 }
 </script>
-

@@ -1,4 +1,4 @@
-import type { 
+import type {
   GetCreditsResponse,
   GetCreditBalanceResponse,
   GetCreditTransactionsResponse,
@@ -12,7 +12,9 @@ export class CreditRepository extends BaseRepository {
   /**
    * Get credits log for a user
    */
-  async getCredits(params: GetCreditsRequest = {}): Promise<GetCreditsResponse> {
+  async getCredits(
+    params: GetCreditsRequest = {}
+  ): Promise<GetCreditsResponse> {
     const endpoints = useApiEndpoints()
     const {
       user_id,
@@ -40,7 +42,7 @@ export class CreditRepository extends BaseRepository {
   async getCurrentUserCredits(): Promise<GetCreditsResponse> {
     const endpoints = useApiEndpoints()
     const authStore = useAuthStore()
-    
+
     const userId = authStore.userId
     if (!userId) {
       throw new Error('User not authenticated - unable to get user ID')
@@ -55,13 +57,17 @@ export class CreditRepository extends BaseRepository {
    */
   async getCreditBalance(): Promise<GetCreditBalanceResponse> {
     const endpoints = useApiEndpoints()
-    return this.get<GetCreditBalanceResponse>(`${endpoints.logsCredits}/balance`)
+    return this.get<GetCreditBalanceResponse>(
+      `${endpoints.logsCredits}/balance`
+    )
   }
 
   /**
    * Get credit transactions for current user
    */
-  async getCreditTransactions(params: GetCreditsRequest = {}): Promise<GetCreditTransactionsResponse> {
+  async getCreditTransactions(
+    params: GetCreditsRequest = {}
+  ): Promise<GetCreditTransactionsResponse> {
     const endpoints = useApiEndpoints()
     const {
       transaction_type,
@@ -77,14 +83,22 @@ export class CreditRepository extends BaseRepository {
       ...(end_date && { end_date })
     })
 
-    return this.get<GetCreditTransactionsResponse>(endpoints.logsCredits, query)
+    return this.get<GetCreditTransactionsResponse>(
+      endpoints.logsCredits,
+      query
+    )
   }
 
   /**
    * Create a new credit transaction (admin only)
    */
-  async createCreditTransaction(transactionData: CreateCreditTransactionRequest): Promise<CreditTransaction> {
+  async createCreditTransaction(
+    transactionData: CreateCreditTransactionRequest
+  ): Promise<CreditTransaction> {
     const endpoints = useApiEndpoints()
-    return this.post<CreditTransaction>(`${endpoints.logsCredits}/transactions`, transactionData)
+    return this.post<CreditTransaction>(
+      `${endpoints.logsCredits}/transactions`,
+      transactionData
+    )
   }
 }

@@ -1,6 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { useCompanyInitialization } from
-  '~/composables/useCompanyInitialization'
+import { useCompanyInitialization } from '~/composables/useCompanyInitialization'
 
 describe('useCompanyInitialization', () => {
   let companyInit: ReturnType<typeof useCompanyInitialization>
@@ -62,18 +61,16 @@ describe('useCompanyInitialization', () => {
       ]
 
       testCases.forEach(({ email, expected }) => {
-        expect(companyInit.extractNameFromEmail(email))
-          .toBe(expected)
+        expect(companyInit.extractNameFromEmail(email)).toBe(expected)
       })
     })
 
     it('should handle edge cases gracefully', () => {
-      expect(companyInit.extractNameFromEmail(''))
-        .toBe("User's Farm")
-      expect(companyInit.extractNameFromEmail('invalid'))
-        .toBe("Invalid's Farm")
-      expect(companyInit.extractNameFromEmail('@'))
-        .toBe("User's Farm")
+      expect(companyInit.extractNameFromEmail('')).toBe("User's Farm")
+      expect(companyInit.extractNameFromEmail('invalid')).toBe(
+        "Invalid's Farm"
+      )
+      expect(companyInit.extractNameFromEmail('@')).toBe("User's Farm")
     })
   })
 
@@ -117,10 +114,7 @@ describe('useCompanyInitialization', () => {
       mockApi.mockRejectedValue(new Error('API Error'))
 
       await expect(
-        companyInit.createCompanyWithSpaces(
-          'test-token',
-          'test@email.com'
-        )
+        companyInit.createCompanyWithSpaces('test-token', 'test@email.com')
       ).rejects.toThrow('API Error')
     })
   })
@@ -140,9 +134,7 @@ describe('useCompanyInitialization', () => {
         company_id: 'test-company-id'
       })
 
-      const result = await companyInit.initializeCompany(
-        'test@email.com'
-      )
+      const result = await companyInit.initializeCompany('test@email.com')
 
       expect(result).toEqual({
         status: 'success',
@@ -200,10 +192,7 @@ describe('useCompanyInitialization', () => {
       // Re-initialize the composable with the new mock
       companyInit = useCompanyInitialization()
 
-      const result = await companyInit.initializeCompany(
-        'test@email.com',
-        1
-      )
+      const result = await companyInit.initializeCompany('test@email.com', 1)
 
       expect(result).toBeNull()
     })

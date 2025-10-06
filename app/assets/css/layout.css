@@ -64,7 +64,7 @@
   .content-container {
     padding: 0 var(--ion-padding, 16px);
   }
-  
+
   /* Allow buttons to be slightly wider on tablets */
   .button-container {
     max-width: 480px;
@@ -76,12 +76,12 @@
   .content-container {
     padding: 0 var(--ion-padding-lg, 24px);
   }
-  
+
   /* Wider content for desktop viewing */
   .content-container--wide {
     max-width: 1200px;
   }
-  
+
   .button-container {
     max-width: 560px;
   }

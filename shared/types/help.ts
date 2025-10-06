@@ -31,9 +31,7 @@ export interface HelpContent {
 /**
  * Type guard to validate if a string is a valid HelpTopic
  */
-export const isValidHelpTopic = (
-  topic: string
-): topic is HelpTopic => {
+export const isValidHelpTopic = (topic: string): topic is HelpTopic => {
   return Object.values(HelpTopic).includes(topic as HelpTopic)
 }
 

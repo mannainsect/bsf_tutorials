@@ -1,4 +1,4 @@
-import type { 
+import type {
   CreateUserRequest,
   UpdateUserRequest,
   UserSearchRequest
@@ -23,12 +23,14 @@ export class UserService {
   async getCurrentUser() {
     // Use centralized profile data from auth store
     await this.authStore.ensureProfileData()
-    
+
     // Check if user data is available
     if (!this.authStore.user) {
-      throw new Error('User data not available. Please ensure you are logged in.')
+      throw new Error(
+        'User data not available. Please ensure you are logged in.'
+      )
     }
-    
+
     return {
       user: this.authStore.user,
       message: 'User data retrieved from profile cache'
@@ -68,12 +70,12 @@ export class UserService {
    */
   async updateCurrentUser(userData: UpdateUserRequest) {
     const response = await this.userRepository.updateCurrentUser(userData)
-    
+
     // Update user in auth store
     if (response.user) {
       this.authStore.setUser(response.user)
     }
-    
+
     return response
   }
 
@@ -89,12 +91,12 @@ export class UserService {
    */
   async switchCompany(companyId: string | number) {
     const response = await this.userRepository.switchCompany(companyId)
-    
+
     // Update user in auth store with new active company
     if (response.user) {
       this.authStore.setUser(response.user)
     }
-    
+
     return response
   }
 

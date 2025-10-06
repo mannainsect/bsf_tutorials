@@ -1,4 +1,4 @@
-export default defineNuxtRouteMiddleware(async (_to) => {
+export default defineNuxtRouteMiddleware(async _to => {
   // Only run on client side to avoid SSR issues
   if (import.meta.server) return
 
@@ -28,15 +28,17 @@ export default defineNuxtRouteMiddleware(async (_to) => {
 
       // If profile fetch fails critically, redirect to error page
       // Check if it's a network error or authentication issue
-      const isNetworkError = error instanceof Error &&
+      const isNetworkError =
+        error instanceof Error &&
         (error.message.includes('fetch') ||
-         error.message.includes('network') ||
-         error.message.includes('Network'))
+          error.message.includes('network') ||
+          error.message.includes('Network'))
 
-      const isAuthError = error instanceof Error &&
+      const isAuthError =
+        error instanceof Error &&
         (error.message.includes('401') ||
-         error.message.includes('403') ||
-         error.message.includes('Unauthorized'))
+          error.message.includes('403') ||
+          error.message.includes('Unauthorized'))
 
       if (isAuthError) {
         // Authentication issue - redirect to login

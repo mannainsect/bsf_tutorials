@@ -10,10 +10,10 @@ export interface ExtractedLink {
 export const useTextFormatting = () => {
   // Configure marked with safe defaults
   marked.setOptions({
-    breaks: true,        // Convert line breaks to <br>
-    gfm: true,          // Enable GitHub Flavored Markdown
-    headerIds: false,   // Disable header IDs for security
-    mangle: false       // Don't mangle email addresses
+    breaks: true, // Convert line breaks to <br>
+    gfm: true, // Enable GitHub Flavored Markdown
+    headerIds: false, // Disable header IDs for security
+    mangle: false // Don't mangle email addresses
   })
 
   /**
@@ -34,9 +34,25 @@ export const useTextFormatting = () => {
       // Sanitize HTML to prevent XSS
       const cleanHtml = DOMPurify.sanitize(rawHtml, {
         ALLOWED_TAGS: [
-          'p', 'br', 'strong', 'em', 'u', 's',
-          'ul', 'ol', 'li', 'blockquote', 'code',
-          'pre', 'a', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
+          'p',
+          'br',
+          'strong',
+          'em',
+          'u',
+          's',
+          'ul',
+          'ol',
+          'li',
+          'blockquote',
+          'code',
+          'pre',
+          'a',
+          'h1',
+          'h2',
+          'h3',
+          'h4',
+          'h5',
+          'h6'
         ],
         ALLOWED_ATTR: ['href', 'target', 'rel'],
         ALLOW_DATA_ATTR: false
@@ -68,8 +84,7 @@ export const useTextFormatting = () => {
 
       while ((match = markdownLinkRegex.exec(text)) !== null) {
         const [, linkText, url] = match
-        if (url && (url.startsWith('http://') ||
-                   url.startsWith('https://'))) {
+        if (url && (url.startsWith('http://') || url.startsWith('https://'))) {
           if (!seenUrls.has(url)) {
             seenUrls.add(url)
             links.push({
@@ -81,8 +96,7 @@ export const useTextFormatting = () => {
       }
 
       // Extract plain URLs from text
-      const plainUrlRegex =
-        /(?:^|[\s])(https?:\/\/[^\s<>"{}|\\^`\[\]]+)/g
+      const plainUrlRegex = /(?:^|[\s])(https?:\/\/[^\s<>"{}|\\^`\[\]]+)/g
 
       while ((match = plainUrlRegex.exec(text)) !== null) {
         const url = match[1]

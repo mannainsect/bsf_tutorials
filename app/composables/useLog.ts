@@ -11,13 +11,13 @@ export const useLog = () => {
   const logService = new LogService()
   const { handleError } = useErrorHandler()
   const { t } = useI18n()
-  
+
   // Reactive state
   const logs = ref<PopulatedLog[]>([])
   const loading = ref(false)
   const error = ref<string>('')
   const requestErrors = ref<string[]>([])
-  
+
   // Log filters state (shared across application)
   const logFilters = useState<LogFilters>('logFilters', () => ({}))
 
@@ -31,7 +31,7 @@ export const useLog = () => {
     loading.value = true
     error.value = ''
     requestErrors.value = []
-    
+
     try {
       // Build filters from state and parameters
       const params: LogFilters = {
@@ -39,7 +39,7 @@ export const useLog = () => {
         start_datetime: startDate,
         end_datetime: endDate
       }
-      
+
       const response = await logService.getCompanyLogs(params)
       logs.value = response
       return response
@@ -69,14 +69,14 @@ export const useLog = () => {
     loading.value = true
     error.value = ''
     requestErrors.value = []
-    
+
     try {
       const response = await logService.createProcessLog(
         spaceId,
         formData.log_type,
         formData.content
       )
-      
+
       if (response.status === 'Log created') {
         return response
       } else {
@@ -101,13 +101,13 @@ export const useLog = () => {
     loading.value = true
     error.value = ''
     requestErrors.value = []
-    
+
     try {
       const response = await logService.deleteLog(logId)
-      
+
       // Remove from local state
       logs.value = logs.value.filter(log => log._id !== logId)
-      
+
       return response
     } catch (err: unknown) {
       const e = err as Error & { data?: { detail?: string } }
@@ -128,13 +128,14 @@ export const useLog = () => {
     loading.value = true
     error.value = ''
     requestErrors.value = []
-    
+
     try {
       const response = await logService.getCreditLogs()
       return response
     } catch (err: unknown) {
       const e = err as Error & { data?: { detail?: string } }
-      const errorMessage = e.data?.detail || e.message || t('errors.fetchCreditLogs')
+      const errorMessage =
+        e.data?.detail || e.message || t('errors.fetchCreditLogs')
       error.value = errorMessage
       requestErrors.value = [errorMessage]
       handleError(err, { source: 'useLog.getCreditLogs' })
@@ -220,7 +221,7 @@ export const useLog = () => {
     error: readonly(error),
     requestErrors: readonly(requestErrors),
     logFilters: readonly(logFilters),
-    
+
     // Methods
     getLogs,
     postLog,

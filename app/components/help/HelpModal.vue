@@ -28,7 +28,7 @@
         <ion-segment-button
           v-for="topicKey in availableTopics"
           :key="topicKey"
-          :value="(topicKey as any)"
+          :value="topicKey as any"
         >
           <ion-label>
             {{ getTopicTitle(topicKey) }}
@@ -66,11 +66,7 @@
 
       <!-- Fallback content -->
       <div v-else class="ion-text-center ion-padding">
-        <ion-icon
-          :icon="helpIcon"
-          class="fallback-icon"
-          aria-hidden="true"
-        />
+        <ion-icon :icon="helpIcon" class="fallback-icon" aria-hidden="true" />
         <ion-text>
           <h3>{{ $t('help.noContent.title') }}</h3>
           <p class="ion-margin-top">
@@ -88,10 +84,7 @@ import { ref, computed, watch, onMounted } from 'vue'
 import { modalController } from '@ionic/vue'
 import { useI18n } from 'vue-i18n'
 import type { HelpContent } from '../../../shared/types/help'
-import {
-  HelpTopic,
-  isValidHelpTopic
-} from '../../../shared/types/help'
+import { HelpTopic, isValidHelpTopic } from '../../../shared/types/help'
 import { useIcons } from '~/composables/useIcons'
 
 interface Props {
@@ -141,10 +134,10 @@ const getTopicTitle = (topicKey: string): string => {
 
     return topicKey
       .split('.')
-      .map((segment) => segment.replace(/[-_]/g, ' '))
-      .flatMap((segment) => segment.split(' '))
+      .map(segment => segment.replace(/[-_]/g, ' '))
+      .flatMap(segment => segment.split(' '))
       .filter(Boolean)
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ')
   }
   return translation
@@ -234,12 +227,15 @@ const scrollToTopic = () => {
 }
 
 // Watch for topic changes
-watch(() => props.topic, (newTopic) => {
-  if (newTopic && isValidHelpTopic(newTopic)) {
-    selectedTopic.value = newTopic
-    scrollToTopic()
+watch(
+  () => props.topic,
+  newTopic => {
+    if (newTopic && isValidHelpTopic(newTopic)) {
+      selectedTopic.value = newTopic
+      scrollToTopic()
+    }
   }
-})
+)
 
 // Initial scroll on mount
 onMounted(() => {

@@ -10,18 +10,18 @@ export const useAuthStore = defineStore('auth', () => {
   const profileFetchPromise = ref<Promise<any> | null>(null)
 
   const isAuthenticated = computed(() => !!token.value)
-  
+
   // Computed properties for easy ID access
   const userId = computed(() => user.value?._id || user.value?.id)
-  const companyId = computed(() =>
-    activeCompany.value?._id || activeCompany.value?.id
+  const companyId = computed(
+    () => activeCompany.value?._id || activeCompany.value?.id
   )
   const otherCompanyIds = computed(() =>
     otherCompanies.value.map(c => c._id || c.id)
   )
   const userEmail = computed(() => user.value?.email)
   const userCredits = computed(() => user.value?.balance || 0)
-  
+
   // Profile caching - increased to 10 minutes as per requirements
   const PROFILE_CACHE_DURATION = 10 * 60 * 1000 // 10 minutes
   const shouldRefetchProfile = computed(() => {
@@ -83,11 +83,11 @@ export const useAuthStore = defineStore('auth', () => {
     const savedLastProfileFetch = storage.get<string>(
       'auth_last_profile_fetch'
     )
-    
+
     if (savedToken) {
       token.value = savedToken
     }
-    
+
     if (savedUser) {
       try {
         user.value = JSON.parse(savedUser)
@@ -96,7 +96,7 @@ export const useAuthStore = defineStore('auth', () => {
         storage.remove('auth_user')
       }
     }
-    
+
     if (savedActiveCompany) {
       try {
         activeCompany.value = JSON.parse(savedActiveCompany)
@@ -105,7 +105,7 @@ export const useAuthStore = defineStore('auth', () => {
         storage.remove('auth_active_company')
       }
     }
-    
+
     if (savedOtherCompanies) {
       try {
         otherCompanies.value = JSON.parse(savedOtherCompanies)
@@ -114,7 +114,7 @@ export const useAuthStore = defineStore('auth', () => {
         storage.remove('auth_other_companies')
       }
     }
-    
+
     if (savedLastProfileFetch) {
       try {
         lastProfileFetch.value = parseInt(savedLastProfileFetch) || 0
@@ -218,7 +218,9 @@ export const useAuthStore = defineStore('auth', () => {
         // Handle localStorage errors (quota exceeded, disabled, etc.)
         if (error instanceof Error) {
           if (error.name === 'QuotaExceededError') {
-            console.error('[AUTH] localStorage quota exceeded, clearing old data')
+            console.error(
+              '[AUTH] localStorage quota exceeded, clearing old data'
+            )
             try {
               const storage = useStorage()
               // Clear old data to make room
@@ -276,13 +278,17 @@ export const useAuthStore = defineStore('auth', () => {
         const profile = await profileRepository.getCurrentProfile()
 
         // Auto-select first company if no active_company is set
-        if (!profile.active_company?.company &&
-            profile.other_companies?.length > 0) {
+        if (
+          !profile.active_company?.company &&
+          profile.other_companies?.length > 0
+        ) {
           // No active company found, auto-selecting first available
 
           // Get the first company ID (handle both _id and id fields)
           const firstCompany = profile.other_companies[0]
-          const firstCompanyId = firstCompany ? (firstCompany._id || firstCompany.id) : null
+          const firstCompanyId = firstCompany
+            ? firstCompany._id || firstCompany.id
+            : null
 
           if (!firstCompanyId) {
             console.error('[AUTH] First company has no valid ID')
@@ -305,10 +311,7 @@ export const useAuthStore = defineStore('auth', () => {
               // Update state from fresh response
               setProfileState(updatedProfile)
             } catch (error) {
-              console.error(
-                '[AUTH] Failed to auto-select company:',
-                error
-              )
+              console.error('[AUTH] Failed to auto-select company:', error)
 
               // Fallback: set company locally without API update
               // Using local fallback for company selection
@@ -388,10 +391,11 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     // Fetch if forced, no user, profile is stale, or activeCompany is missing
-    const needsFetch = force ||
-                      !user.value ||
-                      shouldRefetchProfile.value ||
-                      (user.value && !activeCompany.value && otherCompanies.value.length > 0)
+    const needsFetch =
+      force ||
+      !user.value ||
+      shouldRefetchProfile.value ||
+      (user.value && !activeCompany.value && otherCompanies.value.length > 0)
 
     if (needsFetch) {
       await fetchProfile()
@@ -442,6 +446,6 @@ export const useAuthStore = defineStore('auth', () => {
     initializeAuth,
     fetchProfile,
     ensureProfileData,
-    refreshProfile,
+    refreshProfile
   }
 })

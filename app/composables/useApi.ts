@@ -9,7 +9,7 @@ export const useApi = () => {
     retry: 2,
     retryDelay: 1000,
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
     onRequest({ options }) {
       const authStore = useAuthStore()
@@ -46,9 +46,10 @@ export const useApi = () => {
       console.error('Network error:', error)
       throw createError({
         statusCode: 500,
-        statusMessage: 'Network connection error. Please check your internet connection.',
+        statusMessage:
+          'Network connection error. Please check your internet connection.'
       })
-    },
+    }
   })
 
   return { api }

@@ -1,4 +1,4 @@
-import type { 
+import type {
   CreateUserRequest,
   UpdateUserRequest,
   UserSearchRequest
@@ -24,7 +24,10 @@ export const useUser = () => {
     return userService.createUser(userData)
   }
 
-  const updateUser = async (id: string | number, userData: UpdateUserRequest) => {
+  const updateUser = async (
+    id: string | number,
+    userData: UpdateUserRequest
+  ) => {
     const result = await userService.updateUser(id, userData)
     // If updating current user, refresh profile
     if (String(id) === String(authStore.userId)) {
@@ -60,6 +63,6 @@ export const useUser = () => {
     updateCurrentUser,
     deleteUser,
     switchCompany,
-    currentUser: computed(() => authStore.user),
+    currentUser: computed(() => authStore.user)
   }
 }

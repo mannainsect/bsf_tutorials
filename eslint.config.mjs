@@ -9,17 +9,23 @@ export default createConfigForNuxt({
     rules: {
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/explicit-function-return-type': 'off',
-      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_' }
+      ],
       'vue/multi-word-component-names': 'off',
-      'vue/html-self-closing': ['error', {
-        html: {
-          void: 'always',
-          normal: 'always',
-          component: 'always'
-        },
-        svg: 'always',
-        math: 'always'
-      }]
+      'vue/html-self-closing': [
+        'error',
+        {
+          html: {
+            void: 'always',
+            normal: 'always',
+            component: 'always'
+          },
+          svg: 'always',
+          math: 'always'
+        }
+      ]
     }
   })
   .override('nuxt/vue/rules', {

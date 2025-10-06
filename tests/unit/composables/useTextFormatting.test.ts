@@ -87,8 +87,9 @@ describe('useTextFormatting', () => {
       })
 
       it('should handle combined formatting', () => {
-        const input = '# Title\n\n**Bold** and *italic* with ' +
-                     '[link](https://example.com)'
+        const input =
+          '# Title\n\n**Bold** and *italic* with ' +
+          '[link](https://example.com)'
         const result = textFormatting.formatMarkdown(input)
         expect(result).toContain('<h1>Title</h1>')
         expect(result).toContain('<strong>Bold</strong>')
@@ -134,7 +135,8 @@ describe('useTextFormatting', () => {
       })
 
       it('should remove style attributes with javascript', () => {
-        const input = '<p style="background: url(javascript:alert(1))">Text</p>'
+        const input =
+          '<p style="background: url(javascript:alert(1))">Text</p>'
         const result = textFormatting.formatMarkdown(input)
         expect(result).not.toContain('style')
         expect(result).not.toContain('javascript')
@@ -201,7 +203,8 @@ describe('useTextFormatting', () => {
       })
 
       it('should preserve allowed HTML tags', () => {
-        const input = '# Title\n\n<p>Paragraph</p>\n<blockquote>Quote</blockquote>'
+        const input =
+          '# Title\n\n<p>Paragraph</p>\n<blockquote>Quote</blockquote>'
         const result = textFormatting.formatMarkdown(input)
         expect(result).toContain('<h1>Title</h1>')
         expect(result).toContain('<p>Paragraph</p>')
@@ -240,7 +243,8 @@ describe('useTextFormatting', () => {
   describe('extractUrls', () => {
     describe('URL Extraction from Markdown', () => {
       it('should extract markdown links', () => {
-        const input = '[Google](https://google.com) and [GitHub](https://github.com)'
+        const input =
+          '[Google](https://google.com) and [GitHub](https://github.com)'
         const result = textFormatting.extractUrls(input)
 
         expect(result).toHaveLength(2)
@@ -423,8 +427,8 @@ describe('useTextFormatting', () => {
       })
 
       it('should handle URLs at start and end of text', () => {
-        const input = 'https://start.com in middle https://middle.com ' +
-                     'https://end.com'
+        const input =
+          'https://start.com in middle https://middle.com ' + 'https://end.com'
         const result = textFormatting.extractUrls(input)
 
         expect(result).toHaveLength(3)

@@ -52,8 +52,7 @@ describe('LogRepository', () => {
         _id: 'log-mongo-id-789'
       }
 
-      vi.spyOn(repository as any, 'request')
-        .mockResolvedValue(mockResponse)
+      vi.spyOn(repository as any, 'request').mockResolvedValue(mockResponse)
 
       const result = await repository.createProcessLog(logData, params)
 
@@ -75,8 +74,7 @@ describe('LogRepository', () => {
         _id: 'log-legacy-id'
       }
 
-      vi.spyOn(repository as any, 'request')
-        .mockResolvedValue(mockResponse)
+      vi.spyOn(repository as any, 'request').mockResolvedValue(mockResponse)
 
       const result = await repository.createProcessLog(logData, params)
 
@@ -102,8 +100,7 @@ describe('LogRepository', () => {
         _id: 'log-null-id'
       }
 
-      vi.spyOn(repository as any, 'request')
-        .mockResolvedValue(mockResponse)
+      vi.spyOn(repository as any, 'request').mockResolvedValue(mockResponse)
 
       const result = await repository.createProcessLog(logData, params)
 
@@ -128,8 +125,7 @@ describe('LogRepository', () => {
         _id: 'log-empty-id'
       }
 
-      vi.spyOn(repository as any, 'request')
-        .mockResolvedValue(mockResponse)
+      vi.spyOn(repository as any, 'request').mockResolvedValue(mockResponse)
 
       const result = await repository.createProcessLog(logData, params)
 
@@ -153,8 +149,7 @@ describe('LogRepository', () => {
         _id: 'log-content-123'
       }
 
-      vi.spyOn(repository as any, 'request')
-        .mockResolvedValue(mockResponse)
+      vi.spyOn(repository as any, 'request').mockResolvedValue(mockResponse)
 
       const result = await repository.createContentLog(logData)
 
@@ -178,8 +173,7 @@ describe('LogRepository', () => {
         _id: 'log-content-456'
       }
 
-      vi.spyOn(repository as any, 'request')
-        .mockResolvedValue(mockResponse)
+      vi.spyOn(repository as any, 'request').mockResolvedValue(mockResponse)
 
       const result = await repository.createContentLog(logData, params)
 

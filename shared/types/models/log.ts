@@ -21,26 +21,35 @@ export interface Log {
 /**
  * Log with populated relations (returned from GET endpoints)
  */
-export interface PopulatedLog extends Omit<Log, 'user' | 'company' | 'space' | 'device'> {
-  user?: {
-    _id: string
-    name: string
-    email: string
-  } | string
-  company?: {
-    _id: string
-    name: string
-  } | string
-  space?: {
-    _id: string
-    name: string
-    process_type: string
-  } | string
-  device?: {
-    _id: string
-    description: string
-    device_code: string
-  } | string
+export interface PopulatedLog
+  extends Omit<Log, 'user' | 'company' | 'space' | 'device'> {
+  user?:
+    | {
+        _id: string
+        name: string
+        email: string
+      }
+    | string
+  company?:
+    | {
+        _id: string
+        name: string
+      }
+    | string
+  space?:
+    | {
+        _id: string
+        name: string
+        process_type: string
+      }
+    | string
+  device?:
+    | {
+        _id: string
+        description: string
+        device_code: string
+      }
+    | string
 }
 
 /**
@@ -51,24 +60,24 @@ export enum LogType {
   PROCESS_START = 'process_start',
   PROCESS_COMPLETE = 'process_complete',
   PROCESS_ERROR = 'process_error',
-  
+
   // Task logs
   TASK_COMPLETE = 'task_complete',
   TASK_FAILED = 'task_failed',
-  
+
   // System logs
   SYSTEM_EVENT = 'system_event',
   SYSTEM_ERROR = 'system_error',
-  
+
   // User activity logs
   USER_ACTION = 'user_action',
   USER_LOGIN = 'user_login',
   USER_LOGOUT = 'user_logout',
-  
+
   // Content logs
   CONTENT_VIEWED = 'content_viewed',
   CONTENT_COMPLETED = 'content_completed',
-  
+
   // Generic
   CUSTOM = 'custom'
 }

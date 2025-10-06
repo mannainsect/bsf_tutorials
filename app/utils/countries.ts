@@ -56,7 +56,7 @@ export const COUNTRIES_DATA = [
   { code: 'CF', name: 'Central African Republic', flag: '🇨🇫' },
   { code: 'CG', name: 'Republic of the Congo', flag: '🇨🇬' },
   { code: 'CH', name: 'Switzerland', flag: '🇨🇭' },
-  { code: 'CI', name: 'Côte d\'Ivoire', flag: '🇨🇮' },
+  { code: 'CI', name: "Côte d'Ivoire", flag: '🇨🇮' },
   { code: 'CK', name: 'Cook Islands', flag: '🇨🇰' },
   { code: 'CL', name: 'Chile', flag: '🇨🇱' },
   { code: 'CM', name: 'Cameroon', flag: '🇨🇲' },

@@ -4,11 +4,7 @@
       <ion-text color="danger">
         <p>{{ message }}</p>
       </ion-text>
-      <ion-button
-        v-if="showRetry"
-        size="small"
-        @click="$emit('retry')"
-      >
+      <ion-button v-if="showRetry" size="small" @click="$emit('retry')">
         {{ retryLabel || t('common.retry') }}
       </ion-button>
     </ion-card-content>

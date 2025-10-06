@@ -28,7 +28,16 @@ interface Props {
   type?: 'button' | 'submit' | 'reset'
   icon?: string
   iconSlot?: 'start' | 'end' | 'icon-only'
-  spinnerName?: 'lines' | 'crescent' | 'bubbles' | 'circles' | 'circular' | 'dots' | 'lines-small' | 'lines-sharp' | 'lines-sharp-small'
+  spinnerName?:
+    | 'lines'
+    | 'crescent'
+    | 'bubbles'
+    | 'circles'
+    | 'circular'
+    | 'dots'
+    | 'lines-small'
+    | 'lines-sharp'
+    | 'lines-sharp-small'
 }
 
 interface Emits {

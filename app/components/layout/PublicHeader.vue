@@ -30,4 +30,3 @@ const { currentTopic } = useHelpTopic()
   padding-inline-start: 16px;
 }
 </style>
-

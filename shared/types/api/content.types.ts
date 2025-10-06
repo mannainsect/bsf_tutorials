@@ -43,16 +43,9 @@ export type ContentCategory =
 
 export type ContentLevel = 'basic' | 'intermediate' | 'advanced'
 
-export type PlaylistCategory =
-  | 'course'
-  | 'support_mind'
-  | 'tech_support'
+export type PlaylistCategory = 'course' | 'support_mind' | 'tech_support'
 
-export type ToolCategory =
-  | 'learn'
-  | 'farming'
-  | 'business'
-  | 'analytics'
+export type ToolCategory = 'learn' | 'farming' | 'business' | 'analytics'
 
 /**
  * Public content response (for anonymous users)
@@ -131,8 +124,7 @@ export interface Playlist {
 /**
  * Populated playlist with full objects
  */
-export interface PopulatedPlaylist
-  extends Omit<Playlist, 'includes'> {
+export interface PopulatedPlaylist extends Omit<Playlist, 'includes'> {
   includes: {
     content: Content[]
     tools: Tool[]

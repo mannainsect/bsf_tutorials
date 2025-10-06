@@ -1,7 +1,7 @@
 <template>
-  <div 
-    class="ion-text-center" 
-    :class="{ 
+  <div
+    class="ion-text-center"
+    :class="{
       'ion-justify-content-center ion-align-items-center': centered,
       'loading-fullscreen': fullscreen,
       'loading-container': !fullscreen
@@ -16,7 +16,14 @@
 
 <script setup lang="ts">
 interface Props {
-  name?: 'bubbles' | 'circles' | 'circular' | 'crescent' | 'dots' | 'lines' | 'lines-small'
+  name?:
+    | 'bubbles'
+    | 'circles'
+    | 'circular'
+    | 'crescent'
+    | 'dots'
+    | 'lines'
+    | 'lines-small'
   color?: string
   message?: string
   centered?: boolean
@@ -55,4 +62,3 @@ withDefaults(defineProps<Props>(), {
   gap: 1rem;
 }
 </style>
-

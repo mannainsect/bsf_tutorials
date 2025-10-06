@@ -3,7 +3,10 @@
     <ion-row class="ion-justify-content-center">
       <ion-col size="12" size-sm="6" size-md="5" size-lg="5">
         <!-- Email verification step -->
-        <div v-if="!creatingCompany" class="ion-text-center ion-padding-vertical">
+        <div
+          v-if="!creatingCompany"
+          class="ion-text-center ion-padding-vertical"
+        >
           <ion-icon
             :icon="mail"
             size="large"
@@ -14,8 +17,11 @@
             <h1>{{ $t('auth.checkYourEmail') }}</h1>
           </ion-text>
           <ion-text color="medium">
-            <p>{{ $t('auth.verificationCodeSent',
-                 { email: registrationEmail }) }}</p>
+            <p>
+              {{
+                $t('auth.verificationCodeSent', { email: registrationEmail })
+              }}
+            </p>
           </ion-text>
         </div>
 
@@ -70,7 +76,10 @@
         </form>
 
         <!-- Retry button for company creation failures -->
-        <div v-if="companyCreationError" class="ion-text-center ion-margin-top">
+        <div
+          v-if="companyCreationError"
+          class="ion-text-center ion-margin-top"
+        >
           <ion-text color="danger">
             <p>{{ companyCreationError }}</p>
           </ion-text>
@@ -95,11 +104,7 @@
           <ion-text color="medium">
             <p>{{ $t('auth.didntReceiveCode') }}</p>
           </ion-text>
-          <ion-button
-            fill="clear"
-            :disabled="resending"
-            @click="resendCode"
-          >
+          <ion-button fill="clear" :disabled="resending" @click="resendCode">
             {{ resending ? $t('auth.sending') : $t('auth.resendCode') }}
           </ion-button>
         </div>
@@ -158,9 +163,7 @@ const handleVerify = async () => {
       submitting.value = false
 
       // Initialize company with all spaces
-      const result = await initializeCompany(
-        registrationEmail as string
-      )
+      const result = await initializeCompany(registrationEmail as string)
 
       if (result) {
         // Success - navigate to main page
@@ -190,9 +193,7 @@ const retryCompanyCreation = async () => {
   companyCreationError.value = ''
   creatingCompany.value = true
 
-  const result = await initializeCompany(
-    registrationEmail as string
-  )
+  const result = await initializeCompany(registrationEmail as string)
 
   if (result) {
     await navigateTo(localePath('/main'))
@@ -209,14 +210,14 @@ const skipCompanyCreation = async () => {
 
 const resendCode = async () => {
   if (!registrationEmail) return
-  
+
   resending.value = true
-  
+
   try {
     // Send new verification token
     const { api } = useApi()
     const endpoints = useApiEndpoints()
-    
+
     await api(endpoints.authSendToken, {
       method: 'POST',
       body: {
@@ -224,7 +225,7 @@ const resendCode = async () => {
         token_type: 'register'
       }
     })
-    
+
     // Show success message or toast
     // TODO: Add toast notification
   } catch (err: unknown) {

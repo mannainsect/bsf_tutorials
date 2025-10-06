@@ -150,8 +150,9 @@ class MyMemoryProvider implements TranslationProvider {
 
     try {
       const langPair = `${sourceLang}|${targetLang}`
-      const url = `${this.baseUrl}?q=${encodeURIComponent(text)}` +
-                  `&langpair=${langPair}`
+      const url =
+        `${this.baseUrl}?q=${encodeURIComponent(text)}` +
+        `&langpair=${langPair}`
 
       const response = await fetchWithTimeout(url, {})
       if (!response.ok) {
@@ -264,7 +265,7 @@ export function useTranslation() {
     let hash = 0
     for (let i = 0; i < text.length; i++) {
       const char = text.charCodeAt(i)
-      hash = ((hash << 5) - hash) + char
+      hash = (hash << 5) - hash + char
       hash = hash & hash // Convert to 32bit integer
     }
     // Include truncated text start for uniqueness
@@ -319,18 +320,18 @@ export function useTranslation() {
 
     // Map our language codes to Google Translate codes if needed
     const langMap: Record<string, string> = {
-      'en': 'en',
-      'es': 'es',
-      'fr': 'fr',
-      'de': 'de',
-      'pt': 'pt',
-      'it': 'it',
-      'ru': 'ru',
-      'zh': 'zh',
-      'ja': 'ja',
-      'ko': 'ko',
-      'ar': 'ar',
-      'auto': 'auto'
+      en: 'en',
+      es: 'es',
+      fr: 'fr',
+      de: 'de',
+      pt: 'pt',
+      it: 'it',
+      ru: 'ru',
+      zh: 'zh',
+      ja: 'ja',
+      ko: 'ko',
+      ar: 'ar',
+      auto: 'auto'
     }
 
     const googleSourceLang = langMap[sourceLang] || 'auto'

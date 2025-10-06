@@ -3,8 +3,7 @@ import { setActivePinia, createPinia } from 'pinia'
 import { computed, ref } from 'vue'
 import { useAuthStore as realUseAuthStore } from '~/stores/auth'
 import { useCompanyEdit } from '~/composables/useCompanyEdit'
-import { CompanyRepository } from
-  '~/composables/api/repositories/CompanyRepository'
+import { CompanyRepository } from '~/composables/api/repositories/CompanyRepository'
 import type { Company } from '~/shared/types'
 
 // Create a shared form state for vee-validate mocks
@@ -16,7 +15,9 @@ let mockFormMeta = ref({ valid: true, dirty: false, touched: false })
 vi.mock('vee-validate', () => ({
   useForm: vi.fn(() => {
     const formInstance = {
-      get values() { return mockFormValues },
+      get values() {
+        return mockFormValues
+      },
       meta: mockFormMeta,
       setValues: (values: any) => {
         Object.keys(mockFormValues).forEach(key => {
@@ -83,7 +84,7 @@ vi.mock('vee-validate', () => ({
 
 // Mock @vee-validate/zod
 vi.mock('@vee-validate/zod', () => ({
-  toTypedSchema: vi.fn((schema) => schema)
+  toTypedSchema: vi.fn(schema => schema)
 }))
 
 // Mock CompanyRepository
@@ -127,18 +128,20 @@ describe('useCompanyEdit', () => {
     authStore.setActiveCompany(mockCompany)
 
     // Override useProfile to return mock company
-    global.useProfile = () => ({
-      activeCompany: computed(() => mockCompany),
-      user: computed(() => authStore.user),
-      userId: computed(() => authStore.userId),
-      companyId: computed(() => authStore.companyId)
-    }) as any
+    global.useProfile = () =>
+      ({
+        activeCompany: computed(() => mockCompany),
+        user: computed(() => authStore.user),
+        userId: computed(() => authStore.userId),
+        companyId: computed(() => authStore.companyId)
+      }) as any
 
     // Override useUserRole to return admin permissions
-    global.useUserRole = () => ({
-      isCompanyAdmin: vi.fn(() => true),
-      isCompanyManager: vi.fn(() => false)
-    }) as any
+    global.useUserRole = () =>
+      ({
+        isCompanyAdmin: vi.fn(() => true),
+        isCompanyManager: vi.fn(() => false)
+      }) as any
   })
 
   it('should allow admin to start editing', () => {
@@ -151,10 +154,11 @@ describe('useCompanyEdit', () => {
 
   it('should prevent non-admin from starting edit', () => {
     // Override to return false for both checks
-    global.useUserRole = () => ({
-      isCompanyAdmin: vi.fn(() => false),
-      isCompanyManager: vi.fn(() => false)
-    }) as any
+    global.useUserRole = () =>
+      ({
+        isCompanyAdmin: vi.fn(() => false),
+        isCompanyManager: vi.fn(() => false)
+      }) as any
 
     const { startEdit, isEditing, error } = useCompanyEdit()
 
@@ -168,16 +172,20 @@ describe('useCompanyEdit', () => {
     const mockRefreshProfile = vi.fn().mockResolvedValue({})
     const mockShowSuccess = vi.fn()
 
-    vi.mocked(CompanyRepository).mockImplementation(() => ({
-      updateCompany: mockUpdateCompany
-    }) as any)
+    vi.mocked(CompanyRepository).mockImplementation(
+      () =>
+        ({
+          updateCompany: mockUpdateCompany
+        }) as any
+    )
 
     authStore.refreshProfile = mockRefreshProfile
 
-    global.useToast = () => ({
-      showSuccess: mockShowSuccess,
-      showError: vi.fn()
-    }) as any
+    global.useToast = () =>
+      ({
+        showSuccess: mockShowSuccess,
+        showError: vi.fn()
+      }) as any
 
     const { startEdit, name, saveCompany } = useCompanyEdit()
 
@@ -185,10 +193,9 @@ describe('useCompanyEdit', () => {
     name.value = 'Updated Company'
     await saveCompany()
 
-    expect(mockUpdateCompany).toHaveBeenCalledWith(
-      'comp1',
-      { name: 'Updated Company' }
-    )
+    expect(mockUpdateCompany).toHaveBeenCalledWith('comp1', {
+      name: 'Updated Company'
+    })
     expect(mockRefreshProfile).toHaveBeenCalledWith({ force: true })
     expect(mockShowSuccess).toHaveBeenCalled()
   })
@@ -198,14 +205,18 @@ describe('useCompanyEdit', () => {
     const mockUpdateCompany = vi.fn().mockRejectedValue(mockError)
     const mockShowError = vi.fn()
 
-    vi.mocked(CompanyRepository).mockImplementation(() => ({
-      updateCompany: mockUpdateCompany
-    }) as any)
+    vi.mocked(CompanyRepository).mockImplementation(
+      () =>
+        ({
+          updateCompany: mockUpdateCompany
+        }) as any
+    )
 
-    global.useToast = () => ({
-      showSuccess: vi.fn(),
-      showError: mockShowError
-    }) as any
+    global.useToast = () =>
+      ({
+        showSuccess: vi.fn(),
+        showError: mockShowError
+      }) as any
 
     const { startEdit, name, saveCompany } = useCompanyEdit()
 
@@ -219,9 +230,12 @@ describe('useCompanyEdit', () => {
   it('should only send changed fields', async () => {
     const mockUpdateCompany = vi.fn().mockResolvedValue({})
 
-    vi.mocked(CompanyRepository).mockImplementation(() => ({
-      updateCompany: mockUpdateCompany
-    }) as any)
+    vi.mocked(CompanyRepository).mockImplementation(
+      () =>
+        ({
+          updateCompany: mockUpdateCompany
+        }) as any
+    )
 
     authStore.refreshProfile = vi.fn().mockResolvedValue({})
 
@@ -231,9 +245,8 @@ describe('useCompanyEdit', () => {
     city.value = 'New City'
     await saveCompany()
 
-    expect(mockUpdateCompany).toHaveBeenCalledWith(
-      'comp1',
-      { city: 'New City' }
-    )
+    expect(mockUpdateCompany).toHaveBeenCalledWith('comp1', {
+      city: 'New City'
+    })
   })
 })
