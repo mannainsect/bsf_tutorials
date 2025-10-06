@@ -100,7 +100,17 @@ const navigationLoading = ref(false)
 const navigationError = ref<string | null>(null)
 
 // Navigation items configuration with accessibility
-const navigationItems = ref([
+interface NavigationItem {
+  id: string
+  icon: string
+  label: string
+  ariaLabel: string
+  route: string
+  color: string
+  fill: 'solid' | 'outline' | 'clear' | 'default'
+}
+
+const navigationItems = ref<NavigationItem[]>([
   {
     id: 'account',
     icon: person,
@@ -138,7 +148,10 @@ const navigateToRoute = async (route: string) => {
 }
 
 // Create debounced navigation handler
-const handleNavigation = debounce(navigateToRoute, 300)
+const handleNavigation = debounce(
+  (...args: unknown[]) => navigateToRoute(args[0] as string),
+  300
+)
 
 onMounted(() => {
   ensureProfileData()

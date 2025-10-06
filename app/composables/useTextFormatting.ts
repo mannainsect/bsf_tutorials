@@ -11,9 +11,7 @@ export const useTextFormatting = () => {
   // Configure marked with safe defaults
   marked.setOptions({
     breaks: true, // Convert line breaks to <br>
-    gfm: true, // Enable GitHub Flavored Markdown
-    headerIds: false, // Disable header IDs for security
-    mangle: false // Don't mangle email addresses
+    gfm: true // Enable GitHub Flavored Markdown
   })
 
   /**
@@ -29,7 +27,9 @@ export const useTextFormatting = () => {
       const truncatedText = text.slice(0, 10000)
 
       // Parse markdown to HTML
-      const rawHtml = marked.parse(truncatedText)
+      // marked.parse returns string | Promise<string>, but since we
+      // don't use async extensions, it's always string
+      const rawHtml = marked.parse(truncatedText) as string
 
       // Sanitize HTML to prevent XSS
       const cleanHtml = DOMPurify.sanitize(rawHtml, {
@@ -84,7 +84,11 @@ export const useTextFormatting = () => {
 
       while ((match = markdownLinkRegex.exec(text)) !== null) {
         const [, linkText, url] = match
-        if (url && (url.startsWith('http://') || url.startsWith('https://'))) {
+        if (
+          linkText &&
+          url &&
+          (url.startsWith('http://') || url.startsWith('https://'))
+        ) {
           if (!seenUrls.has(url)) {
             seenUrls.add(url)
             links.push({
@@ -100,7 +104,7 @@ export const useTextFormatting = () => {
 
       while ((match = plainUrlRegex.exec(text)) !== null) {
         const url = match[1]
-        if (!seenUrls.has(url)) {
+        if (url && !seenUrls.has(url)) {
           seenUrls.add(url)
           // For plain URLs, use domain as text
           let displayText = url

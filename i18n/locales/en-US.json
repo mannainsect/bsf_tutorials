@@ -164,7 +164,8 @@
       "notSet": "Not Set",
       "updateSuccess": "Company updated successfully",
       "updateError": "Failed to update company",
-      "permissionDenied": "You do not have permission to edit company"
+      "permissionDenied": "You do not have permission to edit company",
+      "invalidCompanyId": "Invalid company ID"
     },
     "profile": {
       "title": "Profile",

@@ -1,15 +1,6 @@
 import type { RouteLocationRaw } from 'vue-router'
 import type { Ref } from 'vue'
 
-// These are auto-imported by Nuxt but we declare types for clarity
-declare global {
-  const useLocalePath: () => (
-    route: RouteLocationRaw | string,
-    locale?: string
-  ) => string
-  const useI18n: () => { locale: Ref<string> }
-}
-
 /**
  * Type definitions for route handling
  */
