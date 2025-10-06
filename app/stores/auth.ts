@@ -132,9 +132,7 @@ export const useAuthStore = defineStore('auth', () => {
    * @param entity - Entity with potential id/_id fields
    * @returns Normalized entity with both id and _id fields
    */
-  const normalizeEntity = <
-    T extends { _id?: string; id?: string | number }
-  >(
+  const normalizeEntity = <T extends { _id?: string; id?: string | number }>(
     entity: T
   ): T => {
     if (!entity) return entity
@@ -320,23 +318,24 @@ export const useAuthStore = defineStore('auth', () => {
               // Fallback: set company locally without API update
               // Using local fallback for company selection
               // Manually construct the active_company structure
-              const fallbackProfile: import('../composables/api/repositories/ProfileRepository').ProfileResponse = {
-                ...profile,
-                active_company: {
-                  company: firstCompany!,
-                  metrics: {
-                    today: {},
-                    week: {},
-                    month: {}
-                  },
-                  tasks: [],
-                  devices: [],
-                  spaces: [],
-                  admins: [],
-                  managers: [],
-                  operators: []
+              const fallbackProfile: import('../composables/api/repositories/ProfileRepository').ProfileResponse =
+                {
+                  ...profile,
+                  active_company: {
+                    company: firstCompany!,
+                    metrics: {
+                      today: {},
+                      week: {},
+                      month: {}
+                    },
+                    tasks: [],
+                    devices: [],
+                    spaces: [],
+                    admins: [],
+                    managers: [],
+                    operators: []
+                  }
                 }
-              }
               console.log('[AUTH] Using local fallback for company selection')
               setProfileState(fallbackProfile)
             }

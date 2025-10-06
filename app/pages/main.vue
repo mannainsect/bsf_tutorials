@@ -43,7 +43,7 @@
                     expand="block"
                     size="large"
                     :color="item.color"
-                    :fill="item.fill as 'solid' | 'outline' | 'clear' | 'default'"
+                    :fill="item.fill"
                     :disabled="loading || navigationLoading"
                     :aria-label="$t(item.ariaLabel || item.label)"
                     :aria-describedby="
@@ -100,7 +100,17 @@ const navigationLoading = ref(false)
 const navigationError = ref<string | null>(null)
 
 // Navigation items configuration with accessibility
-const navigationItems = ref([
+interface NavigationItem {
+  id: string
+  icon: string
+  label: string
+  ariaLabel: string
+  route: string
+  color: string
+  fill: 'solid' | 'outline' | 'clear' | 'default'
+}
+
+const navigationItems = ref<NavigationItem[]>([
   {
     id: 'account',
     icon: person,
