@@ -65,6 +65,25 @@ git checkout main  # or dev
 ### 2. Analyze and Plan Implementation
 
 - Read the issue documentation thoroughly
+- Check for and download any attachments in the issue:
+
+```bash
+# Create temporary directory for attachments
+mkdir -p /tmp/issue-attachments
+
+# Extract and download attachments with authentication
+gh issue view ISSUE_NUMBER --json body -q .body | \
+  grep -oE 'https://github\.com/user-attachments/assets/[a-f0-9-]+' \
+  | while read url; do
+    filename=$(basename "$url")
+    curl -L -H "Authorization: token $(gh auth token)" \
+      -o /tmp/issue-attachments/$filename "$url"
+  done
+
+# Review downloaded images and text files for requirements
+ls -la /tmp/issue-attachments/
+```
+
 - Analyze existing codebase structure:
 
 ```bash
@@ -74,7 +93,7 @@ grep -r "related_function" --include="*.py" .
 ```
 
 - Identify files that need modification
-- Create detailed implementation plan
+- Create detailed implementation plan based on issue and attachments
 
 ### 3. Implement Features
 
