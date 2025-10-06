@@ -1,4 +1,4 @@
-import type { PurchasedProduct } from './Product'
+import type { PurchasedProduct } from '../api/content.types'
 import type { Company } from './Company'
 import type { CompanyMetrics } from '../api/metrics.types'
 

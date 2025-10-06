@@ -1,6 +1,7 @@
 # BSF App Starter Template
 
-A production-ready Nuxt 4 + Ionic starter focused on authentication, account management, and multi-language support.
+A production-ready Nuxt 4 + Ionic starter focused on authentication,
+account management, and multi-language support.
 
 ## Installation
 
@@ -28,14 +29,17 @@ A production-ready Nuxt 4 + Ionic starter focused on authentication, account man
 ### Account Management
 
 - Edit personal information, password, and preferences.
-- Company management for administrators and managers (name, address, timezone, business ID).
+- Company management for administrators and managers (name, address,
+  timezone, business ID).
 - Credits and metrics overview with cached profile data.
 
 ### Help System
 
 - Contextual help icon accessible across pages.
-- Modal topics: getting started overview, profile settings, account security.
-- Fully localized content across English, Spanish, French, Portuguese, and German.
+- Modal topics: getting started overview, profile settings, account
+  security.
+- Fully localized content across English, Spanish, French, Portuguese,
+  and German.
 
 ### Infrastructure Highlights
 
@@ -49,14 +53,19 @@ A production-ready Nuxt 4 + Ionic starter focused on authentication, account man
 - `npm run lint` – ESLint checks (fails on existing legacy warnings).
 - `npm run test` – Vitest unit suite.
 - `npm run build` – Production build validation.
-- `npm run test:e2e` – Playwright specs (requires running `npm run dev` in a separate terminal first).
+- `npm run test:e2e` – Playwright specs (requires running `npm run dev`
+  in a separate terminal first).
 
 ## Architecture Notes
 
-- Auth store (`app/stores/auth.ts`) manages profile caching, concurrency control, and permission hydration.
-- `useUserRole` exposes synchronous permission helpers sourced from cached profile state.
-- `useHelp` and `useHelpTopic` coordinate contextual help topics across routes.
-- Localization managed through `@nuxtjs/i18n` with translations stored in `i18n/locales`.
+- Auth store (`app/stores/auth.ts`) manages profile caching,
+  concurrency control, and permission hydration.
+- `useUserRole` exposes synchronous permission helpers sourced from
+  cached profile state.
+- `useHelp` and `useHelpTopic` coordinate contextual help topics
+  across routes.
+- Localization managed through `@nuxtjs/i18n` with translations stored
+  in `i18n/locales`.
 
 ## Directory Overview
 
@@ -67,8 +76,20 @@ app/               # Nuxt application source
   pages/           # Public and private Vue pages
   stores/          # Pinia stores (auth, metrics, etc.)
 docs/              # Reference material and internal plans
+  CONTENT_GUIDANCE.md  # Content & Products API documentation
+  PRD.md              # Product requirements and architecture guide
+shared/types/      # TypeScript type definitions
+  api/             # API request/response types
 tests/             # Unit and E2E tests (Vitest + Playwright)
 ```
+
+## API Documentation
+
+For detailed API endpoint specifications and usage examples:
+
+- `docs/CONTENT_GUIDANCE.md` – Complete Content & Products API reference
+  including content, playlists, tools, and purchasing workflows.
+- TypeScript types available in `shared/types/api/content.types.ts`.
 
 ## Development Tips
 
