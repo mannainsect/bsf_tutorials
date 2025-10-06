@@ -1,8 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import {
-  CompanyRepository,
-  type UpdateCompanyRequest
-} from '~/composables/api/repositories/CompanyRepository'
+import { CompanyRepository } from '~/composables/api/repositories/CompanyRepository'
+import type { UpdateCompanyRequest } from '~/composables/api/repositories/CompanyRepository'
 import type { Company } from '~/shared/types'
 
 const createMockAuthStore = () => ({

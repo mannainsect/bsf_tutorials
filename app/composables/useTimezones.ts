@@ -1,9 +1,9 @@
 import { computed } from 'vue'
 import {
   TIMEZONE_IDENTIFIERS,
-  POPULAR_TIMEZONE_VALUES,
-  type TimezoneIdentifier
+  POPULAR_TIMEZONE_VALUES
 } from '~/utils/timezones'
+import type { TimezoneIdentifier } from '~/utils/timezones'
 
 export interface Timezone {
   value: string

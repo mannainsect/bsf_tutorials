@@ -9,7 +9,7 @@ import type { Company } from '~/shared/types'
 // Create a shared form state for vee-validate mocks
 let mockFormValues: Record<string, any> = {}
 let mockFieldRefs: Record<string, any> = {}
-let mockFormMeta = ref({ valid: true, dirty: false, touched: false })
+const mockFormMeta = ref({ valid: true, dirty: false, touched: false })
 
 // Mock vee-validate
 vi.mock('vee-validate', () => ({

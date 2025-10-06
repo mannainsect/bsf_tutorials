@@ -6,7 +6,7 @@ export const useHelpTopic = () => {
   const route = useRoute()
 
   const currentHelpTopic = computed(() => {
-    if (process.server || !route?.path) return null
+    if (import.meta.server || !route?.path) return null
 
     let path = route.path
     const routeName = route.name?.toString() || ''

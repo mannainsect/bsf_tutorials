@@ -2,7 +2,8 @@ import { modalController } from '@ionic/vue'
 import type { HTMLIonModalElement } from '@ionic/vue'
 import type { Ref } from 'vue'
 import { ref, onUnmounted, getCurrentInstance } from 'vue'
-import { HelpTopic, isValidHelpTopic } from '../../shared/types/help'
+import type { HelpTopic } from '../../shared/types/help'
+import { isValidHelpTopic } from '../../shared/types/help'
 import HelpModal from '~/components/help/HelpModal.vue'
 
 // Singleton modal instance reference with stronger typing

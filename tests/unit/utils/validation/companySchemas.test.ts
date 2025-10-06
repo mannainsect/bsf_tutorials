@@ -1,8 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import {
-  createCompanyEditSchema,
-  type CompanyEditForm
-} from '~/utils/validation/companySchemas'
+import { createCompanyEditSchema } from '~/utils/validation/companySchemas'
+import type { CompanyEditForm } from '~/utils/validation/companySchemas'
 
 describe('companySchemas', () => {
   describe('companyEditSchema', () => {
