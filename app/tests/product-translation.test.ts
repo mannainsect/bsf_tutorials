@@ -48,7 +48,7 @@ describe('Product Detail Translation', () => {
       await translate('Test text', 'en', 'es')
     } catch (err) {
       expect(err).toBeDefined()
-      expect(err.message).toContain('limit')
+      expect((err as Error).message).toContain('limit')
     }
   })
 

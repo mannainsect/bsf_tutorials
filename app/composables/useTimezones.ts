@@ -15,8 +15,9 @@ export interface Timezone {
 function getTimezoneLabel(tzIdentifier: string): string {
   if (tzIdentifier === 'UTC') return 'UTC'
   const parts = tzIdentifier.split('/')
-  const city = parts[parts.length - 1].replace(/_/g, ' ')
-  if (parts.length > 2) {
+  const lastPart = parts[parts.length - 1]
+  const city = lastPart ? lastPart.replace(/_/g, ' ') : tzIdentifier
+  if (parts.length > 2 && parts[1]) {
     return `${parts[1]} - ${city}`
   }
   return city

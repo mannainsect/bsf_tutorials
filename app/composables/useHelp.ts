@@ -1,5 +1,4 @@
 import { modalController } from '@ionic/vue'
-import type { HTMLIonModalElement } from '@ionic/vue'
 import type { Ref } from 'vue'
 import { ref, onUnmounted, getCurrentInstance } from 'vue'
 import type { HelpTopic } from '../../shared/types/help'

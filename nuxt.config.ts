@@ -52,13 +52,6 @@ export default defineNuxtConfig({
       ]
     }
   },
-  router: {
-    options: {
-      scrollBehavior(to, from, savedPosition) {
-        return savedPosition || { top: 0 }
-      }
-    }
-  },
   modules: [
     '@nuxtjs/ionic',
     '@pinia/nuxt',

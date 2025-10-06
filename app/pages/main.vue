@@ -43,7 +43,7 @@
                     expand="block"
                     size="large"
                     :color="item.color"
-                    :fill="item.fill"
+                    :fill="item.fill as 'solid' | 'outline' | 'clear' | 'default'"
                     :disabled="loading || navigationLoading"
                     :aria-label="$t(item.ariaLabel || item.label)"
                     :aria-describedby="
@@ -138,7 +138,10 @@ const navigateToRoute = async (route: string) => {
 }
 
 // Create debounced navigation handler
-const handleNavigation = debounce(navigateToRoute, 300)
+const handleNavigation = debounce(
+  (...args: unknown[]) => navigateToRoute(args[0] as string),
+  300
+)
 
 onMounted(() => {
   ensureProfileData()

@@ -116,7 +116,7 @@ export const useCompanyEdit = () => {
 
     if (!canEdit.value) {
       error.value = t('account.company.permissionDenied')
-      await toast.showError(error.value)
+      await toast.showError(error.value || 'Permission denied')
       return
     }
 
@@ -148,6 +148,9 @@ export const useCompanyEdit = () => {
       }
 
       const companyId = activeCompany.value._id || activeCompany.value.id
+      if (!companyId || typeof companyId !== 'string') {
+        throw new Error('Invalid company ID')
+      }
       await companyRepository.updateCompany(companyId, updateData)
 
       // CRITICAL: Invalidate cache and refresh profile

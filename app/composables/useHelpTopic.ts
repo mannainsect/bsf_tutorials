@@ -12,7 +12,8 @@ export const useHelpTopic = () => {
     const routeName = route.name?.toString() || ''
 
     // Remove hash fragments if present
-    path = path.split('#')[0]
+    const pathParts = path.split('#')
+    path = pathParts[0] || path
 
     // Remove trailing slash if present
     if (path.endsWith('/') && path.length > 1) {

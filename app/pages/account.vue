@@ -370,7 +370,7 @@
                   :key="timezone.value"
                   :value="timezone.value"
                 >
-                  {{ timezone.label }} (UTC{{ timezone.offset }})
+                  {{ timezone.label }}
                 </ion-select-option>
               </ion-select>
             </ion-item>

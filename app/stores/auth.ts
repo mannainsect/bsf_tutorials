@@ -132,7 +132,9 @@ export const useAuthStore = defineStore('auth', () => {
    * @param entity - Entity with potential id/_id fields
    * @returns Normalized entity with both id and _id fields
    */
-  const normalizeEntity = <T extends { _id?: string; id?: string }>(
+  const normalizeEntity = <
+    T extends { _id?: string; id?: string | number }
+  >(
     entity: T
   ): T => {
     if (!entity) return entity
@@ -149,7 +151,9 @@ export const useAuthStore = defineStore('auth', () => {
   /**
    * Normalize arrays of entities
    */
-  const normalizeEntityArray = <T extends { _id?: string; id?: string }>(
+  const normalizeEntityArray = <
+    T extends { _id?: string; id?: string | number }
+  >(
     entities: T[]
   ): T[] => {
     if (!Array.isArray(entities)) return []
@@ -201,13 +205,13 @@ export const useAuthStore = defineStore('auth', () => {
           // Store only IDs if data is too large
           const summaryData = JSON.stringify({
             admins: (profile.active_company.admins || []).map(
-              (a: { _id?: string; id?: string }) => a._id || a.id
+              a => a._id || String(a.id)
             ),
             managers: (profile.active_company.managers || []).map(
-              (m: { _id?: string; id?: string }) => m._id || m.id
+              m => m._id || String(m.id)
             ),
             operators: (profile.active_company.operators || []).map(
-              (o: { _id?: string; id?: string }) => o._id || o.id
+              o => o._id || String(o.id)
             )
           })
           storage.set('auth_active_company_roles', summaryData)
@@ -316,11 +320,15 @@ export const useAuthStore = defineStore('auth', () => {
               // Fallback: set company locally without API update
               // Using local fallback for company selection
               // Manually construct the active_company structure
-              const fallbackProfile = {
+              const fallbackProfile: import('../composables/api/repositories/ProfileRepository').ProfileResponse = {
                 ...profile,
                 active_company: {
-                  company: firstCompany,
-                  metrics: {},
+                  company: firstCompany!,
+                  metrics: {
+                    today: {},
+                    week: {},
+                    month: {}
+                  },
                   tasks: [],
                   devices: [],
                   spaces: [],
