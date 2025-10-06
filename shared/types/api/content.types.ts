@@ -1,6 +1,6 @@
 /**
  * Content & Products API Types
- * Based on /docs/CONTENT_GUIDANCE.md
+ * Based on docs/PRD.md
  */
 
 // Allowed values for tags

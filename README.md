@@ -1,7 +1,9 @@
-# BSF App Starter Template
+# BSF Tutorials
 
-A production-ready Nuxt 4 + Ionic starter focused on authentication,
-account management, and multi-language support.
+A Nuxt 4 + Ionic application that surfaces Black Soldier Fly (BSF) video
+tutorials and courses from the REST Content & Products API. The experience
+covers anonymous discovery, authenticated learning, and registered user
+workflows on web and mobile using Capacitor.
 
 ## Installation
 
@@ -17,36 +19,49 @@ account management, and multi-language support.
 3. Copy `.env.example` to `.env` and set `NUXT_PUBLIC_API_BASE_URL`.
 4. Run the development server with `npm run dev` (http://localhost:3000).
 
-## Core Features
+## Core Experience
+
+### Learning Content Delivery
+
+- Typed Content & Products API integration (`shared/types/api/content.types.ts`)
+  ensures consistent data for public (`/products/content/public`) and
+  authenticated (`/products/content`) catalogues.
+- `useApi` hardens all REST requests with automatic auth headers, retry, and
+  401 recovery; endpoints are centralized under `nuxt.config.ts` ➝
+  `runtimeConfig.public.apiEndpoints`.
+- `useLog.logContentAction` records views, completions, and purchases so course
+  interactions stay in sync across devices.
 
 ### Authentication & Session Handling
 
-- Email/password and passwordless login flows.
-- Email verification with automatic and manual token entry.
-- Centralized profile bootstrap to ensure session state before rendering.
-- Automatic company selection when no active company is set.
+- Email/password onboarding with token verification (`app/pages/register.vue`,
+  `app/pages/verify-token.vue`).
+- Guest middleware keeps public routes accessible while guarding `main` and
+  `account` dashboards.
+- `useAuthStore` centralizes profile bootstrap, token persistence, and company
+  hydration with 10-minute caching.
 
-### Account Management
+### Account & Company Management
 
-- Edit personal information, password, and preferences.
-- Company management for administrators and managers (name, address,
-  timezone, business ID).
-- Credits and metrics overview with cached profile data.
+- `app/pages/account.vue` allows profile edits, company metadata updates, and
+  password resets with toast feedback and unsaved-change guards.
+- Country and timezone lookups come from `useCountries` and `useTimezones`,
+  keeping validation consistent across forms.
+- Credit balances and account tiers surface via Ionic cards for quick reads.
 
-### Help System
+### Help & Accessibility
 
-- Contextual help icon accessible across pages.
-- Modal topics: getting started overview, profile settings, account
-  security.
-- Fully localized content across English, Spanish, French, Portuguese,
-  and German.
+- `useHelp` provides an accessible modal with focus/scroll management and a
+  single Ionic modal instance.
+- Help topics are mapped in `useHelpTopic` and localized through
+  `i18n/locales/*`.
 
-### Infrastructure Highlights
+### Observability & Insights
 
-- Ionic components with automatic public/private layout switching.
-- Metrics, logging, and credit systems preserved.
-- Comprehensive validation utilities for account flows.
-- PWA support and static generation ready for deployment.
+- `useMetrics` ships non-blocking event tracking for logins, page views, and
+  feature usage.
+- `useLog` exposes CRUD helpers for process, credit, and content logs—mirrored
+  in `tests/unit` examples for instrumentation.
 
 ## Testing & Quality
 
@@ -58,14 +73,13 @@ account management, and multi-language support.
 
 ## Architecture Notes
 
-- Auth store (`app/stores/auth.ts`) manages profile caching,
-  concurrency control, and permission hydration.
-- `useUserRole` exposes synchronous permission helpers sourced from
-  cached profile state.
-- `useHelp` and `useHelpTopic` coordinate contextual help topics
-  across routes.
-- Localization managed through `@nuxtjs/i18n` with translations stored
-  in `i18n/locales`.
+- `app/stores/auth.ts` normalizes Mongo-style ids, caches profiles, and keeps
+  company context in localStorage.
+- `app/composables/api` wraps repositories/services for profile, metrics, logs,
+  and users; swap base URLs using `.env` without touching call sites.
+- `useSafeLocalePath` and Nuxt i18n guard navigation while preserving locale.
+- Reusable Ionic layout shells live in `app/components/layout/*`, switching
+  automatically between public and private experiences.
 
 ## Directory Overview
 
@@ -76,7 +90,6 @@ app/               # Nuxt application source
   pages/           # Public and private Vue pages
   stores/          # Pinia stores (auth, metrics, etc.)
 docs/              # Reference material and internal plans
-  CONTENT_GUIDANCE.md  # Content & Products API documentation
   PRD.md              # Product requirements and architecture guide
 shared/types/      # TypeScript type definitions
   api/             # API request/response types
@@ -85,11 +98,10 @@ tests/             # Unit and E2E tests (Vitest + Playwright)
 
 ## API Documentation
 
-For detailed API endpoint specifications and usage examples:
-
-- `docs/CONTENT_GUIDANCE.md` – Complete Content & Products API reference
-  including content, playlists, tools, and purchasing workflows.
-- TypeScript types available in `shared/types/api/content.types.ts`.
+- `docs/PRD.md` – Strategy, audience flows, and the integrated Content &
+  Products API reference (public, authenticated, playlists, tools, purchasing).
+- TypeScript helpers live under `shared/types/api` and are re-exported via
+  `shared/types/index.ts` for composables and stores.
 
 ## Development Tips
 

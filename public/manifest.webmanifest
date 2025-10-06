@@ -1,7 +1,7 @@
 {
-  "name": "BSF App",
-  "short_name": "BSF",
-  "description": "Production-ready mobile app template",
+  "name": "BSF Tutorials",
+  "short_name": "BSF Tutor",
+  "description": "Nuxt + Ionic experience delivering BSF tutorials from the Content & Products REST API.",
   "theme_color": "#3880ff",
   "background_color": "#ffffff",
   "display": "standalone",

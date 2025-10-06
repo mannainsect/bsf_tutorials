@@ -1,5 +1,5 @@
 // App constants
-export const APP_NAME = 'BSF Template'
+export const APP_NAME = 'BSF Tutorials'
 export const APP_VERSION = '1.0.0'
 
 // API constants
