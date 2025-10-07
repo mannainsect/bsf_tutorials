@@ -139,6 +139,40 @@ Format of the issue body / description:
 - Code snippets and reference links
 - Best practice examples
 
+### Backend Integration (if applicable)
+
+[This section is added when the feature requires backend API integration]
+
+#### API Endpoints
+
+- List of endpoints with methods, paths, and purposes
+- Request/response formats
+- Authentication requirements
+
+#### Data Models
+
+- Backend data structures
+- Field descriptions and types
+- Required vs optional fields
+
+#### Authentication & Authorization
+
+- Auth flow and token handling
+- Permission requirements
+- Authorization patterns
+
+#### Error Handling
+
+- Possible error responses
+- Error codes and messages
+- Recommended error handling approach
+
+#### Integration Examples
+
+- Code snippets showing API usage
+- Example requests and responses
+- Frontend integration patterns
+
 ### Implementation Tasks
 
 #### Task 1: Foundation/Structure
@@ -249,35 +283,87 @@ Follow this procedure:
      - Careful: Risk mitigation
    - Identify consensus and conflicts
 
-4. **Decision Framework**:
+4. **Backend Analysis** (if applicable):
+   - Determine if the issue involves REST API backend integration:
+     - Does it require calling backend endpoints?
+     - Does it need backend data models or authentication?
+     - Does it involve backend business logic or validation?
+   - If YES, launch backend-docs-engineer with this assignment format:
+
+     ```
+     Assignment for backend-docs-engineer:
+
+     Backend Repository: manna_cloud (default - same owner as frontend)
+     Backend Branch: main
+
+     Feature Description:
+     [Brief description of what the frontend needs to implement]
+
+     Questions to Answer:
+     1. [Specific question about endpoints]
+     2. [Question about data models]
+     3. [Question about authentication]
+     4. [Question about error handling]
+     5. [Any other backend-specific questions]
+
+     Focus Areas:
+     - [Specific API endpoints to research]
+     - [Data models to document]
+     - [Authentication/authorization patterns]
+     - [Error handling patterns]
+
+     Context from Analysis:
+     [Include relevant insights from the three analyzers that
+     relate to backend integration]
+
+     NOTE: Use manna_cloud repository with main branch by default.
+     The owner is the same as the frontend repository.
+
+     DO NOT RUN ANY TESTS OR START SERVERS!! YOUR JOB
+     IS JUST TO ANALYSE THE BACKEND DOCUMENTATION AND CODE!
+     ```
+
+   - Wait for backend analysis report
+   - If NO backend involvement, skip this step
+
+5. **Decision Framework**:
    - If lazy solution adequately fixes the issue → Use it as base
    - Add careful analyzer's safety measures and concerns → Always include
    - Include architect's improvements → Only if not overly complex
+   - Incorporate backend details if backend-docs-engineer was used
    - If issue is already addressed → Report to user and stop
 
-5. **Testing Enhancement**:
+6. **Testing Enhancement**:
    - Send synthesized solution to test-driven-engineer
    - Request testing strategy and guidance
    - Wait for testing recommendations
 
-6. **Create Comprehensive Issue**:
+7. **Create Comprehensive Issue**:
    - Title: Based on synthesized understanding
-   - Body: Combine insights from all three perspectives
+   - Body: Combine insights from all perspectives
    - Implementation tasks: Balanced approach
+   - Backend Integration: Add dedicated section if backend analysis was done
+     - Include API endpoints documentation
+     - Data models and structures
+     - Authentication requirements
+     - Error handling patterns
+     - Integration code examples
    - Testing: Enhanced by test-driven-engineer's recommendations
    - Architecture notes: From architect if relevant
    - Quality gates: From test-driven-engineer
 
-7. **Post to GitHub**:
+8. **Post to GitHub**:
    - First determine the repository owner and name from git:
      - Use `git remote -v` to get the repository URL
      - Extract owner and repo name from the URL
    - Use gh CLI tool to create the issue
    - Add appropriate labels (bug, enhancement, etc.)
    - Include note about multi-perspective analysis
+   - Add "backend-integration" label if backend analysis was performed
 
-8. **Report to User**:
+9. **Report to User**:
    - Summary of the three perspectives
+   - Backend integration details (if applicable)
    - Testing strategy overview
    - Final balanced recommendation
    - Link to created GitHub issue
