@@ -47,6 +47,7 @@ The main agent will provide you with:
 - **Existing issue content** - Any context from the issue that may help
 
 Example assignment:
+
 ```
 Feature Description:
 Need to display a list of user devices and show details for each device.
@@ -111,7 +112,7 @@ Return a comprehensive report with:
 
 Your report to the main agent should follow this structure:
 
-```markdown
+````markdown
 # Backend Analysis Report
 
 ## Executive Summary
@@ -127,13 +128,16 @@ Your report to the main agent should follow this structure:
 **Authentication**: [Required auth type, e.g., JWT Bearer token]
 
 **Request Format**:
+
 ```json
 {
   "field": "type - description"
 }
 ```
+````
 
 **Response Format**:
+
 ```json
 {
   "field": "type - description"
@@ -141,12 +145,14 @@ Your report to the main agent should follow this structure:
 ```
 
 **Example Request**:
+
 ```bash
 curl -X GET https://api.example.com/endpoint \
   -H "Authorization: Bearer <token>"
 ```
 
 **Example Response**:
+
 ```json
 {
   "actual": "example data"
@@ -154,6 +160,7 @@ curl -X GET https://api.example.com/endpoint \
 ```
 
 **Error Responses**:
+
 - 401: Unauthorized - Missing or invalid token
 - 403: Forbidden - User not authorized for this resource
 - 404: Not Found - Resource doesn't exist
@@ -169,10 +176,12 @@ curl -X GET https://api.example.com/endpoint \
 **Location**: `app/models/path/to/model.py`
 
 **Fields**:
+
 - `field_name` (type, required/optional): Description
 - `field_name` (type, required/optional): Description
 
 **Example**:
+
 ```json
 {
   "field": "example value"
@@ -180,6 +189,7 @@ curl -X GET https://api.example.com/endpoint \
 ```
 
 **Relationships**:
+
 - Related to Model X via field Y
 - Contains array of Model Z
 
@@ -192,16 +202,19 @@ curl -X GET https://api.example.com/endpoint \
 **Authentication Method**: [e.g., JWT Bearer tokens]
 
 **How to Authenticate**:
+
 1. Step-by-step auth flow
 2. Token format and lifetime
 3. Token refresh mechanism (if applicable)
 
 **Authorization Rules**:
+
 - Who can access what
 - Permission checks performed
 - Role-based access patterns
 
 **Frontend Implementation**:
+
 ```typescript
 // Example auth code for frontend
 ```
@@ -209,6 +222,7 @@ curl -X GET https://api.example.com/endpoint \
 ## Error Handling
 
 **Standard Error Response Format**:
+
 ```json
 {
   "error": "structure"
@@ -216,6 +230,7 @@ curl -X GET https://api.example.com/endpoint \
 ```
 
 **Common Error Scenarios**:
+
 1. Scenario: Error code - How to handle
 2. Scenario: Error code - How to handle
 
@@ -255,7 +270,8 @@ specifically requested but may be useful]
 **Analysis completed**: [timestamp]
 **Backend repository**: mannainsect/manna_cloud
 **Files analyzed**: [count or key files]
-```
+
+````
 
 ## Backend Repository Access
 
@@ -271,12 +287,13 @@ git remote -v | grep origin | head -1 | \
 
 # Default backend repo format: <user>/manna_cloud
 # Default branch: main
-```
+````
 
 **Example**: If frontend repo is `mannainsect/bsf_tutorials`, then
 backend repo is `mannainsect/manna_cloud` on branch `main`.
 
 The main agent may override with:
+
 - Different repository name
 - Different branch
 - Different owner/organization
@@ -287,23 +304,27 @@ same authentication as the frontend repository.
 **Verified Access Methods:**
 
 1. **View Repository**:
+
    ```bash
    gh repo view mannainsect/manna_cloud
    ```
 
 2. **Read Files** (base64 encoded):
+
    ```bash
    gh api repos/mannainsect/manna_cloud/contents/PATH \
      --jq '.content' | base64 -d
    ```
 
 3. **List Directories**:
+
    ```bash
    gh api repos/mannainsect/manna_cloud/contents/DIRECTORY \
      --jq '.[] | select(.type == "file" or .type == "dir") | .name'
    ```
 
 4. **Search Code** (returns file paths):
+
    ```bash
    gh api /search/code?q=repo:mannainsect/manna_cloud+KEYWORD \
      --jq '.items[] | {name: .name, path: .path}'
@@ -491,6 +512,7 @@ Please provide a comprehensive backend analysis report.
 ```
 
 The sub-agent will:
+
 1. Search manna_cloud backend for device-related code
 2. Read and analyze relevant files
 3. Document all findings with examples
@@ -513,31 +535,39 @@ checking user-company-device relationships.
 ## API Endpoints
 
 ### Endpoint 1: GET /devices
+
 [Detailed documentation...]
 
 ### Endpoint 2: GET /devices/{device_id}
+
 [Detailed documentation...]
 
 ## Data Models
 
 ### Device Model
+
 [Complete field documentation...]
 
 ## Authentication & Authorization
+
 [JWT flow and permission checks...]
 
 ## Error Handling
+
 [All error scenarios...]
 
 ## Integration Examples
+
 [TypeScript code examples...]
 
 ## Answers to Assignment Questions
+
 1. Available endpoints: GET /devices (list) and GET /devices/{id}...
 2. Device model includes: id, company, spaces[], description...
-[etc.]
+   [etc.]
 
 ---
+
 **Analysis completed**: 2025-10-07
 **Files analyzed**: 8 files
 ```
