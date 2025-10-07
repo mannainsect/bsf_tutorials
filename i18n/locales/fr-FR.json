@@ -111,6 +111,11 @@
         "description": "Nuxt + Ionic keeps tutorials feeling native on phones, tablets, and desktop.",
         "iconLabel": "Mobile feature icon"
       }
+    },
+    "featuredVideo": {
+      "title": "Tutoriel en Vedette",
+      "subtitle": "Apprenez les techniques d'élevage BSF depuis notre bibliothèque vidéo gratuite",
+      "viewAll": "Voir Tous les Tutoriels"
     }
   },
   "dashboard": {
@@ -505,5 +510,53 @@
     "showOriginal": "Afficher l'original",
     "showTranslated": "Afficher la traduction",
     "genericError": "La traduction a échoué. Veuillez réessayer plus tard."
+  },
+  "tutorials": {
+    "title": "Tutoriels Vidéo",
+    "subtitle": "Explorez notre collection de vidéos éducatives sur l'élevage BSF",
+    "search": {
+      "placeholder": "Rechercher des tutoriels..."
+    },
+    "filters": {
+      "level": "Niveau",
+      "categoryTags": "Tags de Catégorie",
+      "profileTags": "Tags de Profil"
+    },
+    "sort": {
+      "label": "Trier par",
+      "credits": "Crédits",
+      "title": "Titre",
+      "date": "Date",
+      "direction": "Direction",
+      "ascending": "Croissant",
+      "descending": "Décroissant"
+    },
+    "results": {
+      "count": "{n} vidéo trouvée | {n} vidéos trouvées"
+    },
+    "empty": {
+      "title": "Aucun tutoriel trouvé",
+      "description": "Essayez d'ajuster vos filtres ou votre requête de recherche"
+    },
+    "error": {
+      "title": "Échec du chargement des tutoriels",
+      "retry": "Réessayer"
+    }
+  },
+  "video": {
+    "premium": {
+      "badge": "Premium"
+    },
+    "free": {
+      "badge": "Gratuit"
+    },
+    "level": {
+      "basic": "Basique",
+      "intermediate": "Intermédiaire",
+      "advanced": "Avancé"
+    },
+    "error": {
+      "invalidUrl": "L'URL de la vidéo n'est pas disponible ou invalide"
+    }
   }
 }

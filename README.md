@@ -21,6 +21,16 @@ workflows on web and mobile using Capacitor.
 
 ## Core Experience
 
+### Video Tutorials
+
+- Public video catalogue at `/tutorials` with filtering, search, and sorting.
+- Featured free video on homepage rotates randomly from basic-level content.
+- `VideoCard` component displays Vimeo embeds with responsive grid layouts
+  (1 column mobile, 2 tablet, 3 desktop).
+- Client-side filtering by level (`basic`, `intermediate`, `advanced`),
+  category tags, and profile tags.
+- Multi-locale support with translations across 5 languages.
+
 ### Learning Content Delivery
 
 - Typed Content & Products API integration (`shared/types/api/content.types.ts`)
@@ -86,8 +96,11 @@ workflows on web and mobile using Capacitor.
 ```
 app/               # Nuxt application source
   components/      # Shared Ionic components
+    content/       # VideoCard for tutorial display
   composables/     # Authentication, profile, help, and utility hooks
   pages/           # Public and private Vue pages
+    index.vue      # Landing page with featured video
+    tutorials.vue  # Video catalogue with filters and search
   stores/          # Pinia stores (auth, metrics, etc.)
 docs/              # Reference material and internal plans
   PRD.md              # Product requirements and architecture guide

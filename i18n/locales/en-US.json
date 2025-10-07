@@ -117,6 +117,11 @@
         "description": "Nuxt + Ionic keeps tutorials feeling native on phones, tablets, and desktop.",
         "iconLabel": "Mobile feature icon"
       }
+    },
+    "featuredVideo": {
+      "title": "Featured Tutorial",
+      "subtitle": "Learn BSF farming techniques from our free video library",
+      "viewAll": "View All Tutorials"
     }
   },
   "dashboard": {
@@ -526,5 +531,53 @@
     "showOriginal": "Show original",
     "showTranslated": "Show translation",
     "genericError": "Translation failed. Please try again later."
+  },
+  "tutorials": {
+    "title": "Video Tutorials",
+    "subtitle": "Explore our collection of BSF farming educational videos",
+    "search": {
+      "placeholder": "Search tutorials..."
+    },
+    "filters": {
+      "level": "Level",
+      "categoryTags": "Category Tags",
+      "profileTags": "Profile Tags"
+    },
+    "sort": {
+      "label": "Sort By",
+      "credits": "Credits",
+      "title": "Title",
+      "date": "Date",
+      "direction": "Direction",
+      "ascending": "Ascending",
+      "descending": "Descending"
+    },
+    "results": {
+      "count": "{n} video found | {n} videos found"
+    },
+    "empty": {
+      "title": "No tutorials found",
+      "description": "Try adjusting your filters or search query"
+    },
+    "error": {
+      "title": "Failed to load tutorials",
+      "retry": "Retry"
+    }
+  },
+  "video": {
+    "premium": {
+      "badge": "Premium"
+    },
+    "free": {
+      "badge": "Free"
+    },
+    "level": {
+      "basic": "Basic",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    },
+    "error": {
+      "invalidUrl": "Video URL is not available or invalid"
+    }
   }
 }
