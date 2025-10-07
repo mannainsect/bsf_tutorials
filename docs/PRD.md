@@ -83,8 +83,20 @@ tests/             # Vitest unit suites and Playwright E2E specs
 
 ### Video URL Contract
 
-- Backend returns ready-to-embed Vimeo player URLs: `https://player.vimeo.com/video/{VIDEO_ID}?badge=0&autopause=0&player_id=0&app_id=58479`.
-- Use links directly in `<iframe src>`, no extra parsing or `@vimeo/player` dependency needed.
+- Backend returns ready-to-embed Vimeo player URLs with optional query
+  parameters for player configuration (e.g., `badge=0`, `autopause=0`,
+  `player_id=0`, `app_id=58479`).
+- Frontend validation (`VideoCard.vue`) accepts both direct and embed
+  formats with optional query parameters:
+  - Direct: `https://vimeo.com/{VIDEO_ID}` or
+    `https://www.vimeo.com/{VIDEO_ID}`
+  - Embed: `https://player.vimeo.com/video/{VIDEO_ID}`
+  - Query parameters: Supported (e.g., `?badge=0&autopause=0`)
+- Security requirements enforced: HTTPS only, vimeo.com domains only,
+  iframe sandbox attributes (`allow-scripts allow-same-origin
+  allow-presentation`).
+- Use links directly in `<iframe src>`, no extra parsing or
+  `@vimeo/player` dependency needed.
 
 ### Endpoint Reference
 

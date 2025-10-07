@@ -95,12 +95,17 @@ const props = withDefaults(defineProps<Props>(), {
 
 const { t } = useI18n()
 
-// Validate Vimeo URL (requires HTTPS)
+// Validate Vimeo URL - must be HTTPS from vimeo.com domain
+// Accepts both direct (vimeo.com/ID) and embed
+// (player.vimeo.com/video/ID) formats
+// Query parameters allowed (backend includes player config params)
 const isValidVimeoUrl = computed(() => {
   if (!props.video.url) return false
-  const vimeoPattern =
-    /^https:\/\/(www\.)?vimeo\.com\/\d+$|^https:\/\/player\.vimeo\.com\/video\/\d+$/
-  return vimeoPattern.test(props.video.url)
+  const directPattern = /^https:\/\/(?:www\.)?vimeo\.com\/\d+(?:\?.*)?$/
+  const embedPattern = /^https:\/\/player\.vimeo\.com\/video\/\d+(?:\?.*)?$/
+  return (
+    directPattern.test(props.video.url) || embedPattern.test(props.video.url)
+  )
 })
 
 // Get color for level chip
