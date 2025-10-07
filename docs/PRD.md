@@ -29,11 +29,11 @@
 
 ## 2. User Segments & Journeys
 
-| Segment                 | Primary Routes                     | Key Capabilities                                                                                                        |
-| ----------------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Segment                 | Primary Routes                     | Key Capabilities                                                                                                             |
+| ----------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | Public visitor          | `index.vue`, `tutorials.vue`       | Marketing hero, feature carousel, featured video, full video catalogue with filters/search; uses `/products/content/public`. |
-| Registered (logged out) | `register.vue`, `verify-token.vue` | Email/password registration, token verification, follow-up login prompt.                                                |
-| Authenticated member    | `main.vue`, `account.vue`          | Navigation hub, profile & company editors, credit snapshot, password reset, contextual help, content logging hooks.     |
+| Registered (logged out) | `register.vue`, `verify-token.vue` | Email/password registration, token verification, follow-up login prompt.                                                     |
+| Authenticated member    | `main.vue`, `account.vue`          | Navigation hub, profile & company editors, credit snapshot, password reset, contextual help, content logging hooks.          |
 
 `definePageMeta` guards keep `main` and `account` behind `auth` middleware while `guest` middleware protects login/registration routes from logged-in users.
 

@@ -3,16 +3,14 @@
     <ion-card-content class="video-content">
       <!-- Vimeo Player Section -->
       <ClientOnly v-if="video.url !== null">
-        <div
-          v-if="isValidVimeoUrl"
-          class="video-container"
-        >
+        <div v-if="isValidVimeoUrl" class="video-container">
           <div class="aspect-ratio-box">
             <iframe
               :src="video.url"
               frameborder="0"
               loading="lazy"
               allow="autoplay; fullscreen; picture-in-picture"
+              sandbox="allow-scripts allow-same-origin allow-presentation"
               allowfullscreen
               :title="video.title"
               :aria-label="video.title"
@@ -84,9 +82,7 @@
 </template>
 
 <script setup lang="ts">
-import type {
-  ContentPublic
-} from '../../../shared/types/api/content.types'
+import type { ContentPublic } from '../../../shared/types/api/content.types'
 
 interface Props {
   video: ContentPublic
@@ -99,18 +95,16 @@ const props = withDefaults(defineProps<Props>(), {
 
 const { t } = useI18n()
 
-// Validate Vimeo URL
+// Validate Vimeo URL (requires HTTPS)
 const isValidVimeoUrl = computed(() => {
   if (!props.video.url) return false
   const vimeoPattern =
-    /vimeo\.com\/\d+|player\.vimeo\.com\/video\/\d+/
+    /^https:\/\/(www\.)?vimeo\.com\/\d+$|^https:\/\/player\.vimeo\.com\/video\/\d+$/
   return vimeoPattern.test(props.video.url)
 })
 
 // Get color for level chip
-const getLevelColor = (
-  level: string
-): 'success' | 'warning' | 'danger' => {
+const getLevelColor = (level: string): 'success' | 'warning' | 'danger' => {
   switch (level) {
     case 'basic':
       return 'success'

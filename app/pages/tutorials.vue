@@ -159,12 +159,7 @@
         <ion-col size="12">
           <ion-text color="medium">
             <p class="results-count">
-              {{
-                t(
-                  'tutorials.results.count',
-                  filteredVideos.length
-                )
-              }}
+              {{ t('tutorials.results.count', filteredVideos.length) }}
             </p>
           </ion-text>
         </ion-col>
@@ -263,17 +258,15 @@ const filteredVideos = computed(() => {
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase()
     filtered = filtered.filter(
-      (v) =>
-        v.title.toLowerCase().includes(query) ||
-        v.description.toLowerCase().includes(query)
+      v =>
+        v.title?.toLowerCase().includes(query) ||
+        v.description?.toLowerCase().includes(query)
     )
   }
 
   // Level filter
   if (selectedLevels.value.length > 0) {
-    filtered = filtered.filter((v) =>
-      selectedLevels.value.includes(v.level)
-    )
+    filtered = filtered.filter(v => selectedLevels.value.includes(v.level))
   }
 
   // Category tags filter (OR logic)
@@ -294,19 +287,19 @@ const filteredVideos = computed(() => {
     )
   }
 
-  // Sort
+  // Sort (create new sorted array to avoid mutation)
   if (sortBy.value === 'credits') {
-    filtered.sort((a, b) => {
+    return [...filtered].sort((a, b) => {
       const diff = a.credits - b.credits
       return sortDirection.value === 'asc' ? diff : -diff
     })
   } else if (sortBy.value === 'title') {
-    filtered.sort((a, b) => {
+    return [...filtered].sort((a, b) => {
       const cmp = a.title.localeCompare(b.title)
       return sortDirection.value === 'asc' ? cmp : -cmp
     })
   } else if (sortBy.value === 'date') {
-    filtered.sort((a, b) => {
+    return [...filtered].sort((a, b) => {
       const dateA = new Date(a.created_at).getTime()
       const dateB = new Date(b.created_at).getTime()
       const diff = dateA - dateB
@@ -322,11 +315,9 @@ const loadVideos = async () => {
   loading.value = true
   error.value = false
   try {
-    const data = await api<ContentPublic[]>(
-      '/products/content/public'
-    )
+    const data = await api<ContentPublic[]>('/products/content/public')
     // Filter only videos with URLs
-    videos.value = data.filter((v) => v.url !== null)
+    videos.value = data.filter(v => v.url !== null)
   } catch {
     error.value = true
   } finally {

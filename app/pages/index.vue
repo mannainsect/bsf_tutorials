@@ -51,15 +51,9 @@
     </ion-grid>
 
     <!-- Featured Video Section -->
-    <ion-grid
-      v-if="!loadingVideo && featuredVideo"
-      class="featured-grid"
-    >
+    <ion-grid v-if="!loadingVideo && featuredVideo" class="featured-grid">
       <ion-row>
-        <ion-col
-          size="12"
-          class="featured-header ion-text-center"
-        >
+        <ion-col size="12" class="featured-header ion-text-center">
           <ion-text class="featured-title">
             <h2>{{ t('home.featuredVideo.title') }}</h2>
           </ion-text>
@@ -73,9 +67,7 @@
           <VideoCard :video="featuredVideo" :featured="true" />
         </ion-col>
       </ion-row>
-      <ion-row
-        class="ion-justify-content-center featured-actions"
-      >
+      <ion-row class="ion-justify-content-center featured-actions">
         <ion-col size="12" size-sm="8" size-md="6" size-lg="4">
           <ion-button
             :router-link="localePath('/tutorials')"
@@ -130,9 +122,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/autoplay'
-import type {
-  ContentPublic
-} from '../../shared/types/api/content.types'
+import type { ContentPublic } from '../../shared/types/api/content.types'
 
 interface Feature {
   readonly id: string
@@ -170,7 +160,6 @@ const { api } = useApi()
 // Featured video state
 const featuredVideo = ref<ContentPublic | null>(null)
 const loadingVideo = ref(true)
-const errorVideo = ref(false)
 
 const features: readonly Feature[] = [
   {
@@ -230,23 +219,17 @@ const swiperConfig = computed<SwiperConfig>(() => {
 // Fetch featured video on mount
 onMounted(async () => {
   try {
-    const videos = await api<ContentPublic[]>(
-      '/products/content/public'
-    )
+    const videos = await api<ContentPublic[]>('/products/content/public')
     // Filter for free videos with URLs
     const freeVideos = videos.filter(
-      (v) =>
-        v.url !== null &&
-        v.level === 'basic' &&
-        v.credits === 0
+      v => v.url !== null && v.level === 'basic' && v.credits === 0
     )
     if (freeVideos.length > 0) {
-      const idx =
-        Math.floor(Math.random() * freeVideos.length)
+      const idx = Math.floor(Math.random() * freeVideos.length)
       featuredVideo.value = freeVideos[idx] ?? null
     }
   } catch {
-    errorVideo.value = true
+    // Silently fail - no featured video will be shown
   } finally {
     loadingVideo.value = false
   }
