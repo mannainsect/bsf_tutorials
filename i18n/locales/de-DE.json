@@ -111,6 +111,11 @@
         "description": "Nuxt + Ionic keeps tutorials feeling native on phones, tablets, and desktop.",
         "iconLabel": "Mobile feature icon"
       }
+    },
+    "featuredVideo": {
+      "title": "Ausgewähltes Tutorial",
+      "subtitle": "BSF-Züchtungstechniken aus unserer kostenlosen Videobibliothek lernen",
+      "viewAll": "Alle Tutorials anzeigen"
     }
   },
   "dashboard": {
@@ -505,5 +510,53 @@
     "showOriginal": "Original anzeigen",
     "showTranslated": "Übersetzung anzeigen",
     "genericError": "Übersetzung fehlgeschlagen. Bitte später erneut versuchen."
+  },
+  "tutorials": {
+    "title": "Video-Tutorials",
+    "subtitle": "Entdecken Sie unsere Sammlung von BSF-Züchtungs-Lehrvideos",
+    "search": {
+      "placeholder": "Tutorials suchen..."
+    },
+    "filters": {
+      "level": "Niveau",
+      "categoryTags": "Kategorie-Tags",
+      "profileTags": "Profil-Tags"
+    },
+    "sort": {
+      "label": "Sortieren nach",
+      "credits": "Guthaben",
+      "title": "Titel",
+      "date": "Datum",
+      "direction": "Richtung",
+      "ascending": "Aufsteigend",
+      "descending": "Absteigend"
+    },
+    "results": {
+      "count": "{n} Video gefunden | {n} Videos gefunden"
+    },
+    "empty": {
+      "title": "Keine Tutorials gefunden",
+      "description": "Versuchen Sie, Ihre Filter oder Suchanfrage anzupassen"
+    },
+    "error": {
+      "title": "Fehler beim Laden der Tutorials",
+      "retry": "Erneut versuchen"
+    }
+  },
+  "video": {
+    "premium": {
+      "badge": "Premium"
+    },
+    "free": {
+      "badge": "Kostenlos"
+    },
+    "level": {
+      "basic": "Grundlegend",
+      "intermediate": "Fortgeschritten",
+      "advanced": "Erweitert"
+    },
+    "error": {
+      "invalidUrl": "Video-URL ist nicht verfügbar oder ungültig"
+    }
   }
 }

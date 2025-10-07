@@ -29,11 +29,11 @@
 
 ## 2. User Segments & Journeys
 
-| Segment                 | Primary Routes                     | Key Capabilities                                                                                                     |
-| ----------------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| Public visitor          | `index.vue`                        | Marketing hero, feature carousel, CTA to register or sign in; consumes public videos via `/products/content/public`. |
-| Registered (logged out) | `register.vue`, `verify-token.vue` | Email/password registration, token verification, follow-up login prompt.                                             |
-| Authenticated member    | `main.vue`, `account.vue`          | Navigation hub, profile & company editors, credit snapshot, password reset, contextual help, content logging hooks.  |
+| Segment                 | Primary Routes                     | Key Capabilities                                                                                                             |
+| ----------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| Public visitor          | `index.vue`, `tutorials.vue`       | Marketing hero, feature carousel, featured video, full video catalogue with filters/search; uses `/products/content/public`. |
+| Registered (logged out) | `register.vue`, `verify-token.vue` | Email/password registration, token verification, follow-up login prompt.                                                     |
+| Authenticated member    | `main.vue`, `account.vue`          | Navigation hub, profile & company editors, credit snapshot, password reset, contextual help, content logging hooks.          |
 
 `definePageMeta` guards keep `main` and `account` behind `auth` middleware while `guest` middleware protects login/registration routes from logged-in users.
 
@@ -43,6 +43,7 @@
 app/
   components/
     auth/          # Login + registration forms
+    content/       # VideoCard component for tutorial display
     help/          # Help modal implementation
     layout/        # Public/private Ionic shells
     ui/            # Shared Ionic primitives
@@ -55,6 +56,7 @@ app/
     useMetrics.ts  # Client-side metrics collector
     useProfile.ts  # Profile bootstrap + company switching
   pages/           # File-based routes listed above
+    tutorials.vue  # Public video catalogue with filters and search
   stores/          # `useAuthStore` with caching + company hydration
 shared/types/      # DTOs for auth, content, metrics, logs, utilities
 docs/              # Product (this file) and ancillary documentation
@@ -114,7 +116,23 @@ tests/             # Vitest unit suites and Playwright E2E specs
 ### Landing (`app/pages/index.vue`)
 
 - Swiper-powered feature carousel using Ionic cards.
-- CTA buttons route via Nuxt i18n helpers to register/login or account when authenticated.
+- Featured video section displays random free tutorial from API.
+- CTA buttons route via Nuxt i18n helpers to register/login or account when
+  authenticated.
+
+### Video Tutorials
+
+Pages: `app/pages/tutorials.vue`, `components/content/VideoCard.vue`
+
+- Public catalogue page consuming `GET /products/content/public`.
+- Client-side filtering by level (basic/intermediate/advanced), category tags,
+  and profile tags.
+- Real-time search across title and description fields.
+- Sorting by credits, title, or date with ascending/descending toggle.
+- Responsive grid: 1 column (mobile), 2 columns (tablet), 3 columns (desktop).
+- VideoCard component renders Vimeo iframes directly from API URLs.
+- Premium badge overlay for paid content; free videos display immediately.
+- Comprehensive i18n coverage across 5 locales (en, es, fr, de, pt-BR).
 
 ### Authentication (`app/pages/login.vue`, `register.vue`, `verify-token.vue`, `auth/verify-email.vue`)
 
@@ -173,6 +191,10 @@ cp .env.example .env
 
 ## 7. Future Extensions
 
-- Build dedicated catalogue pages that consume the typed Content & Products endpoints for public and authenticated views.
-- Surface credit-based purchase flows on tutorial detail pages using `useLog.logContentAction` to bridge purchases and watch tracking.
-- Expand localization copy (currently English placeholders in non-English locales) before production release.
+- Build authenticated video catalogue with purchase flows and progress tracking.
+- Add individual video detail pages with credit-based purchase using
+  `useLog.logContentAction` to bridge purchases and watch tracking.
+- Implement playlist/course catalogue consuming `GET /products/playlists`.
+- Add tools catalogue for premium utilities (`GET /products/tools`).
+- Expand localization copy (currently English placeholders in non-English
+  locales) before production release.

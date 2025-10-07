@@ -111,6 +111,11 @@
         "description": "Nuxt + Ionic keeps tutorials feeling native on phones, tablets, and desktop.",
         "iconLabel": "Mobile feature icon"
       }
+    },
+    "featuredVideo": {
+      "title": "Tutorial em Destaque",
+      "subtitle": "Aprenda técnicas de cultivo BSF da nossa biblioteca de vídeos gratuita",
+      "viewAll": "Ver Todos os Tutoriais"
     }
   },
   "dashboard": {
@@ -505,5 +510,53 @@
     "showOriginal": "Mostrar original",
     "showTranslated": "Mostrar tradução",
     "genericError": "A tradução falhou. Por favor, tente novamente mais tarde."
+  },
+  "tutorials": {
+    "title": "Tutoriais em Vídeo",
+    "subtitle": "Explore nossa coleção de vídeos educativos sobre cultivo BSF",
+    "search": {
+      "placeholder": "Pesquisar tutoriais..."
+    },
+    "filters": {
+      "level": "Nível",
+      "categoryTags": "Tags de Categoria",
+      "profileTags": "Tags de Perfil"
+    },
+    "sort": {
+      "label": "Ordenar por",
+      "credits": "Créditos",
+      "title": "Título",
+      "date": "Data",
+      "direction": "Direção",
+      "ascending": "Crescente",
+      "descending": "Decrescente"
+    },
+    "results": {
+      "count": "{n} vídeo encontrado | {n} vídeos encontrados"
+    },
+    "empty": {
+      "title": "Nenhum tutorial encontrado",
+      "description": "Tente ajustar seus filtros ou consulta de pesquisa"
+    },
+    "error": {
+      "title": "Falha ao carregar os tutoriais",
+      "retry": "Tentar novamente"
+    }
+  },
+  "video": {
+    "premium": {
+      "badge": "Premium"
+    },
+    "free": {
+      "badge": "Gratuito"
+    },
+    "level": {
+      "basic": "Básico",
+      "intermediate": "Intermediário",
+      "advanced": "Avançado"
+    },
+    "error": {
+      "invalidUrl": "A URL do vídeo não está disponível ou é inválida"
+    }
   }
 }
