@@ -2,6 +2,7 @@
 export { BaseRepository } from './repositories/BaseRepository'
 export { AuthRepository } from './repositories/AuthRepository'
 export { UserRepository } from './repositories/UserRepository'
+export { ProductsRepository } from './repositories/ProductsRepository'
 
 // Export services
 export { AuthService } from './services/AuthService'

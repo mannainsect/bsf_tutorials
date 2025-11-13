@@ -200,10 +200,11 @@ export default defineNuxtConfig({
         metricsUpdate: '/metrics/update',
         metricsExcel: '/metrics/excel',
         // Products (Learning Content)
-        productsContent: '/products/content',
-        productsPlaylists: '/products/playlists',
-        productsTools: '/products/tools',
-        productsPurchase: '/products/purchase',
+        productsContent: '/api/v1/products/content',
+        productsContentPublic: '/api/v1/products/content/public',
+        productsPlaylists: '/api/v1/products/playlists',
+        productsTools: '/api/v1/products/tools',
+        productsPurchase: '/api/v1/products/purchase',
 
         // Helper Endpoints
         helpersCalculateMetricsEggs: '/helpers/calculate_metrics_nro_eggs',
