@@ -14,6 +14,17 @@ import type {
 } from '../../../../shared/types/api/content.types'
 import { BaseRepository } from './BaseRepository'
 
+/**
+ * Repository for managing products (content, playlists, tools) and purchases
+ * Extends BaseRepository to provide API communication with proper error handling
+ *
+ * @example
+ * ```ts
+ * const repository = new ProductsRepository()
+ * const contents = await repository.getAllContent('video')
+ * const playlist = await repository.getPlaylistById('playlist-id-123')
+ * ```
+ */
 export class ProductsRepository extends BaseRepository {
   // ==================== Content Management ====================
 
