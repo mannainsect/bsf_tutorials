@@ -1,0 +1,17 @@
+[project]
+name = "pdf-processor"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Yka Marjanen", email = "admin@mannainsect.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "markdown>=3.9",
+    "pypdf>=6.1.2",
+]
+
+[build-system]
+requires = ["uv_build>=0.8.11,<0.9.0"]
+build-backend = "uv_build"
