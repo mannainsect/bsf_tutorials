@@ -219,7 +219,7 @@ test suite execution.
 
 - **Targeted unit test**:
   `npx vitest run path/to/file.test.ts --pool=forks
-  --maxWorkers=1`
+--maxWorkers=1`
 - **Targeted e2e test**:
   `npx playwright test path/to/file.spec.ts`
 - **Resource-safe flags**:
@@ -544,9 +544,8 @@ When creating or updating GitHub issues, use this structure:
     - Who to ask + preferred channel
     - Clarification etiquette and response SLA
 
-**Optional Section (if API integration involved):**
-18. **🔌 Backend Integration**: Manna Cloud API endpoints, data
-    models, auth requirements (Bearer token)
+**Optional Section (if API integration involved):** 18. **🔌 Backend Integration**: Manna Cloud API endpoints, data
+models, auth requirements (Bearer token)
 
 **Quality Requirements:**
 
@@ -641,8 +640,7 @@ When implementing features:
 - [ ] No lint errors (changed files) — `npx eslint <files>`
 - [ ] Type checks pass — `npm run typecheck`
 - [ ] Build succeeds — `npm run build` or `npm run generate`
-- [ ] Targeted unit tests pass — `npx vitest run <file>
-      --pool=forks --maxWorkers=1`
+- [ ] Targeted unit tests pass — `npx vitest run <file> --pool=forks --maxWorkers=1`
 - [ ] Manual e2e check if user-facing flow changed —
       `npx playwright test <file>`
 - NOTE: Full unit suite runs in CI/CD on PR creation;
