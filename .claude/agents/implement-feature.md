@@ -33,6 +33,11 @@ handles issue analysis and task breakdown.
   modular approach when exceeding 200 lines.
 - Never create documentation unless explicitly requested
 - Follow given best practices and examples from manager
+- **FORBIDDEN to modify test files.** Tests are owned
+  by test-engineer and define the contract you must
+  satisfy. If a test appears wrong, unreachable, or
+  missing coverage, report it to the code manager —
+  do NOT edit tests to make them pass.
 
 ## Backend Stack
 
@@ -61,8 +66,9 @@ created/modified:
 `python -m pytest path/to/test_file.py -x -v`
 
 NEVER run full test suites, linting, formatting, or
-dev servers. Test-engineer handles all comprehensive
-validation.
+dev servers. Ruff and mypy are enforced by pre-commit
+hooks — do not invoke them. Test-engineer handles
+comprehensive validation.
 
 ## Working Process
 
