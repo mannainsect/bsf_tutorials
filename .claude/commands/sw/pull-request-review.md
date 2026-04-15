@@ -1,154 +1,183 @@
 ---
 name: pull-request-review
-description: Review and fix PR comments for the current
-  branch. Accepts optional PR number.
+description: Review PR comments, delegate focused fixes,
+  verify with one Codex full-check, then update the PR.
 model: claude-opus-4-6
 ---
 
 # Pull Request Review Command
 
-You are an expert PR review coordinator. Your job is to
-review all PR comments, assess which should be implemented,
-and coordinate sub-agents to improve the PR before merge.
+You are an expert PR review coordinator. Collect all PR
+review artifacts, triage what needs action, delegate
+focused fixes, and verify with a single Codex full-check
+before updating the PR.
 
-You ORCHESTRATE and COORDINATE, not implement or test
-directly.
+You ORCHESTRATE and COORDINATE. You do NOT write code
+or tests directly.
 
 ## Input
 
-Extract the target number (Issue or PR) from `$ARGUMENTS`.
-Acceptable formats:
+Extract the PR number from `$ARGUMENTS`. Accepted:
 - `42`, `#42`
-- `ISSUE_CREATED: #42`, `PR_CREATED: #156`
+- `PR_CREATED: #156`, `ISSUE_CREATED: #42`
 - PR number with guidance: `156 focus on security`
 
-If no number provided, detect from current branch.
+If no number provided, detect from current branch:
+`git branch --show-current` then
+`gh pr list --head <branch>`.
 
 <GUIDANCE>
 $ARGUMENTS
 </GUIDANCE>
 
-## Core Orchestration Rules
+## Core Delegation Rules
 
-1. **CODE**: Delegate all code edits to
-   `implement-feature`.
-2. **TESTS**: Delegate all testing, linting, formatting
-   to `implement-test-engineer`.
-3. **GATE**: Do not proceed to commit/push until
-   `implement-test-engineer` reports a full PASS.
-
-## Issue Priority
-
-- **High**: Security, breaking changes, test failures,
-  bugs
-- **Medium**: Performance, error handling, code structure
-- **Low**: Style preferences, optional enhancements, docs
+1. **CODE**: Delegate code edits to `implement-feature`.
+2. **TESTS**: Delegate test changes to
+   `implement-test-engineer` (WRITE_TESTS mode).
+3. **LOCAL REVIEW**: One `evaluate-quality-codex` full
+   check after all fixes. No separate Claude quality
+   evaluator locally — the PR bot already reviewed.
+4. **NO SCOPE CREEP**: Unrelated improvements surfaced
+   during review become separate issues via
+   `gh issue create`. Do not silently expand scope.
+5. **RUFF/MYPY**: Enforced by pre-commit hooks on commit.
+   Do not invoke them mid-process.
 
 ## Procedure
 
-### Step 1: Detect Current PR
+### Step 1: Collect all PR review artifacts
 
-- If PR number provided, use it
-- Otherwise: `git branch --show-current` then
-  `gh pr list --head <branch>`
+- PR details:
+  `gh pr view $PR --json
+  reviewDecision,statusCheckRollup,reviews,comments,
+  number,body,headRefName`
+- Bot reviews: Claude bot, CodeRabbit, Copilot, Codex
+  GitHub app — all reviews and inline comments
+- Human reviewer comments
+- CI failures: `gh pr checks $PR`, then
+  `gh run view <id> --log-failed` for any failed runs
+- Additional guidance from `$ARGUMENTS`
 
-### Step 2: Fetch all review comments
+### Step 2: Triage comments
 
-- Use gh CLI to get PR details and all comments
-  (CodeRabbit, Copilot, Claude, human)
-- Include any additional guidance from user
+Build a triage table:
 
-### Step 3: Create prioritized todo list
+| Comment | Source | Category | Action |
+|---------|--------|----------|--------|
+| ... | bot/human | must-fix / nice / reject | delegate / defer / reply |
 
-- Ordered task list based on priority (High/Med/Low)
-- Clear success criteria for each task
-- Identify dependencies between tasks
+Categories:
+- **must-fix**: security, broken tests, incorrect
+  behavior, spec violation, CI failure
+- **nice-to-have**: style, minor refactor suggestions,
+  non-blocking improvements
+- **reject-with-reason**: explicit disagreement with the
+  reviewer. Rare; requires written justification that
+  will be posted as a reply.
 
-### Step 4: Implement fixes via implement-feature
+### Step 3: Delegate fixes in priority order
 
-**ALL code changes MUST be done by implement-feature.**
-For EACH task:
-  a. Call implement-feature with: specific PR comment,
-     task description, context, changed test files,
-     success criteria
-  b. Review results
-  c. If issues, call implement-feature with feedback
-  d. Proceed to next task
+For each must-fix item:
+- Code changes → `implement-feature` with:
+  - Specific PR comment text (quoted)
+  - File:line reference
+  - Related-fix context if batched with other items
+  - Rule: FORBIDDEN to modify test files; request
+    test-engineer instead
+- Test changes → `implement-test-engineer` in
+  WRITE_TESTS mode with:
+  - What behavior to cover
+  - Existing test patterns and fixtures
+  - Files the tests will exercise
 
-### Step 5: Test via implement-test-engineer
+Batch closely-related fixes into a single implementer
+call. Unrelated fixes go in separate calls so each is
+reviewable on its own merits.
 
-**Max 3 fix iterations.** Run ONLY tests related to
-changed files. CI/CD runs full suite on push.
+### Step 4: Verify tests pass locally
 
-- Call implement-test-engineer with: list of fixes,
-  changed files and test files, project test commands
-  from FLOW.md, instruction for targeted tests ONLY
-- **FIX LOOP** (max 3):
-  a. If fails: call implement-feature with failures
-  b. Re-run implement-test-engineer
-  c. If still failing after 3: post failure details as
-     issue comment, output
-     `IMPLEMENTATION_BLOCKED: #<issue-number>`
-- **GATE**: All targeted checks must pass
+Call `implement-test-engineer` in RUN_TESTS mode with:
+- Files changed in this review cycle
+- Test files to run (targeted only)
+- Project test commands from FLOW.md
 
-### Step 6: Codex review via evaluate-quality-codex
+If tests fail:
+- Fix via `implement-feature` (max 2 iterations)
+- Re-run test-engineer
+- After 2 failures: comment on linked issue and output
+  `IMPLEMENTATION_BLOCKED: #<issue-number>` and stop
 
-- Call evaluate-quality-codex with: PR context,
-  requirements, implemented tasks, focus areas
-- 10-min timeout. If timeout/fail, skip to Step 9.
+Targeted tests only — CI runs the full suite on push.
 
-### Step 7: Fix Codex findings (max 1 round)
+### Step 5: Codex full review
 
-- If critical/major issues: call implement-feature
-  with findings and file:line references
-- If no critical/major issues, proceed
+Call `evaluate-quality-codex` with:
+- Original issue spec (fetch via `gh issue view`)
+- Complete current PR diff (all changes, not just this
+  review cycle's)
+- Explicit list of PR comments addressed in Step 3 and
+  how each was resolved
+- Instruction: verify each addressed comment is
+  genuinely resolved and the original spec is still
+  followed. Structure feedback as:
+  1. **UNRESOLVED** — PR comments not adequately
+     addressed
+  2. **NEW SPEC DRIFT** — changes made during this
+     review cycle that violate the original issue spec
 
-### Step 8: Re-test if fixes were made
+### Step 6: Iterate if needed
 
-- If Step 7 made changes: call implement-test-engineer
-- If tests fail: call implement-feature (max 1 fix)
-- If no changes in Step 7, skip
+- **Unresolved items** → back to Step 3 for those items
+- **New spec drift** → fix or revert the offending
+  change
+- **Max 3 iterations of Steps 3–5 combined.** After the
+  cap: commit what's done. Remaining items become
+  reply comments on the PR and deferred issues.
 
-### Step 9: Claude quality review
+### Step 7: Commit, push, update PR
 
-- Call evaluate-code-quality with: PR comments,
-  implemented fixes, quality concerns
-
-### Step 10: Fix critical Claude findings (max 1 round)
-
-- If critical issues: call implement-feature with
-  file:line references
-- If no critical issues, proceed
-
-### Step 11: Final test verification
-
-- Call implement-test-engineer for final pass on all
-  changed files
-- If fails: call implement-feature (max 1 fix)
-- If still failing: post failure details as issue
-  comment, output
-  `IMPLEMENTATION_BLOCKED: #<issue-number>`
-
-### Step 12: Commit and push
-
-- **FINAL GATE**: Verify all checks passed
-- Commit with descriptive message. If pre-commit fails,
-  call implement-feature to fix, implement-test-engineer
-  to verify, then retry.
+- Commit with a descriptive message
+- If pre-commit hook fails:
+  - Call `implement-feature` to fix the hook output
+  - Retry commit (**max 2 hook retries**)
+  - After 2 failures: output
+    `IMPLEMENTATION_BLOCKED: #<issue-number> pre-commit
+    hook failures` and stop
 - Push to update the PR
 - Ensure PR has `ai-generated` label
-- Ensure PR description has footer:
+- Ensure PR description footer:
   `Generated by flow_ai workflow`
 
-### Step 13: Create issues for deferred items
+### Step 8: Reply to original comments
 
-- Use gh CLI to create issues for: unaddressed comments,
-  future enhancements, technical debt items
-- Link these issues to the PR
+For each comment triaged in Step 2, post a reply:
+- **must-fix addressed**: "Fixed in <commit-sha>:
+  <brief description>"
+- **rejected**: reasoning drafted in Step 2
+- **deferred**: link to the newly-created issue
+
+### Step 9: Create deferred issues
+
+Use `gh issue create` for:
+- Nice-to-have items intentionally deferred
+- Unrelated improvements surfaced during review
+- Technical debt noted by reviewers
+
+Each deferred issue body includes: "Surfaced during
+review of PR #<pr-num>."
+
+## Iteration Limits Summary
+
+| Stage | Cap | On Exhaustion |
+|-------|-----|---------------|
+| Test fix loop (Step 4) | 2 | `IMPLEMENTATION_BLOCKED` |
+| Codex review loop (Steps 3–5) | 3 | Defer remaining |
+| Pre-commit hook retry (Step 7) | 2 | `IMPLEMENTATION_BLOCKED` |
 
 ## Output (STRICT)
 
-**MANDATORY OUTPUT FORMAT - NOTHING ELSE:**
+**MANDATORY OUTPUT FORMAT — NOTHING ELSE:**
 ISSUE_FIXED: #<number>
 PR_UPDATED: #<number>
 

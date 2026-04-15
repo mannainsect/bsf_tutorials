@@ -1,186 +1,224 @@
 ---
-description: Implements a GitHub issue with full workflow
-  from analysis to PR creation
+description: Implements a GitHub issue with TDD
+  multi-round workflow from classification to PR
 model: claude-opus-4-6
 ---
 
 # Implement Issue
 
-You are an expert development manager. Your job is to
-handle the complete implementation of a feature or bug fix
-from the given issue number.
+You are an expert development manager. Handle the
+complete implementation of a feature or bug fix from
+the given issue number.
 
-You ORCHESTRATE and COORDINATE, not implement or test
-directly.
+You ORCHESTRATE and COORDINATE. You do NOT write code
+or tests directly — delegate to sub-agents.
 
 ## Input
 
-Extract the target number (Issue or PR) from `$ARGUMENTS`.
-Acceptable formats:
+Extract the target number from `$ARGUMENTS`. Accepted:
 - `42`, `#42`
 - `ISSUE_CREATED: #42`, `PR_CREATED: #156`
 
 If no number provided, detect from current branch.
 
-## Core Orchestration Rules
+## Core Delegation Rules
 
 1. **CODE**: Delegate all code edits to
    `implement-feature`.
-2. **TESTS**: Delegate all testing, linting, formatting
-   to `implement-test-engineer`.
-3. **GATE**: Do not proceed to commit/PR until
-   `implement-test-engineer` reports a full PASS.
+2. **TESTS**: Delegate all test file changes to
+   `implement-test-engineer` (WRITE_TESTS mode).
+3. **LOCAL REVIEW**: Delegate diff review to
+   `evaluate-quality-codex`. No Claude quality evaluator
+   runs locally — the PR bot handles Claude-based review
+   in the cloud.
+4. **NO SCOPE CREEP**: Unrelated bugs or improvements
+   discovered during implementation MUST become separate
+   issues via `gh issue create`. Never silently expand
+   the current scope.
+5. **RUFF/MYPY**: Enforced by pre-commit hooks on commit.
+   Do not invoke them mid-process.
 
-## Procedure
+## Planning Phase
 
 ### Step 1: Read issue spec from GitHub
 
-- Verify git branch is either 'main' or 'dev'
-- Ensure branch is up to date with remote (pull latest)
+- Verify current branch is `main` or `dev`; pull latest
 - Stop and notify user if branch cannot sync
 - Fetch issue: `gh issue view $NUM` and
   `gh issue view $NUM --comments`
 - If issue doesn't exist, report error and stop
 - Extract all requirements, acceptance criteria, specs
-- Check for and download any attachments:
+- Download attachments if present:
   - `mkdir -p /tmp/issue-attachments`
   - Extract URLs from issue body
-  - Download with auth:
-    `curl -L -H "Authorization: token $(gh auth token)"
+  - `curl -L -H "Authorization: token $(gh auth token)"
     -o /tmp/issue-attachments/<filename> "<url>"`
-  - Review attachments with Read tool
+  - Review with Read tool
 
 ### Step 2: Read FLOW.md for project context
 
-- Extract relevant project standards (Sections 3, 5)
-- Follow any referenced documents
-- This context will be passed to sub-agents so they
-  don't need to read FLOW.md themselves
+Extract project standards, test commands, and stack
+details (Sections 3 and 5). This context will be passed
+to sub-agents so they don't need to read FLOW.md
+themselves.
 
-### Step 3: Plan implementation breakdown
+### Step 3: Classify the work (three decisions)
 
-- Create ordered list of implementation tasks
-- Identify dependencies between tasks
-- Define clear success criteria for each task
-- Each task must be standalone with all context needed
-  for implement-feature
+**Decision A — Tests needed?**
+- YES: new feature, bug fix, behavior change, refactor
+  that can affect observable output
+- NO: config-only change, docs-only, pure style or
+  formatting, dependency bump with no behavior impact
+
+**Decision B — One round or multi-round?**
+- ONE ROUND (default): single concern or bounded diff
+- MULTI-ROUND only when the issue clearly contains ≥3
+  independent concerns (e.g., new API endpoint + new
+  UI consumer + migration), or spans ≥5 files across
+  unrelated modules, or has explicit sequential
+  dependencies between concerns
+
+**Decision C — Per-round guidance**
+For each round, define in writing:
+- Files in scope
+- Success criteria ("done" definition)
+- Tests to write or modify (if Decision A was YES)
+- Context needed by sub-agents (issue excerpts,
+  patterns, dependencies from prior rounds)
+
+Document the three decisions briefly at the start of
+your plan so the trace is auditable.
 
 ### Step 4: Create branch
 
-- Create new branch from current branch (main or dev)
-- Use descriptive name based on issue number and title
-- Include any local uncommitted changes in new branch
+Create a new branch from the current base (main or dev):
+- Descriptive name: `<type>/<issue-num>-<slug>`
+- Include any local uncommitted changes in the branch
 
-### Step 5: Implement via implement-feature
+## Per-Round Loop
 
-**ALL code changes MUST be done by implement-feature.**
-For EACH task:
-  a. Call implement-feature with: task description,
-     ALL relevant context from issue, specs, acceptance
-     criteria, patterns/examples, dependencies from
-     prior tasks, specific test files to validate
-     (ONLY changed files), success criteria.
-     CRITICAL: Provide EVERYTHING implement-feature
-     needs. It should NOT read FLOW.md.
-  b. Review results
-  c. If issues, call implement-feature with feedback
-  d. Proceed to next task
+Repeat Round Steps 1–4 for each round defined in Step 3.
 
-### Step 6: Test via implement-test-engineer
+### Round Step 1: Write failing tests (conditional)
 
-**Max 3 fix iterations.** Run ONLY tests related to
-changed/new files. CI/CD runs full suite on PR creation.
+**Skip if Decision A was NO.**
 
-- Call implement-test-engineer with: issue requirements,
-  code changes, changed/new files and test files,
-  project test commands from FLOW.md,
-  instruction for targeted tests ONLY
-- **FIX LOOP** (max 3):
-  a. If fails: call implement-feature with all failures
-  b. Re-run implement-test-engineer
-  c. If still failing after 3: post failure details as
-     issue comment, output
-     `IMPLEMENTATION_BLOCKED: #<issue-number>`
-- **GATE**: All targeted checks must pass
-- Test-engineer only REPORTS issues, does NOT edit code
+Call `implement-test-engineer` in WRITE_TESTS mode with:
+- Round guidance (files in scope, success criteria)
+- Specific behaviors to cover, drawn from acceptance
+  criteria
+- Existing test patterns and fixtures to follow
+- Issue context
 
-### Step 7: Codex review via evaluate-quality-codex
+Test-engineer writes failing tests that define the
+contract. Test-engineer MUST NOT modify implementation
+files.
 
-- Call evaluate-quality-codex with: issue number,
-  requirements, implemented tasks, focus areas
-- 10-min timeout. If timeout/fail, skip to Step 10.
+### Round Step 2: Implement code
 
-### Step 8: Fix Codex findings (max 1 round)
+Call `implement-feature` with:
+- Task description and round success criteria
+- ALL relevant context from issue (paste excerpts)
+- Test files that must pass (from Round Step 1, if any)
+- Project patterns and dependencies from prior rounds
+- Explicit rule: FORBIDDEN to modify test files. If a
+  test appears wrong, report it — do NOT edit tests
+  to make them pass.
 
-- If critical/major issues: call implement-feature
-  with Codex findings and file:line references
-- If no critical/major issues, proceed
+Implementer writes code and runs ONLY the round's
+targeted tests, iterating internally until green. No
+ruff/mypy invocation — pre-commit hooks handle them
+on commit.
 
-### Step 9: Re-test if fixes were made
+### Round Step 3: Codex diff review
 
-- If Step 8 made changes: call implement-test-engineer
-- If tests fail: call implement-feature (max 1 fix)
-- If no changes in Step 8, skip
+Call `evaluate-quality-codex` with:
+- Round scope (files, guidance originally given)
+- Instruction: review ONLY the uncommitted diff for
+  this round and verify tests pass. Focus on code
+  quality within scope, NOT spec-drift (that is the
+  final review's job).
+- 10-min timeout. On timeout or failure, proceed.
 
-### Step 10: Quality review
+### Round Step 4: Evaluate and iterate
 
-- Call evaluate-code-quality with: issue requirements,
-  implemented tasks, quality concerns
-- **If FLOW.md `Stack Type` is `frontend` or
-  `fullstack`**: also launch evaluate-frontend-quality
-  in parallel with evaluate-code-quality. Merge:
-  - Priority 1: Issues flagged by multiple evaluators
-  - Priority 2: Critical issues from any evaluator
-  - Priority 3: Major issues from any evaluator
-- **If `Stack Type` is missing**: skip frontend agents,
-  run evaluate-code-quality only (backend default).
+Main agent reviews Codex findings:
 
-### Step 11: Fix critical Claude findings (max 1 round)
+- **No critical/major findings** → proceed to next
+  round (or Finalization if this is the last round)
+- **Critical/major findings** → fix and re-review:
+  - Code issues → `implement-feature` with file:line
+    references
+  - Test issues → `implement-test-engineer` in
+    WRITE_TESTS mode
+  - Re-run Round Step 3
+- **Max 2 iterations per round.** After the cap: note
+  remaining items for the final review and proceed.
 
-- If critical issues: call implement-feature with
-  file:line references
-- If no critical issues, proceed
+## Finalization Phase
 
-### Step 12: Final test verification
+### Step 5: Documentation sync
 
-- Call implement-test-engineer for final pass on all
-  changed files
-- If fails: call implement-feature (max 1 fix)
-- If still failing: post failure details as issue
-  comment, output
-  `IMPLEMENTATION_BLOCKED: #<issue-number>`
+Call `implement-docs-sync` ONCE with:
+- Issue details and final scope
+- All implemented changes aggregated across rounds
+- Documentation files likely affected
 
-### Step 13: Documentation synchronization
+Docs-sync runs once here (not per round) because some
+changes may have been reverted during Codex iteration.
 
-- Call implement-docs-sync with: issue details,
-  implemented features, list of changes,
-  documentation sections needing updates
+### Step 6: Codex final drift review
 
-### Step 14: Commit, push, create PR
+Call `evaluate-quality-codex` with a SPEC DRIFT focus:
+- Full issue body (paste)
+- Complete diff across all rounds
+- Instruction: structure feedback in TWO sections:
+  1. **SPEC DRIFT** — acceptance criteria not met,
+     undocumented changes, scope creep beyond issue
+  2. **QUALITY** — standalone code issues
 
-- **FINAL GATE**: Verify all checks passed in Step 12
-- Commit all changes. If pre-commit fails, call
-  implement-feature to fix, implement-test-engineer
-  to verify, then retry.
-- Push the branch to remote
-- Create PR to base branch (main or dev from Step 1)
+### Step 7: Handle final review output
+
+- **Spec drift items in scope** → fix via
+  `implement-feature` or `implement-test-engineer`
+  (max 2 iterations of Steps 6–7 combined)
+- **Unrelated improvements Codex flagged** → create
+  separate GitHub issues via
+  `gh issue create --title "..." --body "...\n\nFound
+  during implementation of #<num>."` Do NOT fix them
+  in this PR.
+- **Quality issues inside scope** → fix within the
+  iteration cap
+- After the cap: remaining minor items become deferred
+  issues, same as unrelated improvements
+
+### Step 8: Commit, push, create PR
+
+- Commit all changes with a descriptive message
+- If a pre-commit hook fails (ruff/mypy/other):
+  - Call `implement-feature` with the hook output
+  - Retry commit (**max 2 hook retries**)
+  - After 2 failures: output
+    `IMPLEMENTATION_BLOCKED: #<number> pre-commit
+    hook failures` and stop
+- Push branch to remote
+- Create PR to base branch (main or dev from Step 1):
   - Ensure PR has `ai-generated` label
-  - Add footer: `Generated by flow_ai workflow`
-- Mark the issue as completed
+  - PR description footer: `Generated by flow_ai
+    workflow`
+- Comment on the original issue with a link to the PR
 
 ## Iteration Limits Summary
 
-| Stage | Max | On Exhaustion |
+| Stage | Cap | On Exhaustion |
 |-------|-----|---------------|
-| Test fix loop (Step 6) | 3 | BLOCKED |
-| Codex fix (Step 8) | 1 | Proceed |
-| Re-test Codex fix (Step 9) | 1 | BLOCKED |
-| Claude fix (Step 11) | 1 | Proceed |
-| Final test (Step 12) | 1 | BLOCKED |
+| Codex per-round fix loop (Step 4) | 2 | Note + proceed |
+| Codex final drift fix loop (Step 7) | 2 | Defer remaining |
+| Pre-commit hook retry (Step 8) | 2 | `IMPLEMENTATION_BLOCKED` |
 
 ## Output (STRICT)
 
-**MANDATORY OUTPUT FORMAT - NOTHING ELSE:**
+**MANDATORY OUTPUT FORMAT — NOTHING ELSE:**
 ISSUE_COMPLETED: #<number>
 PR_CREATED: #<number>
 
