@@ -102,12 +102,12 @@ export const useAccount = () => {
     }
   }
 
-  const resetPassword = async (currentPassword: string, newPassword: string) => {
+  const resetPassword = async (newPassword: string) => {
     try {
       isLoading.value = true
       error.value = ''
 
-      const response = await authRepository.resetUserPassword(currentPassword, newPassword)
+      const response = await authRepository.resetUserPassword(newPassword)
       return response
     } catch (err: unknown) {
       error.value = err instanceof Error ? err.message : t('errors.account.resetPasswordFailed')

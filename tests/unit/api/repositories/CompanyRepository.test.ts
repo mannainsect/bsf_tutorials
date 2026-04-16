@@ -15,6 +15,13 @@ global.useApiEndpoints = vi.fn(() => ({
   companies: '/api/v1/companies'
 }))
 
+interface CreateCompanyData {
+  name: string
+  city: string
+  country: string
+  timezone: string
+}
+
 describe('CompanyRepository', () => {
   let repository: CompanyRepository
 
@@ -213,6 +220,71 @@ describe('CompanyRepository', () => {
 
       expect(result).toHaveProperty('_id', companyId)
       expect(result.name).toBe('MongoDB Company')
+    })
+  })
+
+  describe('createCompanyWithSpaces', () => {
+    it('should POST to companies endpoint with create_all_spaces query', async () => {
+      const data: CreateCompanyData = {
+        name: "Test User's Farm",
+        city: 'Helsinki',
+        country: 'FI',
+        timezone: 'Europe/Helsinki'
+      }
+
+      const mockResponse = {
+        status: 'success',
+        company_id: 'new-company-id',
+        created_spaces: ['space1', 'space2']
+      }
+
+      vi.spyOn(repository as unknown as { post: () => unknown }, 'post').mockResolvedValue(
+        mockResponse
+      )
+
+      const result = await repository.createCompanyWithSpaces(data)
+
+      expect(result).toEqual(mockResponse)
+      expect(repository.post).toHaveBeenCalledWith('/api/v1/companies?create_all_spaces=true', data)
+    })
+
+    it('should accept only a data object (no token parameter)', async () => {
+      const data: CreateCompanyData = {
+        name: 'Another Farm',
+        city: 'Tampere',
+        country: 'FI',
+        timezone: 'Europe/Helsinki'
+      }
+
+      vi.spyOn(repository as unknown as { post: () => unknown }, 'post').mockResolvedValue({
+        status: 'success',
+        company_id: 'test-company-id'
+      })
+
+      await repository.createCompanyWithSpaces(data)
+
+      // Verify post was called with exactly 2 args: url and data
+      const callArgs = (repository.post as ReturnType<typeof vi.fn>).mock.calls[0]
+      expect(callArgs).toHaveLength(2)
+      expect(callArgs[1]).toEqual(data)
+    })
+
+    it('should handle API errors', async () => {
+      const data: CreateCompanyData = {
+        name: 'Fail Farm',
+        city: 'Helsinki',
+        country: 'FI',
+        timezone: 'Europe/Helsinki'
+      }
+
+      const error = {
+        statusCode: 500,
+        data: { message: 'Server error' }
+      }
+
+      vi.spyOn(repository as unknown as { post: () => unknown }, 'post').mockRejectedValue(error)
+
+      await expect(repository.createCompanyWithSpaces(data)).rejects.toMatchObject(error)
     })
   })
 })

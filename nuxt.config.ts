@@ -161,6 +161,8 @@ export default defineNuxtConfig({
         authResetPassword: '/auth/reset-password',
         authResetPasswordConfirm: '/auth/reset-password/confirm',
         authSendToken: '/auth/send-token',
+        authLogout: '/auth/logout',
+        authRefresh: '/auth/refresh',
 
         // Legacy endpoints (still available)
         login: '/login',
@@ -195,6 +197,7 @@ export default defineNuxtConfig({
         metricsExcel: '/metrics/excel',
         // Products (Learning Content)
         productsContent: '/products/content',
+        productsContentPublic: '/products/content/public',
         productsPlaylists: '/products/playlists',
         productsTools: '/products/tools',
         productsPurchase: '/products/purchase',

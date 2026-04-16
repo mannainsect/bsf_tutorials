@@ -23,7 +23,18 @@ vi.stubGlobal('definePageMeta', vi.fn())
 // eslint-disable-next-line import/first
 import IndexPage from '~/pages/index.vue'
 
-const apiMock = vi.fn()
+const loadPublicMock = vi.fn()
+
+/**
+ * Real pickRandomFreeVideo logic so tests can
+ * verify filtering behavior end-to-end.
+ */
+const pickRandomFreeVideo = (videos: ContentPublic[]): ContentPublic | null => {
+  const freeVideos = videos.filter(v => v.url !== null && v.level === 'basic' && v.credits === 0)
+  if (freeVideos.length === 0) return null
+  const idx = Math.floor(Math.random() * freeVideos.length)
+  return freeVideos[idx] ?? null
+}
 
 const stubs = {
   VideoCard: {
@@ -46,9 +57,12 @@ function mountPage(
 ) {
   const { authenticated = false, apiResult = [] } = overrides
 
-  apiMock.mockResolvedValue(apiResult)
+  loadPublicMock.mockResolvedValue(apiResult)
 
-  vi.stubGlobal('useApi', () => ({ api: apiMock }))
+  vi.stubGlobal('useContent', () => ({
+    loadPublic: loadPublicMock,
+    pickRandomFreeVideo
+  }))
   vi.stubGlobal('useAuthStore', () =>
     reactive({
       user: null,
@@ -72,7 +86,7 @@ describe('IndexPage', () => {
   let randomSpy: ReturnType<typeof vi.spyOn>
 
   beforeEach(() => {
-    apiMock.mockReset()
+    loadPublicMock.mockReset()
     randomSpy = vi.spyOn(Math, 'random').mockReturnValue(0)
   })
 
@@ -85,7 +99,7 @@ describe('IndexPage', () => {
       mountPage({ apiResult: [] })
       await flushPromises()
 
-      expect(apiMock).toHaveBeenCalledWith('/products/content/public')
+      expect(loadPublicMock).toHaveBeenCalled()
     })
 
     it('filters out videos with null url', async () => {
@@ -180,8 +194,11 @@ describe('IndexPage', () => {
     it('hides featured section while loading', () => {
       // Do not await flushPromises so
       // loadingVideo stays true
-      apiMock.mockReturnValue(new Promise(() => {}))
-      vi.stubGlobal('useApi', () => ({ api: apiMock }))
+      loadPublicMock.mockReturnValue(new Promise(() => {}))
+      vi.stubGlobal('useContent', () => ({
+        loadPublic: loadPublicMock,
+        pickRandomFreeVideo
+      }))
       vi.stubGlobal('useAuthStore', () =>
         reactive({
           user: null,
@@ -207,8 +224,11 @@ describe('IndexPage', () => {
 
   describe('Error Handling', () => {
     it('does not show error UI on API failure', async () => {
-      apiMock.mockRejectedValue(new Error('Network error'))
-      vi.stubGlobal('useApi', () => ({ api: apiMock }))
+      loadPublicMock.mockRejectedValue(new Error('Network error'))
+      vi.stubGlobal('useContent', () => ({
+        loadPublic: loadPublicMock,
+        pickRandomFreeVideo
+      }))
       vi.stubGlobal('useAuthStore', () =>
         reactive({
           user: null,
@@ -233,8 +253,11 @@ describe('IndexPage', () => {
     })
 
     it('hides featured section on API error', async () => {
-      apiMock.mockRejectedValue(new Error('Server error'))
-      vi.stubGlobal('useApi', () => ({ api: apiMock }))
+      loadPublicMock.mockRejectedValue(new Error('Server error'))
+      vi.stubGlobal('useContent', () => ({
+        loadPublic: loadPublicMock,
+        pickRandomFreeVideo
+      }))
       vi.stubGlobal('useAuthStore', () =>
         reactive({
           user: null,

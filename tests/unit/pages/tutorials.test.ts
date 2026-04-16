@@ -56,17 +56,19 @@ async function mountPage(
   } = {}
 ): Promise<{
   wrapper: VueWrapper
-  mockApi: ReturnType<typeof vi.fn>
+  loadPublicMock: ReturnType<typeof vi.fn>
 }> {
-  const mockApi = vi.fn()
+  const loadPublicMock = vi.fn()
 
   if (opts.apiError) {
-    mockApi.mockRejectedValueOnce(new Error('Network error'))
+    loadPublicMock.mockRejectedValueOnce(new Error('Network error'))
   } else {
-    mockApi.mockResolvedValueOnce(opts.apiResponse ?? allVideos)
+    loadPublicMock.mockResolvedValueOnce(opts.apiResponse ?? allVideos)
   }
 
-  vi.stubGlobal('useApi', () => ({ api: mockApi }))
+  vi.stubGlobal('useContent', () => ({
+    loadPublic: loadPublicMock
+  }))
 
   const wrapper = mount(TutorialsPage, {
     global: {
@@ -94,7 +96,7 @@ async function mountPage(
     await flushPromises()
   }
 
-  return { wrapper, mockApi }
+  return { wrapper, loadPublicMock }
 }
 
 describe('TutorialsPage', () => {
@@ -107,9 +109,9 @@ describe('TutorialsPage', () => {
   // 1. API Integration
   // -----------------------------------------------
   describe('API Integration', () => {
-    it('calls API on mount with correct endpoint', async () => {
-      const { mockApi } = await mountPage()
-      expect(mockApi).toHaveBeenCalledWith('/products/content/public')
+    it('calls loadPublic on mount', async () => {
+      const { loadPublicMock } = await mountPage()
+      expect(loadPublicMock).toHaveBeenCalled()
     })
 
     it('shows loading state before API resolves', async () => {
@@ -120,19 +122,19 @@ describe('TutorialsPage', () => {
     })
 
     it('shows error state on API failure with retry', async () => {
-      const { wrapper, mockApi } = await mountPage({
+      const { wrapper, loadPublicMock } = await mountPage({
         apiError: true
       })
 
       expect(wrapper.find('.error-stub').exists()).toBe(true)
 
       // Setup a successful retry
-      mockApi.mockResolvedValueOnce(allVideos)
+      loadPublicMock.mockResolvedValueOnce(allVideos)
       await wrapper.find('.retry').trigger('click')
       await flushPromises()
 
       expect(wrapper.find('.error-stub').exists()).toBe(false)
-      expect(mockApi).toHaveBeenCalledTimes(2)
+      expect(loadPublicMock).toHaveBeenCalledTimes(2)
     })
   })
 

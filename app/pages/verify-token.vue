@@ -98,6 +98,7 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { AuthService } from '~/composables/api/services/AuthService'
 
 definePageMeta({
   middleware: 'guest'
@@ -199,17 +200,8 @@ const resendCode = async () => {
   resending.value = true
 
   try {
-    // Send new verification token
-    const { api } = useApi()
-    const endpoints = useApiEndpoints()
-
-    await api(endpoints.authSendToken, {
-      method: 'POST',
-      body: {
-        email: registrationEmail,
-        token_type: 'register'
-      }
-    })
+    const authService = new AuthService()
+    await authService.sendRegisterToken(registrationEmail as string)
 
     // Show success message or toast
     // TODO: Add toast notification
