@@ -8,12 +8,8 @@ export const useContent = () => {
     return contentRepository.getPublic()
   }
 
-  const pickRandomFreeVideo = (
-    videos: ContentPublic[]
-  ): ContentPublic | null => {
-    const freeVideos = videos.filter(
-      v => v.url !== null && v.level === 'basic' && v.credits === 0
-    )
+  const pickRandomFreeVideo = (videos: ContentPublic[]): ContentPublic | null => {
+    const freeVideos = videos.filter(v => v.url !== null && v.level === 'basic' && v.credits === 0)
     if (freeVideos.length === 0) return null
     const idx = Math.floor(Math.random() * freeVideos.length)
     return freeVideos[idx] ?? null

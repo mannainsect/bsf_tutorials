@@ -238,39 +238,33 @@ describe('CompanyRepository', () => {
         created_spaces: ['space1', 'space2']
       }
 
-      vi.spyOn(
-        repository as unknown as { post: () => unknown },
-        'post'
-      ).mockResolvedValue(mockResponse)
+      vi.spyOn(repository as unknown as { post: () => unknown }, 'post').mockResolvedValue(
+        mockResponse
+      )
 
       const result = await repository.createCompanyWithSpaces(data)
 
       expect(result).toEqual(mockResponse)
-      expect(repository.post).toHaveBeenCalledWith(
-        '/api/v1/companies?create_all_spaces=true',
-        data
-      )
+      expect(repository.post).toHaveBeenCalledWith('/api/v1/companies?create_all_spaces=true', data)
     })
 
     it('should accept only a data object (no token parameter)', async () => {
       const data: CreateCompanyData = {
-        name: "Another Farm",
+        name: 'Another Farm',
         city: 'Tampere',
         country: 'FI',
         timezone: 'Europe/Helsinki'
       }
 
-      vi.spyOn(
-        repository as unknown as { post: () => unknown },
-        'post'
-      ).mockResolvedValue({ status: 'success' })
+      vi.spyOn(repository as unknown as { post: () => unknown }, 'post').mockResolvedValue({
+        status: 'success',
+        company_id: 'test-company-id'
+      })
 
       await repository.createCompanyWithSpaces(data)
 
       // Verify post was called with exactly 2 args: url and data
-      const callArgs = (
-        repository.post as ReturnType<typeof vi.fn>
-      ).mock.calls[0]
+      const callArgs = (repository.post as ReturnType<typeof vi.fn>).mock.calls[0]
       expect(callArgs).toHaveLength(2)
       expect(callArgs[1]).toEqual(data)
     })
@@ -288,14 +282,9 @@ describe('CompanyRepository', () => {
         data: { message: 'Server error' }
       }
 
-      vi.spyOn(
-        repository as unknown as { post: () => unknown },
-        'post'
-      ).mockRejectedValue(error)
+      vi.spyOn(repository as unknown as { post: () => unknown }, 'post').mockRejectedValue(error)
 
-      await expect(
-        repository.createCompanyWithSpaces(data)
-      ).rejects.toMatchObject(error)
+      await expect(repository.createCompanyWithSpaces(data)).rejects.toMatchObject(error)
     })
   })
 })

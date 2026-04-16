@@ -472,9 +472,10 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { ref, onMounted, computed } from 'vue'
-import { AuthService } from '../composables/api/services/AuthService'
+import { AuthService } from '~/composables/api/services/AuthService'
 // Use icons from the centralized useIcons composable
 const { alertCircle, create, warning, wallet } = useIcons()
+const authService = new AuthService()
 
 definePageMeta({
   middleware: 'auth'
@@ -587,10 +588,7 @@ const updatePassword = async () => {
   try {
     passwordLoading.value = true
 
-    const authService = new AuthService()
-    await authService.resetUserPassword(
-      passwordForm.value.newPassword
-    )
+    await authService.resetUserPassword(passwordForm.value.newPassword)
 
     const successToast = await useToast().create({
       message: t('account.password.updateSuccess'),

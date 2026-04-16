@@ -69,9 +69,7 @@ describe('useCompanyInitialization', () => {
 
     it('should handle edge cases gracefully', () => {
       expect(companyInit.extractNameFromEmail('')).toBe("User's Farm")
-      expect(
-        companyInit.extractNameFromEmail('invalid')
-      ).toBe("Invalid's Farm")
+      expect(companyInit.extractNameFromEmail('invalid')).toBe("Invalid's Farm")
       expect(companyInit.extractNameFromEmail('@')).toBe("User's Farm")
     })
   })
@@ -84,9 +82,7 @@ describe('useCompanyInitialization', () => {
         created_spaces: ['space1', 'space2', 'space3']
       })
 
-      const result = await companyInit.createCompanyWithSpaces(
-        'test.user@email.com'
-      )
+      const result = await companyInit.createCompanyWithSpaces('test.user@email.com')
 
       // New signature: only data, no token
       expect(mockCreateCompanyWithSpaces).toHaveBeenCalledWith({
@@ -117,13 +113,11 @@ describe('useCompanyInitialization', () => {
     })
 
     it('should handle API errors', async () => {
-      mockCreateCompanyWithSpaces.mockRejectedValue(
-        new Error('API Error')
-      )
+      mockCreateCompanyWithSpaces.mockRejectedValue(new Error('API Error'))
 
-      await expect(
-        companyInit.createCompanyWithSpaces('test@email.com')
-      ).rejects.toThrow('API Error')
+      await expect(companyInit.createCompanyWithSpaces('test@email.com')).rejects.toThrow(
+        'API Error'
+      )
     })
   })
 
@@ -142,9 +136,7 @@ describe('useCompanyInitialization', () => {
         company_id: 'test-company-id'
       })
 
-      const result = await companyInit.initializeCompany(
-        'test@email.com'
-      )
+      const result = await companyInit.initializeCompany('test@email.com')
 
       expect(result).toEqual({
         status: 'success',
@@ -163,9 +155,7 @@ describe('useCompanyInitialization', () => {
           company_id: 'test-company-id'
         })
 
-      const promise = companyInit.initializeCompany(
-        'test@email.com', 3
-      )
+      const promise = companyInit.initializeCompany('test@email.com', 3)
 
       // Fast-forward through delays
       await vi.advanceTimersByTimeAsync(1000)
@@ -181,13 +171,9 @@ describe('useCompanyInitialization', () => {
     })
 
     it('should return null after max retries', async () => {
-      mockCreateCompanyWithSpaces.mockRejectedValue(
-        new Error('API Error')
-      )
+      mockCreateCompanyWithSpaces.mockRejectedValue(new Error('API Error'))
 
-      const promise = companyInit.initializeCompany(
-        'test@email.com', 2
-      )
+      const promise = companyInit.initializeCompany('test@email.com', 2)
 
       await vi.advanceTimersByTimeAsync(1000)
 
@@ -205,9 +191,7 @@ describe('useCompanyInitialization', () => {
 
       companyInit = useCompanyInitialization()
 
-      const result = await companyInit.initializeCompany(
-        'test@email.com', 1
-      )
+      const result = await companyInit.initializeCompany('test@email.com', 1)
 
       expect(result).toBeNull()
     })

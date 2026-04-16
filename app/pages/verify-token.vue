@@ -98,7 +98,7 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { AuthService } from '../composables/api/services/AuthService'
+import { AuthService } from '~/composables/api/services/AuthService'
 
 definePageMeta({
   middleware: 'guest'
@@ -201,9 +201,7 @@ const resendCode = async () => {
 
   try {
     const authService = new AuthService()
-    await authService.sendRegisterToken(
-      registrationEmail as string
-    )
+    await authService.sendRegisterToken(registrationEmail as string)
 
     // Show success message or toast
     // TODO: Add toast notification

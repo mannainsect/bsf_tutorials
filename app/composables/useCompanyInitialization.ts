@@ -1,23 +1,17 @@
-import type {
-  CompanyCreationResponse
-} from '../../shared/types/models/Company'
-import {
-  CompanyRepository
-} from './api/repositories/CompanyRepository'
+import type { CompanyCreationResponse } from '../../shared/types/models/Company'
+import { CompanyRepository } from './api/repositories/CompanyRepository'
 import { useErrorHandler } from './errors/useErrorHandler'
 
 export const useCompanyInitialization = () => {
   const authStore = useAuthStore()
   const { handleApiError, handleSilentError } = useErrorHandler()
+  const companyRepository = new CompanyRepository()
 
   const extractNameFromEmail = (email: string): string => {
     const parts = email.split('@')
     const localPart = parts[0] || ''
 
-    const cleanName = localPart
-      .replace(/[._-]/g, ' ')
-      .replace(/\d+/g, '')
-      .trim()
+    const cleanName = localPart.replace(/[._-]/g, ' ').replace(/\d+/g, '').trim()
 
     if (!cleanName) {
       return "User's Farm"
@@ -26,18 +20,13 @@ export const useCompanyInitialization = () => {
     const capitalized = cleanName
       .split(' ')
       .filter(word => word.length > 0)
-      .map(
-        word =>
-          word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-      )
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
       .join(' ')
 
     return capitalized ? `${capitalized}'s Farm` : "User's Farm"
   }
 
-  const createCompanyWithSpaces = async (
-    email: string
-  ): Promise<CompanyCreationResponse> => {
+  const createCompanyWithSpaces = async (email: string): Promise<CompanyCreationResponse> => {
     const companyName = extractNameFromEmail(email)
     const companyData = {
       name: companyName,
@@ -47,26 +36,17 @@ export const useCompanyInitialization = () => {
     }
 
     try {
-      const repository = new CompanyRepository()
-      const response = await repository.createCompanyWithSpaces(
-        companyData
-      )
+      const response = await companyRepository.createCompanyWithSpaces(companyData)
 
       if (import.meta.dev) {
         if (response.failed_space_types?.length) {
-          console.warn(
-            '[CompanyInit] Some spaces failed to create:',
-            response.failed_space_types
-          )
+          console.warn('[CompanyInit] Some spaces failed to create:', response.failed_space_types)
         }
       }
 
       return response
     } catch (error) {
-      const normalizedError = handleApiError(
-        error as Error,
-        'CompanyInit: Create company'
-      )
+      const normalizedError = handleApiError(error as Error, 'CompanyInit: Create company')
       throw normalizedError
     }
   }
@@ -98,16 +78,10 @@ export const useCompanyInitialization = () => {
         return response
       } catch (error) {
         lastError = error as Error
-        handleSilentError(
-          error as Error,
-          `CompanyInit: Attempt ${attempts} failed`
-        )
+        handleSilentError(error as Error, `CompanyInit: Attempt ${attempts} failed`)
 
         if (attempts < maxRetries) {
-          const delay = Math.min(
-            1000 * Math.pow(2, attempts - 1),
-            4000
-          )
+          const delay = Math.min(1000 * Math.pow(2, attempts - 1), 4000)
           if (import.meta.dev) {
             // Waiting before retry
           }
@@ -116,10 +90,7 @@ export const useCompanyInitialization = () => {
       }
     }
 
-    handleSilentError(
-      lastError,
-      'CompanyInit: All attempts failed'
-    )
+    handleSilentError(lastError, 'CompanyInit: All attempts failed')
     return null
   }
 
