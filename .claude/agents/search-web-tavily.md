@@ -2,7 +2,7 @@
 name: tavily-web-research
 description: Advanced web researcher using Tavily AI for real-time search, data extraction, site mapping, and web crawling
 tools: mcp__tavily__tavily_search, mcp__tavily__tavily_extract, mcp__tavily__tavily_map, mcp__tavily__tavily_crawl, Bash, Write
-model: claude-opus-4-6
+model: opus
 ---
 
 # Tavily Web Research Agent

@@ -2,7 +2,7 @@
 argument-hint: [source file(s)...] [output folder] [additional guidance]
 description: Create Word document from report file(s)
 allowed-tools: [Read, Write, Bash, Skill, TodoWrite]
-model: claude-opus-4-6
+model: opus
 ---
 
 # Create Word Document from Report

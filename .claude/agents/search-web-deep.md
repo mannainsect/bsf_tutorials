@@ -4,7 +4,7 @@ description: Thorough web researcher specializing in comprehensive
   analysis, detailed reporting, and in-depth investigation of complex
   topics
 tools: WebSearch, WebFetch, Bash, Write
-model: claude-opus-4-6
+model: opus
 ---
 
 # Deep Web Research Agent

@@ -2,7 +2,7 @@
 argument-hint: [query string] [--limit N]
 description: Use index.md/tags.md plus light content reads to rank relevant references
 allowed-tools: [Read, Task]
-model: claude-opus-4-6
+model: opus
 ---
 
 # /research:index-query

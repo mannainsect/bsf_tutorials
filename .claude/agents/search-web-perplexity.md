@@ -2,7 +2,7 @@
 name: perplexity-web-research
 description: Advanced web researcher using Perplexity AI for real-time search, deep analysis, and complex reasoning
 tools: mcp__perplexity__search, mcp__perplexity__reason, mcp__perplexity__deep_research, Bash, Write
-model: claude-opus-4-6
+model: opus
 ---
 
 # Perplexity Web Research Agent

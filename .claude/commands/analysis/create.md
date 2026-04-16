@@ -2,7 +2,7 @@
 argument-hint: [topic] [--toc]
 description: Generate metadata-compliant analysis from indexed knowledge
 allowed-tools: [Glob, Grep, Read, Execute, Write, Task]
-model: claude-opus-4-6
+model: opus
 ---
 
 # /analysis:create

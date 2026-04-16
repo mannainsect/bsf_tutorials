@@ -2,7 +2,7 @@
 argument-hint: [reference filename(s) from references/]
 description: Distill insights from research into report chapters
 allowed-tools: [Read, Edit, Write, Glob, TodoWrite, Bash]
-model: claude-opus-4-6
+model: opus
 ---
 
 # Update Report from Research

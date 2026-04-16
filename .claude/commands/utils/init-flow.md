@@ -1,7 +1,7 @@
 ---
 description: Initialize FLOW.md for your project with guided setup
 tags: [setup, initialization, configuration]
-model: claude-opus-4-6
+model: opus
 ---
 
 # Initialize Project FLOW.md

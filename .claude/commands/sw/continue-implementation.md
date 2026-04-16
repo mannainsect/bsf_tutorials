@@ -1,7 +1,7 @@
 ---
 description: Continue interrupted implementation from
   code-manager process
-model: claude-opus-4-6
+model: opus
 ---
 
 # Continue Implementation

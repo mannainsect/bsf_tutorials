@@ -2,7 +2,7 @@
 argument-hint: [optional-filename.pdf]
 description: Convert PDFs to markdown, move to archived, process all if no filename specified
 allowed-tools: [Bash, Task, Glob]
-model: claude-opus-4-6
+model: opus
 ---
 
 # Convert PDF to Markdown

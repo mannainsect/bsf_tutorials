@@ -2,7 +2,7 @@
 name: deploy-check
 description: Check Render deploy status via MCP and poll
   until terminal state
-model: claude-opus-4-6
+model: opus
 ---
 
 # Deploy Check Command

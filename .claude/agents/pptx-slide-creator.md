@@ -2,7 +2,7 @@
 name: pptx-slide-creator
 description: Creates single PowerPoint slide with visual verification
 allowed-tools: [Skill, Bash, Read, Write]
-model: claude-opus-4-6
+model: opus
 ---
 
 # PowerPoint Slide Creator (Worker Agent)

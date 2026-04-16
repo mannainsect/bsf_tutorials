@@ -2,7 +2,7 @@
 name: convert-pdf-to-markdown
 description: Converts PDFs from the configured incoming imports directory into cleaned markdown drafts for the v3 import pipeline
 tools: Bash, Read, Write, Edit
-model: claude-opus-4-6
+model: opus
 ---
 
 # convert-pdf-to-markdown

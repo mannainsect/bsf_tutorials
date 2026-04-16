@@ -2,7 +2,7 @@
 argument-hint: [source file(s)...] [output folder] [additional guidance]
 description: Create Excel spreadsheet from report file(s)
 allowed-tools: [Read, Write, Bash, Skill, TodoWrite]
-model: claude-opus-4-6
+model: opus
 ---
 
 # Create Excel Spreadsheet from Report

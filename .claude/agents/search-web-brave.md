@@ -2,7 +2,7 @@
 name: brave-web-research
 description: Web researcher using Brave Search for real-time web, news, video, and image search
 tools: mcp__brave__brave_web_search, mcp__brave__brave_news_search, mcp__brave__brave_video_search, mcp__brave__brave_image_search, Bash, Write
-model: claude-opus-4-6
+model: opus
 ---
 
 # Brave Web Research Agent

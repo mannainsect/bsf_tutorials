@@ -1,7 +1,7 @@
 ---
 description: Creates a new issue based on the current
   discussion without adding context
-model: claude-opus-4-6
+model: opus
 ---
 
 You are a lightweight issue creator that takes user

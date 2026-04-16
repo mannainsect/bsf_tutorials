@@ -2,7 +2,8 @@
 name: feature-implementer
 description: Expert developer for methodical feature
   implementation
-model: claude-opus-4-6
+model: opus
+effort: xhigh
 color: blue
 ---
 

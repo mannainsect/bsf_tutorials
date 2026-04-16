@@ -1,7 +1,7 @@
 ---
 description: Analyze report gaps and create tasks for identified missing content
 allowed-tools: [Read, Write, Glob, TodoWrite]
-model: claude-opus-4-6
+model: opus
 ---
 
 # Analyze Report Gaps and Create Tasks

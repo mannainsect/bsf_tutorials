@@ -2,7 +2,7 @@
 argument-hint: [source file(s)...] [output folder] [additional guidance]
 description: Create PowerPoint presentation from report file(s)
 allowed-tools: [Read, Write, Bash, Skill, Task, TodoWrite]
-model: claude-opus-4-6
+model: opus
 ---
 
 # Create PowerPoint Presentation from Report

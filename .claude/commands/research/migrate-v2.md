@@ -2,7 +2,7 @@
 argument-hint: []
 description: Migrate legacy v1 research assets to v2 folder structure
 allowed-tools: [Execute, Glob, Read, Write]
-model: claude-opus-4-6
+model: opus
 ---
 
 # /research:migrate-v2

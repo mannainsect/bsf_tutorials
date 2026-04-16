@@ -1,7 +1,8 @@
 ---
 description: Implements a GitHub issue with TDD
   multi-round workflow from classification to PR
-model: claude-opus-4-6
+model: opus
+effort: xhigh
 ---
 
 # Implement Issue

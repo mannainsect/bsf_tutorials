@@ -2,7 +2,7 @@
 argument-hint: [task description]
 description: Create a new numbered task file with proper structure and content
 allowed-tools: [Read, Write, Glob, Bash]
-model: claude-opus-4-6
+model: opus
 ---
 
 # Create New Task

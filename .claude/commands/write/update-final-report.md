@@ -2,7 +2,7 @@
 argument-hint: [final_report_path] [new_files (comma-sep or glob)]
 description: Update existing final report with new content
 allowed-tools: [Read, Glob, TodoWrite, Task]
-model: claude-opus-4-6
+model: opus
 ---
 
 # Update Final Report

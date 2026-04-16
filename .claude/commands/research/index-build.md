@@ -2,7 +2,7 @@
 argument-hint: []
 description: Rebuild v3 text-first index.md and tags.md from YAML metadata
 allowed-tools: [Execute, Task]
-model: claude-opus-4-6
+model: opus
 ---
 
 # /research:index-build

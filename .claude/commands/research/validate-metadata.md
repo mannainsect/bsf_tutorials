@@ -2,7 +2,7 @@
 argument-hint: [folder (default: references)]
 description: Validate v3 YAML metadata schema for markdown files in a folder
 allowed-tools: [Execute]
-model: claude-opus-4-6
+model: opus
 ---
 
 # /research:validate-metadata
