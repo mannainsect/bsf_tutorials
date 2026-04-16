@@ -243,7 +243,7 @@ Agents do NOT duplicate this locally.
 
 - **CI platform**: GitHub Actions
 - **CI commands**:
-  - Lint: `npm run lint -- --max-warnings 153`
+  - Lint: `npm run lint -- --max-warnings=0`
   - Format: `npm run format:check`
   - Typecheck: `npm run typecheck`
   - Tests: `npx vitest run --no-coverage`

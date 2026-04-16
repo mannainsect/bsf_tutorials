@@ -7,20 +7,9 @@ export default createConfigForNuxt({
 })
   .override('nuxt/typescript/rules', {
     rules: {
-      // Temporary: Allow legacy `any` types (99 instances)
-      // Fix incrementally in future PRs
-      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/explicit-function-return-type': 'off',
-      // Temporary: Allow legacy unused vars (19 instances)
-      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
-      // Temporary: Allow legacy dynamic delete (11 instances)
-      '@typescript-eslint/no-dynamic-delete': 'warn',
-      // Temporary: Allow legacy unsafe function types
-      '@typescript-eslint/no-unsafe-function-type': 'warn',
-      // Temporary: Allow legacy useless constructors
-      '@typescript-eslint/no-useless-constructor': 'warn',
-      // Temporary: Allow legacy useless escape characters
-      'no-useless-escape': 'warn',
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       'vue/multi-word-component-names': 'off',
       'vue/html-self-closing': [
         'error',

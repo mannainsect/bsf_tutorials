@@ -23,7 +23,7 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - run: npm run lint -- --max-warnings 153
+      - run: npm run lint -- --max-warnings=0
         timeout-minutes: 5
 
   format:
