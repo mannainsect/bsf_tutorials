@@ -11,11 +11,7 @@
           </ion-text>
         </div>
 
-        <AuthRegisterForm
-          :submitting="submitting"
-          :error="error"
-          @submit="handleSubmit"
-        />
+        <AuthRegisterForm :submitting="submitting" :error="error" @submit="handleSubmit" />
 
         <div class="ion-text-center ion-margin-top">
           <ion-text color="medium">

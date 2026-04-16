@@ -59,13 +59,8 @@ export const useMetrics = () => {
       // Determine timeout based on connection quality
       let timeoutDuration = 3000 // Default 3s
       if (import.meta.client && 'connection' in navigator) {
-        const connection = (
-          navigator as Navigator & { connection?: NetworkInformation }
-        ).connection
-        if (
-          connection?.effectiveType === 'slow-2g' ||
-          connection?.effectiveType === '2g'
-        ) {
+        const connection = (navigator as Navigator & { connection?: NetworkInformation }).connection
+        if (connection?.effectiveType === 'slow-2g' || connection?.effectiveType === '2g') {
           timeoutDuration = 2000 // 2s for slow connections
         }
       }
@@ -114,10 +109,7 @@ export const useMetrics = () => {
   /**
    * Track a page view
    */
-  const trackPageView = async (
-    page: string,
-    additionalInfo?: Record<string, unknown>
-  ) => {
+  const trackPageView = async (page: string, additionalInfo?: Record<string, unknown>) => {
     const metricData: MetricData = {
       category: MetricCategory.PAGE_VIEW,
       extra_info: {
@@ -133,10 +125,7 @@ export const useMetrics = () => {
   /**
    * Track a button click
    */
-  const trackButtonClick = async (
-    buttonName: string,
-    additionalInfo?: Record<string, unknown>
-  ) => {
+  const trackButtonClick = async (buttonName: string, additionalInfo?: Record<string, unknown>) => {
     const metricData: MetricData = {
       category: MetricCategory.CLICK_BUTTON,
       extra_info: {
@@ -152,10 +141,7 @@ export const useMetrics = () => {
   /**
    * Track a feature usage
    */
-  const trackFeatureUsage = async (
-    feature: string,
-    additionalInfo?: Record<string, unknown>
-  ) => {
+  const trackFeatureUsage = async (feature: string, additionalInfo?: Record<string, unknown>) => {
     const metricData: MetricData = {
       category: MetricCategory.FEATURE_USED,
       extra_info: {

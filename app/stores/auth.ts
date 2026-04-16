@@ -13,12 +13,8 @@ export const useAuthStore = defineStore('auth', () => {
 
   // Computed properties for easy ID access
   const userId = computed(() => user.value?._id || user.value?.id)
-  const companyId = computed(
-    () => activeCompany.value?._id || activeCompany.value?.id
-  )
-  const otherCompanyIds = computed(() =>
-    otherCompanies.value.map(c => c._id || c.id)
-  )
+  const companyId = computed(() => activeCompany.value?._id || activeCompany.value?.id)
+  const otherCompanyIds = computed(() => otherCompanies.value.map(c => c._id || c.id))
   const userEmail = computed(() => user.value?.email)
   const userCredits = computed(() => user.value?.balance || 0)
 
@@ -80,9 +76,7 @@ export const useAuthStore = defineStore('auth', () => {
     const savedUser = storage.get<string>('auth_user')
     const savedActiveCompany = storage.get<string>('auth_active_company')
     const savedOtherCompanies = storage.get<string>('auth_other_companies')
-    const savedLastProfileFetch = storage.get<string>(
-      'auth_last_profile_fetch'
-    )
+    const savedLastProfileFetch = storage.get<string>('auth_last_profile_fetch')
 
     if (savedToken) {
       token.value = savedToken
@@ -132,9 +126,7 @@ export const useAuthStore = defineStore('auth', () => {
    * @param entity - Entity with potential id/_id fields
    * @returns Normalized entity with both id and _id fields
    */
-  const normalizeEntity = <T extends { _id?: string; id?: string | number }>(
-    entity: T
-  ): T => {
+  const normalizeEntity = <T extends { _id?: string; id?: string | number }>(entity: T): T => {
     if (!entity) return entity
     // Ensure both id and _id are present for backward compatibility
     if (entity._id && !entity.id) {
@@ -149,9 +141,7 @@ export const useAuthStore = defineStore('auth', () => {
   /**
    * Normalize arrays of entities
    */
-  const normalizeEntityArray = <
-    T extends { _id?: string; id?: string | number }
-  >(
+  const normalizeEntityArray = <T extends { _id?: string; id?: string | number }>(
     entities: T[]
   ): T[] => {
     if (!Array.isArray(entities)) return []
@@ -175,9 +165,7 @@ export const useAuthStore = defineStore('auth', () => {
     setActiveCompany(normalizedActiveCompany)
 
     // Normalize and set other companies
-    const normalizedOtherCompanies = normalizeEntityArray(
-      profile.other_companies || []
-    )
+    const normalizedOtherCompanies = normalizeEntityArray(profile.other_companies || [])
     setOtherCompanies(normalizedOtherCompanies)
 
     // Store role information if present
@@ -187,19 +175,13 @@ export const useAuthStore = defineStore('auth', () => {
         const storage = useStorage()
         const roleData = JSON.stringify({
           admins: normalizeEntityArray(profile.active_company.admins || []),
-          managers: normalizeEntityArray(
-            profile.active_company.managers || []
-          ),
-          operators: normalizeEntityArray(
-            profile.active_company.operators || []
-          )
+          managers: normalizeEntityArray(profile.active_company.managers || []),
+          operators: normalizeEntityArray(profile.active_company.operators || [])
         })
 
         // Check if data size is reasonable (< 100KB)
         if (roleData.length > 100000) {
-          console.warn(
-            '[AUTH] Role data too large for localStorage, storing summary only'
-          )
+          console.warn('[AUTH] Role data too large for localStorage, storing summary only')
           // Store only IDs if data is too large
           const summaryData = JSON.stringify({
             admins: (profile.active_company.admins || [])
@@ -220,9 +202,7 @@ export const useAuthStore = defineStore('auth', () => {
         // Handle localStorage errors (quota exceeded, disabled, etc.)
         if (error instanceof Error) {
           if (error.name === 'QuotaExceededError') {
-            console.error(
-              '[AUTH] localStorage quota exceeded, clearing old data'
-            )
+            console.error('[AUTH] localStorage quota exceeded, clearing old data')
             try {
               const storage = useStorage()
               // Clear old data to make room
@@ -261,9 +241,7 @@ export const useAuthStore = defineStore('auth', () => {
    * @throws Error if profile fetch fails after retries
    */
   const fetchProfile = async () => {
-    const { ProfileRepository } = await import(
-      '../composables/api/repositories/ProfileRepository'
-    )
+    const { ProfileRepository } = await import('../composables/api/repositories/ProfileRepository')
 
     // If there's already a fetch in progress, return the existing promise
     if (profileFetchPromise.value) {
@@ -280,17 +258,12 @@ export const useAuthStore = defineStore('auth', () => {
         const profile = await profileRepository.getCurrentProfile()
 
         // Auto-select first company if no active_company is set
-        if (
-          !profile.active_company?.company &&
-          profile.other_companies?.length > 0
-        ) {
+        if (!profile.active_company?.company && profile.other_companies?.length > 0) {
           // No active company found, auto-selecting first available
 
           // Get the first company ID (handle both _id and id fields)
           const firstCompany = profile.other_companies[0]
-          const firstCompanyId = firstCompany
-            ? firstCompany._id || firstCompany.id
-            : null
+          const firstCompanyId = firstCompany ? firstCompany._id || firstCompany.id : null
 
           if (!firstCompanyId) {
             console.error('[AUTH] First company has no valid ID')
@@ -319,8 +292,7 @@ export const useAuthStore = defineStore('auth', () => {
               // Using local fallback for company selection
               // Manually construct the active_company structure
               const activeCompanyId =
-                firstCompany?._id ??
-                (firstCompany?.id != null ? String(firstCompany.id) : null)
+                firstCompany?._id ?? (firstCompany?.id != null ? String(firstCompany.id) : null)
               const fallbackProfile: import('../composables/api/repositories/ProfileRepository').ProfileResponse =
                 {
                   ...profile,
@@ -338,14 +310,10 @@ export const useAuthStore = defineStore('auth', () => {
                     managers: [],
                     operators: []
                   },
-                  other_companies: (profile.other_companies || []).filter(
-                    other => {
-                      const otherId =
-                        other._id ??
-                        (other.id != null ? String(other.id) : null)
-                      return !activeCompanyId || otherId !== activeCompanyId
-                    }
-                  )
+                  other_companies: (profile.other_companies || []).filter(other => {
+                    const otherId = other._id ?? (other.id != null ? String(other.id) : null)
+                    return !activeCompanyId || otherId !== activeCompanyId
+                  })
                 }
               console.log('[AUTH] Using local fallback for company selection')
               setProfileState(fallbackProfile)

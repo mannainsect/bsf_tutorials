@@ -36,22 +36,16 @@ export const useCompanyEdit = () => {
 
   // Form fields
   const { value: name, errorMessage: nameError } = useField<string>('name')
-  const { value: street, errorMessage: streetError } =
-    useField<string>('street')
+  const { value: street, errorMessage: streetError } = useField<string>('street')
   const { value: city, errorMessage: cityError } = useField<string>('city')
-  const { value: country, errorMessage: countryError } =
-    useField<string>('country')
-  const { value: timezone, errorMessage: timezoneError } =
-    useField<string>('timezone')
-  const { value: business_id, errorMessage: businessIdError } =
-    useField<string>('business_id')
+  const { value: country, errorMessage: countryError } = useField<string>('country')
+  const { value: timezone, errorMessage: timezoneError } = useField<string>('timezone')
+  const { value: business_id, errorMessage: businessIdError } = useField<string>('business_id')
 
   // Computed values
   const isValid = computed(() => form.meta.value.valid)
   const isDirty = computed(() => form.meta.value.dirty)
-  const hasErrors = computed(
-    () => !form.meta.value.valid && form.meta.value.touched
-  )
+  const hasErrors = computed(() => !form.meta.value.valid && form.meta.value.touched)
 
   // Check permissions
   const canEdit = computed(() => isCompanyAdmin() || isCompanyManager())
@@ -117,9 +111,7 @@ export const useCompanyEdit = () => {
 
     if (!canEdit.value) {
       error.value = t('account.company.permissionDenied')
-      await toast.showError(
-        error.value || t('account.company.permissionDenied')
-      )
+      await toast.showError(error.value || t('account.company.permissionDenied'))
       return
     }
 
@@ -131,14 +123,10 @@ export const useCompanyEdit = () => {
 
       // Only send changed fields
       const updateData: UpdateCompanyRequest = {}
-      if (formData.name !== activeCompany.value.name)
-        updateData.name = formData.name
-      if (formData.street !== activeCompany.value.street)
-        updateData.street = formData.street
-      if (formData.city !== activeCompany.value.city)
-        updateData.city = formData.city
-      if (formData.country !== activeCompany.value.country)
-        updateData.country = formData.country
+      if (formData.name !== activeCompany.value.name) updateData.name = formData.name
+      if (formData.street !== activeCompany.value.street) updateData.street = formData.street
+      if (formData.city !== activeCompany.value.city) updateData.city = formData.city
+      if (formData.country !== activeCompany.value.country) updateData.country = formData.country
       if (formData.timezone !== activeCompany.value.timezone)
         updateData.timezone = formData.timezone
       if (formData.business_id !== activeCompany.value.business_id)
@@ -165,8 +153,7 @@ export const useCompanyEdit = () => {
       isEditing.value = false
     } catch (err: unknown) {
       console.error(t('errors.account.updateCompanyLog'), err)
-      error.value =
-        err instanceof Error ? err.message : t('account.company.updateError')
+      error.value = err instanceof Error ? err.message : t('account.company.updateError')
 
       await toast.showError(error.value || t('common.error'))
     } finally {

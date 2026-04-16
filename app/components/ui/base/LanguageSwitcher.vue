@@ -7,11 +7,7 @@
     :style="{ minWidth: '120px', maxWidth: '200px' }"
     @ion-change="changeLanguage"
   >
-    <ion-select-option
-      v-for="loc in availableLocales"
-      :key="loc.code"
-      :value="loc.code"
-    >
+    <ion-select-option v-for="loc in availableLocales" :key="loc.code" :value="loc.code">
       {{ loc.name }}
     </ion-select-option>
   </ion-select>
@@ -26,9 +22,7 @@ const currentLocale = ref(locale.value)
 const availableLocales = computed(() => locales.value)
 
 const currentLanguageName = computed(() => {
-  const current = availableLocales.value.find(
-    l => l.code === currentLocale.value
-  )
+  const current = availableLocales.value.find(l => l.code === currentLocale.value)
   return current?.name || t('common.language')
 })
 

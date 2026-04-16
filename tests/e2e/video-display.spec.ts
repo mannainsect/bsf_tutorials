@@ -24,9 +24,7 @@ test.describe('Video Display - Homepage', () => {
     }
   })
 
-  test('should display featured video with query parameters', async ({
-    page
-  }) => {
+  test('should display featured video with query parameters', async ({ page }) => {
     await page.goto('/')
     await page.waitForLoadState('networkidle')
     await page.waitForTimeout(1000)
@@ -46,9 +44,7 @@ test.describe('Video Display - Homepage', () => {
     }
   })
 
-  test('should have correct security attributes on iframe', async ({
-    page
-  }) => {
+  test('should have correct security attributes on iframe', async ({ page }) => {
     await page.goto('/')
     await page.waitForLoadState('networkidle')
     await page.waitForTimeout(1000)

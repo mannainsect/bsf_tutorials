@@ -1,8 +1,4 @@
-import type {
-  CreateUserRequest,
-  UpdateUserRequest,
-  UserSearchRequest
-} from '../../shared/types'
+import type { CreateUserRequest, UpdateUserRequest, UserSearchRequest } from '../../shared/types'
 
 export const useUser = () => {
   const userService = useUserService()
@@ -24,10 +20,7 @@ export const useUser = () => {
     return userService.createUser(userData)
   }
 
-  const updateUser = async (
-    id: string | number,
-    userData: UpdateUserRequest
-  ) => {
+  const updateUser = async (id: string | number, userData: UpdateUserRequest) => {
     const result = await userService.updateUser(id, userData)
     // If updating current user, refresh profile
     if (String(id) === String(authStore.userId)) {

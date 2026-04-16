@@ -40,9 +40,7 @@ export const useCurrencyExchange = () => {
     }
   }
 
-  const fetchRateWithCache = async (
-    currency: string
-  ): Promise<number | null> => {
+  const fetchRateWithCache = async (currency: string): Promise<number | null> => {
     try {
       // Check cache first
       const cached = getCachedRate(currency)

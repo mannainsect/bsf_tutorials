@@ -231,9 +231,7 @@ describe('VideoCard', () => {
       expect(iframe.attributes('sandbox')).toBe(
         'allow-scripts allow-same-origin allow-presentation'
       )
-      expect(iframe.attributes('allow')).toBe(
-        'autoplay; fullscreen; picture-in-picture'
-      )
+      expect(iframe.attributes('allow')).toBe('autoplay; fullscreen; picture-in-picture')
     })
 
     it('should display video title', () => {
@@ -411,9 +409,7 @@ describe('VideoCard', () => {
       })
 
       const iframe = wrapper.find('iframe')
-      expect(iframe.attributes('aria-label')).toBe(
-        freeVideoWithQueryParams.title
-      )
+      expect(iframe.attributes('aria-label')).toBe(freeVideoWithQueryParams.title)
     })
 
     it('should have allowfullscreen attribute', () => {

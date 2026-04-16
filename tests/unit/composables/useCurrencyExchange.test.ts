@@ -91,10 +91,7 @@ describe('useCurrencyExchange', () => {
           timestamp: Date.now() - 1000
         }
       }
-      localStorageMock.setItem(
-        'currency_exchange_rates',
-        JSON.stringify(cache)
-      )
+      localStorageMock.setItem('currency_exchange_rates', JSON.stringify(cache))
       const { getUSDRate } = useCurrencyExchange()
       const rate = await getUSDRate('EUR')
       expect(rate).toBe(1.2)
@@ -107,10 +104,7 @@ describe('useCurrencyExchange', () => {
           timestamp: Date.now() - 25 * 60 * 60 * 1000
         }
       }
-      localStorageMock.setItem(
-        'currency_exchange_rates',
-        JSON.stringify(cache)
-      )
+      localStorageMock.setItem('currency_exchange_rates', JSON.stringify(cache))
       const mockResponse = {
         ok: true,
         json: vi.fn().mockResolvedValue({

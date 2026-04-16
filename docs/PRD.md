@@ -94,7 +94,7 @@ tests/             # Vitest unit suites and Playwright E2E specs
   - Query parameters: Supported (e.g., `?badge=0&autopause=0`)
 - Security requirements enforced: HTTPS only, vimeo.com domains only,
   iframe sandbox attributes (`allow-scripts allow-same-origin
-  allow-presentation`).
+allow-presentation`).
 - Use links directly in `<iframe src>`, no extra parsing or
   `@vimeo/player` dependency needed.
 

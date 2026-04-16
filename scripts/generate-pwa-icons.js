@@ -39,11 +39,7 @@ async function generateIcons() {
     }
 
     // Also create favicon.ico (multi-size)
-    await baseIcon
-      .clone()
-      .resize(32, 32)
-      .png()
-      .toFile(path.join(publicDir, 'favicon-32x32.png'))
+    await baseIcon.clone().resize(32, 32).png().toFile(path.join(publicDir, 'favicon-32x32.png'))
 
     // All icons generated successfully!
   } catch (error) {

@@ -46,17 +46,11 @@
                     :fill="item.fill"
                     :disabled="loading || navigationLoading"
                     :aria-label="$t(item.ariaLabel || item.label)"
-                    :aria-describedby="
-                      navigationError ? 'nav-error-message' : undefined
-                    "
+                    :aria-describedby="navigationError ? 'nav-error-message' : undefined"
                     :tabindex="index"
                     @click="handleNavigation(item.route)"
                   >
-                    <ion-icon
-                      slot="start"
-                      :icon="item.icon"
-                      :aria-hidden="true"
-                    />
+                    <ion-icon slot="start" :icon="item.icon" :aria-hidden="true" />
                     {{ $t(item.label) }}
                   </ion-button>
                 </ion-col>
@@ -134,8 +128,7 @@ const navigateToRoute = async (route: string) => {
     } catch (err) {
       console.error(t('errors.navigationErrorLog'), err)
       // Set error message for screen readers
-      const fallbackMessage =
-        err instanceof Error ? err.message : t('errors.navigationFailed')
+      const fallbackMessage = err instanceof Error ? err.message : t('errors.navigationFailed')
       navigationError.value = `${t('common.error')}: ${fallbackMessage}`
 
       // Clear error after 5 seconds
@@ -149,10 +142,7 @@ const navigateToRoute = async (route: string) => {
 }
 
 // Create debounced navigation handler
-const handleNavigation = debounce(
-  (...args: unknown[]) => navigateToRoute(args[0] as string),
-  300
-)
+const handleNavigation = debounce((...args: unknown[]) => navigateToRoute(args[0] as string), 300)
 
 onMounted(() => {
   ensureProfileData()

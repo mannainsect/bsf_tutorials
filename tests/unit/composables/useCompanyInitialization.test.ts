@@ -67,9 +67,7 @@ describe('useCompanyInitialization', () => {
 
     it('should handle edge cases gracefully', () => {
       expect(companyInit.extractNameFromEmail('')).toBe("User's Farm")
-      expect(companyInit.extractNameFromEmail('invalid')).toBe(
-        "Invalid's Farm"
-      )
+      expect(companyInit.extractNameFromEmail('invalid')).toBe("Invalid's Farm")
       expect(companyInit.extractNameFromEmail('@')).toBe("User's Farm")
     })
   })
@@ -82,26 +80,20 @@ describe('useCompanyInitialization', () => {
         created_spaces: ['space1', 'space2', 'space3']
       })
 
-      const result = await companyInit.createCompanyWithSpaces(
-        'test-token',
-        'test.user@email.com'
-      )
+      const result = await companyInit.createCompanyWithSpaces('test-token', 'test.user@email.com')
 
-      expect(mockApi).toHaveBeenCalledWith(
-        '/companies?create_all_spaces=true',
-        {
-          method: 'POST',
-          body: {
-            name: "Test User's Farm",
-            city: 'Helsinki',
-            country: 'FI',
-            timezone: 'Europe/Helsinki'
-          },
-          headers: {
-            Authorization: 'Bearer test-token'
-          }
+      expect(mockApi).toHaveBeenCalledWith('/companies?create_all_spaces=true', {
+        method: 'POST',
+        body: {
+          name: "Test User's Farm",
+          city: 'Helsinki',
+          country: 'FI',
+          timezone: 'Europe/Helsinki'
+        },
+        headers: {
+          Authorization: 'Bearer test-token'
         }
-      )
+      })
 
       expect(result).toEqual({
         status: 'success',

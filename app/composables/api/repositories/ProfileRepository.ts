@@ -1,9 +1,4 @@
-import type {
-  User,
-  Company,
-  ProfileMetrics,
-  CompanyTask
-} from '../../../../shared/types'
+import type { User, Company, ProfileMetrics, CompanyTask } from '../../../../shared/types'
 import { BaseRepository } from './BaseRepository'
 
 export interface ProfileResponse {

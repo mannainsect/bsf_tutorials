@@ -11,11 +11,7 @@
           </ion-text>
         </div>
 
-        <AuthLoginForm
-          :loading="loading"
-          :error="error"
-          @submit="handleLogin"
-        />
+        <AuthLoginForm :loading="loading" :error="error" @submit="handleLogin" />
 
         <div class="ion-text-center ion-margin-top">
           <ion-text color="medium">

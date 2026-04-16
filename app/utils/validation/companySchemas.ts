@@ -2,11 +2,7 @@ import { z } from 'zod'
 
 export const createCompanyEditSchema = (t: (key: string) => string) =>
   z.object({
-    name: z
-      .string()
-      .min(1, t('validation.company.nameRequired'))
-      .max(200)
-      .optional(),
+    name: z.string().min(1, t('validation.company.nameRequired')).max(200).optional(),
     street: z.string().max(200).optional(),
     city: z.string().max(100).optional(),
     country: z

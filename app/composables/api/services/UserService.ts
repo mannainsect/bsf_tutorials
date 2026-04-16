@@ -26,9 +26,7 @@ export class UserService {
 
     // Check if user data is available
     if (!this.authStore.user) {
-      throw new Error(
-        'User data not available. Please ensure you are logged in.'
-      )
+      throw new Error('User data not available. Please ensure you are logged in.')
     }
 
     return {

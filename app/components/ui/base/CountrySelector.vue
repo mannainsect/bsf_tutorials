@@ -47,9 +47,7 @@ const { t } = useI18n()
 const { countries: availableCountries } = useCountries()
 
 const resolvedLabel = computed(() => props.label || t('forms.country'))
-const resolvedPlaceholder = computed(
-  () => props.placeholder || t('forms.countryPlaceholder')
-)
+const resolvedPlaceholder = computed(() => props.placeholder || t('forms.countryPlaceholder'))
 const countryOptions = computed<Country[]>(() => availableCountries.value)
 
 const handleChange = (event: CustomEvent) => {

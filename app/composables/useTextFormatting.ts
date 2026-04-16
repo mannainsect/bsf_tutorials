@@ -84,11 +84,7 @@ export const useTextFormatting = () => {
 
       while ((match = markdownLinkRegex.exec(text)) !== null) {
         const [, linkText, url] = match
-        if (
-          linkText &&
-          url &&
-          (url.startsWith('http://') || url.startsWith('https://'))
-        ) {
+        if (linkText && url && (url.startsWith('http://') || url.startsWith('https://'))) {
           if (!seenUrls.has(url)) {
             seenUrls.add(url)
             links.push({

@@ -2,10 +2,7 @@
   <ion-grid class="ion-padding">
     <ion-row class="ion-justify-content-center">
       <ion-col size="12" size-sm="6" size-md="5">
-        <div
-          v-if="creatingCompany"
-          class="ion-text-center ion-padding-vertical"
-        >
+        <div v-if="creatingCompany" class="ion-text-center ion-padding-vertical">
           <ion-icon
             :icon="businessOutline"
             size="large"
@@ -22,12 +19,7 @@
         </div>
 
         <div v-else class="ion-text-center ion-padding-vertical">
-          <ion-spinner
-            v-if="!error"
-            name="crescent"
-            size="large"
-            color="primary"
-          />
+          <ion-spinner v-if="!error" name="crescent" size="large" color="primary" />
           <ion-icon v-else :icon="closeCircle" size="large" color="danger" />
           <ion-text>
             <h2 v-if="!error">
@@ -39,18 +31,11 @@
           </ion-text>
         </div>
 
-        <div
-          v-if="companyCreationError"
-          class="ion-text-center ion-margin-top"
-        >
+        <div v-if="companyCreationError" class="ion-text-center ion-margin-top">
           <ion-text color="danger">
             <p>{{ companyCreationError }}</p>
           </ion-text>
-          <ion-button
-            expand="block"
-            class="ion-margin-top"
-            @click="retryCompanyCreation"
-          >
+          <ion-button expand="block" class="ion-margin-top" @click="retryCompanyCreation">
             {{ $t('auth.retryCreation') }}
           </ion-button>
           <ion-button

@@ -16,10 +16,7 @@ export class CompanyRepository extends BaseRepository {
    * PUT /companies/${companyId}
    * All fields are optional
    */
-  async updateCompany(
-    companyId: string,
-    data: UpdateCompanyRequest
-  ): Promise<Company> {
+  async updateCompany(companyId: string, data: UpdateCompanyRequest): Promise<Company> {
     const endpoints = useApiEndpoints()
     return this.put<Company>(`${endpoints.companies}/${companyId}`, data)
   }

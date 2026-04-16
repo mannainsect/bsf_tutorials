@@ -14,6 +14,7 @@
 
 This file contains **10 numbered sections** that define project
 configuration. Each section has:
+
 - **Required fields**: Must be filled (marked with `[...]`)
 - **Optional fields**: Can be removed if not applicable (in `<!--`)
 - **Examples**: Show format (marked with `e.g.,`)
@@ -85,12 +86,13 @@ A properly initialized FLOW.md has:
   If unclear, ask the user explicitly.
 - Line Length: 79 for Python, 80 for others
 - Indentation: 4 spaces for Python, 2 for JS/TS, language default
-- Branch Naming: feature/*, fix/*, chore/*
+- Branch Naming: feature/_, fix/_, chore/\*
 - Commit Messages: Conventional Commits
 - Default Branch: main
 - Test Framework: pytest (Python), Jest (JS/TS), None
 
 **Directory Defaults**:
+
 - Documentation: `docs/`
 - Tests: `tests/` (Python), `test/` or `__tests__/` (JS/TS)
 - Source Code: `src/` (most projects), `lib/` (libraries), root (simple
@@ -114,6 +116,7 @@ A properly initialized FLOW.md has:
 **Purpose**: [Brief description of what this project does]
 
 **Tech Stack**:
+
 - Stack Type: [backend, frontend, or fullstack]
 - Primary Language: [e.g., Python, TypeScript, Rust]
 - Framework: [e.g., FastAPI, React, None]
@@ -121,6 +124,7 @@ A properly initialized FLOW.md has:
 - Key Dependencies: [List major dependencies]
 
 **Repository Structure**:
+
 ```
 project/
 ├── .claude/           # Commands and agents
@@ -141,6 +145,7 @@ project/
 ```
 
 **Metadata Requirements Overview**:
+
 - All reference, analysis, and report markdown files must include YAML
   frontmatter that satisfies `docs/metadata-taxonomy.yaml`.
 - Required fields: `title`, `date`, `topics`, `tags`, `source` with
@@ -149,6 +154,7 @@ project/
   edits using `./flow.py index-build`.
 
 **Quick Start Commands**:
+
 - `./flow.py import-document <path>` – ingest files from `imports/new/`
   and generate compliant references with metadata.
 - `./flow.py validate-metadata [folder]` – verify metadata against the
@@ -161,6 +167,7 @@ project/
 <!-- Define all standard directories used by slash commands -->
 
 **Project Documentation**:
+
 - **Location**: `docs/` (default)
 - **Purpose**: Project-related documents, PRDs, architecture docs,
   templates
@@ -170,18 +177,21 @@ project/
   files)
 
 **Test Directory**:
+
 - **Location**: [e.g., `tests/`, `test/`, `__tests__/`, `src/test/`]
 - **Purpose**: Test files and test fixtures
 - **Used by**: All implementation and review commands
 - **Structure**: [e.g., mirrors src/ structure, organized by test type]
 
 **Application/Code Directory**:
+
 - **Location**: [e.g., `src/`, `app/`, `lib/`, project root]
 - **Purpose**: Main application source code
 - **Used by**: All coding commands
 - **Structure**: [Describe module organization]
 
 **Research Tasks**:
+
 - **Location**: `[tasks_dir]` (default `tasks/`)
 - **Purpose**: Research task definitions and lifecycle tracking
 - **Used by**:
@@ -192,6 +202,7 @@ project/
 - **Subdirectories**: `[tasks_dir]/completed/` - Archived tasks
 
 **Internal Knowledge Base**:
+
 - **Location**: `[references_dir]` (default `references/`)
 - **Purpose**: Metadata-compliant research corpus
 - **Used by**:
@@ -203,12 +214,14 @@ project/
 - **Metadata**: Must satisfy `docs/metadata-taxonomy.yaml`
 
 **Analysis Workspace**:
+
 - **Location**: `[analysis_dir]` (default `analysis/`)
 - **Purpose**: AI-generated analyses with YAML metadata
 - **Used by**: `/analysis:create`, `/research:maintain-report`
 - **File naming**: `analysis-[topic]-[YYYY-MM-DD].md`
 
 **Import Pipeline Root**:
+
 - **Location**: `[imports_root]` (default `imports/`)
 - **Purpose**: Stage raw files, convert, and archive originals
 - **Used by**: `/utils:convert-pdf`, `/research:import-document`
@@ -225,6 +238,7 @@ project/
   `.gitignore` (directory placeholder files for git tracking)
 
 **Report Synthesis**:
+
 - **Location**: `[report_dir]` (default `reports/`)
 - **Topic Index**: `[report_index]` (default `000-topic-reference.md`)
 - **Purpose**: Client-facing deliverables with YAML metadata
@@ -240,18 +254,21 @@ project/
 - **File naming**: `NN-chapter-title.md`
 
 **Search Index Artefacts**:
+
 - **Location**: `[index_dir]` (default `index/`)
 - **Purpose**: Structured search outputs built from metadata
 - **Used by**: `/research:index-build`, `/research:index-query`
 - **Maintenance**: Rebuild after imports or taxonomy changes
 
 **Temporary Files**:
+
 - **Location**: `/tmp/` (system temp, default)
 - **Purpose**: Temporary downloads, attachments, intermediate processing
 - **Used by**: `/sw:analyse-issue` (for attachments), various commands
 - **Cleanup**: Automatically cleared by system, not committed to git
 
 **Build/Generated Files**:
+
 - **Location**: [e.g., `dist/`, `build/`, `.next/`, `target/`]
 - **Purpose**: Compiled artifacts, build output (gitignored)
 - **Used by**: Build and deployment workflows
@@ -280,6 +297,7 @@ project/
 ### Sub-Agent Delegation
 
 When delegating to sub-agents:
+
 - **Filter Information**: Share only relevant sections from this file
 - **Specify Scope**: Clearly define the sub-task boundaries
 - **Provide Context**: Include necessary tech stack details
@@ -349,11 +367,13 @@ Agents do NOT duplicate this locally.
 
 **Test file discovery pattern**:
 How to find the test file for a given source file:
+
 - [e.g., `src/foo.py` → `tests/test_foo.py`]
 - [e.g., `src/components/Foo.tsx` → `src/components/Foo.test.tsx`]
 - [e.g., `pkg/foo/bar.go` → `pkg/foo/bar_test.go`]
 
 **What agents should NOT run**:
+
 - Full test suite (CI/CD handles this)
 - E2E tests (manual or CI/CD only)
 - Performance/load tests
@@ -445,6 +465,7 @@ How to find the test file for a given source file:
 
 ```markdown
 When sub-agents need guidance:
+
 1. Read FLOW.md sections relevant to the task
 2. Extract applicable rules and tech stack info
 3. Include in sub-agent prompt with clear scope
@@ -454,6 +475,7 @@ When sub-agents need guidance:
 ### Command Reading Requirements
 
 **Software Development Commands** (need Section 3 + 5 + 6):
+
 - `/sw:analyse-issue`: Read Sections 3, 6 (Issue Template)
 - `/sw:implement-issue`: Read Sections 1, 3, 5, 6 (Implementation)
 - `/sw:continue-implementation`: Read Sections 1, 3, 5, 6
@@ -463,6 +485,7 @@ When sub-agents need guidance:
 - `/sw:create-issue`: Read Sections 1, 3, 6 (Issue Template)
 
 **Research Commands**:
+
 - `/research:import-document`: Sections 1 (Import Pipeline,
   Knowledge Base), 3, 6, 10
 - `/research:validate-metadata`: Sections 1 (Import Pipeline,
@@ -482,11 +505,13 @@ When sub-agents need guidance:
 - `/research:archive-task`: Sections 1 (Research Tasks), 3, 6, 10
 
 **Utility Commands**:
+
 - `/utils:init-flow`: Reads FLOW.md template itself
 - `/utils:convert-pdf`: Sections 1 (Import Pipeline), 3
 - `/utils:update-flow`: No FLOW.md reading needed
 
 **Status Commands** (no FLOW.md needed):
+
 - `/sw:pull-request-check`: Uses GitHub API only
 - `/sw:pull-request-merge`: Uses git/gh CLI only
 
@@ -495,6 +520,7 @@ When sub-agents need guidance:
 ### Version Control
 
 **Git** (Required)
+
 - Purpose: Source control operations
 - Common commands:
   ```bash
@@ -505,6 +531,7 @@ When sub-agents need guidance:
   ```
 
 **GitHub CLI** (gh)
+
 - Purpose: GitHub API interactions
 - Authentication: Assumes `gh auth login` completed
 - Common commands:
@@ -572,6 +599,7 @@ and workflow patterns.
 When creating or updating GitHub issues, use this structure:
 
 **Issue Title Format:**
+
 ```
 [TYPE]: Concise summary (READY)
 ```
@@ -614,6 +642,7 @@ When creating or updating GitHub issues, use this structure:
    - Known pain points
 
 8. **🗺️ Impact Map**
+
    ```
    | Area | Change | Notes |
    |------|--------|-------|
@@ -640,6 +669,7 @@ When creating or updating GitHub issues, use this structure:
       use
 
 12. **🧰 Commands to Run Before PR**
+
     ```bash
     npm run lint
     npm test
@@ -667,10 +697,10 @@ When creating or updating GitHub issues, use this structure:
     - Who to ask + preferred channel
     - Clarification etiquette and response SLA
 
-**Optional Section (if backend involved):**
-18. **🔌 Backend Integration**: API endpoints, data models, auth
+**Optional Section (if backend involved):** 18. **🔌 Backend Integration**: API endpoints, data models, auth
 
 **Quality Requirements:**
+
 - Character budget: ≤15k (ideal ≤12k)
 - **Precise file:line references** for all code mentions
 - **Concrete test code examples** (not vague descriptions)
@@ -682,6 +712,7 @@ When creating or updating GitHub issues, use this structure:
 - **Focus on implementation playbook** (not PM overhead)
 
 **Quality Rubric (Pass/Needs Work):**
+
 - ✓ Clarity: Mid-level dev can start without extra context
 - ✓ Completeness: All sections filled with actionable info
 - ✓ Decisions: Architecture/product decisions documented
@@ -699,6 +730,7 @@ When creating or updating GitHub issues, use this structure:
 **Required for**: `/sw:analyse-issue`, `/sw:create-issue`
 
 When analyzing issues:
+
 1. Read issue description and all comments
 2. Check for attachments (download if needed)
 3. Reference related issues/PRs if mentioned
@@ -708,6 +740,7 @@ When analyzing issues:
 7. Output structured analysis with file:line references
 
 **Multi-Perspective Analysis** (for `/sw:analyse-issue`):
+
 - Collect three Spec Cards in parallel:
   - **Quick Win** (minimal path, reuse, effort estimate)
   - **Quality** (patterns, cleanup, abstractions)
@@ -727,6 +760,7 @@ When analyzing issues:
 `/sw:coder-simple`
 
 When implementing features:
+
 1. Read issue documentation completely
 2. Extract code quality standards (Section 3)
 3. Extract testing strategy (Section 3: Testing Strategy for
@@ -744,6 +778,7 @@ When implementing features:
 8. Create PR — CI/CD runs the full test suite automatically
 
 **Quality Gates Before PR (targeted only):**
+
 <!--
 Customize using commands from Testing Strategy for Agents:
 - [ ] Code formatted (changed files)
@@ -756,6 +791,7 @@ Customize using commands from Testing Strategy for Agents:
 
 **Implementation State Recovery:**
 For `/sw:continue-implementation`, assess:
+
 - What was completed vs attempted
 - Which quality gates failed
 - Which tests are failing and why
@@ -766,6 +802,7 @@ For `/sw:continue-implementation`, assess:
 **Required for**: `/sw:pull-request-review`
 
 When reviewing PRs:
+
 1. Check all PR comments and requested changes
 2. Verify code follows quality standards (Section 3)
 3. Run tests locally if applicable
@@ -881,6 +918,7 @@ See Section 1 for resolved paths. Defaults: `[imports_root]/`,
   - Maintains original numbering for traceability
 
 **Task Template Structure:**
+
 <!--
 See: docs/TASK_TEMPLATE.md (if exists)
 
@@ -897,6 +935,7 @@ Default structure:
 -->
 
 **Agent Selection:**
+
 - `perplexity-web-research`: Complex reasoning, strategic analysis
 - `tavily-web-research`: Real-time data extraction, site mapping
 - `brave-web-research`: Broad web/news/video search (quota-aware)
@@ -904,6 +943,7 @@ Default structure:
 - `reference-search`: Fast internal reference lookup
 
 **Research Quality Standards:**
+
 - All claims cited with [Source](url) links
 - Markdown line length ≤80 characters
 - Clear section headers and structure
@@ -920,6 +960,7 @@ paths.
 Defaults: `[report_dir]/`, `[report_dir]/000-topic-reference.md`
 
 **When Updating or Maintaining Reports:**
+
 1. Read `000-topic-reference.md` to locate chapter ownership and tags
 2. Identify chapters requiring updates or new subsections
 3. Decide whether to extend an existing file or create a new numbered
@@ -936,6 +977,7 @@ Defaults: `[report_dir]/`, `[report_dir]/000-topic-reference.md`
    `[index_dir]/`
 
 **Report Quality Standards:**
+
 - Markdown line length ≤80 characters
 - YAML frontmatter present and taxonomy-compliant
 - Consistent heading levels with no orphaned sections
@@ -954,6 +996,7 @@ Defaults: `[imports_root]/new/`, `[imports_root]/converted/`,
 `[imports_root]/archived/`, `[references_dir]/`
 
 **When Ingesting Files:**
+
 1. Stage raw PDFs or markdown inside `[imports_root]/new/`
 2. Run `/utils:convert-pdf` for PDFs to generate intermediary markdown
    before import
@@ -989,20 +1032,24 @@ Defaults: `[imports_root]/new/`, `[imports_root]/converted/`,
 ### When Things Go Wrong
 
 **Workflow Interruption** (Ctrl+C):
+
 - State is saved in FlowState
 - Resume using continuation commands if available
 - Check last output in terminal for context
 
 **Command Failures**:
+
 - Review error output carefully
 - Check if reference documents changed
 - Verify tool availability and authentication
 - Report issue with full context if bug suspected
 
 **Merge Conflicts**:
+
 - [Your conflict resolution strategy]
 
 **Failed CI Checks**:
+
 - [Your CI failure handling process]
 
 ## 9. Custom Workflow Extensions

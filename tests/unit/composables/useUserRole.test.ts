@@ -1,12 +1,4 @@
-import {
-  describe,
-  it,
-  expect,
-  beforeEach,
-  vi,
-  beforeAll,
-  afterAll
-} from 'vitest'
+import { describe, it, expect, beforeEach, vi, beforeAll, afterAll } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { useAuthStore as realUseAuthStore } from '~/stores/auth'
 import { useUserRole } from '~/composables/useUserRole'
@@ -27,16 +19,12 @@ beforeAll(() => {
       return value ? value : null
     },
     set: (key: string, value: unknown) => {
-      mockStorage[key] =
-        typeof value === 'string' ? value : JSON.stringify(value)
+      mockStorage[key] = typeof value === 'string' ? value : JSON.stringify(value)
     },
     remove: (key: string) => {
       const keys = Object.keys(mockStorage)
       keys.forEach(k => {
-        if (
-          k === key &&
-          Object.prototype.hasOwnProperty.call(mockStorage, k)
-        ) {
+        if (k === key && Object.prototype.hasOwnProperty.call(mockStorage, k)) {
           // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
           delete mockStorage[k]
         }
@@ -84,12 +72,8 @@ describe('useUserRole', () => {
       { _id: 'admin1', id: 'admin1', email: 'admin1@test.com' },
       { _id: 'admin2', id: 'admin2', email: 'admin2@test.com' }
     ]
-    mockManagers = [
-      { _id: 'manager1', id: 'manager1', email: 'mgr1@test.com' }
-    ]
-    mockOperators = [
-      { _id: 'operator1', id: 'operator1', email: 'op1@test.com' }
-    ]
+    mockManagers = [{ _id: 'manager1', id: 'manager1', email: 'mgr1@test.com' }]
+    mockOperators = [{ _id: 'operator1', id: 'operator1', email: 'op1@test.com' }]
   })
 
   describe('isCompanyAdmin', () => {
@@ -386,15 +370,11 @@ describe('useUserRole', () => {
       authStore.setUser({ _id: 'user1', id: 'user1', email: 'u@test.com' })
       authStore.setActiveCompany({ _id: 'comp1', id: 'comp1' })
 
-      const consoleWarnSpy = vi
-        .spyOn(console, 'warn')
-        .mockImplementation(() => {})
+      const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
       const { hasAnyRole } = useUserRole()
       expect(hasAnyRole()).toBe(false)
-      expect(consoleWarnSpy).toHaveBeenCalledWith(
-        '[useUserRole] localStorage not available'
-      )
+      expect(consoleWarnSpy).toHaveBeenCalledWith('[useUserRole] localStorage not available')
 
       consoleWarnSpy.mockRestore()
       global.window = originalWindow
@@ -406,9 +386,7 @@ describe('useUserRole', () => {
 
       mockStorage['auth_active_company_roles'] = '{ invalid json }'
 
-      const consoleErrorSpy = vi
-        .spyOn(console, 'error')
-        .mockImplementation(() => {})
+      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
 
       const { hasAnyRole } = useUserRole()
       expect(hasAnyRole()).toBe(false)
@@ -438,15 +416,11 @@ describe('useUserRole', () => {
         invalid: 'structure'
       })
 
-      const consoleWarnSpy = vi
-        .spyOn(console, 'warn')
-        .mockImplementation(() => {})
+      const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
       const { hasAnyRole } = useUserRole()
       expect(hasAnyRole()).toBe(false)
-      expect(consoleWarnSpy).toHaveBeenCalledWith(
-        '[useUserRole] Invalid role data structure'
-      )
+      expect(consoleWarnSpy).toHaveBeenCalledWith('[useUserRole] Invalid role data structure')
 
       consoleWarnSpy.mockRestore()
     })
@@ -469,15 +443,11 @@ describe('useUserRole', () => {
         clear: vi.fn()
       })
 
-      const consoleErrorSpy = vi
-        .spyOn(console, 'error')
-        .mockImplementation(() => {})
+      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
 
       const { hasAnyRole } = useUserRole()
       expect(hasAnyRole()).toBe(false)
-      expect(consoleErrorSpy).toHaveBeenCalledWith(
-        '[useUserRole] localStorage quota exceeded'
-      )
+      expect(consoleErrorSpy).toHaveBeenCalledWith('[useUserRole] localStorage quota exceeded')
 
       consoleErrorSpy.mockRestore()
       // Restore original
@@ -505,15 +475,11 @@ describe('useUserRole', () => {
         clear: vi.fn()
       })
 
-      const consoleErrorSpy = vi
-        .spyOn(console, 'error')
-        .mockImplementation(() => {})
+      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
 
       const { hasAnyRole } = useUserRole()
       expect(hasAnyRole()).toBe(false)
-      expect(consoleErrorSpy).toHaveBeenCalledWith(
-        '[useUserRole] localStorage access denied'
-      )
+      expect(consoleErrorSpy).toHaveBeenCalledWith('[useUserRole] localStorage access denied')
 
       consoleErrorSpy.mockRestore()
     })
@@ -524,9 +490,7 @@ describe('useUserRole', () => {
 
       mockStorage['auth_active_company_roles'] = 'invalid json'
 
-      const consoleErrorSpy = vi
-        .spyOn(console, 'error')
-        .mockImplementation(() => {})
+      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
 
       const { hasAnyRole } = useUserRole()
 

@@ -6,11 +6,7 @@
           {{ currentTitle }}
         </ion-title>
         <ion-buttons slot="end">
-          <ion-button
-            fill="clear"
-            :aria-label="$t('common.close')"
-            @click="dismiss"
-          >
+          <ion-button fill="clear" :aria-label="$t('common.close')" @click="dismiss">
             <ion-icon :icon="closeIcon" />
           </ion-button>
         </ion-buttons>
@@ -45,10 +41,7 @@
         </ion-text>
 
         <!-- Sections if available -->
-        <div
-          v-if="helpContent.sections && helpContent.sections.length"
-          class="ion-margin-top"
-        >
+        <div v-if="helpContent.sections && helpContent.sections.length" class="ion-margin-top">
           <div
             v-for="(section, index) in helpContent.sections"
             :key="`section-${index}`"
@@ -105,9 +98,7 @@ const helpIcon = helpCircleOutline
 const availableTopics = Object.values(HelpTopic)
 
 // Selected topic state
-const selectedTopic: Ref<string> = ref(
-  props.topic || HelpTopic.GETTING_STARTED
-)
+const selectedTopic: Ref<string> = ref(props.topic || HelpTopic.GETTING_STARTED)
 
 // Show navigation only if no specific topic or multiple available
 const showTopicNavigation: ComputedRef<boolean> = computed(() => {

@@ -16,8 +16,7 @@ export const freeVideoWithQueryParams: ContentPublic = {
   profile_tags: ['newbie'],
   category_tags: ['breeding'],
   url:
-    'https://player.vimeo.com/video/1076142559?badge=0&' +
-    'autopause=0&player_id=0&app_id=58479',
+    'https://player.vimeo.com/video/1076142559?badge=0&' + 'autopause=0&player_id=0&app_id=58479',
   active: true,
   expiry_days: 0,
   created_at: '2025-01-01T00:00:00Z',

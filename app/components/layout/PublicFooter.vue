@@ -8,11 +8,7 @@
       </ion-buttons>
 
       <ion-title size="small">
-        <a
-          href="https://www.mannainsect.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="https://www.mannainsect.com" target="_blank" rel="noopener noreferrer">
           {{ t('footer.poweredBy') }}
         </a>
       </ion-title>

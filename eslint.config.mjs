@@ -12,10 +12,7 @@ export default createConfigForNuxt({
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/explicit-function-return-type': 'off',
       // Temporary: Allow legacy unused vars (19 instances)
-      '@typescript-eslint/no-unused-vars': [
-        'warn',
-        { argsIgnorePattern: '^_' }
-      ],
+      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
       // Temporary: Allow legacy dynamic delete (11 instances)
       '@typescript-eslint/no-dynamic-delete': 'warn',
       // Temporary: Allow legacy unsafe function types
@@ -52,6 +49,7 @@ export default createConfigForNuxt({
       '**/ios/**',
       '**/android/**',
       '**/.output/**',
-      '**/coverage/**'
+      '**/coverage/**',
+      '**/.claude/**'
     ]
   })

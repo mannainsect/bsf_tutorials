@@ -47,9 +47,7 @@ export class AuthRepository extends BaseRepository {
   /**
    * Refresh access token
    */
-  async refreshToken(
-    refreshData: RefreshTokenRequest
-  ): Promise<RefreshTokenResponse> {
+  async refreshToken(refreshData: RefreshTokenRequest): Promise<RefreshTokenResponse> {
     return this.post<RefreshTokenResponse>('/auth/refresh', refreshData)
   }
 
@@ -66,10 +64,7 @@ export class AuthRepository extends BaseRepository {
   /**
    * Confirm password reset using new /auth/reset-password/confirm endpoint
    */
-  async confirmPasswordReset(
-    token: string,
-    newPassword: string
-  ): Promise<{ message: string }> {
+  async confirmPasswordReset(token: string, newPassword: string): Promise<{ message: string }> {
     const endpoints = useApiEndpoints()
     return this.post<{ message: string }>(endpoints.authResetPasswordConfirm, {
       token,

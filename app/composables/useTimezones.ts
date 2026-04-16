@@ -1,8 +1,5 @@
 import { computed } from 'vue'
-import {
-  TIMEZONE_IDENTIFIERS,
-  POPULAR_TIMEZONE_VALUES
-} from '~/utils/timezones'
+import { TIMEZONE_IDENTIFIERS, POPULAR_TIMEZONE_VALUES } from '~/utils/timezones'
 
 export interface Timezone {
   value: string
@@ -51,9 +48,9 @@ export const useTimezones = () => {
   }
 
   const getPopularTimezones = (): Timezone[] => {
-    return POPULAR_TIMEZONE_VALUES.map(value =>
-      getTimezoneByValue(value)
-    ).filter((tz): tz is Timezone => tz !== undefined)
+    return POPULAR_TIMEZONE_VALUES.map(value => getTimezoneByValue(value)).filter(
+      (tz): tz is Timezone => tz !== undefined
+    )
   }
 
   return {

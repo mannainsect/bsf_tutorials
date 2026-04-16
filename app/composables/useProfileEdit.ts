@@ -40,15 +40,12 @@ export const useProfileEdit = () => {
   // Form fields
   const { value: name, errorMessage: nameError } = useField<string>('name')
   const { value: city, errorMessage: cityError } = useField<string>('city')
-  const { value: country, errorMessage: countryError } =
-    useField<string>('country')
+  const { value: country, errorMessage: countryError } = useField<string>('country')
 
   // Computed values
   const isValid = computed(() => form.meta.value.valid)
   const isDirty = computed(() => form.meta.value.dirty)
-  const hasErrors = computed(
-    () => !form.meta.value.valid && form.meta.value.touched
-  )
+  const hasErrors = computed(() => !form.meta.value.valid && form.meta.value.touched)
 
   // Get all form errors
   const allErrors = computed(() => {
@@ -106,8 +103,7 @@ export const useProfileEdit = () => {
       const updateData: UpdateUserRequest = {}
       if (formData.name !== user.value.name) updateData.name = formData.name
       if (formData.city !== user.value.city) updateData.city = formData.city
-      if (formData.country !== user.value.country)
-        updateData.country = formData.country
+      if (formData.country !== user.value.country) updateData.country = formData.country
 
       // Only make API call if there are actual changes
       if (Object.keys(updateData).length === 0) {
@@ -132,8 +128,7 @@ export const useProfileEdit = () => {
       isEditing.value = false
     } catch (err: unknown) {
       console.error(t('errors.account.updateProfileLog'), err)
-      error.value =
-        err instanceof Error ? err.message : t('account.profile.updateError')
+      error.value = err instanceof Error ? err.message : t('account.profile.updateError')
 
       const toast = await useToast().create({
         message: error.value || t('common.error'),

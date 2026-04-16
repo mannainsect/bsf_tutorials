@@ -52,13 +52,7 @@ export default defineNuxtConfig({
       ]
     }
   },
-  modules: [
-    '@nuxtjs/ionic',
-    '@pinia/nuxt',
-    '@vite-pwa/nuxt',
-    '@vueuse/nuxt',
-    '@nuxtjs/i18n'
-  ],
+  modules: ['@nuxtjs/ionic', '@pinia/nuxt', '@vite-pwa/nuxt', '@vueuse/nuxt', '@nuxtjs/i18n'],
   ionic: {
     integrations: {
       icons: true,

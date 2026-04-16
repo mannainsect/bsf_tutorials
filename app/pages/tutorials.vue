@@ -56,11 +56,7 @@
                 <ion-label>
                   {{ t('tutorials.filters.level') }}
                 </ion-label>
-                <ion-select
-                  v-model="selectedLevels"
-                  multiple
-                  interface="popover"
-                >
+                <ion-select v-model="selectedLevels" multiple interface="popover">
                   <ion-select-option value="basic">
                     {{ t('video.level.basic') }}
                   </ion-select-option>
@@ -78,16 +74,8 @@
                 <ion-label>
                   {{ t('tutorials.filters.categoryTags') }}
                 </ion-label>
-                <ion-select
-                  v-model="selectedCategoryTags"
-                  multiple
-                  interface="popover"
-                >
-                  <ion-select-option
-                    v-for="tag in availableCategoryTags"
-                    :key="tag"
-                    :value="tag"
-                  >
+                <ion-select v-model="selectedCategoryTags" multiple interface="popover">
+                  <ion-select-option v-for="tag in availableCategoryTags" :key="tag" :value="tag">
                     {{ tag }}
                   </ion-select-option>
                 </ion-select>
@@ -98,16 +86,8 @@
                 <ion-label>
                   {{ t('tutorials.filters.profileTags') }}
                 </ion-label>
-                <ion-select
-                  v-model="selectedProfileTags"
-                  multiple
-                  interface="popover"
-                >
-                  <ion-select-option
-                    v-for="tag in availableProfileTags"
-                    :key="tag"
-                    :value="tag"
-                  >
+                <ion-select v-model="selectedProfileTags" multiple interface="popover">
+                  <ion-select-option v-for="tag in availableProfileTags" :key="tag" :value="tag">
                     {{ tag }}
                   </ion-select-option>
                 </ion-select>
@@ -166,10 +146,7 @@
       </ion-row>
 
       <!-- Empty State -->
-      <ion-row
-        v-if="filteredVideos.length === 0"
-        class="ion-justify-content-center"
-      >
+      <ion-row v-if="filteredVideos.length === 0" class="ion-justify-content-center">
         <ion-col size="12" size-md="8" size-lg="6">
           <ion-card>
             <ion-card-content class="ion-text-center">
@@ -186,13 +163,7 @@
 
       <!-- Videos Grid -->
       <ion-row v-else>
-        <ion-col
-          v-for="video in filteredVideos"
-          :key="video._id"
-          size="12"
-          size-md="6"
-          size-lg="4"
-        >
+        <ion-col v-for="video in filteredVideos" :key="video._id" size="12" size-md="6" size-lg="4">
           <VideoCard :video="video" />
         </ion-col>
       </ion-row>
@@ -202,11 +173,7 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import type {
-  ContentPublic,
-  CategoryTag,
-  ProfileTag
-} from '../../shared/types/api/content.types'
+import type { ContentPublic, CategoryTag, ProfileTag } from '../../shared/types/api/content.types'
 
 definePageMeta({
   layout: 'public'
@@ -240,9 +207,7 @@ const availableCategoryTags = computed(() => {
 
 const availableProfileTags = computed(() => {
   const tags = new Set<ProfileTag>()
-  videos.value.forEach((v: ContentPublic) =>
-    v.profile_tags.forEach((t: ProfileTag) => tags.add(t))
-  )
+  videos.value.forEach((v: ContentPublic) => v.profile_tags.forEach((t: ProfileTag) => tags.add(t)))
   return Array.from(tags).sort()
 })
 
@@ -259,9 +224,7 @@ const filteredVideos = computed(() => {
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase()
     filtered = filtered.filter(
-      v =>
-        v.title?.toLowerCase().includes(query) ||
-        v.description?.toLowerCase().includes(query)
+      v => v.title?.toLowerCase().includes(query) || v.description?.toLowerCase().includes(query)
     )
   }
 
@@ -273,18 +236,14 @@ const filteredVideos = computed(() => {
   // Category tags filter (OR logic)
   if (selectedCategoryTags.value.length > 0) {
     filtered = filtered.filter((v: ContentPublic) =>
-      v.category_tags.some((tag: CategoryTag) =>
-        selectedCategoryTags.value.includes(tag)
-      )
+      v.category_tags.some((tag: CategoryTag) => selectedCategoryTags.value.includes(tag))
     )
   }
 
   // Profile tags filter (OR logic)
   if (selectedProfileTags.value.length > 0) {
     filtered = filtered.filter((v: ContentPublic) =>
-      v.profile_tags.some((tag: ProfileTag) =>
-        selectedProfileTags.value.includes(tag)
-      )
+      v.profile_tags.some((tag: ProfileTag) => selectedProfileTags.value.includes(tag))
     )
   }
 

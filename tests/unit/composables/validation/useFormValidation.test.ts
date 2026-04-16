@@ -12,20 +12,14 @@ import {
 describe('useFormValidation', () => {
   describe('validationSchemas', () => {
     it('should validate email correctly', () => {
-      expect(
-        validationSchemas.email.safeParse('test@example.com').success
-      ).toBe(true)
+      expect(validationSchemas.email.safeParse('test@example.com').success).toBe(true)
       expect(validationSchemas.email.safeParse('invalid').success).toBe(false)
       expect(validationSchemas.email.safeParse('').success).toBe(false)
     })
 
     it('should validate password with min 8 chars', () => {
-      expect(validationSchemas.password.safeParse('12345678').success).toBe(
-        true
-      )
-      expect(validationSchemas.password.safeParse('1234567').success).toBe(
-        false
-      )
+      expect(validationSchemas.password.safeParse('12345678').success).toBe(true)
+      expect(validationSchemas.password.safeParse('1234567').success).toBe(false)
       const result = validationSchemas.password.safeParse('short')
       if (!result.success) {
         expect(result.error.issues[0].message).toContain('8 characters')
@@ -42,25 +36,15 @@ describe('useFormValidation', () => {
     })
 
     it('should validate phone number', () => {
-      expect(validationSchemas.phone.safeParse('+1234567890').success).toBe(
-        true
-      )
-      expect(validationSchemas.phone.safeParse('123-456-7890').success).toBe(
-        true
-      )
-      expect(validationSchemas.phone.safeParse('(123) 456-7890').success).toBe(
-        true
-      )
+      expect(validationSchemas.phone.safeParse('+1234567890').success).toBe(true)
+      expect(validationSchemas.phone.safeParse('123-456-7890').success).toBe(true)
+      expect(validationSchemas.phone.safeParse('(123) 456-7890').success).toBe(true)
       expect(validationSchemas.phone.safeParse('abc').success).toBe(false)
     })
 
     it('should validate URL', () => {
-      expect(
-        validationSchemas.url.safeParse('https://example.com').success
-      ).toBe(true)
-      expect(
-        validationSchemas.url.safeParse('http://example.com').success
-      ).toBe(true)
+      expect(validationSchemas.url.safeParse('https://example.com').success).toBe(true)
+      expect(validationSchemas.url.safeParse('http://example.com').success).toBe(true)
       expect(validationSchemas.url.safeParse('not-a-url').success).toBe(false)
     })
   })
@@ -129,9 +113,7 @@ describe('useFormValidation', () => {
 
       await form.validate()
       expect(form.errors.value.confirmPassword).toBeTruthy()
-      expect(form.errors.value.confirmPassword).toContain(
-        "Passwords don't match"
-      )
+      expect(form.errors.value.confirmPassword).toContain("Passwords don't match")
     })
 
     it('should require all mandatory fields', async () => {

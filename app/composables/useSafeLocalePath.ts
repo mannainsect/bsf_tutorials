@@ -51,10 +51,7 @@ export const useSafeLocalePath = () => {
   /**
    * Generate cache key for path resolution
    */
-  const getCacheKey = (
-    route: RouteInput,
-    locale?: LocalePathOptions
-  ): string => {
+  const getCacheKey = (route: RouteInput, locale?: LocalePathOptions): string => {
     const routeStr = typeof route === 'string' ? route : JSON.stringify(route)
     const localeStr = locale || currentLocale?.value || 'default'
     return `${localeStr}:${routeStr}`
@@ -63,10 +60,7 @@ export const useSafeLocalePath = () => {
   /**
    * Fallback path resolution when localePath is not available
    */
-  const fallbackPathResolver = (
-    route: RouteInput,
-    locale?: LocalePathOptions
-  ): string => {
+  const fallbackPathResolver = (route: RouteInput, locale?: LocalePathOptions): string => {
     // Handle string routes
     if (typeof route === 'string') {
       const targetLocale = locale || currentLocale?.value || 'en'
@@ -110,10 +104,7 @@ export const useSafeLocalePath = () => {
   /**
    * Main function to get localized path with fallback and caching
    */
-  const safeLocalePath = (
-    route: RouteInput,
-    locale?: LocalePathOptions
-  ): string => {
+  const safeLocalePath = (route: RouteInput, locale?: LocalePathOptions): string => {
     try {
       // Check cache first
       const cacheKey = getCacheKey(route, locale)

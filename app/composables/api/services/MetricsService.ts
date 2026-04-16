@@ -1,8 +1,5 @@
 import { MetricsRepository } from '../repositories/MetricsRepository'
-import type {
-  MetricData,
-  MetricsResponse
-} from '../../../../shared/types/models/metrics'
+import type { MetricData, MetricsResponse } from '../../../../shared/types/models/metrics'
 
 export class MetricsService {
   private metricsRepository: MetricsRepository

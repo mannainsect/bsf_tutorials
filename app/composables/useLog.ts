@@ -25,10 +25,7 @@ export const useLog = () => {
   /**
    * Get logs for the current company
    */
-  const getLogs = async (
-    startDate?: string,
-    endDate?: string
-  ): Promise<PopulatedLog[]> => {
+  const getLogs = async (startDate?: string, endDate?: string): Promise<PopulatedLog[]> => {
     loading.value = true
     error.value = ''
     requestErrors.value = []
@@ -135,8 +132,7 @@ export const useLog = () => {
       return response
     } catch (err: unknown) {
       const e = err as Error & { data?: { detail?: string } }
-      const errorMessage =
-        e.data?.detail || e.message || t('errors.fetchCreditLogs')
+      const errorMessage = e.data?.detail || e.message || t('errors.fetchCreditLogs')
       error.value = errorMessage
       requestErrors.value = [errorMessage]
       handleError(err, { source: 'useLog.getCreditLogs' })
@@ -157,12 +153,7 @@ export const useLog = () => {
     options?: { throwOnError?: boolean }
   ) => {
     try {
-      await logService.createContentLog(
-        contentId,
-        contentType,
-        action,
-        additionalData
-      )
+      await logService.createContentLog(contentId, contentType, action, additionalData)
     } catch (err: unknown) {
       if (options?.throwOnError) {
         throw err

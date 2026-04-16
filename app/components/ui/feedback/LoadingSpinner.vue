@@ -16,14 +16,7 @@
 
 <script setup lang="ts">
 interface Props {
-  name?:
-    | 'bubbles'
-    | 'circles'
-    | 'circular'
-    | 'crescent'
-    | 'dots'
-    | 'lines'
-    | 'lines-small'
+  name?: 'bubbles' | 'circles' | 'circular' | 'crescent' | 'dots' | 'lines' | 'lines-small'
   color?: string
   message?: string
   centered?: boolean

@@ -1,10 +1,6 @@
 import { useI18n } from 'vue-i18n'
 import type { FetchError } from 'ofetch'
-import type {
-  ErrorInput,
-  AppError as BaseAppError,
-  AppErrorDetails
-} from '../../../shared/types'
+import type { ErrorInput, AppError as BaseAppError, AppErrorDetails } from '../../../shared/types'
 
 // Extend the base AppError to ensure required fields for error handling
 interface AppError extends BaseAppError {
@@ -18,22 +14,12 @@ export function useErrorHandler() {
 
   // Type guard for FetchError
   const isFetchError = (error: unknown): error is FetchError => {
-    return (
-      error !== null &&
-      typeof error === 'object' &&
-      ('data' in error || 'statusCode' in error)
-    )
+    return error !== null && typeof error === 'object' && ('data' in error || 'statusCode' in error)
   }
 
   // Type guard for validation errors
-  const isValidationError = (
-    error: unknown
-  ): error is { issues?: unknown; errors?: unknown } => {
-    return (
-      error !== null &&
-      typeof error === 'object' &&
-      ('issues' in error || 'errors' in error)
-    )
+  const isValidationError = (error: unknown): error is { issues?: unknown; errors?: unknown } => {
+    return error !== null && typeof error === 'object' && ('issues' in error || 'errors' in error)
   }
 
   // Type guard for standard Error
@@ -97,11 +83,7 @@ export function useErrorHandler() {
       source?: string
     } = {}
   ) => {
-    const {
-      toast: showToast = true,
-      console: logToConsole = true,
-      source
-    } = options
+    const { toast: showToast = true, console: logToConsole = true, source } = options
     const normalizedError = normalizeError(error)
 
     // Log to console in development
