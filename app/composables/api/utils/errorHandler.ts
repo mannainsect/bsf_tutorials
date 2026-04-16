@@ -37,6 +37,7 @@ export function handleApiError(
   const formattedError = `Failed to ${context}: ${errorMessage}`
 
   if (logError) {
+    // eslint-disable-next-line no-console -- transport layer, no Vue context
     console.error(formattedError, error)
   }
 

@@ -88,6 +88,7 @@ export function useErrorHandler() {
 
     // Log to console in development
     if (logToConsole && import.meta.dev) {
+      // eslint-disable-next-line no-console -- dev diagnostic fallback
       console.error(
         `[${normalizedError.source.toUpperCase()}] Error${source ? ` in ${source}` : ''}:`,
         normalizedError
@@ -95,7 +96,7 @@ export function useErrorHandler() {
     }
 
     // Show user-friendly message
-    if (showToast) {
+    if (showToast && import.meta.client) {
       toast
         .create({
           message: normalizedError.message,

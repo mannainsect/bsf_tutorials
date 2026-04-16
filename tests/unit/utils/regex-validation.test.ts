@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { isValidRegex, createSafeRegex } from '../../../app/utils/helpers'
 
 describe('Regex Validation', () => {
@@ -20,16 +20,11 @@ describe('Regex Validation', () => {
     })
 
     it('detects ReDoS vulnerable patterns', () => {
-      const consoleSpy = vi.spyOn(console, 'warn')
-
       // Catastrophic backtracking patterns
       expect(isValidRegex('(a+)+')).toBe(false)
       expect(isValidRegex('(a*)+')).toBe(false)
       expect(isValidRegex('(.*+)+')).toBe(false)
       expect(isValidRegex('(\\w+{1,10})+')).toBe(false)
-
-      expect(consoleSpy).toHaveBeenCalled()
-      consoleSpy.mockRestore()
     })
 
     it('allows safe repetition patterns', () => {

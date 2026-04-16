@@ -1,4 +1,5 @@
 import type { User } from '../../shared/types'
+import { useErrorHandler } from './errors/useErrorHandler'
 
 /**
  * Composable for checking user roles and permissions
@@ -14,6 +15,7 @@ import type { User } from '../../shared/types'
  */
 export const useUserRole = () => {
   const authStore = useAuthStore()
+  const { handleSilentError } = useErrorHandler()
 
   /**
    * Get cached role data from localStorage (set by auth store)
@@ -36,7 +38,6 @@ export const useUserRole = () => {
     try {
       // Check if localStorage is available
       if (typeof window === 'undefined' || !window.localStorage) {
-        console.warn('[useUserRole] localStorage not available')
         return defaultRoleData
       }
 
@@ -61,11 +62,10 @@ export const useUserRole = () => {
         ) {
           return parsed
         } else {
-          console.warn('[useUserRole] Invalid role data structure')
           return defaultRoleData
         }
       } catch (parseError) {
-        console.error('[useUserRole] Failed to parse role data:', parseError)
+        handleSilentError(parseError, 'useUserRole.loadRole')
         // Clear invalid data
         try {
           storage.remove('auth_active_company_roles')
@@ -75,16 +75,7 @@ export const useUserRole = () => {
         return defaultRoleData
       }
     } catch (error) {
-      // Handle localStorage access errors (disabled, quota exceeded, etc.)
-      if (error instanceof Error) {
-        if (error.name === 'QuotaExceededError') {
-          console.error('[useUserRole] localStorage quota exceeded')
-        } else if (error.name === 'SecurityError') {
-          console.error('[useUserRole] localStorage access denied')
-        } else {
-          console.error('[useUserRole] localStorage error:', error.message)
-        }
-      }
+      handleSilentError(error, 'useUserRole.loadRole')
       return defaultRoleData
     }
   }

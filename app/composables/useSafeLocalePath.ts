@@ -1,6 +1,7 @@
 import { useI18n } from 'vue-i18n'
 import type { RouteLocationRaw } from 'vue-router'
 import type { Ref } from 'vue'
+import { useErrorHandler } from './errors/useErrorHandler'
 
 /**
  * Type definitions for route handling
@@ -36,6 +37,14 @@ const pathCache = new Map<string, string>()
  * ```
  */
 export const useSafeLocalePath = () => {
+  const silentError = (error: unknown, source: string) => {
+    try {
+      const { handleSilentError } = useErrorHandler()
+      handleSilentError(error, source)
+    } catch {
+      // useErrorHandler unavailable — silently ignore
+    }
+  }
   let localePath: ReturnType<typeof useLocalePath> | null = null
   let currentLocale: Ref<string> | null = null
 
@@ -45,7 +54,7 @@ export const useSafeLocalePath = () => {
     const { locale } = useI18n()
     currentLocale = locale
   } catch (error) {
-    console.warn('useLocalePath not available:', error)
+    silentError(error, 'useSafeLocalePath.init')
   }
 
   /**
@@ -92,7 +101,6 @@ export const useSafeLocalePath = () => {
       // If it has a name property, return as is
       // (named routes need proper i18n setup)
       if (routeObj.name && typeof routeObj.name === 'string') {
-        console.warn(`Named route "${routeObj.name}" requires i18n setup`)
         return routeObj.name
       }
     }
@@ -119,7 +127,7 @@ export const useSafeLocalePath = () => {
         try {
           resolvedPath = localePath(route, locale)
         } catch (error) {
-          console.warn('Failed to resolve path with localePath:', error)
+          silentError(error, 'useSafeLocalePath.resolve')
           resolvedPath = fallbackPathResolver(route, locale)
         }
       } else {
@@ -138,7 +146,7 @@ export const useSafeLocalePath = () => {
 
       return resolvedPath
     } catch (error) {
-      console.error('Failed to resolve localized path:', error)
+      silentError(error, 'useSafeLocalePath.resolve')
 
       // Ultimate fallback: return original path or root
       if (typeof route === 'string') {

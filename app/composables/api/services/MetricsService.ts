@@ -20,8 +20,6 @@ export class MetricsService {
 
       return await this.metricsRepository.sendMetric(data)
     } catch (error) {
-      // Log but don't throw for metrics - they should never break the app
-      console.error('MetricsService error:', error)
       return {
         success: false,
         message: error instanceof Error ? error.message : 'Unknown error'

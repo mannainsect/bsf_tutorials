@@ -29,8 +29,10 @@
 <script setup lang="ts">
 import { menuController } from '@ionic/vue'
 import { useI18n } from 'vue-i18n'
+import { useErrorHandler } from '~/composables/errors/useErrorHandler'
 
 const { t } = useI18n()
+const { handleSilentError } = useErrorHandler()
 const { menu, home } = useIcons()
 const localePath = useLocalePath()
 
@@ -46,9 +48,7 @@ const toggleMenu = async () => {
     }
 
     if (!menuController) {
-      if (import.meta.dev) {
-        console.warn('Menu controller not available')
-      }
+      handleSilentError(new Error('Menu controller not available'), 'PrivateFooter.toggleMenu')
       return
     }
 
@@ -61,9 +61,7 @@ const toggleMenu = async () => {
       }
     }
   } catch (error) {
-    if (import.meta.dev) {
-      console.warn('Menu toggle failed', error)
-    }
+    handleSilentError(error, 'PrivateFooter.toggleMenu')
   }
 }
 </script>

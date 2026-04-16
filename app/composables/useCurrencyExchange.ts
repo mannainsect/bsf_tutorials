@@ -1,3 +1,5 @@
+import { useErrorHandler } from './errors/useErrorHandler'
+
 interface ExchangeRateCache {
   [currency: string]: {
     rate: number
@@ -13,6 +15,7 @@ const API_TIMEOUT = 5000 // 5 seconds
 const pendingRequests = new Map<string, Promise<number | null>>()
 
 export const useCurrencyExchange = () => {
+  const { handleSilentError } = useErrorHandler()
   const config = useRuntimeConfig()
 
   const getUSDRate = async (currency: string): Promise<number | null> => {
@@ -84,8 +87,7 @@ export const useCurrencyExchange = () => {
 
       return null
     } catch (error) {
-      // Silent failure - return null
-      console.warn(`Currency conversion failed for ${currency}:`, error)
+      handleSilentError(error, 'useCurrencyExchange.convert')
       return null
     }
   }
@@ -113,6 +115,7 @@ export const useCurrencyExchange = () => {
   }
 
   const saveToCache = (currency: string, rate: number) => {
+    if (!import.meta.client) return
     try {
       const cacheStr = localStorage.getItem(CACHE_KEY)
       const cache: ExchangeRateCache = cacheStr ? JSON.parse(cacheStr) : {}
@@ -124,7 +127,7 @@ export const useCurrencyExchange = () => {
 
       localStorage.setItem(CACHE_KEY, JSON.stringify(cache))
     } catch (error) {
-      console.warn('Failed to save exchange rate to cache:', error)
+      handleSilentError(error, 'useCurrencyExchange.cacheRate')
     }
   }
 

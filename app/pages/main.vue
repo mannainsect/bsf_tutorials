@@ -79,6 +79,7 @@
 import { useI18n } from 'vue-i18n'
 import { debounce } from '../utils/helpers'
 import { useSafeLocalePath } from '~/composables/useSafeLocalePath'
+import { useErrorHandler } from '~/composables/errors/useErrorHandler'
 
 definePageMeta({
   middleware: 'auth'
@@ -89,6 +90,7 @@ const { error: errorIcon, person } = useIcons()
 const router = useRouter()
 const { t } = useI18n()
 const { localePath } = useSafeLocalePath()
+const { handleSilentError } = useErrorHandler()
 
 // Navigation state management
 const navigationLoading = ref(false)
@@ -126,7 +128,7 @@ const navigateToRoute = async (route: string) => {
     try {
       await router.push(localePath(route))
     } catch (err) {
-      console.error(t('errors.navigationErrorLog'), err)
+      handleSilentError(err, 'main.navigate')
       // Set error message for screen readers
       const fallbackMessage = err instanceof Error ? err.message : t('errors.navigationFailed')
       navigationError.value = `${t('common.error')}: ${fallbackMessage}`

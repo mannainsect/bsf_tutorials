@@ -42,3 +42,7 @@ export default createConfigForNuxt({
       '**/.claude/**'
     ]
   })
+  .append({
+    files: ['app/**/*.{ts,vue}'],
+    rules: { 'no-console': 'error' }
+  })

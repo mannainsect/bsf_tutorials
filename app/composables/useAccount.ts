@@ -4,9 +4,11 @@ import type { User, UpdateUserRequest, Credit } from '../../shared/types'
 import { UserRepository } from './api/repositories/UserRepository'
 import { CreditRepository } from './api/repositories/CreditRepository'
 import { AuthRepository } from './api/repositories/AuthRepository'
+import { useErrorHandler } from './errors/useErrorHandler'
 
 export const useAccount = () => {
   const { t } = useI18n()
+  const { handleError, handleSilentError } = useErrorHandler()
   // State
   const user = ref<User | null>(null)
   const creditHistory = ref<Credit[]>([])
@@ -35,7 +37,7 @@ export const useAccount = () => {
       user.value = authStore.user ? JSON.parse(JSON.stringify(authStore.user)) : null
     } catch (err: unknown) {
       error.value = err instanceof Error ? err.message : t('errors.account.loadProfileFailed')
-      console.error(t('errors.account.loadProfileLog'), err)
+      handleError(err, { source: 'useAccount.loadProfile' })
     } finally {
       isLoading.value = false
     }
@@ -58,7 +60,7 @@ export const useAccount = () => {
       return response
     } catch (err: unknown) {
       error.value = err instanceof Error ? err.message : t('errors.account.updateProfileFailed')
-      console.error(t('errors.account.updateProfileLog'), err)
+      handleError(err, { source: 'useAccount.updateProfile' })
       throw err
     } finally {
       isLoading.value = false
@@ -77,7 +79,7 @@ export const useAccount = () => {
       creditHistory.value = response.data || []
     } catch (err: unknown) {
       // Log the error but don't fail silently - credits should be available
-      console.error(t('errors.account.creditHistoryLog'), err)
+      handleSilentError(err, 'useAccount.loadCreditHistory')
       creditHistory.value = []
       // Don't throw error to prevent blocking the account page
     }
@@ -95,7 +97,7 @@ export const useAccount = () => {
       return response
     } catch (err: unknown) {
       error.value = err instanceof Error ? err.message : t('errors.account.sendResetFailed')
-      console.error(t('errors.account.sendResetLog'), err)
+      handleError(err, { source: 'useAccount.sendPasswordReset' })
       throw err
     } finally {
       isLoading.value = false
@@ -111,7 +113,7 @@ export const useAccount = () => {
       return response
     } catch (err: unknown) {
       error.value = err instanceof Error ? err.message : t('errors.account.resetPasswordFailed')
-      console.error(t('errors.account.resetPasswordLog'), err)
+      handleError(err, { source: 'useAccount.resetPassword' })
       throw err
     } finally {
       isLoading.value = false

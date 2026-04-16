@@ -5,6 +5,7 @@
 
 import { LogType } from '../../../shared/types/models/log'
 import { useLog } from '../useLog'
+import { useErrorHandler } from '../errors/useErrorHandler'
 
 /**
  * Example: Logging user activities
@@ -65,6 +66,7 @@ export const useActivityLogger = () => {
  */
 export const useProcessLogger = () => {
   const { postLog } = useLog()
+  const { handleError } = useErrorHandler()
 
   /**
    * Log a task completion
@@ -88,7 +90,7 @@ export const useProcessLogger = () => {
       // Task logged successfully
       return response
     } catch (error) {
-      console.error('Failed to log task:', error)
+      handleError(error, { source: 'useLogExample.logTask' })
       throw error
     }
   }

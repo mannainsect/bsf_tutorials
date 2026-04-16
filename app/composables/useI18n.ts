@@ -1,6 +1,8 @@
 import { useI18n } from 'vue-i18n'
+import { useErrorHandler } from './errors/useErrorHandler'
 
 export const useAppI18n = () => {
+  const { handleSilentError } = useErrorHandler()
   const { $i18n } = useNuxtApp()
   const i18n = useI18n()
   const localePath = useLocalePath()
@@ -27,7 +29,7 @@ export const useAppI18n = () => {
         replace: true
       })
     } catch (error) {
-      console.warn('Failed to switch language:', error)
+      handleSilentError(error, 'useI18n.switchLanguage')
       // Fallback to setting locale without navigation
       await i18n.setLocale(locale as 'en' | 'es' | 'fr' | 'de' | 'pt')
     }

@@ -38,10 +38,11 @@ export const useCompanyInitialization = () => {
     try {
       const response = await companyRepository.createCompanyWithSpaces(companyData)
 
-      if (import.meta.dev) {
-        if (response.failed_space_types?.length) {
-          console.warn('[CompanyInit] Some spaces failed to create:', response.failed_space_types)
-        }
+      if (response.failed_space_types?.length) {
+        handleSilentError(
+          new Error('Some spaces failed to create: ' + JSON.stringify(response.failed_space_types)),
+          'useCompanyInitialization.initialize'
+        )
       }
 
       return response

@@ -59,10 +59,7 @@ export class LogService {
     logType: string,
     content: Record<string, unknown>
   ): Promise<CreateLogResponse> {
-    // Validate log type
-    if (!this.isValidLogType(logType)) {
-      console.warn(`Non-standard log type used: ${logType}`)
-    }
+    // Validate log type (non-standard types are allowed)
 
     const log = this.createLogEntry(logType, content)
     return this.logRepository.createProcessLog(log, { space_id: spaceId })

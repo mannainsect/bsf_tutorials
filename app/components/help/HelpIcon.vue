@@ -18,6 +18,7 @@ import { useI18n } from 'vue-i18n'
 import type { HelpTopic } from '../../../shared/types/help'
 import { useHelp } from '~/composables/useHelp'
 import { useIcons } from '~/composables/useIcons'
+import { useErrorHandler } from '~/composables/errors/useErrorHandler'
 
 interface Props {
   /**
@@ -59,6 +60,7 @@ const props = withDefaults(defineProps<Props>(), {
 const { t } = useI18n()
 const { showHelp } = useHelp()
 const { helpCircleOutline } = useIcons()
+const { handleSilentError } = useErrorHandler()
 
 const translate = (key: string, fallback: string, params?: Record<string, unknown>): string => {
   const translated = params ? t(key, params) : t(key)
@@ -111,10 +113,9 @@ const handleClick = async (event: Event) => {
   event.stopPropagation()
 
   try {
-    console.log(`[HelpIcon] Showing help for topic: ${props.topic ?? ''}`)
     await showHelp(props.topic)
   } catch (error) {
-    console.error('[HelpIcon] Failed to show help:', error)
+    handleSilentError(error, 'HelpIcon.showHelp')
   }
 }
 </script>

@@ -1,6 +1,8 @@
 import { API_TIMEOUT } from '~/utils/constants'
+import { useErrorHandler } from './errors/useErrorHandler'
 
 export const useApi = () => {
+  const { handleSilentError } = useErrorHandler()
   const config = useRuntimeConfig()
 
   const api = $fetch.create({
@@ -42,8 +44,7 @@ export const useApi = () => {
       }
     },
     onRequestError({ error }) {
-      // Handle network errors like ECONNRESET
-      console.error('Network error:', error)
+      handleSilentError(error, 'useApi.request')
       throw createError({
         statusCode: 500,
         statusMessage: 'Network connection error. Please check your internet connection.'

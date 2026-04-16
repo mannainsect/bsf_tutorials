@@ -79,6 +79,7 @@ import { useI18n } from 'vue-i18n'
 import type { HelpContent } from '../../../shared/types/help'
 import { HelpTopic, isValidHelpTopic } from '../../../shared/types/help'
 import { useIcons } from '~/composables/useIcons'
+import { useErrorHandler } from '~/composables/errors/useErrorHandler'
 
 interface Props {
   topic?: HelpTopic | null
@@ -90,6 +91,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const { t } = useI18n()
 const { close, helpCircleOutline } = useIcons()
+const { handleSilentError } = useErrorHandler()
 
 const closeIcon = close
 const helpIcon = helpCircleOutline
@@ -139,7 +141,7 @@ const helpContent: ComputedRef<HelpContent | null> = computed(() => {
   const currentTopic = props.topic || selectedTopic.value
 
   if (!isValidHelpTopic(currentTopic)) {
-    console.warn(`[HelpModal] Invalid topic: ${currentTopic}`)
+    handleSilentError(new Error('Invalid topic: ' + currentTopic), 'HelpModal.loadContent')
     return null
   }
 
@@ -204,7 +206,7 @@ const dismiss = async () => {
   try {
     await modalController.dismiss()
   } catch (error) {
-    console.error('[HelpModal] Error dismissing:', error)
+    handleSilentError(error, 'HelpModal.dismiss')
   }
 }
 
@@ -212,8 +214,6 @@ const dismiss = async () => {
 const scrollToTopic = () => {
   if (props.topic) {
     selectedTopic.value = props.topic
-    // Could implement actual scrolling here if needed
-    console.log(`[HelpModal] Scrolled to topic: ${props.topic}`)
   }
 }
 

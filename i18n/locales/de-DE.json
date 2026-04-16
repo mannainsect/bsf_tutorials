@@ -236,6 +236,8 @@
   },
   "errors": {
     "generic": "Etwas ist schief gelaufen",
+    "api": { "generic": "Serverfehler aufgetreten" },
+    "validation": { "generic": "Bitte beheben Sie die Formularfehler unten" },
     "networkError": "Netzwerkfehler. Bitte überprüfen Sie Ihre Verbindung.",
     "unauthorized": "Nicht autorisierter Zugriff",
     "forbidden": "Sie haben keine Berechtigung, auf diese Ressource zuzugreifen",

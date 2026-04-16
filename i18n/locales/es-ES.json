@@ -237,6 +237,8 @@
   },
   "errors": {
     "generic": "Algo salió mal",
+    "api": { "generic": "Se produjo un error en el servidor" },
+    "validation": { "generic": "Por favor corrija los errores del formulario" },
     "networkError": "Error de red. Por favor verifica tu conexión.",
     "unauthorized": "Acceso no autorizado",
     "forbidden": "No tienes permiso para acceder a este recurso",
