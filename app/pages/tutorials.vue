@@ -180,7 +180,7 @@ definePageMeta({
 })
 
 const { t } = useI18n()
-const { api } = useApi()
+const { loadPublic } = useContent()
 
 // State
 const videos = ref<ContentPublic[]>([])
@@ -275,8 +275,7 @@ const loadVideos = async () => {
   loading.value = true
   error.value = false
   try {
-    const data = await api<ContentPublic[]>('/products/content/public')
-    // Filter only videos with URLs
+    const data = await loadPublic()
     videos.value = data.filter(v => v.url !== null)
   } catch {
     error.value = true

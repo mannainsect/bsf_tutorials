@@ -152,7 +152,7 @@ const { t } = useI18n()
 const localePath = useLocalePath()
 const icons = useIcons()
 const authStore = useAuthStore()
-const { api } = useApi()
+const { loadPublic, pickRandomFreeVideo } = useContent()
 
 // Featured video state
 const featuredVideo = ref<ContentPublic | null>(null)
@@ -216,13 +216,8 @@ const swiperConfig = computed<SwiperConfig>(() => {
 // Fetch featured video on mount
 onMounted(async () => {
   try {
-    const videos = await api<ContentPublic[]>('/products/content/public')
-    // Filter for free videos with URLs
-    const freeVideos = videos.filter(v => v.url !== null && v.level === 'basic' && v.credits === 0)
-    if (freeVideos.length > 0) {
-      const idx = Math.floor(Math.random() * freeVideos.length)
-      featuredVideo.value = freeVideos[idx] ?? null
-    }
+    const videos = await loadPublic()
+    featuredVideo.value = pickRandomFreeVideo(videos)
   } catch {
     // Silently fail - no featured video will be shown
   } finally {

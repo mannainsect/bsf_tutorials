@@ -96,9 +96,14 @@ export class AuthService {
     return response
   }
 
-  /**
-   * Check if user is authenticated
-   */
+  async sendRegisterToken(email: string) {
+    return this.authRepository.sendRegisterToken(email)
+  }
+
+  async resetUserPassword(newPassword: string) {
+    return this.authRepository.resetUserPassword(newPassword)
+  }
+
   get isAuthenticated() {
     return this.authStore.isAuthenticated
   }

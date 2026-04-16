@@ -472,6 +472,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { ref, onMounted, computed } from 'vue'
+import { AuthService } from '../composables/api/services/AuthService'
 // Use icons from the centralized useIcons composable
 const { alertCircle, create, warning, wallet } = useIcons()
 
@@ -586,16 +587,10 @@ const updatePassword = async () => {
   try {
     passwordLoading.value = true
 
-    // Use the API client directly for the new password reset endpoint
-    const { api } = useApi()
-    const endpoints = useApiEndpoints()
-
-    await api(endpoints.usersResetPassword, {
-      method: 'POST',
-      body: {
-        new_password: passwordForm.value.newPassword
-      }
-    })
+    const authService = new AuthService()
+    await authService.resetUserPassword(
+      passwordForm.value.newPassword
+    )
 
     const successToast = await useToast().create({
       message: t('account.password.updateSuccess'),
