@@ -2,7 +2,7 @@ import { API_TIMEOUT } from '~/utils/constants'
 import { useErrorHandler } from './errors/useErrorHandler'
 
 export const useApi = () => {
-  const { handleError } = useErrorHandler()
+  const { handleSilentError } = useErrorHandler()
   const config = useRuntimeConfig()
 
   const api = $fetch.create({
@@ -44,7 +44,7 @@ export const useApi = () => {
       }
     },
     onRequestError({ error }) {
-      handleError(error, { source: 'useApi.request' })
+      handleSilentError(error, 'useApi.request')
       throw createError({
         statusCode: 500,
         statusMessage: 'Network connection error. Please check your internet connection.'

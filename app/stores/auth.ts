@@ -203,10 +203,7 @@ export const useAuthStore = defineStore('auth', () => {
         // Handle localStorage errors (quota exceeded, disabled, etc.)
         if (error instanceof Error) {
           if (error.name === 'QuotaExceededError') {
-            handleSilentError(
-              new Error('localStorage quota exceeded'),
-              'authStore.persistRoleData'
-            )
+            handleSilentError(error, 'authStore.persistRoleData')
             try {
               const storage = useStorage()
               // Clear old data to make room
@@ -218,8 +215,8 @@ export const useAuthStore = defineStore('auth', () => {
                 operators: []
               })
               storage.set('auth_active_company_roles', minimalData)
-            } catch {
-              // Unable to store role data
+            } catch (retryError) {
+              handleSilentError(retryError, 'authStore.persistRoleData')
             }
           } else {
             handleSilentError(error, 'authStore.persistRoleData')
@@ -270,10 +267,7 @@ export const useAuthStore = defineStore('auth', () => {
           const firstCompanyId = firstCompany ? firstCompany._id || firstCompany.id : null
 
           if (!firstCompanyId) {
-            handleSilentError(
-              new Error('First company has no valid ID'),
-              'authStore.fetchProfile'
-            )
+            handleSilentError(new Error('First company has no valid ID'), 'authStore.fetchProfile')
             // Fallback: set company locally without API update
             setProfileState(profile)
           } else {

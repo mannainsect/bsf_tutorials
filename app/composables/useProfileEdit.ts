@@ -16,7 +16,7 @@ export const useProfileEdit = () => {
   const { user, refreshProfile } = useProfile()
   const { t } = useI18n()
   const userService = new UserService()
-  const { handleError } = useErrorHandler()
+  const { handleSilentError } = useErrorHandler()
 
   const profileEditSchema = z.object({
     name: z.string().min(1, t('validation.profile.nameRequired')),
@@ -129,7 +129,7 @@ export const useProfileEdit = () => {
 
       isEditing.value = false
     } catch (err: unknown) {
-      handleError(err, { source: 'useProfileEdit.updateProfile' })
+      handleSilentError(err, 'useProfileEdit.updateProfile')
       error.value = err instanceof Error ? err.message : t('account.profile.updateError')
 
       const toast = await useToast().create({

@@ -14,7 +14,7 @@ export const useCompanyEdit = () => {
   const { isCompanyAdmin, isCompanyManager } = useUserRole()
   const companyRepository = new CompanyRepository()
   const toast = useToast()
-  const { handleError } = useErrorHandler()
+  const { handleSilentError } = useErrorHandler()
 
   const companyEditSchema = createCompanyEditSchema(t)
 
@@ -154,7 +154,7 @@ export const useCompanyEdit = () => {
 
       isEditing.value = false
     } catch (err: unknown) {
-      handleError(err, { source: 'useCompanyEdit.updateCompany' })
+      handleSilentError(err, 'useCompanyEdit.updateCompany')
       error.value = err instanceof Error ? err.message : t('account.company.updateError')
 
       await toast.showError(error.value || t('common.error'))

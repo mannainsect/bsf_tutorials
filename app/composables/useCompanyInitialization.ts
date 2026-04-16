@@ -40,10 +40,7 @@ export const useCompanyInitialization = () => {
 
       if (response.failed_space_types?.length) {
         handleSilentError(
-          new Error(
-            'Some spaces failed to create: '
-              + JSON.stringify(response.failed_space_types)
-          ),
+          new Error('Some spaces failed to create: ' + JSON.stringify(response.failed_space_types)),
           'useCompanyInitialization.initialize'
         )
       }

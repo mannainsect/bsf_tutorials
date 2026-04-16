@@ -61,8 +61,7 @@ export const useHelp = () => {
    */
   const saveScrollPosition = (): void => {
     try {
-      savedScrollPosition = window.pageYOffset
-        || document.documentElement.scrollTop
+      savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop
     } catch (error) {
       handleSilentError(error, 'useHelp.saveScrollPosition')
     }
@@ -78,9 +77,7 @@ export const useHelp = () => {
         savedScrollPosition = 0
       }
     } catch (error) {
-      handleSilentError(
-        error, 'useHelp.restoreScrollPosition'
-      )
+      handleSilentError(error, 'useHelp.restoreScrollPosition')
     }
   }
 
@@ -154,9 +151,7 @@ export const useHelp = () => {
           showBackdrop: true,
           animated: true
         })
-      } catch (createError) {
-        handleSilentError(createError, 'useHelp.showHelp')
-        // Attempt recovery
+      } catch {
         currentModal = null
         isModalOpen.value = false
         throw new Error(
@@ -191,7 +186,6 @@ export const useHelp = () => {
 
       // Present with error handling
       await currentModal.present()
-
     } catch (error) {
       handleSilentError(error, 'useHelp.showHelp')
       currentModal = null

@@ -141,10 +141,7 @@ const helpContent: ComputedRef<HelpContent | null> = computed(() => {
   const currentTopic = props.topic || selectedTopic.value
 
   if (!isValidHelpTopic(currentTopic)) {
-    handleSilentError(
-      new Error('Invalid topic: ' + currentTopic),
-      'HelpModal.loadContent'
-    )
+    handleSilentError(new Error('Invalid topic: ' + currentTopic), 'HelpModal.loadContent')
     return null
   }
 

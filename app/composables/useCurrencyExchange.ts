@@ -115,6 +115,7 @@ export const useCurrencyExchange = () => {
   }
 
   const saveToCache = (currency: string, rate: number) => {
+    if (!import.meta.client) return
     try {
       const cacheStr = localStorage.getItem(CACHE_KEY)
       const cache: ExchangeRateCache = cacheStr ? JSON.parse(cacheStr) : {}

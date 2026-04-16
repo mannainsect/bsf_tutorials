@@ -2,9 +2,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { flushPromises } from '../../../setup/test-setup'
 
 const presentSpy = vi.fn()
-const createSpy = vi.fn(
-  () => Promise.resolve({ present: presentSpy })
-)
+const createSpy = vi.fn(() => Promise.resolve({ present: presentSpy }))
 
 // Override global useToast before composable import
 global.useToast = () => ({ create: createSpy })
@@ -12,17 +10,14 @@ global.useToast = () => ({ create: createSpy })
 // eslint-disable-next-line import/first -- must follow useToast override
 import { useErrorHandler } from '~/composables/errors/useErrorHandler'
 
-// NOTE: import.meta.dev is statically replaced to false by Vitest at
-// transform time. Tests that verify console.error logging in dev mode
-// require `define: { 'import.meta.dev': true }` in vitest.config.mjs.
-// Those tests are marked .skip until the config is updated.
+// NOTE: import.meta.dev is statically replaced by Vitest via
+// `define: { 'import.meta.dev': true }` in vitest.config.mjs.
 
 describe('useErrorHandler', () => {
   let consoleSpy: ReturnType<typeof vi.spyOn>
 
   beforeEach(() => {
-    consoleSpy = vi.spyOn(console, 'error')
-      .mockImplementation(() => {})
+    consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
     createSpy.mockClear()
     presentSpy.mockClear()
   })
@@ -140,24 +135,34 @@ describe('useErrorHandler', () => {
       expect(createSpy).not.toHaveBeenCalled()
     })
 
-    // Requires import.meta.dev=true in vitest config define
-    it(
-      'logs to console in dev mode with source',
-      () => {
+    it('does not create toast on server (non-client)', async () => {
+      const originalSSR = import.meta.env.SSR
+      import.meta.env.SSR = true
+
+      try {
         const { handleError } = useErrorHandler()
+        handleError(new Error('ssr error'))
+        await flushPromises()
 
-        handleError(new Error('oops'), {
-          console: true,
-          source: 'TestModule'
-        })
-
-        expect(consoleSpy).toHaveBeenCalled()
-        const msg = consoleSpy.mock.calls[0][0] as string
-        expect(msg).toMatch(
-          /^\[SYSTEM\] Error in TestModule:/
-        )
+        expect(createSpy).not.toHaveBeenCalled()
+      } finally {
+        import.meta.env.SSR = originalSSR
       }
-    )
+    })
+
+    // Requires import.meta.dev=true in vitest config define
+    it('logs to console in dev mode with source', () => {
+      const { handleError } = useErrorHandler()
+
+      handleError(new Error('oops'), {
+        console: true,
+        source: 'TestModule'
+      })
+
+      expect(consoleSpy).toHaveBeenCalled()
+      const msg = consoleSpy.mock.calls[0][0] as string
+      expect(msg).toMatch(/^\[SYSTEM\] Error in TestModule:/)
+    })
 
     it('does not log to console when console option is false', () => {
       const { handleError } = useErrorHandler()
@@ -168,21 +173,18 @@ describe('useErrorHandler', () => {
     })
 
     // Requires import.meta.dev=true in vitest config define
-    it(
-      'omits "in" from console message when no source',
-      () => {
-        const { handleError } = useErrorHandler()
+    it('omits "in" from console message when no source', () => {
+      const { handleError } = useErrorHandler()
 
-        handleError(new Error('no source'), {
-          console: true
-        })
+      handleError(new Error('no source'), {
+        console: true
+      })
 
-        expect(consoleSpy).toHaveBeenCalled()
-        const msg = consoleSpy.mock.calls[0][0] as string
-        expect(msg).toMatch(/^\[SYSTEM\] Error:/)
-        expect(msg).not.toContain(' in ')
-      }
-    )
+      expect(consoleSpy).toHaveBeenCalled()
+      const msg = consoleSpy.mock.calls[0][0] as string
+      expect(msg).toMatch(/^\[SYSTEM\] Error:/)
+      expect(msg).not.toContain(' in ')
+    })
 
     it('returns normalized error matching shape', () => {
       const { handleError, normalizeError } = useErrorHandler()
@@ -217,22 +219,19 @@ describe('useErrorHandler', () => {
     })
 
     // Requires import.meta.dev=true in vitest config define
-    it(
-      'logs with API call as default source',
-      () => {
-        const { handleApiError } = useErrorHandler()
-        const fetchError = {
-          data: { message: 'Err' },
-          statusCode: 500
-        }
-
-        handleApiError(fetchError as never)
-
-        expect(consoleSpy).toHaveBeenCalled()
-        const msg = consoleSpy.mock.calls[0][0] as string
-        expect(msg).toContain('API call')
+    it('logs with API call as default source', () => {
+      const { handleApiError } = useErrorHandler()
+      const fetchError = {
+        data: { message: 'Err' },
+        statusCode: 500
       }
-    )
+
+      handleApiError(fetchError as never)
+
+      expect(consoleSpy).toHaveBeenCalled()
+      const msg = consoleSpy.mock.calls[0][0] as string
+      expect(msg).toContain('API call')
+    })
   })
 
   describe('handleValidationError', () => {
@@ -249,20 +248,17 @@ describe('useErrorHandler', () => {
     })
 
     // Requires import.meta.dev=true in vitest config define
-    it(
-      'logs with Form validation as default source',
-      () => {
-        const { handleValidationError } = useErrorHandler()
+    it('logs with Form validation as default source', () => {
+      const { handleValidationError } = useErrorHandler()
 
-        handleValidationError({
-          issues: [{ msg: 'required' }]
-        })
+      handleValidationError({
+        issues: [{ msg: 'required' }]
+      })
 
-        expect(consoleSpy).toHaveBeenCalled()
-        const msg = consoleSpy.mock.calls[0][0] as string
-        expect(msg).toContain('Form validation')
-      }
-    )
+      expect(consoleSpy).toHaveBeenCalled()
+      const msg = consoleSpy.mock.calls[0][0] as string
+      expect(msg).toContain('Form validation')
+    })
   })
 
   describe('handleSilentError', () => {
@@ -277,18 +273,15 @@ describe('useErrorHandler', () => {
     })
 
     // Requires import.meta.dev=true in vitest config define
-    it(
-      'logs without default source label',
-      () => {
-        const { handleSilentError } = useErrorHandler()
+    it('logs without default source label', () => {
+      const { handleSilentError } = useErrorHandler()
 
-        handleSilentError(new Error('quiet'))
+      handleSilentError(new Error('quiet'))
 
-        expect(consoleSpy).toHaveBeenCalled()
-        const msg = consoleSpy.mock.calls[0][0] as string
-        expect(msg).toMatch(/^\[SYSTEM\] Error:/)
-        expect(msg).not.toContain(' in ')
-      }
-    )
+      expect(consoleSpy).toHaveBeenCalled()
+      const msg = consoleSpy.mock.calls[0][0] as string
+      expect(msg).toMatch(/^\[SYSTEM\] Error:/)
+      expect(msg).not.toContain(' in ')
+    })
   })
 })

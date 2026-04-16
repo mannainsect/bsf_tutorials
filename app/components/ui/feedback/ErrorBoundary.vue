@@ -97,8 +97,9 @@ const handleRetry = () => {
   emit('retry')
 }
 
+const localePath = useLocalePath()
 const goHome = () => {
-  navigateTo('/')
+  navigateTo(localePath('/'))
 }
 
 // Allow programmatic error triggering

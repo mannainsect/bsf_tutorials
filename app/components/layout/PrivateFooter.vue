@@ -48,10 +48,7 @@ const toggleMenu = async () => {
     }
 
     if (!menuController) {
-      handleSilentError(
-        new Error('Menu controller not available'),
-        'PrivateFooter.toggleMenu'
-      )
+      handleSilentError(new Error('Menu controller not available'), 'PrivateFooter.toggleMenu')
       return
     }
 

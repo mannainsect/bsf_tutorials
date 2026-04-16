@@ -38,10 +38,6 @@ export const useUserRole = () => {
     try {
       // Check if localStorage is available
       if (typeof window === 'undefined' || !window.localStorage) {
-        handleSilentError(
-          new Error('localStorage not available'),
-          'useUserRole.loadRole'
-        )
         return defaultRoleData
       }
 
@@ -79,7 +75,7 @@ export const useUserRole = () => {
         return defaultRoleData
       }
     } catch (error) {
-      handleSilentError(error, 'useUserRole.saveRole')
+      handleSilentError(error, 'useUserRole.loadRole')
       return defaultRoleData
     }
   }

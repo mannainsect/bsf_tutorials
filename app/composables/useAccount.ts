@@ -8,7 +8,7 @@ import { useErrorHandler } from './errors/useErrorHandler'
 
 export const useAccount = () => {
   const { t } = useI18n()
-  const { handleError } = useErrorHandler()
+  const { handleError, handleSilentError } = useErrorHandler()
   // State
   const user = ref<User | null>(null)
   const creditHistory = ref<Credit[]>([])
@@ -79,7 +79,7 @@ export const useAccount = () => {
       creditHistory.value = response.data || []
     } catch (err: unknown) {
       // Log the error but don't fail silently - credits should be available
-      handleError(err, { source: 'useAccount.loadCreditHistory' })
+      handleSilentError(err, 'useAccount.loadCreditHistory')
       creditHistory.value = []
       // Don't throw error to prevent blocking the account page
     }

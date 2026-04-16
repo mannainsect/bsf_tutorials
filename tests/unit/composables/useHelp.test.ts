@@ -67,9 +67,7 @@ describe('useHelp', () => {
     mockPerformanceNow.mockReturnValue(100)
 
     // Reset modal mock
-    mockModal.onDidDismiss.mockReturnValue(
-      Promise.resolve({ data: undefined, role: undefined })
-    )
+    mockModal.onDidDismiss.mockReturnValue(Promise.resolve({ data: undefined, role: undefined }))
 
     // Mock window properties
     Object.defineProperty(window, 'pageYOffset', {
@@ -221,9 +219,7 @@ describe('useHelp', () => {
 
       mockModal.present.mockRejectedValueOnce(new Error('Present failed'))
 
-      await expect(showHelp(HelpTopic.GETTING_STARTED)).rejects.toThrow(
-        'Present failed'
-      )
+      await expect(showHelp(HelpTopic.GETTING_STARTED)).rejects.toThrow('Present failed')
     })
   })
 
@@ -333,7 +329,6 @@ describe('useHelp', () => {
 
       // Simulate modal dismiss
       dismissCallback({ data: undefined, role: 'backdrop' })
-
     })
 
     it('should restore scroll position on dismiss', async () => {

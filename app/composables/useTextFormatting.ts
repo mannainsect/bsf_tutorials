@@ -62,9 +62,7 @@ export const useTextFormatting = () => {
 
       return cleanHtml
     } catch (error) {
-      handleSilentError(
-        error, 'useTextFormatting.formatMarkdown'
-      )
+      handleSilentError(error, 'useTextFormatting.formatMarkdown')
       // Fallback to plain text
       return DOMPurify.sanitize(text)
     }
