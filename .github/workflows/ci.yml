@@ -49,7 +49,7 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - run: npx vitest run --no-coverage
+      - run: npx vitest run --coverage
         timeout-minutes: 10
 
   typecheck:

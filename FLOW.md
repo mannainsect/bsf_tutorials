@@ -194,9 +194,9 @@ guidance, data access rules, and Nuxt client/server rules.
 ### Testing Requirements
 
 - **Test Framework**: Vitest (unit), Playwright (e2e)
-- **Coverage Target**: Not enforced globally; aim for meaningful
-  coverage on composables, stores, repositories, and utils.
-  Critical user flows covered by Playwright e2e.
+- **Coverage Target**: Enforced globally via vitest.config.mjs
+  thresholds (lines 25%, branches 78%, functions 72%,
+  statements 25%). CI fails if coverage drops below baseline.
 - **Test Location**: `tests/` directory
   - Unit: `tests/unit/` (mirrors `app/` structure)
   - E2E: `tests/e2e/`
@@ -246,7 +246,7 @@ Agents do NOT duplicate this locally.
   - Lint: `npm run lint -- --max-warnings=0`
   - Format: `npm run format:check`
   - Typecheck: `npm run typecheck`
-  - Tests: `npx vitest run --no-coverage`
+  - Tests: `npx vitest run --coverage`
 - **CI workflow file**: `.github/workflows/ci.yml`
 - **Required CI checks**: `lint`, `format`, `typecheck`, `test`
 - **Note**: Playwright e2e tests do NOT run in CI; they are
