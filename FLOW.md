@@ -245,9 +245,10 @@ Agents do NOT duplicate this locally.
 - **CI commands**:
   - Lint: `npm run lint -- --max-warnings 153`
   - Format: `npm run format:check`
+  - Typecheck: `npm run typecheck`
   - Tests: `npx vitest run --no-coverage`
 - **CI workflow file**: `.github/workflows/ci.yml`
-- **Required CI checks**: `lint`, `format`, `test`
+- **Required CI checks**: `lint`, `format`, `typecheck`, `test`
 - **Note**: Playwright e2e tests do NOT run in CI; they are
   manual/local only.
 
@@ -421,7 +422,7 @@ When sub-agents need guidance:
 
 - **Platform**: GitHub Actions
 - **Workflow**: `.github/workflows/ci.yml`
-- **Required Checks**: lint, format, vitest unit tests
+- **Required Checks**: lint, format, typecheck, test (Vitest unit tests)
 - **Enforcement**: Pre-commit hooks via Husky; all checks must
   pass before merge
 - **Deploy**: Netlify (`netlify.toml`); build command
