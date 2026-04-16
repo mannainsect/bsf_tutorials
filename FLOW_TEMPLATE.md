@@ -697,7 +697,12 @@ When creating or updating GitHub issues, use this structure:
     - Who to ask + preferred channel
     - Clarification etiquette and response SLA
 
-**Optional Section (if backend involved):** 18. **🔌 Backend Integration**: API endpoints, data models, auth
+**Optional Section (if backend involved):**
+
+18. **🔌 Backend Integration**
+    - API endpoints
+    - data models
+    - auth
 
 **Quality Requirements:**
 

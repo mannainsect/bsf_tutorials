@@ -55,7 +55,11 @@
 
         <!-- Credits Badge -->
         <ion-badge :color="video.credits === 0 ? 'success' : 'primary'" class="credits-badge">
-          {{ video.credits === 0 ? t('video.free.badge') : `${video.credits} credits` }}
+          {{
+            video.credits === 0
+              ? t('video.free.badge')
+              : `${video.credits} ${t('tutorials.sort.credits')}`
+          }}
         </ion-badge>
       </div>
 
