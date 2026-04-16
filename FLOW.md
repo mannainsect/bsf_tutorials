@@ -422,7 +422,7 @@ When sub-agents need guidance:
 
 - **Platform**: GitHub Actions
 - **Workflow**: `.github/workflows/ci.yml`
-- **Required Checks**: lint, format, typecheck, vitest unit tests
+- **Required Checks**: lint, format, typecheck, test (Vitest unit tests)
 - **Enforcement**: Pre-commit hooks via Husky; all checks must
   pass before merge
 - **Deploy**: Netlify (`netlify.toml`); build command
