@@ -174,7 +174,7 @@ describe('AuthService', () => {
       mockVerifyEmail.mockResolvedValue(response)
       const mockStorage = { set: vi.fn(), get: vi.fn() }
       const origUseStorage = global.useStorage
-      global.useStorage = vi.fn(() => mockStorage) as any
+      global.useStorage = vi.fn(() => mockStorage) as unknown as typeof global.useStorage
 
       const result = await service.verifyEmail('email-token')
 

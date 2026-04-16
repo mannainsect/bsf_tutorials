@@ -17,6 +17,7 @@ vi.mock('~/composables/api/repositories/ContentRepository', () => ({
   }))
 }))
 
+// eslint-disable-next-line import/first
 import { useContent } from '../../../app/composables/useContent'
 
 describe('useContent', () => {
