@@ -27,9 +27,7 @@
       <!-- Basic User Details -->
       <ion-card>
         <ion-card-header>
-          <ion-card-title>{{
-            $t('account.profile.basicDetails')
-          }}</ion-card-title>
+          <ion-card-title>{{ $t('account.profile.basicDetails') }}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <div v-if="!isEditing">
@@ -55,10 +53,7 @@
               <ion-label>
                 <h3>{{ $t('account.profile.country') }}</h3>
                 <p>
-                  {{
-                    getCountryName(profileData?.country || '') ||
-                    $t('common.notSet')
-                  }}
+                  {{ getCountryName(profileData?.country || '') || $t('common.notSet') }}
                 </p>
               </ion-label>
             </ion-item>
@@ -105,9 +100,7 @@
             </ion-item>
 
             <ion-item lines="none" :class="{ 'ion-invalid': nameError }">
-              <ion-label position="stacked">
-                {{ $t('account.profile.name') }} *
-              </ion-label>
+              <ion-label position="stacked"> {{ $t('account.profile.name') }} * </ion-label>
               <ion-input
                 v-model="name"
                 :placeholder="$t('account.profile.namePlaceholder')"
@@ -122,10 +115,7 @@
               <ion-label position="stacked">
                 {{ $t('account.profile.city') }}
               </ion-label>
-              <ion-input
-                v-model="city"
-                :placeholder="$t('account.profile.cityPlaceholder')"
-              />
+              <ion-input v-model="city" :placeholder="$t('account.profile.cityPlaceholder')" />
             </ion-item>
 
             <ion-item lines="none">
@@ -156,11 +146,7 @@
                 :disabled="!isValid || isSubmitting"
                 color="primary"
               >
-                <ion-spinner
-                  v-if="isSubmitting"
-                  slot="start"
-                  name="crescent"
-                />
+                <ion-spinner v-if="isSubmitting" slot="start" name="crescent" />
                 {{ $t('common.save') }}
               </ion-button>
               <ion-button
@@ -224,10 +210,7 @@
               <ion-label>
                 <h3>{{ $t('account.company.country') }}</h3>
                 <p>
-                  {{
-                    getCountryName(activeCompany.country || '') ||
-                    $t('account.company.notSet')
-                  }}
+                  {{ getCountryName(activeCompany.country || '') || $t('account.company.notSet') }}
                 </p>
               </ion-label>
             </ion-item>
@@ -249,9 +232,7 @@
               <ion-label>
                 <h3>{{ $t('account.company.businessId') }}</h3>
                 <p>
-                  {{
-                    activeCompany.business_id || $t('account.company.notSet')
-                  }}
+                  {{ activeCompany.business_id || $t('account.company.notSet') }}
                 </p>
               </ion-label>
             </ion-item>
@@ -300,13 +281,8 @@
               </ion-item>
             </div>
 
-            <ion-item
-              lines="none"
-              :class="{ 'ion-invalid': companyNameError }"
-            >
-              <ion-label position="stacked">
-                {{ $t('account.company.name') }} *
-              </ion-label>
+            <ion-item lines="none" :class="{ 'ion-invalid': companyNameError }">
+              <ion-label position="stacked"> {{ $t('account.company.name') }} * </ion-label>
               <ion-input
                 v-model="companyName"
                 :placeholder="$t('account.company.namePlaceholder')"
@@ -393,11 +369,7 @@
                 :disabled="!isCompanyValid || isCompanySubmitting"
                 color="primary"
               >
-                <ion-spinner
-                  v-if="isCompanySubmitting"
-                  slot="start"
-                  name="crescent"
-                />
+                <ion-spinner v-if="isCompanySubmitting" slot="start" name="crescent" />
                 {{ $t('common.save') }}
               </ion-button>
               <ion-button
@@ -485,11 +457,7 @@
                   :disabled="passwordLoading || !isPasswordValid"
                   size="large"
                 >
-                  <ion-spinner
-                    v-if="passwordLoading"
-                    slot="start"
-                    name="crescent"
-                  />
+                  <ion-spinner v-if="passwordLoading" slot="start" name="crescent" />
                   {{ $t('account.password.updateButton') }}
                 </ion-button>
               </div>
@@ -502,6 +470,7 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import { ref, onMounted, computed } from 'vue'
 // Use icons from the centralized useIcons composable
 const { alertCircle, create, warning, wallet } = useIcons()

@@ -34,8 +34,7 @@ vi.mock('vee-validate', () => ({
           Object.assign(mockFormValues, opts.values)
           Object.keys(opts.values).forEach(key => {
             if (mockFieldRefs[key]) {
-              ;(mockFieldRefs[key] as { value: unknown }).value =
-                opts.values[key]
+              ;(mockFieldRefs[key] as { value: unknown }).value = opts.values[key]
             }
           })
         }
@@ -56,10 +55,7 @@ vi.mock('vee-validate', () => ({
       mockFieldRefs[name] = fieldRef
 
       // Watch for changes to the ref and update form values
-      const originalSetter = Object.getOwnPropertyDescriptor(
-        fieldRef,
-        'value'
-      )?.set
+      const originalSetter = Object.getOwnPropertyDescriptor(fieldRef, 'value')?.set
       Object.defineProperty(fieldRef, 'value', {
         get() {
           return mockFormValues[name] ?? ''

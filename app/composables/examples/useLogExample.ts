@@ -15,10 +15,7 @@ export const useActivityLogger = () => {
   /**
    * Log page views
    */
-  const logPageView = async (
-    pageName: string,
-    metadata?: Record<string, unknown>
-  ) => {
+  const logPageView = async (pageName: string, metadata?: Record<string, unknown>) => {
     await logUserAction('page_view', pageName, {
       ...metadata,
       timestamp: new Date().toISOString()
@@ -127,8 +124,7 @@ export const useProcessLogger = () => {
  * Example: Viewing logs with filters
  */
 export const useLogViewer = () => {
-  const { getLogs, setLogFilters, clearLogFilters, logs, loading, error } =
-    useLog()
+  const { getLogs, setLogFilters, clearLogFilters, logs, loading, error } = useLog()
 
   /**
    * Get logs for today

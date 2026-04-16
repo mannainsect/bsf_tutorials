@@ -1,8 +1,4 @@
-import type {
-  User,
-  UpdateUserRequest,
-  UpdateUserResponse
-} from '../models/User'
+import type { User, UpdateUserRequest, UpdateUserResponse } from '../models/User'
 import type { PaginatedResponse } from './common.types'
 
 // User API endpoint types

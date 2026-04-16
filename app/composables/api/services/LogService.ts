@@ -159,8 +159,6 @@ export class LogService {
    */
   isValidLogType(logType: string): boolean {
     const validTypes = Object.values(LogType)
-    return (
-      validTypes.includes(logType as LogType) || logType.startsWith('custom_')
-    )
+    return validTypes.includes(logType as LogType) || logType.startsWith('custom_')
   }
 }

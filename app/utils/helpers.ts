@@ -38,10 +38,7 @@ export const sortBy = <T>(
 }
 
 // Object utilities
-export const pick = <T extends object, K extends keyof T>(
-  obj: T,
-  keys: K[]
-): Pick<T, K> => {
+export const pick = <T extends object, K extends keyof T>(obj: T, keys: K[]): Pick<T, K> => {
   const result = {} as Pick<T, K>
   keys.forEach(key => {
     if (key in obj) {
@@ -51,10 +48,7 @@ export const pick = <T extends object, K extends keyof T>(
   return result
 }
 
-export const omit = <T extends object, K extends keyof T>(
-  obj: T,
-  keys: K[]
-): Omit<T, K> => {
+export const omit = <T extends object, K extends keyof T>(obj: T, keys: K[]): Omit<T, K> => {
   const result = { ...obj }
   keys.forEach(key => {
     // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
@@ -105,11 +99,7 @@ export const delay = (ms: number): Promise<void> => {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-export const retry = async <T>(
-  fn: () => Promise<T>,
-  retries = 3,
-  delayMs = 1000
-): Promise<T> => {
+export const retry = async <T>(fn: () => Promise<T>, retries = 3, delayMs = 1000): Promise<T> => {
   try {
     return await fn()
   } catch (error) {
@@ -137,8 +127,7 @@ export const buildUrl = (
 
 // Random utilities
 export const generateId = (length = 8): string => {
-  const chars =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
   let result = ''
   for (let i = 0; i < length; i++) {
     result += chars.charAt(Math.floor(Math.random() * chars.length))
@@ -173,10 +162,7 @@ export const isValidRegex = (pattern: string): boolean => {
   }
 }
 
-export const createSafeRegex = (
-  pattern: string,
-  flags = ''
-): RegExp | null => {
+export const createSafeRegex = (pattern: string, flags = ''): RegExp | null => {
   try {
     // Check for ReDoS patterns (catastrophic backtracking)
     // Only check for truly dangerous nested quantifiers

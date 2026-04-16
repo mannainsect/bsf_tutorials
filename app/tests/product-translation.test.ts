@@ -38,10 +38,7 @@ describe('Product Detail Translation', () => {
       count: 11, // Over the limit of 10
       resetTime: Date.now() + 3600000 // 1 hour from now
     }
-    localStorage.setItem(
-      'user_translation_limit',
-      JSON.stringify(rateLimitEntry)
-    )
+    localStorage.setItem('user_translation_limit', JSON.stringify(rateLimitEntry))
 
     // Try to translate
     try {

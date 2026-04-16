@@ -21,8 +21,7 @@ export interface Log {
 /**
  * Log with populated relations (returned from GET endpoints)
  */
-export interface PopulatedLog
-  extends Omit<Log, 'user' | 'company' | 'space' | 'device'> {
+export interface PopulatedLog extends Omit<Log, 'user' | 'company' | 'space' | 'device'> {
   user?:
     | {
         _id: string

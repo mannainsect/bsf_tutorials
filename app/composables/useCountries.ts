@@ -1,3 +1,4 @@
+import { useI18n } from 'vue-i18n'
 import { computed } from 'vue'
 import type { Country } from '~/utils/countries'
 import { COUNTRIES_DATA, POPULAR_COUNTRY_CODES } from '~/utils/countries'
@@ -8,11 +9,9 @@ export const useCountries = () => {
   const { t, locale } = useI18n()
 
   const localizedCountries = computed<Country[]>(() => {
-    const rawLocale =
-      typeof locale.value === 'string' ? locale.value.trim() : ''
+    const rawLocale = typeof locale.value === 'string' ? locale.value.trim() : ''
     const normalizedLocale = rawLocale.replace(/_/g, '-')
-    const candidateLocale =
-      normalizedLocale.length > 0 ? normalizedLocale : 'en-US'
+    const candidateLocale = normalizedLocale.length > 0 ? normalizedLocale : 'en-US'
 
     let displayNames: Intl.DisplayNames | null = null
     for (const localeCode of [candidateLocale, 'en-US']) {

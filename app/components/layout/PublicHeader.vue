@@ -4,12 +4,7 @@
       <ion-title class="title-left">{{ t('home.title') }}</ion-title>
 
       <ion-buttons slot="end">
-        <HelpIcon
-          v-if="currentTopic"
-          :topic="currentTopic"
-          size="large"
-          color="primary"
-        />
+        <HelpIcon v-if="currentTopic" :topic="currentTopic" size="large" color="primary" />
         <UiBaseLanguageSwitcher />
       </ion-buttons>
     </ion-toolbar>
@@ -17,6 +12,7 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import HelpIcon from '~/components/help/HelpIcon.vue'
 import { useHelpTopic } from '~/composables/useHelpTopic'
 

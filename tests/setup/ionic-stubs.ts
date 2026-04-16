@@ -19,14 +19,7 @@ export const ionicStubs = {
       ':maxlength="maxlength" ' +
       ':disabled="disabled" ' +
       ':rows="rows"></textarea>',
-    props: [
-      'modelValue',
-      'placeholder',
-      'disabled',
-      'maxlength',
-      'rows',
-      'autoGrow'
-    ],
+    props: ['modelValue', 'placeholder', 'disabled', 'maxlength', 'rows', 'autoGrow'],
     emits: ['update:modelValue', 'keydown']
   },
   'ion-input': {

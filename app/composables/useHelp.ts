@@ -1,3 +1,4 @@
+import { useI18n } from 'vue-i18n'
 import { modalController } from '@ionic/vue'
 import type { Ref } from 'vue'
 import { ref, onUnmounted, getCurrentInstance } from 'vue'
@@ -20,11 +21,7 @@ let previousActiveElement: HTMLElement | null = null
 export const useHelp = () => {
   const { t } = useI18n()
 
-  const translate = (
-    key: string,
-    fallback: string,
-    params?: Record<string, unknown>
-  ): string => {
+  const translate = (key: string, fallback: string, params?: Record<string, unknown>): string => {
     const translated = params ? t(key, params) : t(key)
     return translated === key ? fallback : translated
   }
@@ -32,10 +29,7 @@ export const useHelp = () => {
   // Fallback content for missing topics
   const getFallbackContent = () => ({
     title: translate('help.fallback.title', 'Help'),
-    content: translate(
-      'help.fallback.content',
-      'Help content is not available for this topic.'
-    ),
+    content: translate('help.fallback.content', 'Help content is not available for this topic.'),
     sections: []
   })
 
@@ -68,8 +62,7 @@ export const useHelp = () => {
    */
   const saveScrollPosition = (): void => {
     try {
-      savedScrollPosition =
-        window.pageYOffset || document.documentElement.scrollTop
+      savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop
       console.debug('[useHelp] Saved scroll position:', savedScrollPosition)
     } catch (error) {
       console.warn('[useHelp] Failed to save scroll position:', error)
@@ -83,10 +76,7 @@ export const useHelp = () => {
     try {
       if (savedScrollPosition > 0) {
         window.scrollTo(0, savedScrollPosition)
-        console.debug(
-          '[useHelp] Restored scroll position:',
-          savedScrollPosition
-        )
+        console.debug('[useHelp] Restored scroll position:', savedScrollPosition)
         savedScrollPosition = 0
       }
     } catch (error) {
@@ -100,10 +90,7 @@ export const useHelp = () => {
   const saveFocus = (): void => {
     try {
       previousActiveElement = document.activeElement as HTMLElement
-      console.debug(
-        '[useHelp] Saved focus element:',
-        previousActiveElement?.tagName ?? ''
-      )
+      console.debug('[useHelp] Saved focus element:', previousActiveElement?.tagName ?? '')
     } catch (error) {
       console.warn('[useHelp] Failed to save focus:', error)
     }
@@ -116,10 +103,7 @@ export const useHelp = () => {
     try {
       if (previousActiveElement && previousActiveElement.focus) {
         previousActiveElement.focus()
-        console.debug(
-          '[useHelp] Restored focus to:',
-          previousActiveElement.tagName
-        )
+        console.debug('[useHelp] Restored focus to:', previousActiveElement.tagName)
         previousActiveElement = null
       }
     } catch (error) {
@@ -230,10 +214,7 @@ export const useHelp = () => {
 
       // Performance warning
       if (loadTime > 200) {
-        console.warn(
-          '[useHelp] Modal took longer than 200ms to open:',
-          `${formattedLoadTime}ms`
-        )
+        console.warn('[useHelp] Modal took longer than 200ms to open:', `${formattedLoadTime}ms`)
       }
     } catch (error) {
       console.error('[useHelp] Error showing help modal:', error)

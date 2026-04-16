@@ -78,20 +78,14 @@ export const useCompanyInitialization = () => {
         // Company created successfully
 
         if (response.failed_space_types?.length) {
-          console.warn(
-            '[CompanyInit] Some spaces failed to create:',
-            response.failed_space_types
-          )
+          console.warn('[CompanyInit] Some spaces failed to create:', response.failed_space_types)
         }
       }
 
       return response
     } catch (error) {
       // Use the error handler for consistent error handling
-      const normalizedError = handleApiError(
-        error as Error,
-        'CompanyInit: Create company'
-      )
+      const normalizedError = handleApiError(error as Error, 'CompanyInit: Create company')
       throw normalizedError
     }
   }
@@ -132,10 +126,7 @@ export const useCompanyInitialization = () => {
       } catch (error) {
         lastError = error as Error
         // Use silent error handler for retry attempts
-        handleSilentError(
-          error as Error,
-          `CompanyInit: Attempt ${attempts} failed`
-        )
+        handleSilentError(error as Error, `CompanyInit: Attempt ${attempts} failed`)
 
         if (attempts < maxRetries) {
           // Exponential backoff: 1s, 2s, 4s

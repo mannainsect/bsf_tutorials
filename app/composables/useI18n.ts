@@ -1,3 +1,5 @@
+import { useI18n } from 'vue-i18n'
+
 export const useAppI18n = () => {
   const { $i18n } = useNuxtApp()
   const i18n = useI18n()
@@ -21,12 +23,9 @@ export const useAppI18n = () => {
 
   const switchLanguage = async (locale: string) => {
     try {
-      await navigateTo(
-        localePath(route.path, locale as 'en' | 'es' | 'fr' | 'de' | 'pt'),
-        {
-          replace: true
-        }
-      )
+      await navigateTo(localePath(route.path, locale as 'en' | 'es' | 'fr' | 'de' | 'pt'), {
+        replace: true
+      })
     } catch (error) {
       console.warn('Failed to switch language:', error)
       // Fallback to setting locale without navigation
@@ -35,10 +34,7 @@ export const useAppI18n = () => {
   }
 
   const getLocalizedRoute = (route: string, locale?: string) => {
-    return localePath(
-      route,
-      locale as 'en' | 'es' | 'fr' | 'de' | 'pt' | undefined
-    )
+    return localePath(route, locale as 'en' | 'es' | 'fr' | 'de' | 'pt' | undefined)
   }
 
   return {

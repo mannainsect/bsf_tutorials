@@ -112,12 +112,7 @@ describe('companySchemas', () => {
     })
 
     it('should validate IANA timezone strings', () => {
-      const validTimezones = [
-        'Europe/Helsinki',
-        'America/New_York',
-        'Asia/Tokyo',
-        'UTC'
-      ]
+      const validTimezones = ['Europe/Helsinki', 'America/New_York', 'Asia/Tokyo', 'UTC']
       validTimezones.forEach(timezone => {
         const company = { timezone }
         const result = companyEditSchema.safeParse(company)

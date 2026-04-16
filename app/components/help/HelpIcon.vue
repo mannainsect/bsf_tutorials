@@ -60,11 +60,7 @@ const { t } = useI18n()
 const { showHelp } = useHelp()
 const { helpCircleOutline } = useIcons()
 
-const translate = (
-  key: string,
-  fallback: string,
-  params?: Record<string, unknown>
-): string => {
+const translate = (key: string, fallback: string, params?: Record<string, unknown>): string => {
   const translated = params ? t(key, params) : t(key)
   return translated === key ? fallback : translated
 }
@@ -90,9 +86,7 @@ const ariaLabel: ComputedRef<string> = computed(() => {
 
   // Try to get specific help label for the topic
   const topicPath = props.topic
-  const specificLabel = topicPath
-    ? translate(`help.topics.${topicPath}.ariaLabel`, '')
-    : ''
+  const specificLabel = topicPath ? translate(`help.topics.${topicPath}.ariaLabel`, '') : ''
 
   if (specificLabel) {
     return specificLabel
@@ -103,11 +97,9 @@ const ariaLabel: ComputedRef<string> = computed(() => {
     ? translate(`help.topics.${topicPath}.title`, formatTopic(topicPath))
     : translate('help.button.genericTopic', 'topic')
 
-  return translate(
-    'help.button.ariaLabel',
-    `Get help for ${fallbackTopicTitle}`,
-    { topic: fallbackTopicTitle }
-  )
+  return translate('help.button.ariaLabel', `Get help for ${fallbackTopicTitle}`, {
+    topic: fallbackTopicTitle
+  })
 })
 
 /**

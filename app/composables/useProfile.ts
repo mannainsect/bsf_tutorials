@@ -1,3 +1,4 @@
+import { useI18n } from 'vue-i18n'
 import { ProfileRepository } from './api/repositories/ProfileRepository'
 
 export const useProfile = () => {

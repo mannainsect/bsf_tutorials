@@ -28,11 +28,9 @@ export const useHelpTopic = () => {
     // Also check locale-suffixed route names (e.g., market___es)
     const cleanRouteName = routeName.replace(/___[a-z]{2,3}(-[A-Z]{2})?$/, '')
 
-    if (cleanPath === '/' || cleanRouteName === 'index')
-      return HelpTopic.GETTING_STARTED
+    if (cleanPath === '/' || cleanRouteName === 'index') return HelpTopic.GETTING_STARTED
 
-    if (cleanPath === '/main' || cleanRouteName === 'main')
-      return HelpTopic.GETTING_STARTED
+    if (cleanPath === '/main' || cleanRouteName === 'main') return HelpTopic.GETTING_STARTED
 
     if (cleanPath === '/account' || cleanPath.startsWith('/account?'))
       return HelpTopic.PROFILE_SETTINGS

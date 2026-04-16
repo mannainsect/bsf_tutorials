@@ -14,15 +14,9 @@ export class LogRepository extends BaseRepository {
   /**
    * Get logs for a company with optional filters
    */
-  async getCompanyLogs(
-    companyId: string,
-    params?: GetLogsParams
-  ): Promise<PopulatedLog[]> {
+  async getCompanyLogs(companyId: string, params?: GetLogsParams): Promise<PopulatedLog[]> {
     const endpoints = useApiEndpoints()
-    const query: Record<
-      string,
-      string | number | boolean | string[] | number[]
-    > = {}
+    const query: Record<string, string | number | boolean | string[] | number[]> = {}
 
     if (params?.start_datetime) query.start_datetime = params.start_datetime
     if (params?.end_datetime) query.end_datetime = params.end_datetime
@@ -31,10 +25,7 @@ export class LogRepository extends BaseRepository {
     if (params?.deviceId) query.device_id = params.deviceId
     if (params?.log_type) query.log_type = params.log_type
 
-    return this.get<PopulatedLog[]>(
-      `${endpoints.logsCompany}/${companyId}`,
-      query
-    )
+    return this.get<PopulatedLog[]>(`${endpoints.logsCompany}/${companyId}`, query)
   }
 
   /**
@@ -58,10 +49,7 @@ export class LogRepository extends BaseRepository {
     params?: CreateContentLogParams
   ): Promise<CreateLogResponse> {
     const endpoints = useApiEndpoints()
-    const query: Record<
-      string,
-      string | number | boolean | string[] | number[]
-    > = {}
+    const query: Record<string, string | number | boolean | string[] | number[]> = {}
 
     if (params?.content_id) query.content_id = params.content_id
     if (params?.content_type) query.content_type = params.content_type
@@ -82,9 +70,7 @@ export class LogRepository extends BaseRepository {
    */
   async getCreditLogs(userId: string): Promise<GetCreditLogsResponse> {
     const endpoints = useApiEndpoints()
-    return this.get<GetCreditLogsResponse>(
-      `${endpoints.logsCredits}/${userId}`
-    )
+    return this.get<GetCreditLogsResponse>(`${endpoints.logsCredits}/${userId}`)
   }
 
   /**
@@ -96,10 +82,9 @@ export class LogRepository extends BaseRepository {
     endDate?: string
   ): Promise<PopulatedLog[]> {
     const endpoints = useApiEndpoints()
-    const query: Record<
-      string,
-      string | number | boolean | string[] | number[]
-    > = { device_id: deviceId }
+    const query: Record<string, string | number | boolean | string[] | number[]> = {
+      device_id: deviceId
+    }
 
     if (startDate) query.start_datetime = startDate
     if (endDate) query.end_datetime = endDate

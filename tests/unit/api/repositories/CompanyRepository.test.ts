@@ -47,18 +47,14 @@ describe('CompanyRepository', () => {
         business_id: 'BIZ123'
       }
 
-      vi.spyOn(
-        repository as unknown as { put: () => unknown },
-        'put'
-      ).mockResolvedValue(mockResponse)
+      vi.spyOn(repository as unknown as { put: () => unknown }, 'put').mockResolvedValue(
+        mockResponse
+      )
 
       const result = await repository.updateCompany(companyId, updateData)
 
       expect(result).toEqual(mockResponse)
-      expect(repository.put).toHaveBeenCalledWith(
-        `/api/v1/companies/${companyId}`,
-        updateData
-      )
+      expect(repository.put).toHaveBeenCalledWith(`/api/v1/companies/${companyId}`, updateData)
     })
 
     it('should update only name field', async () => {
@@ -75,18 +71,14 @@ describe('CompanyRepository', () => {
         city: 'Old City'
       }
 
-      vi.spyOn(
-        repository as unknown as { put: () => unknown },
-        'put'
-      ).mockResolvedValue(mockResponse)
+      vi.spyOn(repository as unknown as { put: () => unknown }, 'put').mockResolvedValue(
+        mockResponse
+      )
 
       const result = await repository.updateCompany(companyId, updateData)
 
       expect(result.name).toBe('New Company Name')
-      expect(repository.put).toHaveBeenCalledWith(
-        `/api/v1/companies/${companyId}`,
-        updateData
-      )
+      expect(repository.put).toHaveBeenCalledWith(`/api/v1/companies/${companyId}`, updateData)
     })
 
     it('should update multiple fields', async () => {
@@ -106,10 +98,9 @@ describe('CompanyRepository', () => {
         ...updateData
       }
 
-      vi.spyOn(
-        repository as unknown as { put: () => unknown },
-        'put'
-      ).mockResolvedValue(mockResponse)
+      vi.spyOn(repository as unknown as { put: () => unknown }, 'put').mockResolvedValue(
+        mockResponse
+      )
 
       const result = await repository.updateCompany(companyId, updateData)
 
@@ -127,14 +118,11 @@ describe('CompanyRepository', () => {
         data: { message: 'Unauthorized' }
       }
 
-      vi.spyOn(
-        repository as unknown as { put: () => unknown },
-        'put'
-      ).mockRejectedValue(error)
+      vi.spyOn(repository as unknown as { put: () => unknown }, 'put').mockRejectedValue(error)
 
-      await expect(
-        repository.updateCompany('company-123', { name: 'Test' })
-      ).rejects.toMatchObject(error)
+      await expect(repository.updateCompany('company-123', { name: 'Test' })).rejects.toMatchObject(
+        error
+      )
     })
 
     it('should handle 403 forbidden error', async () => {
@@ -143,14 +131,11 @@ describe('CompanyRepository', () => {
         data: { message: 'Permission denied' }
       }
 
-      vi.spyOn(
-        repository as unknown as { put: () => unknown },
-        'put'
-      ).mockRejectedValue(error)
+      vi.spyOn(repository as unknown as { put: () => unknown }, 'put').mockRejectedValue(error)
 
-      await expect(
-        repository.updateCompany('company-123', { name: 'Test' })
-      ).rejects.toMatchObject(error)
+      await expect(repository.updateCompany('company-123', { name: 'Test' })).rejects.toMatchObject(
+        error
+      )
     })
 
     it('should handle 404 not found error', async () => {
@@ -159,14 +144,11 @@ describe('CompanyRepository', () => {
         data: { message: 'Company not found' }
       }
 
-      vi.spyOn(
-        repository as unknown as { put: () => unknown },
-        'put'
-      ).mockRejectedValue(error)
+      vi.spyOn(repository as unknown as { put: () => unknown }, 'put').mockRejectedValue(error)
 
-      await expect(
-        repository.updateCompany('company-123', { name: 'Test' })
-      ).rejects.toMatchObject(error)
+      await expect(repository.updateCompany('company-123', { name: 'Test' })).rejects.toMatchObject(
+        error
+      )
     })
 
     it('should handle 500 server error', async () => {
@@ -175,27 +157,21 @@ describe('CompanyRepository', () => {
         data: { message: 'Internal server error' }
       }
 
-      vi.spyOn(
-        repository as unknown as { put: () => unknown },
-        'put'
-      ).mockRejectedValue(error)
+      vi.spyOn(repository as unknown as { put: () => unknown }, 'put').mockRejectedValue(error)
 
-      await expect(
-        repository.updateCompany('company-123', { name: 'Test' })
-      ).rejects.toMatchObject(error)
+      await expect(repository.updateCompany('company-123', { name: 'Test' })).rejects.toMatchObject(
+        error
+      )
     })
 
     it('should handle network errors', async () => {
       const error = new Error('Network connection failed')
 
-      vi.spyOn(
-        repository as unknown as { put: () => unknown },
-        'put'
-      ).mockRejectedValue(error)
+      vi.spyOn(repository as unknown as { put: () => unknown }, 'put').mockRejectedValue(error)
 
-      await expect(
-        repository.updateCompany('company-123', { name: 'Test' })
-      ).rejects.toThrow('Network connection failed')
+      await expect(repository.updateCompany('company-123', { name: 'Test' })).rejects.toThrow(
+        'Network connection failed'
+      )
     })
 
     it('should handle empty update data', async () => {
@@ -208,18 +184,14 @@ describe('CompanyRepository', () => {
         name: 'Unchanged Company'
       }
 
-      vi.spyOn(
-        repository as unknown as { put: () => unknown },
-        'put'
-      ).mockResolvedValue(mockResponse)
+      vi.spyOn(repository as unknown as { put: () => unknown }, 'put').mockResolvedValue(
+        mockResponse
+      )
 
       const result = await repository.updateCompany(companyId, updateData)
 
       expect(result).toEqual(mockResponse)
-      expect(repository.put).toHaveBeenCalledWith(
-        `/api/v1/companies/${companyId}`,
-        {}
-      )
+      expect(repository.put).toHaveBeenCalledWith(`/api/v1/companies/${companyId}`, {})
     })
 
     it('should map MongoDB _id to id in response', async () => {
@@ -233,10 +205,9 @@ describe('CompanyRepository', () => {
         name: 'MongoDB Company'
       }
 
-      vi.spyOn(
-        repository as unknown as { put: () => unknown },
-        'put'
-      ).mockResolvedValue(mockResponse)
+      vi.spyOn(repository as unknown as { put: () => unknown }, 'put').mockResolvedValue(
+        mockResponse
+      )
 
       const result = await repository.updateCompany(companyId, updateData)
 

@@ -20,11 +20,7 @@ export function handleApiError(
   context: string,
   options: ErrorHandlerOptions = {}
 ): string {
-  const {
-    defaultMessage = `Error ${context}`,
-    logError = true,
-    throwError = false
-  } = options
+  const { defaultMessage = `Error ${context}`, logError = true, throwError = false } = options
 
   let errorMessage: string
 

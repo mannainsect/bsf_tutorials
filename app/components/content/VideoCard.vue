@@ -54,26 +54,18 @@
         </ion-chip>
 
         <!-- Credits Badge -->
-        <ion-badge
-          :color="video.credits === 0 ? 'success' : 'primary'"
-          class="credits-badge"
-        >
+        <ion-badge :color="video.credits === 0 ? 'success' : 'primary'" class="credits-badge">
           {{
             video.credits === 0
               ? t('video.free.badge')
-              : `${video.credits} credits`
+              : `${video.credits} ${t('tutorials.sort.credits')}`
           }}
         </ion-badge>
       </div>
 
       <!-- Category Tags (first 3) -->
       <div class="chips-container">
-        <ion-chip
-          v-for="tag in video.category_tags.slice(0, 3)"
-          :key="tag"
-          size="small"
-          outline
-        >
+        <ion-chip v-for="tag in video.category_tags.slice(0, 3)" :key="tag" size="small" outline>
           <ion-label>{{ tag }}</ion-label>
         </ion-chip>
       </div>
@@ -82,6 +74,7 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import type { ContentPublic } from '../../../shared/types/api/content.types'
 
 interface Props {
@@ -103,9 +96,7 @@ const isValidVimeoUrl = computed(() => {
   if (!props.video.url) return false
   const directPattern = /^https:\/\/(?:www\.)?vimeo\.com\/\d+(?:\?.*)?$/
   const embedPattern = /^https:\/\/player\.vimeo\.com\/video\/\d+(?:\?.*)?$/
-  return (
-    directPattern.test(props.video.url) || embedPattern.test(props.video.url)
-  )
+  return directPattern.test(props.video.url) || embedPattern.test(props.video.url)
 })
 
 // Get color for level chip

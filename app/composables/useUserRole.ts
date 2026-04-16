@@ -111,9 +111,7 @@ export const useUserRole = () => {
     const roleData = getCachedRoleData()
     const admins = roleData.admins || []
 
-    return admins.some(
-      (admin: User) => admin._id === userId || admin.id === userId
-    )
+    return admins.some((admin: User) => admin._id === userId || admin.id === userId)
   }
 
   /**
@@ -130,9 +128,7 @@ export const useUserRole = () => {
     const roleData = getCachedRoleData()
     const managers = roleData.managers || []
 
-    return managers.some(
-      (manager: User) => manager._id === userId || manager.id === userId
-    )
+    return managers.some((manager: User) => manager._id === userId || manager.id === userId)
   }
 
   /**
@@ -149,9 +145,7 @@ export const useUserRole = () => {
     const roleData = getCachedRoleData()
     const operators = roleData.operators || []
 
-    return operators.some(
-      (operator: User) => operator._id === userId || operator.id === userId
-    )
+    return operators.some((operator: User) => operator._id === userId || operator.id === userId)
   }
 
   /**

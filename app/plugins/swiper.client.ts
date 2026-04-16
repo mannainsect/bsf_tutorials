@@ -5,9 +5,6 @@ export default defineNuxtPlugin(async () => {
     // Register Swiper custom elements globally
     register()
   } catch (error) {
-    console.warn(
-      'Swiper element bundle not found, skipping registration:',
-      error
-    )
+    console.warn('Swiper element bundle not found, skipping registration:', error)
   }
 })

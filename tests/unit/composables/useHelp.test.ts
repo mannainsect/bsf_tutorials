@@ -88,9 +88,7 @@ describe('useHelp', () => {
     console.debug = vi.fn()
 
     // Reset modal mock
-    mockModal.onDidDismiss.mockReturnValue(
-      Promise.resolve({ data: undefined, role: undefined })
-    )
+    mockModal.onDidDismiss.mockReturnValue(Promise.resolve({ data: undefined, role: undefined }))
 
     // Mock window properties
     Object.defineProperty(window, 'pageYOffset', {
@@ -173,8 +171,7 @@ describe('useHelp', () => {
       await showHelp(HelpTopic.ACCOUNT_SECURITY)
 
       expect(mockModal.querySelector).toHaveBeenCalledWith(
-        '[autofocus], button, [href], input, select, textarea, ' +
-          '[tabindex]:not([tabindex="-1"])'
+        '[autofocus], button, [href], input, select, textarea, ' + '[tabindex]:not([tabindex="-1"])'
       )
 
       // Cleanup
@@ -208,10 +205,7 @@ describe('useHelp', () => {
       })
 
       expect(mockModal.present).toHaveBeenCalled()
-      expect(console.log).toHaveBeenCalledWith(
-        '[useHelp] Opening help modal',
-        expect.any(Object)
-      )
+      expect(console.log).toHaveBeenCalledWith('[useHelp] Opening help modal', expect.any(Object))
     })
 
     it('should handle invalid topic', async () => {
@@ -219,10 +213,7 @@ describe('useHelp', () => {
 
       await showHelp('invalid.topic' as HelpTopic)
 
-      expect(console.warn).toHaveBeenCalledWith(
-        '[useHelp] Invalid help topic:',
-        'invalid.topic'
-      )
+      expect(console.warn).toHaveBeenCalledWith('[useHelp] Invalid help topic:', 'invalid.topic')
 
       // Should still create modal but with null topic
       expect(mockModalController.create).toHaveBeenCalledWith(
@@ -287,10 +278,7 @@ describe('useHelp', () => {
 
       await showHelp(HelpTopic.GETTING_STARTED)
 
-      expect(console.debug).toHaveBeenCalledWith(
-        '[useHelp] Saved scroll position:',
-        500
-      )
+      expect(console.debug).toHaveBeenCalledWith('[useHelp] Saved scroll position:', 500)
     })
 
     it('should save focus element', async () => {
@@ -304,18 +292,13 @@ describe('useHelp', () => {
 
       await showHelp(HelpTopic.GETTING_STARTED)
 
-      expect(console.debug).toHaveBeenCalledWith(
-        '[useHelp] Saved focus element:',
-        'INPUT'
-      )
+      expect(console.debug).toHaveBeenCalledWith('[useHelp] Saved focus element:', 'INPUT')
     })
 
     it('should handle modal creation error', async () => {
       const { showHelp } = useHelp()
 
-      mockModalController.create.mockRejectedValueOnce(
-        new Error('Creation failed')
-      )
+      mockModalController.create.mockRejectedValueOnce(new Error('Creation failed'))
 
       await expect(showHelp(HelpTopic.GETTING_STARTED)).rejects.toThrow(
         'Unable to create help modal. Please try again.'
@@ -332,9 +315,7 @@ describe('useHelp', () => {
 
       mockModal.present.mockRejectedValueOnce(new Error('Present failed'))
 
-      await expect(showHelp(HelpTopic.GETTING_STARTED)).rejects.toThrow(
-        'Present failed'
-      )
+      await expect(showHelp(HelpTopic.GETTING_STARTED)).rejects.toThrow('Present failed')
 
       expect(console.error).toHaveBeenCalledWith(
         '[useHelp] Error showing help modal:',
@@ -440,10 +421,7 @@ describe('useHelp', () => {
     it('should handle modal dismissal', async () => {
       const { showHelp } = useHelp()
 
-      let dismissCallback: (value: {
-        data: undefined
-        role?: string
-      }) => void = () => {}
+      let dismissCallback: (value: { data: undefined; role?: string }) => void = () => {}
       mockModal.onDidDismiss.mockImplementation(() => {
         return {
           then: (callback: (value: { data: undefined }) => void) => {
@@ -460,10 +438,7 @@ describe('useHelp', () => {
       // Simulate modal dismiss
       dismissCallback({ data: undefined, role: 'backdrop' })
 
-      expect(console.log).toHaveBeenCalledWith(
-        '[useHelp] Modal dismissed',
-        expect.any(Object)
-      )
+      expect(console.log).toHaveBeenCalledWith('[useHelp] Modal dismissed', expect.any(Object))
     })
 
     it('should restore scroll position on dismiss', async () => {
@@ -472,10 +447,7 @@ describe('useHelp', () => {
       window.pageYOffset = 500
       const scrollToSpy = vi.spyOn(window, 'scrollTo')
 
-      let dismissCallback: (value: {
-        data: undefined
-        role?: string
-      }) => void = () => {}
+      let dismissCallback: (value: { data: undefined; role?: string }) => void = () => {}
       mockModal.onDidDismiss.mockImplementation(() => {
         return {
           then: (callback: (value: { data: undefined }) => void) => {
@@ -493,10 +465,7 @@ describe('useHelp', () => {
       dismissCallback({ data: undefined, role: 'backdrop' })
 
       expect(scrollToSpy).toHaveBeenCalledWith(0, 500)
-      expect(console.debug).toHaveBeenCalledWith(
-        '[useHelp] Restored scroll position:',
-        500
-      )
+      expect(console.debug).toHaveBeenCalledWith('[useHelp] Restored scroll position:', 500)
     })
 
     it('should restore focus on dismiss', async () => {
@@ -508,10 +477,7 @@ describe('useHelp', () => {
         configurable: true
       })
 
-      let dismissCallback: (value: {
-        data: undefined
-        role?: string
-      }) => void = () => {}
+      let dismissCallback: (value: { data: undefined; role?: string }) => void = () => {}
       mockModal.onDidDismiss.mockImplementation(() => {
         return {
           then: (callback: (value: { data: undefined }) => void) => {
@@ -529,10 +495,7 @@ describe('useHelp', () => {
       dismissCallback({ data: undefined, role: 'backdrop' })
 
       expect(mockElement.focus).toHaveBeenCalled()
-      expect(console.debug).toHaveBeenCalledWith(
-        '[useHelp] Restored focus to:',
-        'INPUT'
-      )
+      expect(console.debug).toHaveBeenCalledWith('[useHelp] Restored focus to:', 'INPUT')
     })
 
     it('should handle dismiss callback error', async () => {
@@ -584,9 +547,7 @@ describe('useHelp', () => {
 
       await nextTick()
 
-      expect(console.debug).toHaveBeenCalledWith(
-        '[useHelp] Escape key pressed, closing modal'
-      )
+      expect(console.debug).toHaveBeenCalledWith('[useHelp] Escape key pressed, closing modal')
 
       // Cleanup
       if (dismissResolve) {
@@ -605,9 +566,7 @@ describe('useHelp', () => {
 
       await nextTick()
 
-      expect(console.debug).not.toHaveBeenCalledWith(
-        '[useHelp] Escape key pressed, closing modal'
-      )
+      expect(console.debug).not.toHaveBeenCalledWith('[useHelp] Escape key pressed, closing modal')
     })
 
     it('should not close modal if no modal is open', async () => {
@@ -676,10 +635,7 @@ describe('useHelp', () => {
         throw new Error('Cannot scroll')
       })
 
-      let dismissCallback: (value: {
-        data: undefined
-        role?: string
-      }) => void = () => {}
+      let dismissCallback: (value: { data: undefined; role?: string }) => void = () => {}
       mockModal.onDidDismiss.mockImplementation(() => {
         return {
           then: (callback: (value: { data: undefined }) => void) => {
@@ -714,10 +670,7 @@ describe('useHelp', () => {
         configurable: true
       })
 
-      let dismissCallback: (value: {
-        data: undefined
-        role?: string
-      }) => void = () => {}
+      let dismissCallback: (value: { data: undefined; role?: string }) => void = () => {}
       mockModal.onDidDismiss.mockImplementation(() => {
         return {
           then: (callback: (value: { data: undefined }) => void) => {

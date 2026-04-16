@@ -8,11 +8,7 @@
       </ion-buttons>
 
       <ion-title size="small">
-        <a
-          href="https://www.mannainsect.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="https://www.mannainsect.com" target="_blank" rel="noopener noreferrer">
           {{ t('footer.poweredBy') }}
         </a>
       </ion-title>
@@ -32,6 +28,7 @@
 
 <script setup lang="ts">
 import { menuController } from '@ionic/vue'
+import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 const { menu, home } = useIcons()

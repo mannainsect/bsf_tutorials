@@ -8,9 +8,7 @@ export const validationSchemas = {
   email: z.string().email('Please enter a valid email address'),
   password: z.string().min(8, 'Password must be at least 8 characters'),
   required: z.string().min(1, 'This field is required'),
-  phone: z
-    .string()
-    .regex(/^\+?[\d\s\-()]+$/, 'Please enter a valid phone number'),
+  phone: z.string().regex(/^\+?[\d\s\-()]+$/, 'Please enter a valid phone number'),
   url: z.string().url('Please enter a valid URL')
 }
 
@@ -52,8 +50,7 @@ export function useFormValidation<T extends Record<string, unknown>>(
   initialValues?: Partial<T>
 ) {
   const form = useForm<T>({
-    validationSchema:
-      schema instanceof z.ZodType ? toTypedSchema(schema) : schema,
+    validationSchema: schema instanceof z.ZodType ? toTypedSchema(schema) : schema,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     initialValues: initialValues as any
   })

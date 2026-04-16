@@ -46,8 +46,7 @@ export const useApi = () => {
       console.error('Network error:', error)
       throw createError({
         statusCode: 500,
-        statusMessage:
-          'Network connection error. Please check your internet connection.'
+        statusMessage: 'Network connection error. Please check your internet connection.'
       })
     }
   })

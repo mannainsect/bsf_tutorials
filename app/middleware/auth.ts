@@ -21,10 +21,7 @@ export default defineNuxtRouteMiddleware(async _to => {
     try {
       await authStore.ensureProfileData(true)
     } catch (error) {
-      console.error(
-        '[AUTH_MIDDLEWARE] Failed to bootstrap profile data:',
-        error
-      )
+      console.error('[AUTH_MIDDLEWARE] Failed to bootstrap profile data:', error)
 
       // If profile fetch fails critically, redirect to error page
       // Check if it's a network error or authentication issue

@@ -49,30 +49,21 @@ export abstract class BaseRepository {
   /**
    * POST request helper
    */
-  protected async post<T = unknown>(
-    endpoint: string,
-    body?: unknown
-  ): Promise<T> {
+  protected async post<T = unknown>(endpoint: string, body?: unknown): Promise<T> {
     return this.request<T>(endpoint, { method: 'POST', body })
   }
 
   /**
    * PUT request helper
    */
-  protected async put<T = unknown>(
-    endpoint: string,
-    body?: unknown
-  ): Promise<T> {
+  protected async put<T = unknown>(endpoint: string, body?: unknown): Promise<T> {
     return this.request<T>(endpoint, { method: 'PUT', body })
   }
 
   /**
    * PATCH request helper
    */
-  protected async patch<T = unknown>(
-    endpoint: string,
-    body?: unknown
-  ): Promise<T> {
+  protected async patch<T = unknown>(endpoint: string, body?: unknown): Promise<T> {
     return this.request<T>(endpoint, { method: 'PATCH', body })
   }
 

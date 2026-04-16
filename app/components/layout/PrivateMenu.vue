@@ -22,6 +22,7 @@
 
 <script setup lang="ts">
 import { menuController } from '@ionic/vue'
+import { useI18n } from 'vue-i18n'
 import { logOutOutline, personOutline } from 'ionicons/icons'
 
 const { t } = useI18n()

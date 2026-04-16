@@ -60,11 +60,7 @@ export function useTranslation() {
   }
 
   // Generate cache key using hash or truncated text
-  function generateCacheKey(
-    text: string,
-    source: string,
-    target: string
-  ): string {
+  function generateCacheKey(text: string, source: string, target: string): string {
     // Create a simple hash of the text to avoid btoa Unicode issues
     let hash = 0
     for (let i = 0; i < text.length; i++) {
@@ -78,11 +74,7 @@ export function useTranslation() {
   }
 
   // Get cached translation
-  function getCachedTranslation(
-    text: string,
-    source: string,
-    target: string
-  ): string | null {
+  function getCachedTranslation(text: string, source: string, target: string): string | null {
     const cacheKey = generateCacheKey(text, source, target)
     const stored = localStorage.getItem(cacheKey)
     if (!stored) return null

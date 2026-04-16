@@ -3,24 +3,14 @@
     <ion-row class="ion-justify-content-center">
       <ion-col size="12" size-sm="6" size-md="5" size-lg="5">
         <!-- Email verification step -->
-        <div
-          v-if="!creatingCompany"
-          class="ion-text-center ion-padding-vertical"
-        >
-          <ion-icon
-            :icon="mail"
-            size="large"
-            color="primary"
-            class="ion-margin-bottom"
-          />
+        <div v-if="!creatingCompany" class="ion-text-center ion-padding-vertical">
+          <ion-icon :icon="mail" size="large" color="primary" class="ion-margin-bottom" />
           <ion-text>
             <h1>{{ $t('auth.checkYourEmail') }}</h1>
           </ion-text>
           <ion-text color="medium">
             <p>
-              {{
-                $t('auth.verificationCodeSent', { email: registrationEmail })
-              }}
+              {{ $t('auth.verificationCodeSent', { email: registrationEmail }) }}
             </p>
           </ion-text>
         </div>
@@ -76,18 +66,11 @@
         </form>
 
         <!-- Retry button for company creation failures -->
-        <div
-          v-if="companyCreationError"
-          class="ion-text-center ion-margin-top"
-        >
+        <div v-if="companyCreationError" class="ion-text-center ion-margin-top">
           <ion-text color="danger">
             <p>{{ companyCreationError }}</p>
           </ion-text>
-          <ion-button
-            expand="block"
-            class="ion-margin-top"
-            @click="retryCompanyCreation"
-          >
+          <ion-button expand="block" class="ion-margin-top" @click="retryCompanyCreation">
             {{ $t('auth.retryCreation') }}
           </ion-button>
           <ion-button
@@ -114,6 +97,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
 definePageMeta({
   middleware: 'guest'
 })

@@ -1,3 +1,4 @@
+import { useI18n } from 'vue-i18n'
 import type { Ref } from 'vue'
 
 export interface RegistrationData {
@@ -30,9 +31,7 @@ export function useRegistration(): UseRegistrationReturn {
    */
   const generateDefaultName = (email: string): string => {
     const emailPrefix = email.split('@')[0] || email
-    return emailPrefix
-      .replace(/[._-]/g, ' ')
-      .replace(/\b\w/g, l => l.toUpperCase())
+    return emailPrefix.replace(/[._-]/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
   }
 
   /**
@@ -48,10 +47,7 @@ export function useRegistration(): UseRegistrationReturn {
    * @param email - User's email address
    * @param password - User's password
    */
-  const registerUser = async (
-    email: string,
-    password: string
-  ): Promise<void> => {
+  const registerUser = async (email: string, password: string): Promise<void> => {
     loading.value = true
     error.value = ''
 

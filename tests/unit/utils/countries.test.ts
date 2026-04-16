@@ -62,18 +62,7 @@ should have flag`
 
     it('should include common countries', () => {
       const codes = COUNTRIES_DATA.map(c => c.code)
-      const commonCountries = [
-        'US',
-        'GB',
-        'CA',
-        'DE',
-        'FR',
-        'ES',
-        'IT',
-        'JP',
-        'CN',
-        'BR'
-      ]
+      const commonCountries = ['US', 'GB', 'CA', 'DE', 'FR', 'ES', 'IT', 'JP', 'CN', 'BR']
       commonCountries.forEach(code => {
         expect(codes).toContain(code)
       })

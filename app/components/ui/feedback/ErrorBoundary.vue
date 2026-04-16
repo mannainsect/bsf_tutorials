@@ -14,16 +14,8 @@
           <p>{{ message || $t('errors.boundary.message') }}</p>
 
           <div v-if="showDetails && errorDetails" class="error-details">
-            <ion-button
-              fill="clear"
-              size="small"
-              @click="showErrorDetails = !showErrorDetails"
-            >
-              {{
-                showErrorDetails
-                  ? $t('common.hideDetails')
-                  : $t('common.showDetails')
-              }}
+            <ion-button fill="clear" size="small" @click="showErrorDetails = !showErrorDetails">
+              {{ showErrorDetails ? $t('common.hideDetails') : $t('common.showDetails') }}
             </ion-button>
 
             <div v-if="showErrorDetails" class="error-code">
@@ -36,12 +28,7 @@
               {{ retryText || $t('common.retry') }}
             </ion-button>
 
-            <ion-button
-              v-if="showGoHome"
-              fill="outline"
-              color="medium"
-              @click="goHome"
-            >
+            <ion-button v-if="showGoHome" fill="outline" color="medium" @click="goHome">
               {{ $t('common.goHome') }}
             </ion-button>
           </div>
@@ -52,6 +39,7 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import { warningOutline } from 'ionicons/icons'
 
 interface Props {

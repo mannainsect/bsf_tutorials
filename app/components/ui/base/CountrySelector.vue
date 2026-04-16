@@ -19,6 +19,7 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import { computed, toRefs } from 'vue'
 import { useCountries } from '~/composables/useCountries'
 import type { Country } from '~/composables/useCountries'
@@ -46,9 +47,7 @@ const { t } = useI18n()
 const { countries: availableCountries } = useCountries()
 
 const resolvedLabel = computed(() => props.label || t('forms.country'))
-const resolvedPlaceholder = computed(
-  () => props.placeholder || t('forms.countryPlaceholder')
-)
+const resolvedPlaceholder = computed(() => props.placeholder || t('forms.countryPlaceholder'))
 const countryOptions = computed<Country[]>(() => availableCountries.value)
 
 const handleChange = (event: CustomEvent) => {

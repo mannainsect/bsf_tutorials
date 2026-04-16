@@ -20,13 +20,7 @@ import {
   toRefs,
   shallowRef
 } from 'vue'
-import {
-  defineStore,
-  createPinia,
-  setActivePinia,
-  getActivePinia,
-  storeToRefs
-} from 'pinia'
+import { defineStore, createPinia, setActivePinia, getActivePinia, storeToRefs } from 'pinia'
 import { ionicStubs } from './ionic-stubs'
 
 // Mock browser APIs that don't exist in jsdom
@@ -44,8 +38,7 @@ class MockIntersectionObserver {
   rootMargin = ''
   thresholds = []
 }
-global.IntersectionObserver =
-  MockIntersectionObserver as unknown as typeof IntersectionObserver
+global.IntersectionObserver = MockIntersectionObserver as unknown as typeof IntersectionObserver
 
 // Mock ResizeObserver
 class MockResizeObserver {
@@ -251,9 +244,7 @@ global.useAuthService = () => ({
       user: { id: 1, email: 'test@example.com' }
     })
   ),
-  getProfile: vi.fn(() =>
-    Promise.resolve({ id: 1, email: 'test@example.com' })
-  ),
+  getProfile: vi.fn(() => Promise.resolve({ id: 1, email: 'test@example.com' })),
   sendPasswordReset: vi.fn(() => Promise.resolve()),
   verifyEmail: vi.fn(() => Promise.resolve())
 })
@@ -408,6 +399,10 @@ global.useUserRole = () => ({
   hasAnyRole: vi.fn(() => false),
   getUserRole: vi.fn(() => null)
 })
+
+vi.mock('vue-i18n', () => ({
+  useI18n: () => global.useI18n()
+}))
 
 // Mock useI18n composable
 global.useI18n = () => ({

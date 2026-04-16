@@ -1,3 +1,4 @@
+import { useI18n } from 'vue-i18n'
 import { ref, computed, readonly } from 'vue'
 import type { User, UpdateUserRequest, Credit } from '../../shared/types'
 import { UserRepository } from './api/repositories/UserRepository'
@@ -18,13 +19,9 @@ export const useAccount = () => {
   const authRepository = new AuthRepository()
 
   // Computed
-  const hasCredits = computed(
-    () => user.value?.credits_balance && user.value.credits_balance > 0
-  )
+  const hasCredits = computed(() => user.value?.credits_balance && user.value.credits_balance > 0)
   const currentBalance = computed(() => user.value?.credits_balance || 0)
-  const purchasedProducts = computed(
-    () => user.value?.purchased_products || []
-  )
+  const purchasedProducts = computed(() => user.value?.purchased_products || [])
 
   // User Profile Methods
   const loadCurrentUser = async () => {
@@ -35,14 +32,9 @@ export const useAccount = () => {
       // Use centralized profile data from auth store
       const authStore = useAuthStore()
       await authStore.ensureProfileData() // Uses cached data or fetches if needed
-      user.value = authStore.user
-        ? JSON.parse(JSON.stringify(authStore.user))
-        : null
+      user.value = authStore.user ? JSON.parse(JSON.stringify(authStore.user)) : null
     } catch (err: unknown) {
-      error.value =
-        err instanceof Error
-          ? err.message
-          : t('errors.account.loadProfileFailed')
+      error.value = err instanceof Error ? err.message : t('errors.account.loadProfileFailed')
       console.error(t('errors.account.loadProfileLog'), err)
     } finally {
       isLoading.value = false
@@ -65,10 +57,7 @@ export const useAccount = () => {
 
       return response
     } catch (err: unknown) {
-      error.value =
-        err instanceof Error
-          ? err.message
-          : t('errors.account.updateProfileFailed')
+      error.value = err instanceof Error ? err.message : t('errors.account.updateProfileFailed')
       console.error(t('errors.account.updateProfileLog'), err)
       throw err
     } finally {
@@ -105,10 +94,7 @@ export const useAccount = () => {
       const response = await authRepository.sendPasswordReset(email)
       return response
     } catch (err: unknown) {
-      error.value =
-        err instanceof Error
-          ? err.message
-          : t('errors.account.sendResetFailed')
+      error.value = err instanceof Error ? err.message : t('errors.account.sendResetFailed')
       console.error(t('errors.account.sendResetLog'), err)
       throw err
     } finally {
@@ -116,24 +102,15 @@ export const useAccount = () => {
     }
   }
 
-  const resetPassword = async (
-    currentPassword: string,
-    newPassword: string
-  ) => {
+  const resetPassword = async (currentPassword: string, newPassword: string) => {
     try {
       isLoading.value = true
       error.value = ''
 
-      const response = await authRepository.resetUserPassword(
-        currentPassword,
-        newPassword
-      )
+      const response = await authRepository.resetUserPassword(currentPassword, newPassword)
       return response
     } catch (err: unknown) {
-      error.value =
-        err instanceof Error
-          ? err.message
-          : t('errors.account.resetPasswordFailed')
+      error.value = err instanceof Error ? err.message : t('errors.account.resetPasswordFailed')
       console.error(t('errors.account.resetPasswordLog'), err)
       throw err
     } finally {

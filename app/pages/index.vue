@@ -69,11 +69,7 @@
       </ion-row>
       <ion-row class="ion-justify-content-center featured-actions">
         <ion-col size="12" size-sm="8" size-md="6" size-lg="4">
-          <ion-button
-            :router-link="localePath('/tutorials')"
-            expand="block"
-            fill="outline"
-          >
+          <ion-button :router-link="localePath('/tutorials')" expand="block" fill="outline">
             {{ t('home.featuredVideo.viewAll') }}
           </ion-button>
         </ion-col>
@@ -118,6 +114,7 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
@@ -221,9 +218,7 @@ onMounted(async () => {
   try {
     const videos = await api<ContentPublic[]>('/products/content/public')
     // Filter for free videos with URLs
-    const freeVideos = videos.filter(
-      v => v.url !== null && v.level === 'basic' && v.credits === 0
-    )
+    const freeVideos = videos.filter(v => v.url !== null && v.level === 'basic' && v.credits === 0)
     if (freeVideos.length > 0) {
       const idx = Math.floor(Math.random() * freeVideos.length)
       featuredVideo.value = freeVideos[idx] ?? null

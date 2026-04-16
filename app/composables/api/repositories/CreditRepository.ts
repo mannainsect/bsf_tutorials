@@ -12,18 +12,9 @@ export class CreditRepository extends BaseRepository {
   /**
    * Get credits log for a user
    */
-  async getCredits(
-    params: GetCreditsRequest = {}
-  ): Promise<GetCreditsResponse> {
+  async getCredits(params: GetCreditsRequest = {}): Promise<GetCreditsResponse> {
     const endpoints = useApiEndpoints()
-    const {
-      user_id,
-      transaction_type,
-      start_date,
-      end_date,
-      page = 1,
-      limit = 20
-    } = params
+    const { user_id, transaction_type, start_date, end_date, page = 1, limit = 20 } = params
 
     const query = this.buildPaginationQuery(page, limit, {
       ...(user_id && { user_id }),
@@ -57,9 +48,7 @@ export class CreditRepository extends BaseRepository {
    */
   async getCreditBalance(): Promise<GetCreditBalanceResponse> {
     const endpoints = useApiEndpoints()
-    return this.get<GetCreditBalanceResponse>(
-      `${endpoints.logsCredits}/balance`
-    )
+    return this.get<GetCreditBalanceResponse>(`${endpoints.logsCredits}/balance`)
   }
 
   /**
@@ -69,13 +58,7 @@ export class CreditRepository extends BaseRepository {
     params: GetCreditsRequest = {}
   ): Promise<GetCreditTransactionsResponse> {
     const endpoints = useApiEndpoints()
-    const {
-      transaction_type,
-      start_date,
-      end_date,
-      page = 1,
-      limit = 20
-    } = params
+    const { transaction_type, start_date, end_date, page = 1, limit = 20 } = params
 
     const query = this.buildPaginationQuery(page, limit, {
       ...(transaction_type && { transaction_type }),
@@ -83,10 +66,7 @@ export class CreditRepository extends BaseRepository {
       ...(end_date && { end_date })
     })
 
-    return this.get<GetCreditTransactionsResponse>(
-      endpoints.logsCredits,
-      query
-    )
+    return this.get<GetCreditTransactionsResponse>(endpoints.logsCredits, query)
   }
 
   /**
@@ -96,9 +76,6 @@ export class CreditRepository extends BaseRepository {
     transactionData: CreateCreditTransactionRequest
   ): Promise<CreditTransaction> {
     const endpoints = useApiEndpoints()
-    return this.post<CreditTransaction>(
-      `${endpoints.logsCredits}/transactions`,
-      transactionData
-    )
+    return this.post<CreditTransaction>(`${endpoints.logsCredits}/transactions`, transactionData)
   }
 }
