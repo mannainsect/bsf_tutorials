@@ -2,7 +2,7 @@
 name: pull-request-check
 description: Check if PR is ready for review implementation
   or still in progress. Accepts optional PR number.
-model: claude-opus-4-6
+model: opus
 ---
 
 # Pull Request Status Checker

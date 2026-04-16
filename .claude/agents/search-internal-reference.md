@@ -2,7 +2,7 @@
 name: reference-search
 description: Uses [references_dir]/index.md, [references_dir]/tags.md, and light content reads to return ranked file paths for a query
 tools: Read, Glob, Grep
-model: claude-opus-4-6
+model: opus
 ---
 
 # Reference Search Agent (v3)

@@ -2,7 +2,7 @@
 name: firecrawl-web-research
 description: Web scraping and crawling specialist using Firecrawl for extracting structured data from websites
 tools: mcp__firecrawl__firecrawl_scrape, mcp__firecrawl__firecrawl_map, mcp__firecrawl__firecrawl_search, mcp__firecrawl__firecrawl_crawl, mcp__firecrawl__firecrawl_extract, Bash, Write
-model: claude-opus-4-6
+model: opus
 ---
 
 # Firecrawl Web Research Agent

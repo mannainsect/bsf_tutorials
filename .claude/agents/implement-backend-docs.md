@@ -6,7 +6,8 @@ tools: Glob, Grep, Read, WebFetch, WebSearch, BashOutput,
   KillShell, Bash,
   mcp__context7__resolve-library-id,
   mcp__context7__get-library-docs
-model: claude-opus-4-6
+model: opus
+effort: xhigh
 color: teal
 ---
 

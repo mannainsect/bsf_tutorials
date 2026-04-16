@@ -1,7 +1,8 @@
 ---
 name: docs-sync-engineer
 description: Technical documentation engineer for maintaining accurate documentation
-model: claude-opus-4-6
+model: opus
+effort: xhigh
 color: purple
 ---
 

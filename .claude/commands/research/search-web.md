@@ -3,7 +3,7 @@ argument-hint: [query or task filename] [optional: internal:
   /tmp/internal-summary-*.md]
 description: Execute sequential web research and save findings
 allowed-tools: [Read, Write, Glob, TodoWrite, Task, Bash]
-model: claude-opus-4-6
+model: opus
 ---
 
 # Search Web

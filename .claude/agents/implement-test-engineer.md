@@ -2,7 +2,8 @@
 name: test-engineer
 description: Expert test-driven engineer who writes and
   runs tests
-model: claude-opus-4-6
+model: opus
+effort: xhigh
 color: red
 ---
 

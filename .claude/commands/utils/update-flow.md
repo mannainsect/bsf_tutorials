@@ -1,7 +1,7 @@
 ---
 description: Update flow_ai files from upstream repository
 tags: [maintenance, update, sync]
-model: claude-opus-4-6
+model: opus
 ---
 
 # Update Flow AI

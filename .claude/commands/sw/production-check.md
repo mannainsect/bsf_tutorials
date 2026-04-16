@@ -2,7 +2,7 @@
 name: production-check
 description: Read-only production API endpoint probes
   to verify deployment health
-model: claude-opus-4-6
+model: opus
 ---
 
 # Production Check Command

@@ -2,7 +2,7 @@
 name: pull-request-merge
 description: Merge PR to main branch and cleanup branches.
   Accepts optional PR number.
-model: claude-opus-4-6
+model: opus
 ---
 
 # Pull Request Merge Command

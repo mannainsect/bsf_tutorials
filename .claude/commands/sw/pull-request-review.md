@@ -2,7 +2,8 @@
 name: pull-request-review
 description: Review PR comments, delegate focused fixes,
   verify with one Codex full-check, then update the PR.
-model: claude-opus-4-6
+model: opus
+effort: xhigh
 ---
 
 # Pull Request Review Command

@@ -1,7 +1,7 @@
 ---
 name: write-report
 description: Expert report writer for distilling and integrating content
-model: claude-opus-4-6
+model: opus
 color: purple
 ---
 

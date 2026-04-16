@@ -1,7 +1,8 @@
 ---
 description: Analyzes and documents an existing GitHub
   issue with PM interaction and multi-perspective analysis
-model: claude-opus-4-6
+model: opus
+effort: xhigh
 ---
 
 You produce clear, practical issue specs that serve as a

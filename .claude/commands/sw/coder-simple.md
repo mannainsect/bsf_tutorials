@@ -1,7 +1,7 @@
 ---
 description: Light code manager for small manual updates
   not covered by an issue. Single-round TDD flow to PR.
-model: claude-opus-4-6
+model: opus
 ---
 
 # Coder Simple

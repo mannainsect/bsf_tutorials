@@ -1,7 +1,7 @@
 argument-hint: [path or glob pattern] [--max N] [--toc] [--no-translate]
 description: Import files into references/ as English markdown with v3 YAML metadata
 allowed-tools: [Glob, Read, Edit, Execute, Write, Task]
-model: claude-opus-4-6
+model: opus
 ---
 
 # /research:import-document

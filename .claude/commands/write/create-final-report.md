@@ -2,7 +2,7 @@
 argument-hint: [folder_path (default:report)] [guidance]
 description: Create final distilled report from directory of reports
 allowed-tools: [Glob, Read, TodoWrite, Task, Write]
-model: claude-opus-4-6
+model: opus
 ---
 
 # Create Final Report

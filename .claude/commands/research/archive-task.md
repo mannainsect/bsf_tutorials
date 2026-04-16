@@ -2,7 +2,7 @@
 argument-hint: [task filename]
 description: Archive completed task to completed folder
 allowed-tools: [Read, Bash, Glob]
-model: claude-opus-4-6
+model: opus
 ---
 
 # Archive Completed Task

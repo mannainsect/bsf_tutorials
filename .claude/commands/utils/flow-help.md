@@ -1,7 +1,7 @@
 ---
 description: Interactive help system for flow_ai features and commands
 tags: [help, documentation, mcp, commands]
-model: claude-opus-4-6
+model: opus
 ---
 
 # flow_ai Help System

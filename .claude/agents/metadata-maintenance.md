@@ -2,7 +2,7 @@
 name: metadata-maintenance
 description: Maintains v3 text-first index.md and tags.md files from YAML frontmatter
 tools: Read, Write, Glob
-model: claude-opus-4-6
+model: opus
 ---
 
 # metadata-maintenance

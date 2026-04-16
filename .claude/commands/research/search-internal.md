@@ -1,7 +1,7 @@
 argument-hint: [query string or task filename]
 description: Search internal knowledge base and create temp summary
 allowed-tools: [Glob, Grep, Read, Bash, Write, Task]
-model: claude-opus-4-6
+model: opus
 ---
 
 # Search Internal Knowledge Base

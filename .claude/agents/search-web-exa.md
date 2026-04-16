@@ -3,7 +3,7 @@ name: exa-web-research
 description: AI-optimized web search specialist using Exa AI for
   neural search with category filtering
 tools: Bash, Write, Read
-model: claude-opus-4-6
+model: opus
 ---
 
 # Exa Web Research Agent

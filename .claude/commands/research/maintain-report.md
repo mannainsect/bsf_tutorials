@@ -1,7 +1,7 @@
 ---
 description: Maintain report structure by splitting large files into organized directories
 allowed-tools: [Read, Write, Edit, Glob, Bash, TodoWrite]
-model: claude-opus-4-6
+model: opus
 ---
 
 # Maintain Report Structure

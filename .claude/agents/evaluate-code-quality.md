@@ -6,7 +6,7 @@ tools: Glob, Grep, Read, WebFetch, TodoWrite, WebSearch,
   BashOutput, KillShell,
   mcp__context7__resolve-library-id,
   mcp__context7__get-library-docs
-model: claude-opus-4-6
+model: opus
 color: yellow
 ---
 
