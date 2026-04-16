@@ -29,7 +29,13 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
       reportsDirectory: './coverage',
-      exclude: ['node_modules/**', 'tests/**', '**/*.config.*', '.nuxt/**', 'dist/**']
+      exclude: ['node_modules/**', 'tests/**', '**/*.config.*', '.nuxt/**', 'dist/**'],
+      thresholds: {
+        lines: 25,
+        branches: 78,
+        functions: 72,
+        statements: 25,
+      },
     }
   },
   resolve: {
