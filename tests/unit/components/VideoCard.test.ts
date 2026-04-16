@@ -313,6 +313,68 @@ describe('VideoCard', () => {
     })
   })
 
+  describe('Level Color Mapping', () => {
+    it('should map basic level to success color', () => {
+      const video: ContentPublic = {
+        ...freeVideoWithQueryParams,
+        level: 'basic'
+      }
+      const wrapper = mount(VideoCard, {
+        props: { video }
+      })
+      const chip = wrapper.find('ion-chip')
+      expect(chip.attributes('color')).toBe('success')
+    })
+
+    it(
+      'should map intermediate level to warning color',
+      () => {
+        const video: ContentPublic = {
+          ...freeVideoWithQueryParams,
+          level: 'intermediate'
+        }
+        const wrapper = mount(VideoCard, {
+          props: { video }
+        })
+        const chip = wrapper.find('ion-chip')
+        expect(chip.attributes('color'))
+          .toBe('warning')
+      }
+    )
+
+    it(
+      'should map advanced level to danger color',
+      () => {
+        const video: ContentPublic = {
+          ...freeVideoWithQueryParams,
+          level: 'advanced'
+        }
+        const wrapper = mount(VideoCard, {
+          props: { video }
+        })
+        const chip = wrapper.find('ion-chip')
+        expect(chip.attributes('color'))
+          .toBe('danger')
+      }
+    )
+
+    it(
+      'should default to success color for unknown level',
+      () => {
+        const video: ContentPublic = {
+          ...freeVideoWithQueryParams,
+          level: 'expert'
+        }
+        const wrapper = mount(VideoCard, {
+          props: { video }
+        })
+        const chip = wrapper.find('ion-chip')
+        expect(chip.attributes('color'))
+          .toBe('success')
+      }
+    )
+  })
+
   describe('Edge Cases', () => {
     it('should handle very long query strings', () => {
       const longQueryVideo: ContentPublic = {
