@@ -263,11 +263,8 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
       await store.fetchProfile()
       expect(mockSwitchCompany).not.toHaveBeenCalled()
-      const errorMsg = '[AUTH] First company has no valid ID'
-      expect(consoleErrorSpy).toHaveBeenCalledWith(errorMsg)
       expect(store.activeCompany).toBeNull()
       const normalizedCompanies = profileWithInvalidId.other_companies.map(
         (c: { _id?: string; id?: string; name: string }) => {
@@ -277,7 +274,6 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
         }
       )
       expect(store.otherCompanies).toEqual(normalizedCompanies)
-      consoleErrorSpy.mockRestore()
     })
   })
   describe('Retry mechanism', () => {
@@ -319,7 +315,6 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
-      const consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {})
       const fetchPromise = store.fetchProfile()
       await vi.runOnlyPendingTimersAsync()
       await vi.advanceTimersByTimeAsync(1000)
@@ -328,13 +323,11 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       await fetchPromise
       expect(mockSwitchCompany).toHaveBeenCalledTimes(4)
       expect(mockSwitchCompany).toHaveBeenCalledWith('comp1')
-      expect(consoleLogSpy).toHaveBeenCalledWith('[AUTH] Successfully auto-selected company')
       expect(store.activeCompany).toEqual({
         _id: 'comp1',
         id: 'comp1',
         name: 'First Co'
       })
-      consoleLogSpy.mockRestore()
       vi.useRealTimers()
     })
     it('should fall back to local selection after all retries fail', async () => {
@@ -360,8 +353,6 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
-      const consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {})
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
       const fetchPromise = store.fetchProfile()
       await vi.runOnlyPendingTimersAsync()
       await vi.advanceTimersByTimeAsync(1000)
@@ -369,12 +360,6 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       await vi.advanceTimersByTimeAsync(1000)
       await fetchPromise
       expect(mockSwitchCompany).toHaveBeenCalledTimes(4)
-      expect(consoleErrorSpy).toHaveBeenCalledWith(
-        '[AUTH] Failed to auto-select company:',
-        expect.any(Error)
-      )
-      const fallbackMsg = '[AUTH] Using local fallback for company selection'
-      expect(consoleLogSpy).toHaveBeenCalledWith(fallbackMsg)
       expect(store.activeCompany).toEqual({
         _id: 'comp1',
         id: 'comp1',
@@ -392,8 +377,6 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
         ...profileWithoutActiveCompany.user,
         id: profileWithoutActiveCompany.user._id
       })
-      consoleLogSpy.mockRestore()
-      consoleErrorSpy.mockRestore()
       vi.useRealTimers()
     })
     it('should use correct fixed retry delays', async () => {
@@ -416,8 +399,6 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
-      const consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {})
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
       const fetchPromise = store.fetchProfile()
       await vi.runOnlyPendingTimersAsync()
       await vi.advanceTimersByTimeAsync(1000)
@@ -425,8 +406,6 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       await vi.advanceTimersByTimeAsync(1000)
       await fetchPromise
       expect(mockSwitchCompany).toHaveBeenCalledTimes(4)
-      consoleLogSpy.mockRestore()
-      consoleErrorSpy.mockRestore()
       vi.useRealTimers()
     })
   })
@@ -583,13 +562,7 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: vi.fn()
       }))
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
       await expect(store.fetchProfile()).rejects.toThrow('API Error')
-      expect(consoleErrorSpy).toHaveBeenCalledWith(
-        '[AUTH] Failed to fetch profile:',
-        expect.any(Error)
-      )
-      consoleErrorSpy.mockRestore()
     })
     it('should handle edge case of empty other_companies array', async () => {
       const profile: ProfileResponse = {

@@ -5,6 +5,7 @@ import { ref, onUnmounted, getCurrentInstance } from 'vue'
 import type { HelpTopic } from '../../shared/types/help'
 import { isValidHelpTopic } from '../../shared/types/help'
 import HelpModal from '~/components/help/HelpModal.vue'
+import { useErrorHandler } from './errors/useErrorHandler'
 
 // Singleton modal instance reference with stronger typing
 let currentModal: HTMLIonModalElement | null = null
@@ -20,6 +21,7 @@ let previousActiveElement: HTMLElement | null = null
 
 export const useHelp = () => {
   const { t } = useI18n()
+  const { handleSilentError } = useErrorHandler()
 
   const translate = (key: string, fallback: string, params?: Record<string, unknown>): string => {
     const translated = params ? t(key, params) : t(key)
@@ -40,17 +42,14 @@ export const useHelp = () => {
    */
   const validateTopic = (topic?: HelpTopic): HelpTopic | null => {
     if (!topic) {
-      console.debug('[useHelp] No topic provided')
       return null
     }
 
     if (typeof topic !== 'string') {
-      console.warn('[useHelp] Invalid help topic type:', typeof topic)
       return null
     }
 
     if (!isValidHelpTopic(topic)) {
-      console.warn('[useHelp] Invalid help topic:', topic)
       return null
     }
 
@@ -62,10 +61,10 @@ export const useHelp = () => {
    */
   const saveScrollPosition = (): void => {
     try {
-      savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop
-      console.debug('[useHelp] Saved scroll position:', savedScrollPosition)
+      savedScrollPosition = window.pageYOffset
+        || document.documentElement.scrollTop
     } catch (error) {
-      console.warn('[useHelp] Failed to save scroll position:', error)
+      handleSilentError(error, 'useHelp.saveScrollPosition')
     }
   }
 
@@ -76,11 +75,12 @@ export const useHelp = () => {
     try {
       if (savedScrollPosition > 0) {
         window.scrollTo(0, savedScrollPosition)
-        console.debug('[useHelp] Restored scroll position:', savedScrollPosition)
         savedScrollPosition = 0
       }
     } catch (error) {
-      console.warn('[useHelp] Failed to restore scroll position:', error)
+      handleSilentError(
+        error, 'useHelp.restoreScrollPosition'
+      )
     }
   }
 
@@ -90,9 +90,8 @@ export const useHelp = () => {
   const saveFocus = (): void => {
     try {
       previousActiveElement = document.activeElement as HTMLElement
-      console.debug('[useHelp] Saved focus element:', previousActiveElement?.tagName ?? '')
     } catch (error) {
-      console.warn('[useHelp] Failed to save focus:', error)
+      handleSilentError(error, 'useHelp.saveFocus')
     }
   }
 
@@ -103,11 +102,10 @@ export const useHelp = () => {
     try {
       if (previousActiveElement && previousActiveElement.focus) {
         previousActiveElement.focus()
-        console.debug('[useHelp] Restored focus to:', previousActiveElement.tagName)
         previousActiveElement = null
       }
     } catch (error) {
-      console.warn('[useHelp] Failed to restore focus:', error)
+      handleSilentError(error, 'useHelp.restoreFocus')
     }
   }
 
@@ -116,12 +114,9 @@ export const useHelp = () => {
    * @param topic - Optional help topic to display
    */
   const showHelp = async (topic?: HelpTopic): Promise<void> => {
-    const startTime = performance.now()
-
     try {
       // Enhanced singleton enforcement
       if (isModalOpen.value || isCreating) {
-        console.warn('[useHelp] Modal already open, preventing duplicate')
         if (currentModal) {
           try {
             // Try to focus first focusable element within the modal
@@ -131,7 +126,7 @@ export const useHelp = () => {
             )
             el?.focus()
           } catch {
-            console.debug('[useHelp] Could not focus existing help modal')
+            // Could not focus existing help modal
           }
         }
         return
@@ -139,11 +134,6 @@ export const useHelp = () => {
 
       // Validate topic
       const validatedTopic = validateTopic(topic)
-
-      // Opening help modal
-      console.log('[useHelp] Opening help modal', {
-        topic: validatedTopic ?? null
-      })
 
       // Save current state
       saveScrollPosition()
@@ -165,7 +155,7 @@ export const useHelp = () => {
           animated: true
         })
       } catch (createError) {
-        console.error('[useHelp] Failed to create modal:', createError)
+        handleSilentError(createError, 'useHelp.showHelp')
         // Attempt recovery
         currentModal = null
         isModalOpen.value = false
@@ -183,10 +173,7 @@ export const useHelp = () => {
       // Enhanced dismissal handling
       currentModal
         .onDidDismiss()
-        .then((result: unknown) => {
-          const duration = Date.now() - modalOpenTime.value
-          console.log('[useHelp] Modal dismissed', { duration, result })
-          // Modal dismissed
+        .then(() => {
           currentModal = null
           isModalOpen.value = false
           modalOpenTime.value = 0
@@ -196,7 +183,7 @@ export const useHelp = () => {
           restoreFocus()
         })
         .catch((error: unknown) => {
-          console.error('[useHelp] Error in dismiss handler:', error)
+          handleSilentError(error, 'useHelp.showHelp.dismiss')
           currentModal = null
           isModalOpen.value = false
           modalOpenTime.value = 0
@@ -205,19 +192,8 @@ export const useHelp = () => {
       // Present with error handling
       await currentModal.present()
 
-      const loadTime = performance.now() - startTime
-      const formattedLoadTime = loadTime.toFixed(2)
-      // Modal presented successfully
-      console.log('[useHelp] Modal presented successfully', {
-        loadTime: `${formattedLoadTime}ms`
-      })
-
-      // Performance warning
-      if (loadTime > 200) {
-        console.warn('[useHelp] Modal took longer than 200ms to open:', `${formattedLoadTime}ms`)
-      }
     } catch (error) {
-      console.error('[useHelp] Error showing help modal:', error)
+      handleSilentError(error, 'useHelp.showHelp')
       currentModal = null
       isModalOpen.value = false
       modalOpenTime.value = 0
@@ -243,15 +219,10 @@ export const useHelp = () => {
   const hideHelp = async (): Promise<void> => {
     try {
       if (currentModal) {
-        // Hiding help modal
-        console.log('[useHelp] Hiding help modal')
         await currentModal.dismiss()
-      } else {
-        // No modal to hide
-        console.log('[useHelp] No modal to hide')
       }
     } catch (error) {
-      console.error('[useHelp] Error hiding help modal:', error)
+      handleSilentError(error, 'useHelp.hideHelp')
       // Clean up state even if dismiss fails
       currentModal = null
       isModalOpen.value = false
@@ -272,7 +243,6 @@ export const useHelp = () => {
   const setupKeyboardHandlers = (): void => {
     const handleEscape = async (event: KeyboardEvent) => {
       if (event.key === 'Escape' && isModalOpen.value) {
-        console.debug('[useHelp] Escape key pressed, closing modal')
         await hideHelp()
       }
     }

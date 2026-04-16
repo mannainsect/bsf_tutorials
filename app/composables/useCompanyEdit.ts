@@ -5,6 +5,7 @@ import { createCompanyEditSchema } from '~/utils/validation/companySchemas'
 import type { CompanyEditForm } from '~/utils/validation/companySchemas'
 import { CompanyRepository } from './api/repositories/CompanyRepository'
 import type { UpdateCompanyRequest } from './api/repositories/CompanyRepository'
+import { useErrorHandler } from './errors/useErrorHandler'
 
 export const useCompanyEdit = () => {
   const { activeCompany } = useProfile()
@@ -13,6 +14,7 @@ export const useCompanyEdit = () => {
   const { isCompanyAdmin, isCompanyManager } = useUserRole()
   const companyRepository = new CompanyRepository()
   const toast = useToast()
+  const { handleError } = useErrorHandler()
 
   const companyEditSchema = createCompanyEditSchema(t)
 
@@ -152,7 +154,7 @@ export const useCompanyEdit = () => {
 
       isEditing.value = false
     } catch (err: unknown) {
-      console.error(t('errors.account.updateCompanyLog'), err)
+      handleError(err, { source: 'useCompanyEdit.updateCompany' })
       error.value = err instanceof Error ? err.message : t('account.company.updateError')
 
       await toast.showError(error.value || t('common.error'))

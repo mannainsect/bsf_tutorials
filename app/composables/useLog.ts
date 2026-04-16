@@ -158,8 +158,6 @@ export const useLog = () => {
       if (options?.throwOnError) {
         throw err
       }
-      // Content logs are often non-critical, so we just log the error
-      console.error(t('errors.log.contentActionFailedLog'), err)
       handleError(err, { source: 'useLog.logContentAction' })
     }
   }
@@ -179,8 +177,6 @@ export const useLog = () => {
       if (options?.throwOnError) {
         throw err
       }
-      // User action logs are often non-critical
-      console.error(t('errors.log.userActionFailedLog'), err)
       handleError(err, { source: 'useLog.logUserAction' })
     }
   }

@@ -21,8 +21,6 @@ export default defineNuxtRouteMiddleware(async _to => {
     try {
       await authStore.ensureProfileData(true)
     } catch (error) {
-      console.error('[AUTH_MIDDLEWARE] Failed to bootstrap profile data:', error)
-
       // If profile fetch fails critically, redirect to error page
       // Check if it's a network error or authentication issue
       const isNetworkError =
@@ -49,9 +47,8 @@ export default defineNuxtRouteMiddleware(async _to => {
         return navigateTo(localePath('/error?type=profile&retry=profile'))
       }
     }
-  } catch (error) {
+  } catch {
     // If Pinia isn't ready yet, redirect to login as fallback
-    console.warn('Auth store not ready in auth middleware:', error)
     const localePath = useLocalePath()
     return navigateTo(localePath('/login'))
   }

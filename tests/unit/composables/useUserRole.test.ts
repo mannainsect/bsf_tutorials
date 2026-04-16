@@ -370,13 +370,9 @@ describe('useUserRole', () => {
       authStore.setUser({ _id: 'user1', id: 'user1', email: 'u@test.com' })
       authStore.setActiveCompany({ _id: 'comp1', id: 'comp1' })
 
-      const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
-
       const { hasAnyRole } = useUserRole()
       expect(hasAnyRole()).toBe(false)
-      expect(consoleWarnSpy).toHaveBeenCalledWith('[useUserRole] localStorage not available')
 
-      consoleWarnSpy.mockRestore()
       global.window = originalWindow
     })
 
@@ -386,16 +382,8 @@ describe('useUserRole', () => {
 
       mockStorage['auth_active_company_roles'] = '{ invalid json }'
 
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
-
       const { hasAnyRole } = useUserRole()
       expect(hasAnyRole()).toBe(false)
-      expect(consoleErrorSpy).toHaveBeenCalledWith(
-        '[useUserRole] Failed to parse role data:',
-        expect.any(Error)
-      )
-
-      consoleErrorSpy.mockRestore()
     })
 
     it('should handle missing role data', () => {
@@ -416,13 +404,8 @@ describe('useUserRole', () => {
         invalid: 'structure'
       })
 
-      const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
-
       const { hasAnyRole } = useUserRole()
       expect(hasAnyRole()).toBe(false)
-      expect(consoleWarnSpy).toHaveBeenCalledWith('[useUserRole] Invalid role data structure')
-
-      consoleWarnSpy.mockRestore()
     })
 
     it('should handle localStorage quota exceeded', () => {
@@ -443,13 +426,9 @@ describe('useUserRole', () => {
         clear: vi.fn()
       })
 
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
-
       const { hasAnyRole } = useUserRole()
       expect(hasAnyRole()).toBe(false)
-      expect(consoleErrorSpy).toHaveBeenCalledWith('[useUserRole] localStorage quota exceeded')
 
-      consoleErrorSpy.mockRestore()
       // Restore original
       global.useStorage = () => ({
         get: originalGet,
@@ -475,13 +454,8 @@ describe('useUserRole', () => {
         clear: vi.fn()
       })
 
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
-
       const { hasAnyRole } = useUserRole()
       expect(hasAnyRole()).toBe(false)
-      expect(consoleErrorSpy).toHaveBeenCalledWith('[useUserRole] localStorage access denied')
-
-      consoleErrorSpy.mockRestore()
     })
 
     it('should clear corrupt data on parse error', () => {

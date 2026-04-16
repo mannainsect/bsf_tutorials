@@ -1,5 +1,6 @@
 import { marked } from 'marked'
 import DOMPurify from 'dompurify'
+import { useErrorHandler } from './errors/useErrorHandler'
 
 // TypeScript interface for extracted links
 export interface ExtractedLink {
@@ -8,6 +9,7 @@ export interface ExtractedLink {
 }
 
 export const useTextFormatting = () => {
+  const { handleSilentError } = useErrorHandler()
   // Configure marked with safe defaults
   marked.setOptions({
     breaks: true, // Convert line breaks to <br>
@@ -60,7 +62,9 @@ export const useTextFormatting = () => {
 
       return cleanHtml
     } catch (error) {
-      console.warn('Error formatting markdown:', error)
+      handleSilentError(
+        error, 'useTextFormatting.formatMarkdown'
+      )
       // Fallback to plain text
       return DOMPurify.sanitize(text)
     }
@@ -117,7 +121,7 @@ export const useTextFormatting = () => {
         }
       }
     } catch (error) {
-      console.warn('Error extracting URLs:', error)
+      handleSilentError(error, 'useTextFormatting.extractUrls')
     }
 
     return links

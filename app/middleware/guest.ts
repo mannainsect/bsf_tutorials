@@ -16,8 +16,7 @@ export default defineNuxtRouteMiddleware(_to => {
       const localePath = useLocalePath()
       return navigateTo(localePath('/main'))
     }
-  } catch (error) {
+  } catch {
     // If Pinia isn't ready yet, just continue
-    console.warn('Auth store not ready in guest middleware:', error)
   }
 })

@@ -81,7 +81,9 @@ onErrorCaptured((error: Error, _instance, errorInfo) => {
 
   // Log error in development
   if (import.meta.dev) {
+    // eslint-disable-next-line no-console -- prevent recursion with handleError
     console.error(t('errors.boundary.caughtLog'), error)
+    // eslint-disable-next-line no-console -- prevent recursion with handleError
     console.error(t('errors.boundary.infoLog'), errorInfo)
   }
 

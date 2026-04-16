@@ -83,6 +83,17 @@ vi.mock('@vee-validate/zod', () => ({
 // Mock CompanyRepository
 vi.mock('~/composables/api/repositories/CompanyRepository')
 
+// Mock useErrorHandler to prevent real toast calls in error paths
+vi.mock('~/composables/errors/useErrorHandler', () => ({
+  useErrorHandler: () => ({
+    normalizeError: vi.fn((error: unknown) => error),
+    handleError: vi.fn((error: unknown) => error),
+    handleApiError: vi.fn((error: unknown) => error),
+    handleValidationError: vi.fn((error: unknown) => error),
+    handleSilentError: vi.fn((error: unknown) => error)
+  })
+}))
+
 describe('useCompanyEdit', () => {
   let authStore: ReturnType<typeof realUseAuthStore>
   let mockCompany: Company

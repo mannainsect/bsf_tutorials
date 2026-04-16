@@ -12,7 +12,6 @@ export default defineNuxtRouteMiddleware(to => {
     // Ensure Pinia is available before trying to use stores
     const nuxtApp = useNuxtApp()
     if (!nuxtApp.$pinia) {
-      console.warn('Pinia not yet initialized, defaulting to public layout')
       to.meta.layout = 'public'
       return
     }
@@ -27,8 +26,7 @@ export default defineNuxtRouteMiddleware(to => {
     authStore.initializeAuth()
 
     to.meta.layout = authStore.isAuthenticated ? 'private' : 'public'
-  } catch (error) {
-    console.error('Layout middleware error:', error)
+  } catch {
     to.meta.layout = 'public'
   }
 })

@@ -568,8 +568,8 @@ const isPasswordValid = computed(() => {
 const loadProfileData = async () => {
   try {
     await ensureProfileData()
-  } catch (err: unknown) {
-    console.error('Error loading profile:', err)
+  } catch {
+    // Error handled by useProfile
   }
 }
 
@@ -603,8 +603,7 @@ const updatePassword = async () => {
       newPassword: '',
       confirmPassword: ''
     }
-  } catch (err: unknown) {
-    console.error('Error updating password:', err)
+  } catch {
     const errorToast = await useToast().create({
       message: t('account.password.updateError'),
       duration: 4000,

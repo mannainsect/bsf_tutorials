@@ -1,7 +1,9 @@
 import type { User, Company } from '../../shared/types'
 import { retry } from '~/utils/helpers'
+import { useErrorHandler } from '~/composables/errors/useErrorHandler'
 
 export const useAuthStore = defineStore('auth', () => {
+  const { handleError, handleSilentError } = useErrorHandler()
   const user = ref<User | null>(null)
   const token = ref<string | null>(null)
   const activeCompany = ref<Company | null>(null)
@@ -86,7 +88,7 @@ export const useAuthStore = defineStore('auth', () => {
       try {
         user.value = JSON.parse(savedUser)
       } catch (error) {
-        console.error('Failed to parse saved user data:', error)
+        handleSilentError(error, 'authStore.hydrate')
         storage.remove('auth_user')
       }
     }
@@ -95,7 +97,7 @@ export const useAuthStore = defineStore('auth', () => {
       try {
         activeCompany.value = JSON.parse(savedActiveCompany)
       } catch (error) {
-        console.error('Failed to parse saved active company data:', error)
+        handleSilentError(error, 'authStore.hydrate')
         storage.remove('auth_active_company')
       }
     }
@@ -104,7 +106,7 @@ export const useAuthStore = defineStore('auth', () => {
       try {
         otherCompanies.value = JSON.parse(savedOtherCompanies)
       } catch (error) {
-        console.error('Failed to parse saved other companies data:', error)
+        handleSilentError(error, 'authStore.hydrate')
         storage.remove('auth_other_companies')
       }
     }
@@ -113,7 +115,7 @@ export const useAuthStore = defineStore('auth', () => {
       try {
         lastProfileFetch.value = parseInt(savedLastProfileFetch) || 0
       } catch (error) {
-        console.error('Failed to parse saved last profile fetch time:', error)
+        handleSilentError(error, 'authStore.hydrate')
         storage.remove('auth_last_profile_fetch')
       }
     }
@@ -181,7 +183,6 @@ export const useAuthStore = defineStore('auth', () => {
 
         // Check if data size is reasonable (< 100KB)
         if (roleData.length > 100000) {
-          console.warn('[AUTH] Role data too large for localStorage, storing summary only')
           // Store only IDs if data is too large
           const summaryData = JSON.stringify({
             admins: (profile.active_company.admins || [])
@@ -202,7 +203,10 @@ export const useAuthStore = defineStore('auth', () => {
         // Handle localStorage errors (quota exceeded, disabled, etc.)
         if (error instanceof Error) {
           if (error.name === 'QuotaExceededError') {
-            console.error('[AUTH] localStorage quota exceeded, clearing old data')
+            handleSilentError(
+              new Error('localStorage quota exceeded'),
+              'authStore.persistRoleData'
+            )
             try {
               const storage = useStorage()
               // Clear old data to make room
@@ -215,10 +219,10 @@ export const useAuthStore = defineStore('auth', () => {
               })
               storage.set('auth_active_company_roles', minimalData)
             } catch {
-              console.error('[AUTH] Unable to store role data in localStorage')
+              // Unable to store role data
             }
           } else {
-            console.error('[AUTH] Failed to store role data:', error.message)
+            handleSilentError(error, 'authStore.persistRoleData')
           }
         }
       }
@@ -266,7 +270,10 @@ export const useAuthStore = defineStore('auth', () => {
           const firstCompanyId = firstCompany ? firstCompany._id || firstCompany.id : null
 
           if (!firstCompanyId) {
-            console.error('[AUTH] First company has no valid ID')
+            handleSilentError(
+              new Error('First company has no valid ID'),
+              'authStore.fetchProfile'
+            )
             // Fallback: set company locally without API update
             setProfileState(profile)
           } else {
@@ -280,16 +287,12 @@ export const useAuthStore = defineStore('auth', () => {
                 1000 // delay between attempts
               )
 
-              // Successfully auto-selected company
-              console.log('[AUTH] Successfully auto-selected company')
-
               // Update state from fresh response
               setProfileState(updatedProfile)
             } catch (error) {
-              console.error('[AUTH] Failed to auto-select company:', error)
+              handleSilentError(error, 'authStore.fetchProfile')
 
               // Fallback: set company locally without API update
-              // Using local fallback for company selection
               // Manually construct the active_company structure
               const activeCompanyId =
                 firstCompany?._id ?? (firstCompany?.id != null ? String(firstCompany.id) : null)
@@ -315,7 +318,6 @@ export const useAuthStore = defineStore('auth', () => {
                     return !activeCompanyId || otherId !== activeCompanyId
                   })
                 }
-              console.log('[AUTH] Using local fallback for company selection')
               setProfileState(fallbackProfile)
             }
           }
@@ -337,7 +339,7 @@ export const useAuthStore = defineStore('auth', () => {
           otherCompanies: otherCompanies.value
         }
       } catch (error) {
-        console.error('[AUTH] Failed to fetch profile:', error)
+        handleError(error, { source: 'authStore.fetchProfile' })
         // Ensure cleanup happens even on error
         if (!cleanupDone) {
           profileFetchPromise.value = null

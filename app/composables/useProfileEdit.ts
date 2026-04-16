@@ -4,6 +4,7 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { useForm, useField } from 'vee-validate'
 import { UserService } from './api/services/UserService'
 import type { UpdateUserRequest } from '../../shared/types'
+import { useErrorHandler } from './errors/useErrorHandler'
 
 export type ProfileEditForm = {
   name: string
@@ -15,6 +16,7 @@ export const useProfileEdit = () => {
   const { user, refreshProfile } = useProfile()
   const { t } = useI18n()
   const userService = new UserService()
+  const { handleError } = useErrorHandler()
 
   const profileEditSchema = z.object({
     name: z.string().min(1, t('validation.profile.nameRequired')),
@@ -127,7 +129,7 @@ export const useProfileEdit = () => {
 
       isEditing.value = false
     } catch (err: unknown) {
-      console.error(t('errors.account.updateProfileLog'), err)
+      handleError(err, { source: 'useProfileEdit.updateProfile' })
       error.value = err instanceof Error ? err.message : t('account.profile.updateError')
 
       const toast = await useToast().create({

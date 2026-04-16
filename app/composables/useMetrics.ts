@@ -1,6 +1,7 @@
 import { MetricsService } from './api/services/MetricsService'
 import { MetricCategory } from '../../shared/types/models/metrics'
 import type { MetricData } from '../../shared/types/models/metrics'
+import { useErrorHandler } from './errors/useErrorHandler'
 
 // NetworkInformation API type (experimental browser API)
 interface NetworkInformation {
@@ -15,6 +16,7 @@ interface NetworkInformation {
  * Provides a lightweight, non-blocking way to send metrics to the backend
  */
 export const useMetrics = () => {
+  const { handleSilentError } = useErrorHandler()
   // Use Nuxt's built-in state management for SSR safety
   const metricsService = useState<MetricsService>('metricsService', () => {
     return new MetricsService()
@@ -85,8 +87,7 @@ export const useMetrics = () => {
         throw error
       }
     } catch (error) {
-      // Metrics are non-critical, so we just log the error with context
-      console.error(`Error sending ${metricData.category} metric:`, error)
+      handleSilentError(error, 'useMetrics.sendMetric')
       return false
     }
   }

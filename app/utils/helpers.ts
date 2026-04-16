@@ -148,7 +148,6 @@ export const isValidRegex = (pattern: string): boolean => {
       if (nestedQuantifier.test(pattern) || nestedBraces.test(pattern)) {
         // But allow safe patterns like (/path)*
         if (!/\(\/[^)]*\)\*/.test(pattern)) {
-          console.warn('Potentially dangerous regex pattern detected')
           return false
         }
       }
@@ -174,7 +173,6 @@ export const createSafeRegex = (pattern: string, flags = ''): RegExp | null => {
       if (nestedQuantifier.test(pattern) || nestedBraces.test(pattern)) {
         // But allow safe patterns like (/path)*
         if (!/\(\/[^)]*\)\*/.test(pattern)) {
-          console.warn('Potentially dangerous regex pattern detected')
           return null
         }
       }
