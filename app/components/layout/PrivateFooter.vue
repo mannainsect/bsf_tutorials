@@ -31,8 +31,8 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
 import { menuController } from '@ionic/vue'
+import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 const { menu, home } = useIcons()
