@@ -9,11 +9,6 @@ import {
 import { mount } from '@vue/test-utils'
 import { onMounted, reactive } from 'vue'
 import { flushPromises } from '../../setup/test-setup'
-
-// Make Vue lifecycle hooks globally available
-// (Nuxt auto-imports these but test-setup omits
-// lifecycle hooks)
-vi.stubGlobal('onMounted', onMounted)
 import {
   freeVideoWithQueryParams,
   premiumVideo
@@ -21,6 +16,11 @@ import {
 import type {
   ContentPublic
 } from '../../../shared/types/api/content.types'
+
+// Make Vue lifecycle hooks globally available
+// (Nuxt auto-imports these but test-setup omits
+// lifecycle hooks)
+vi.stubGlobal('onMounted', onMounted)
 
 // Mock swiper CSS imports
 vi.mock('swiper/css', () => ({}))
@@ -32,6 +32,7 @@ vi.mock('swiper/css/autoplay', () => ({}))
 vi.stubGlobal('definePageMeta', vi.fn())
 
 // Import component under test after mocks
+// eslint-disable-next-line import/first
 import IndexPage from '~/pages/index.vue'
 
 const apiMock = vi.fn()
@@ -62,18 +63,22 @@ function mountPage(
 
   apiMock.mockResolvedValue(apiResult)
 
-  global.useApi = () => ({ api: apiMock })
-  global.useAuthStore = () => reactive({
-    user: null,
-    token: null,
-    isAuthenticated: authenticated,
-    setUser: vi.fn(),
-    setToken: vi.fn(),
-    logout: vi.fn(),
-    $patch: vi.fn(),
-    $reset: vi.fn(),
-    $subscribe: vi.fn()
-  })
+  vi.stubGlobal(
+    'useApi', () => ({ api: apiMock })
+  )
+  vi.stubGlobal(
+    'useAuthStore', () => reactive({
+      user: null,
+      token: null,
+      isAuthenticated: authenticated,
+      setUser: vi.fn(),
+      setToken: vi.fn(),
+      logout: vi.fn(),
+      $patch: vi.fn(),
+      $reset: vi.fn(),
+      $subscribe: vi.fn()
+    })
+  )
 
   return mount(IndexPage, {
     global: { stubs }
@@ -84,6 +89,7 @@ describe('IndexPage', () => {
   let randomSpy: ReturnType<typeof vi.spyOn>
 
   beforeEach(() => {
+    apiMock.mockReset()
     randomSpy = vi.spyOn(Math, 'random')
       .mockReturnValue(0)
   })
@@ -255,7 +261,22 @@ describe('IndexPage', () => {
         apiMock.mockReturnValue(
           new Promise(() => {})
         )
-        global.useApi = () => ({ api: apiMock })
+        vi.stubGlobal(
+          'useApi', () => ({ api: apiMock })
+        )
+        vi.stubGlobal(
+          'useAuthStore', () => reactive({
+            user: null,
+            token: null,
+            isAuthenticated: false,
+            setUser: vi.fn(),
+            setToken: vi.fn(),
+            logout: vi.fn(),
+            $patch: vi.fn(),
+            $reset: vi.fn(),
+            $subscribe: vi.fn()
+          })
+        )
 
         const wrapper = mount(IndexPage, {
           global: { stubs }
@@ -274,7 +295,22 @@ describe('IndexPage', () => {
         apiMock.mockRejectedValue(
           new Error('Network error')
         )
-        global.useApi = () => ({ api: apiMock })
+        vi.stubGlobal(
+          'useApi', () => ({ api: apiMock })
+        )
+        vi.stubGlobal(
+          'useAuthStore', () => reactive({
+            user: null,
+            token: null,
+            isAuthenticated: false,
+            setUser: vi.fn(),
+            setToken: vi.fn(),
+            logout: vi.fn(),
+            $patch: vi.fn(),
+            $reset: vi.fn(),
+            $subscribe: vi.fn()
+          })
+        )
 
         const wrapper = mount(IndexPage, {
           global: { stubs }
@@ -296,7 +332,22 @@ describe('IndexPage', () => {
         apiMock.mockRejectedValue(
           new Error('Server error')
         )
-        global.useApi = () => ({ api: apiMock })
+        vi.stubGlobal(
+          'useApi', () => ({ api: apiMock })
+        )
+        vi.stubGlobal(
+          'useAuthStore', () => reactive({
+            user: null,
+            token: null,
+            isAuthenticated: false,
+            setUser: vi.fn(),
+            setToken: vi.fn(),
+            logout: vi.fn(),
+            $patch: vi.fn(),
+            $reset: vi.fn(),
+            $subscribe: vi.fn()
+          })
+        )
 
         const wrapper = mount(IndexPage, {
           global: { stubs }

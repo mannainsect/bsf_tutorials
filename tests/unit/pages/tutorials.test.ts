@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { mount, VueWrapper } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
+import type { VueWrapper } from '@vue/test-utils'
 import {
   onMounted,
   onUnmounted,
@@ -13,10 +14,6 @@ import {
   freeVideoWithQueryParams,
   freeVideoNoQueryParams,
   premiumVideo,
-  directVimeoUrlWithWww,
-  directVimeoUrlNoWww,
-  videoWithManyQueryParams,
-  validVideos,
   allVideos
 } from '../../fixtures/videos'
 
@@ -41,7 +38,7 @@ const videosWithUrls = allVideos.filter(
 
 /**
  * Mount tutorials page with a mocked API response.
- * By default returns videosWithUrls.
+ * By default returns allVideos.
  * Pass `apiResponse` to override, or `apiError` to
  * simulate a failure.
  */
@@ -187,7 +184,9 @@ describe('TutorialsPage', () => {
         const filtered = vm.filteredVideos
         expect(filtered.length).toBeGreaterThan(0)
         expect(
-          filtered.some((v: ContentPublic) =>
+          filtered.every((v: ContentPublic) =>
+            v.title.toLowerCase()
+              .includes('fundamentals') ||
             v.description.toLowerCase()
               .includes('fundamentals')
           )
