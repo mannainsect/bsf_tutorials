@@ -1,3 +1,4 @@
+import { useI18n } from 'vue-i18n'
 import { modalController } from '@ionic/vue'
 import type { Ref } from 'vue'
 import { ref, onUnmounted, getCurrentInstance } from 'vue'

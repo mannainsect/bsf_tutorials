@@ -502,6 +502,7 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import { ref, onMounted, computed } from 'vue'
 // Use icons from the centralized useIcons composable
 const { alertCircle, create, warning, wallet } = useIcons()

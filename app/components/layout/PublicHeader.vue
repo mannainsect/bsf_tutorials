@@ -17,6 +17,7 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import HelpIcon from '~/components/help/HelpIcon.vue'
 import { useHelpTopic } from '~/composables/useHelpTopic'
 

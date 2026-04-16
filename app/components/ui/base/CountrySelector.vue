@@ -19,6 +19,7 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import { computed, toRefs } from 'vue'
 import { useCountries } from '~/composables/useCountries'
 import type { Country } from '~/composables/useCountries'

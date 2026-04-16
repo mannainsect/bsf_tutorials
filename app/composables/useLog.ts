@@ -1,3 +1,4 @@
+import { useI18n } from 'vue-i18n'
 import { LogService } from './api/services/LogService'
 import type { PopulatedLog, LogFilters } from '../../shared/types/models/log'
 import type { CreateLogResponse } from '../../shared/types/api/log'

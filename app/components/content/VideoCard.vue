@@ -82,6 +82,7 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import type { ContentPublic } from '../../../shared/types/api/content.types'
 
 interface Props {

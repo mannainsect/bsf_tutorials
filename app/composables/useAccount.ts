@@ -1,3 +1,4 @@
+import { useI18n } from 'vue-i18n'
 import { ref, computed, readonly } from 'vue'
 import type { User, UpdateUserRequest, Credit } from '../../shared/types'
 import { UserRepository } from './api/repositories/UserRepository'

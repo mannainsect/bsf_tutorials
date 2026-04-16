@@ -1,3 +1,4 @@
+import { useI18n } from 'vue-i18n'
 import { computed } from 'vue'
 import type { Country } from '~/utils/countries'
 import { COUNTRIES_DATA, POPULAR_COUNTRY_CODES } from '~/utils/countries'

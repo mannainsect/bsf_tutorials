@@ -18,6 +18,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
 const { locale, locales, t } = useI18n()
 const currentLocale = ref(locale.value)
 

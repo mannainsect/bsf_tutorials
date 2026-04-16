@@ -409,6 +409,10 @@ global.useUserRole = () => ({
   getUserRole: vi.fn(() => null)
 })
 
+vi.mock('vue-i18n', () => ({
+  useI18n: () => global.useI18n()
+}))
+
 // Mock useI18n composable
 global.useI18n = () => ({
   t: (key: string) => key,

@@ -52,6 +52,7 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import { warningOutline } from 'ionicons/icons'
 
 interface Props {

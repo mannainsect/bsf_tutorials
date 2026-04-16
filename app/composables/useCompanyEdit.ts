@@ -1,3 +1,4 @@
+import { useI18n } from 'vue-i18n'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm, useField } from 'vee-validate'
 import { createCompanyEditSchema } from '~/utils/validation/companySchemas'
