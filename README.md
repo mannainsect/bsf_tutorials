@@ -16,7 +16,8 @@ workflows on web and mobile using Capacitor.
 
 1. Clone the repository.
 2. Install dependencies with `npm install`.
-3. Copy `.env.example` to `.env` and set `NUXT_PUBLIC_API_BASE_URL`.
+3. Copy `.env.example` to `.env` and fill in values as needed.
+   `.env.example` is the source of truth for all runtime env vars.
 4. Run the development server with `npm run dev` (http://localhost:3000).
 
 ## Core Experience
@@ -80,6 +81,8 @@ workflows on web and mobile using Capacitor.
 - `npm run build` – Production build validation.
 - `npm run test:e2e` – Playwright specs (requires running `npm run dev`
   in a separate terminal first).
+- Playwright-only env vars (`CI`, `PW_ALL=1` for full browser matrix)
+  are configured in `playwright.config.ts`, not `.env.example`.
 
 ## Architecture Notes
 
