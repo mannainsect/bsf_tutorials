@@ -53,8 +53,9 @@ describe('Array utilities', () => {
 
   it('sortBy does not mutate original array', () => {
     const items = [{ id: 2 }, { id: 1 }]
+    const original = [...items]
     sortBy(items, i => i.id)
-    expect(items[0].id).toBe(2)
+    expect(items).toEqual(original)
   })
 })
 
@@ -65,13 +66,18 @@ describe('Object utilities', () => {
   })
 
   it('pick ignores missing keys', () => {
-    const obj = { a: 1 } as { a: number; b?: number }
+    const obj: Record<string, number> = { a: 1 }
     expect(pick(obj, ['a', 'b'])).toEqual({ a: 1 })
   })
 
   it('omit removes specified keys', () => {
     const obj = { a: 1, b: 2, c: 3 }
     expect(omit(obj, ['b'])).toEqual({ a: 1, c: 3 })
+  })
+
+  it('omit removes multiple keys', () => {
+    const obj = { a: 1, b: 2, c: 3 }
+    expect(omit(obj, ['a', 'c'])).toEqual({ b: 2 })
   })
 
   it('isEmpty returns true for null and undefined', () => {
@@ -98,6 +104,11 @@ describe('Object utilities', () => {
     expect(isEmpty(0)).toBe(false)
     expect(isEmpty(42)).toBe(false)
   })
+
+  it('isEmpty returns false for booleans', () => {
+    expect(isEmpty(false)).toBe(false)
+    expect(isEmpty(true)).toBe(false)
+  })
 })
 
 describe('Function utilities', () => {
@@ -105,6 +116,7 @@ describe('Function utilities', () => {
     vi.useFakeTimers()
   })
   afterEach(() => {
+    vi.clearAllTimers()
     vi.useRealTimers()
   })
 
@@ -129,6 +141,14 @@ describe('Function utilities', () => {
     expect(fn).toHaveBeenCalledOnce()
   })
 
+  it('debounce forwards arguments', () => {
+    const fn = vi.fn()
+    const debounced = debounce(fn, 100)
+    debounced('a', 42)
+    vi.advanceTimersByTime(100)
+    expect(fn).toHaveBeenCalledWith('a', 42)
+  })
+
   it('throttle fires first call immediately', () => {
     const fn = vi.fn()
     const throttled = throttle(fn, 100)
@@ -147,12 +167,21 @@ describe('Function utilities', () => {
     throttled()
     expect(fn).toHaveBeenCalledTimes(2)
   })
+
+  it('throttle forwards arguments', () => {
+    const fn = vi.fn()
+    const throttled = throttle(fn, 100)
+    throttled('x', 99)
+    expect(fn).toHaveBeenCalledWith('x', 99)
+  })
 })
 
 describe('URL utilities', () => {
   it('buildUrl appends query params', () => {
-    const url = buildUrl('https://example.com', { q: 'test', p: 1 })
-    expect(url).toBe('https://example.com/?q=test&p=1')
+    const url = new URL(buildUrl('https://example.com', { q: 'test', p: 1 }))
+    expect(url.origin).toBe('https://example.com')
+    expect(url.searchParams.get('q')).toBe('test')
+    expect(url.searchParams.get('p')).toBe('1')
   })
 
   it('buildUrl skips null and undefined values', () => {
