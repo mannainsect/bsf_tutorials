@@ -40,7 +40,6 @@
     "@vueuse/core": "^13.5.0",
     "@vueuse/nuxt": "^13.5.0",
     "dompurify": "^3.2.7",
-    "ionic-vue-router": "^8.2.8",
     "isomorphic-dompurify": "^2.28.0",
     "marked": "^16.3.0",
     "nuxt": "^4.0.0",
