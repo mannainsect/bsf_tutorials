@@ -288,6 +288,10 @@ config.global.stubs = {
   }
 }
 
+// Mock Nuxt createError
+global.createError = (o: { statusCode: number; statusMessage: string }) =>
+  Object.assign(new Error(o.statusMessage), o)
+
 // Setup Pinia for each test
 beforeEach(() => {
   const pinia = createPinia()

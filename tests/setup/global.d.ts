@@ -29,6 +29,10 @@ declare global {
   const useRoute: () => RouteLocationNormalizedLoaded
   const navigateTo: (to: string | { path: string }) => Promise<void>
   const $fetch: typeof import('ofetch').$fetch
+  const createError: (o: {
+    statusCode: number
+    statusMessage: string
+  }) => Error & { statusCode: number; statusMessage: string }
 
   // Pinia functions (from real Pinia)
   const defineStore: (typeof import('pinia'))['defineStore']
