@@ -83,7 +83,20 @@
     "creatingWorkspace": "Ihr Arbeitsbereich wird erstellt...",
     "settingUpCompany": "Ihr Unternehmen und Ihre Bereiche werden eingerichtet...",
     "retryCreation": "Erneut versuchen",
-    "skipForNow": "Vorläufig überspringen"
+    "skipForNow": "Vorläufig überspringen",
+    "passwordReset": {
+      "requestTitle": "Passwort zurücksetzen",
+      "requestSubtitle": "Geben Sie Ihre E-Mail ein und wir senden Ihnen einen Link zum Zurücksetzen",
+      "requestButton": "Link zum Zurücksetzen senden",
+      "requestSuccess": "Falls ein Konto mit dieser E-Mail existiert, erhalten Sie in Kürze einen Link zum Zurücksetzen des Passworts.",
+      "confirmTitle": "Neues Passwort festlegen",
+      "confirmSubtitle": "Geben Sie unten Ihr neues Passwort ein",
+      "newPassword": "Neues Passwort",
+      "confirmPassword": "Passwort bestätigen",
+      "submitButton": "Passwort zurücksetzen",
+      "successToast": "Passwort erfolgreich zurückgesetzt! Bitte melden Sie sich an.",
+      "invalidToken": "Ungültiger oder fehlender Token. Bitte fordern Sie einen neuen Link an."
+    }
   },
   "home": {
     "title": "BSF Tutorials",

@@ -111,6 +111,26 @@ export const createRegisterEmailPasswordSchema = (t: TranslateFn) => {
   })
 }
 
+export const createResetPasswordRequestSchema = (t: TranslateFn) => {
+  const f = createValidationFragments(t)
+  return z.object({
+    email: f.email
+  })
+}
+
+export const createResetPasswordConfirmSchema = (t: TranslateFn) => {
+  const f = createValidationFragments(t)
+  return z
+    .object({
+      password: f.password,
+      confirmPassword: f.password
+    })
+    .refine(data => data.password === data.confirmPassword, {
+      message: t('validation.passwordMatch'),
+      path: ['confirmPassword']
+    })
+}
+
 export const createProfileEditSchema = (t: TranslateFn) =>
   z.object({
     name: z.string().min(1, t('validation.profile.nameRequired')),
@@ -152,6 +172,10 @@ export const profileSchema = toTypedSchema(createProfileSchema(fallbackT))
 export const registerEmailPasswordSchema = toTypedSchema(
   createRegisterEmailPasswordSchema(fallbackT)
 )
+
+export const resetPasswordRequestSchema = toTypedSchema(createResetPasswordRequestSchema(fallbackT))
+
+export const resetPasswordConfirmSchema = toTypedSchema(createResetPasswordConfirmSchema(fallbackT))
 
 export function useFormValidation<T extends Record<string, unknown>>(
   schema: ZodSchema<T> | ReturnType<typeof toTypedSchema>,

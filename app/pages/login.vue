@@ -14,6 +14,14 @@
         <AuthLoginForm :loading="loading" :error="error" @submit="handleLogin" />
 
         <div class="ion-text-center ion-margin-top">
+          <NuxtLink :to="localePath('/auth/reset-password')">
+            <ion-button fill="clear" size="small">
+              {{ $t('auth.forgotPassword') }}
+            </ion-button>
+          </NuxtLink>
+        </div>
+
+        <div class="ion-text-center ion-margin-top">
           <ion-text color="medium">
             <p>{{ $t('auth.dontHaveAccount') }}</p>
           </ion-text>

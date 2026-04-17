@@ -13,6 +13,8 @@ import {
   createProfileSchema,
   createRegisterEmailPasswordSchema,
   createProfileEditSchema,
+  createResetPasswordRequestSchema,
+  createResetPasswordConfirmSchema,
   createCompanyEditSchema,
   createFallbackTranslator
 } from '~/composables/validation/useFormValidation'
@@ -504,6 +506,26 @@ describe('useFormValidation', () => {
       }
     })
 
+    it('createResetPasswordRequestSchema uses translator', () => {
+      const schema = createResetPasswordRequestSchema(stubT)
+      const result = schema.safeParse({ email: '' })
+      expect(result.success).toBe(false)
+      if (!result.success) {
+        const msgs = result.error.issues.map(i => i.message)
+        expect(msgs.some(m => m.startsWith('T:'))).toBe(true)
+      }
+    })
+
+    it('createResetPasswordConfirmSchema uses translator', () => {
+      const schema = createResetPasswordConfirmSchema(stubT)
+      const result = schema.safeParse({ password: '', confirmPassword: '' })
+      expect(result.success).toBe(false)
+      if (!result.success) {
+        const msgs = result.error.issues.map(i => i.message)
+        expect(msgs.some(m => m.startsWith('T:'))).toBe(true)
+      }
+    })
+
     it('createProfileEditSchema uses translator', () => {
       const schema = createProfileEditSchema(stubT)
       const result = schema.safeParse({ name: '', city: '', country: '' })
@@ -512,6 +534,72 @@ describe('useFormValidation', () => {
         const msgs = result.error.issues.map(i => i.message)
         expect(msgs.some(m => m.startsWith('T:'))).toBe(true)
       }
+    })
+  })
+
+  describe('resetPasswordRequestSchema', () => {
+    const stubT = (k: string, p?: Record<string, unknown>) => `T:${k}:${JSON.stringify(p ?? {})}`
+
+    it('should accept valid email', () => {
+      const schema = createResetPasswordRequestSchema(stubT)
+      const result = schema.safeParse({ email: 'test@example.com' })
+      expect(result.success).toBe(true)
+    })
+
+    it('should reject invalid email', () => {
+      const schema = createResetPasswordRequestSchema(stubT)
+      const result = schema.safeParse({ email: 'not-an-email' })
+      expect(result.success).toBe(false)
+    })
+
+    it('should reject empty email', () => {
+      const schema = createResetPasswordRequestSchema(stubT)
+      const result = schema.safeParse({ email: '' })
+      expect(result.success).toBe(false)
+    })
+  })
+
+  describe('resetPasswordConfirmSchema', () => {
+    const stubT = (k: string, p?: Record<string, unknown>) => `T:${k}:${JSON.stringify(p ?? {})}`
+
+    it('should accept matching passwords >= 8 chars', () => {
+      const schema = createResetPasswordConfirmSchema(stubT)
+      const result = schema.safeParse({
+        password: 'password123',
+        confirmPassword: 'password123'
+      })
+      expect(result.success).toBe(true)
+    })
+
+    it('should reject short passwords', () => {
+      const schema = createResetPasswordConfirmSchema(stubT)
+      const result = schema.safeParse({
+        password: 'short',
+        confirmPassword: 'short'
+      })
+      expect(result.success).toBe(false)
+    })
+
+    it('should reject mismatched passwords', () => {
+      const schema = createResetPasswordConfirmSchema(stubT)
+      const result = schema.safeParse({
+        password: 'password123',
+        confirmPassword: 'different123'
+      })
+      expect(result.success).toBe(false)
+      if (!result.success) {
+        const paths = result.error.issues.map(i => i.path.join('.'))
+        expect(paths).toContain('confirmPassword')
+      }
+    })
+
+    it('should reject empty passwords', () => {
+      const schema = createResetPasswordConfirmSchema(stubT)
+      const result = schema.safeParse({
+        password: '',
+        confirmPassword: ''
+      })
+      expect(result.success).toBe(false)
     })
   })
 

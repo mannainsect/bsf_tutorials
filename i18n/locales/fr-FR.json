@@ -83,7 +83,20 @@
     "creatingWorkspace": "Création de votre espace de travail...",
     "settingUpCompany": "Configuration de votre entreprise et de vos espaces...",
     "retryCreation": "Réessayer",
-    "skipForNow": "Ignorer pour l'instant"
+    "skipForNow": "Ignorer pour l'instant",
+    "passwordReset": {
+      "requestTitle": "Réinitialiser le mot de passe",
+      "requestSubtitle": "Entrez votre e-mail et nous vous enverrons un lien de réinitialisation",
+      "requestButton": "Envoyer le lien de réinitialisation",
+      "requestSuccess": "Si un compte existe avec cette adresse e-mail, vous recevrez un lien de réinitialisation sous peu.",
+      "confirmTitle": "Définir un nouveau mot de passe",
+      "confirmSubtitle": "Entrez votre nouveau mot de passe ci-dessous",
+      "newPassword": "Nouveau mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "submitButton": "Réinitialiser le mot de passe",
+      "successToast": "Mot de passe réinitialisé avec succès ! Veuillez vous connecter.",
+      "invalidToken": "Jeton invalide ou manquant. Veuillez demander un nouveau lien."
+    }
   },
   "home": {
     "title": "BSF Tutorials",

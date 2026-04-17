@@ -20,6 +20,14 @@ export const useAuth = () => {
     return authService.sendPasswordReset(email)
   }
 
+  const confirmPasswordReset = async (token: string, newPassword: string) => {
+    return authService.confirmPasswordReset(token, newPassword)
+  }
+
+  const sendRegisterToken = async (email: string) => {
+    return authService.sendRegisterToken(email)
+  }
+
   const verifyEmail = async (token: string) => {
     return authService.verifyEmail(token)
   }
@@ -33,6 +41,8 @@ export const useAuth = () => {
     logout,
     register,
     sendPasswordReset,
+    confirmPasswordReset,
+    sendRegisterToken,
     verifyEmail,
     setToken,
     user: computed(() => authStore.user),

@@ -98,17 +98,19 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { AuthService } from '~/composables/api/services/AuthService'
+import { useErrorHandler } from '~/composables/errors/useErrorHandler'
 
 definePageMeta({
   middleware: 'guest'
 })
 
-const { verifyEmail } = useAuth()
+const { verifyEmail, sendRegisterToken } = useAuth()
 const { initializeCompany } = useCompanyInitialization()
 const localePath = useLocalePath()
 const { t } = useI18n()
 const { mail, businessOutline } = useIcons()
+const toast = useToast()
+const { handleApiError } = useErrorHandler()
 
 // Get email from local storage
 const storage = useStorage()
@@ -200,14 +202,10 @@ const resendCode = async () => {
   resending.value = true
 
   try {
-    const authService = new AuthService()
-    await authService.sendRegisterToken(registrationEmail as string)
-
-    // Show success message or toast
-    // TODO: Add toast notification
+    await sendRegisterToken(registrationEmail as string)
+    await toast.showSuccess(t('auth.verificationCodeSentSuccess'))
   } catch (err: unknown) {
-    const errorObj = err as { data?: { detail?: string } }
-    error.value = errorObj.data?.detail || t('errors.resendFailed')
+    handleApiError(err as import('ofetch').FetchError, 'verify-token.resendCode')
   } finally {
     resending.value = false
   }
