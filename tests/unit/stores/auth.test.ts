@@ -2,6 +2,10 @@ import { describe, it, expect, beforeEach, vi, afterEach, beforeAll, afterAll } 
 import { setActivePinia, createPinia } from 'pinia'
 import { useAuthStore } from '~/stores/auth'
 import type { ProfileResponse } from '~/composables/api/repositories/ProfileRepository'
+
+type MockProfileRepo =
+  typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
+
 vi.mock('~/composables/api/repositories/ProfileRepository', () => ({
   ProfileRepository: vi.fn().mockImplementation(() => ({
     getCurrentProfile: vi.fn(),
@@ -14,6 +18,28 @@ vi.mock('~/composables/useApiEndpoints', () => ({
     profilesSwitchCompany: '/profiles/switch-company'
   })
 }))
+const makeActiveCompany = (company: {
+  _id?: string
+  id?: string
+  name: string
+}): ProfileResponse['active_company'] => ({
+  company,
+  metrics: {},
+  tasks: [],
+  devices: [],
+  spaces: [],
+  admins: [],
+  managers: [],
+  operators: []
+})
+
+const makeProfileResponse = (over: Partial<ProfileResponse> = {}): ProfileResponse => ({
+  user: { _id: 'u1', email: 'a@b.c', balance: 0 },
+  active_company: null,
+  other_companies: [],
+  ...over
+})
+
 const mockStorage: Record<string, string> = {}
 const originalUseStorage = global.useStorage
 beforeAll(() => {
@@ -70,33 +96,18 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
   })
   describe('Existing behavior preservation', () => {
     it('should not auto-select when active_company exists', async () => {
-      const profileWithActiveCompany: ProfileResponse = {
-        user: {
-          _id: 'user1',
-          email: 'test@example.com',
-          balance: 100
-        },
-        active_company: {
-          company: { _id: 'comp1', name: 'Active Co' },
-          metrics: {},
-          tasks: [],
-          devices: [],
-          spaces: [],
-          admins: [],
-          managers: [],
-          operators: []
-        },
+      const profileWithActiveCompany = makeProfileResponse({
+        user: { _id: 'user1', email: 'test@example.com', balance: 100 },
+        active_company: makeActiveCompany({ _id: 'comp1', name: 'Active Co' }),
         other_companies: [
           { _id: 'comp2', name: 'Other Co 1' },
           { _id: 'comp3', name: 'Other Co 2' }
         ]
-      }
+      })
       const { ProfileRepository } = await import('~/composables/api/repositories/ProfileRepository')
       mockGetCurrentProfile = vi.fn().mockResolvedValue(profileWithActiveCompany)
       mockSwitchCompany = vi.fn()
-      ;(
-        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
-      ).mockImplementation(() => ({
+      ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
@@ -114,21 +125,13 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       })
     })
     it('should handle profile with no companies at all', async () => {
-      const profileWithNoCompanies: ProfileResponse = {
-        user: {
-          _id: 'user1',
-          email: 'test@example.com',
-          balance: 50
-        },
-        active_company: null,
-        other_companies: []
-      }
+      const profileWithNoCompanies = makeProfileResponse({
+        user: { _id: 'user1', email: 'test@example.com', balance: 50 }
+      })
       const { ProfileRepository } = await import('~/composables/api/repositories/ProfileRepository')
       mockGetCurrentProfile = vi.fn().mockResolvedValue(profileWithNoCompanies)
       mockSwitchCompany = vi.fn()
-      ;(
-        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
-      ).mockImplementation(() => ({
+      ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
@@ -144,37 +147,21 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
   })
   describe('Auto-selection functionality', () => {
     it('should auto-select first company when no active_company exists', async () => {
-      const profileWithoutActiveCompany: ProfileResponse = {
-        user: {
-          _id: 'user1',
-          email: 'test@example.com',
-          balance: 75
-        },
-        active_company: null,
+      const profileWithoutActiveCompany = makeProfileResponse({
+        user: { _id: 'user1', email: 'test@example.com', balance: 75 },
         other_companies: [
           { _id: 'comp1', name: 'First Co' },
           { _id: 'comp2', name: 'Second Co' }
         ]
-      }
-      const updatedProfile: ProfileResponse = {
+      })
+      const updatedProfile = makeProfileResponse({
         ...profileWithoutActiveCompany,
-        active_company: {
-          company: { _id: 'comp1', name: 'First Co' },
-          metrics: {},
-          tasks: [],
-          devices: [],
-          spaces: [],
-          admins: [],
-          managers: [],
-          operators: []
-        }
-      }
+        active_company: makeActiveCompany({ _id: 'comp1', name: 'First Co' })
+      })
       const { ProfileRepository } = await import('~/composables/api/repositories/ProfileRepository')
       mockGetCurrentProfile = vi.fn().mockResolvedValue(profileWithoutActiveCompany)
       mockSwitchCompany = vi.fn().mockResolvedValue(updatedProfile)
-      ;(
-        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
-      ).mockImplementation(() => ({
+      ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
@@ -199,37 +186,21 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       })
     })
     it('should handle companies with id field instead of _id', async () => {
-      const profileWithIdField: ProfileResponse = {
-        user: {
-          id: 'user1',
-          email: 'test@example.com',
-          balance: 60
-        },
-        active_company: null,
+      const profileWithIdField = makeProfileResponse({
+        user: { id: 'user1', email: 'test@example.com', balance: 60 },
         other_companies: [
           { id: 'comp1', name: 'Company with id' },
           { _id: 'comp2', name: 'Company with _id' }
         ]
-      }
-      const updatedProfile: ProfileResponse = {
+      })
+      const updatedProfile = makeProfileResponse({
         ...profileWithIdField,
-        active_company: {
-          company: { id: 'comp1', name: 'Company with id' },
-          metrics: {},
-          tasks: [],
-          devices: [],
-          spaces: [],
-          admins: [],
-          managers: [],
-          operators: []
-        }
-      }
+        active_company: makeActiveCompany({ id: 'comp1', name: 'Company with id' })
+      })
       const { ProfileRepository } = await import('~/composables/api/repositories/ProfileRepository')
       mockGetCurrentProfile = vi.fn().mockResolvedValue(profileWithIdField)
       mockSwitchCompany = vi.fn().mockResolvedValue(updatedProfile)
-      ;(
-        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
-      ).mockImplementation(() => ({
+      ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
@@ -242,24 +213,17 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       })
     })
     it('should use local fallback when company has no valid ID', async () => {
-      const profileWithInvalidId: ProfileResponse = {
-        user: {
-          _id: 'user1',
-          email: 'test@example.com',
-          balance: 80
-        },
-        active_company: null,
+      const profileWithInvalidId = makeProfileResponse({
+        user: { _id: 'user1', email: 'test@example.com', balance: 80 },
         other_companies: [
           { name: 'Company without ID' } as { name: string },
           { _id: 'comp2', name: 'Valid Company' }
         ]
-      }
+      })
       const { ProfileRepository } = await import('~/composables/api/repositories/ProfileRepository')
       mockGetCurrentProfile = vi.fn().mockResolvedValue(profileWithInvalidId)
       mockSwitchCompany = vi.fn()
-      ;(
-        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
-      ).mockImplementation(() => ({
+      ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
@@ -279,28 +243,14 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
   describe('Retry mechanism', () => {
     it('should retry switchCompany on failure', async () => {
       vi.useFakeTimers()
-      const profileWithoutActiveCompany: ProfileResponse = {
-        user: {
-          _id: 'user1',
-          email: 'test@example.com',
-          balance: 90
-        },
-        active_company: null,
+      const profileWithoutActiveCompany = makeProfileResponse({
+        user: { _id: 'user1', email: 'test@example.com', balance: 90 },
         other_companies: [{ _id: 'comp1', name: 'First Co' }]
-      }
-      const updatedProfile: ProfileResponse = {
+      })
+      const updatedProfile = makeProfileResponse({
         ...profileWithoutActiveCompany,
-        active_company: {
-          company: { _id: 'comp1', name: 'First Co' },
-          metrics: {},
-          tasks: [],
-          devices: [],
-          spaces: [],
-          admins: [],
-          managers: [],
-          operators: []
-        }
-      }
+        active_company: makeActiveCompany({ _id: 'comp1', name: 'First Co' })
+      })
       const { ProfileRepository } = await import('~/composables/api/repositories/ProfileRepository')
       mockGetCurrentProfile = vi.fn().mockResolvedValue(profileWithoutActiveCompany)
       mockSwitchCompany = vi
@@ -309,9 +259,7 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
         .mockRejectedValueOnce(new Error('Timeout'))
         .mockRejectedValueOnce(new Error('Retry'))
         .mockResolvedValueOnce(updatedProfile)
-      ;(
-        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
-      ).mockImplementation(() => ({
+      ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
@@ -332,24 +280,17 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
     })
     it('should fall back to local selection after all retries fail', async () => {
       vi.useFakeTimers()
-      const profileWithoutActiveCompany: ProfileResponse = {
-        user: {
-          _id: 'user1',
-          email: 'test@example.com',
-          balance: 95
-        },
-        active_company: null,
+      const profileWithoutActiveCompany = makeProfileResponse({
+        user: { _id: 'user1', email: 'test@example.com', balance: 95 },
         other_companies: [
           { _id: 'comp1', name: 'First Co' },
           { _id: 'comp2', name: 'Second Co' }
         ]
-      }
+      })
       const { ProfileRepository } = await import('~/composables/api/repositories/ProfileRepository')
       mockGetCurrentProfile = vi.fn().mockResolvedValue(profileWithoutActiveCompany)
       mockSwitchCompany = vi.fn().mockRejectedValue(new Error('Persistent API failure'))
-      ;(
-        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
-      ).mockImplementation(() => ({
+      ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
@@ -381,21 +322,14 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
     })
     it('should use correct fixed retry delays', async () => {
       vi.useFakeTimers()
-      const profileWithoutActiveCompany: ProfileResponse = {
-        user: {
-          _id: 'user1',
-          email: 'test@example.com',
-          balance: 85
-        },
-        active_company: null,
+      const profileWithoutActiveCompany = makeProfileResponse({
+        user: { _id: 'user1', email: 'test@example.com', balance: 85 },
         other_companies: [{ _id: 'comp1', name: 'Test Co' }]
-      }
+      })
       const { ProfileRepository } = await import('~/composables/api/repositories/ProfileRepository')
       mockGetCurrentProfile = vi.fn().mockResolvedValue(profileWithoutActiveCompany)
       mockSwitchCompany = vi.fn().mockRejectedValue(new Error('Test error'))
-      ;(
-        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
-      ).mockImplementation(() => ({
+      ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
@@ -411,29 +345,13 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
   })
   describe('State management', () => {
     it('should update lastProfileFetch after successful fetch', async () => {
-      const profile: ProfileResponse = {
-        user: {
-          _id: 'user1',
-          email: 'test@example.com',
-          balance: 100
-        },
-        active_company: {
-          company: { _id: 'comp1', name: 'Test Co' },
-          metrics: {},
-          tasks: [],
-          devices: [],
-          spaces: [],
-          admins: [],
-          managers: [],
-          operators: []
-        },
-        other_companies: []
-      }
+      const profile = makeProfileResponse({
+        user: { _id: 'user1', email: 'test@example.com', balance: 100 },
+        active_company: makeActiveCompany({ _id: 'comp1', name: 'Test Co' })
+      })
       const { ProfileRepository } = await import('~/composables/api/repositories/ProfileRepository')
       mockGetCurrentProfile = vi.fn().mockResolvedValue(profile)
-      ;(
-        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
-      ).mockImplementation(() => ({
+      ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: vi.fn()
       }))
@@ -444,34 +362,18 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       expect(mockStorage['auth_last_profile_fetch']).toBeDefined()
     })
     it('should persist state to storage after auto-selection', async () => {
-      const profileWithoutActiveCompany: ProfileResponse = {
-        user: {
-          _id: 'user1',
-          email: 'test@example.com',
-          balance: 70
-        },
-        active_company: null,
+      const profileWithoutActiveCompany = makeProfileResponse({
+        user: { _id: 'user1', email: 'test@example.com', balance: 70 },
         other_companies: [{ _id: 'comp1', name: 'Selected Co' }]
-      }
-      const updatedProfile: ProfileResponse = {
+      })
+      const updatedProfile = makeProfileResponse({
         ...profileWithoutActiveCompany,
-        active_company: {
-          company: { _id: 'comp1', name: 'Selected Co' },
-          metrics: {},
-          tasks: [],
-          devices: [],
-          spaces: [],
-          admins: [],
-          managers: [],
-          operators: []
-        }
-      }
+        active_company: makeActiveCompany({ _id: 'comp1', name: 'Selected Co' })
+      })
       const { ProfileRepository } = await import('~/composables/api/repositories/ProfileRepository')
       mockGetCurrentProfile = vi.fn().mockResolvedValue(profileWithoutActiveCompany)
       mockSwitchCompany = vi.fn().mockResolvedValue(updatedProfile)
-      ;(
-        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
-      ).mockImplementation(() => ({
+      ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
@@ -499,34 +401,18 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       expect(storedOtherCompanies).toEqual(otherComps)
     })
     it('should return correct data structure from fetchProfile', async () => {
-      const profile: ProfileResponse = {
-        user: {
-          _id: 'user1',
-          email: 'test@example.com',
-          balance: 65
-        },
-        active_company: null,
+      const profile = makeProfileResponse({
+        user: { _id: 'user1', email: 'test@example.com', balance: 65 },
         other_companies: [{ _id: 'comp1', name: 'Auto Selected' }]
-      }
-      const updatedProfile: ProfileResponse = {
+      })
+      const updatedProfile = makeProfileResponse({
         ...profile,
-        active_company: {
-          company: { _id: 'comp1', name: 'Auto Selected' },
-          metrics: {},
-          tasks: [],
-          devices: [],
-          spaces: [],
-          admins: [],
-          managers: [],
-          operators: []
-        }
-      }
+        active_company: makeActiveCompany({ _id: 'comp1', name: 'Auto Selected' })
+      })
       const { ProfileRepository } = await import('~/composables/api/repositories/ProfileRepository')
       mockGetCurrentProfile = vi.fn().mockResolvedValue(profile)
       mockSwitchCompany = vi.fn().mockResolvedValue(updatedProfile)
-      ;(
-        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
-      ).mockImplementation(() => ({
+      ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
@@ -556,30 +442,21 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
     it('should throw error when fetchProfile fails completely', async () => {
       const { ProfileRepository } = await import('~/composables/api/repositories/ProfileRepository')
       mockGetCurrentProfile = vi.fn().mockRejectedValue(new Error('API Error'))
-      ;(
-        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
-      ).mockImplementation(() => ({
+      ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: vi.fn()
       }))
       await expect(store.fetchProfile()).rejects.toThrow('API Error')
     })
     it('should handle edge case of empty other_companies array', async () => {
-      const profile: ProfileResponse = {
-        user: {
-          _id: 'user1',
-          email: 'test@example.com',
-          balance: 55
-        },
-        active_company: null,
+      const profile = makeProfileResponse({
+        user: { _id: 'user1', email: 'test@example.com', balance: 55 },
         other_companies: null as unknown as []
-      }
+      })
       const { ProfileRepository } = await import('~/composables/api/repositories/ProfileRepository')
       mockGetCurrentProfile = vi.fn().mockResolvedValue(profile)
       mockSwitchCompany = vi.fn()
-      ;(
-        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
-      ).mockImplementation(() => ({
+      ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
@@ -589,34 +466,19 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       expect(store.otherCompanies).toEqual([])
     })
     it('should handle undefined active_company gracefully', async () => {
-      const profile: ProfileResponse = {
-        user: {
-          _id: 'user1',
-          email: 'test@example.com',
-          balance: 45
-        },
+      const profile = makeProfileResponse({
+        user: { _id: 'user1', email: 'test@example.com', balance: 45 },
         active_company: undefined as unknown as null,
         other_companies: [{ _id: 'comp1', name: 'Company 1' }]
-      }
-      const updatedProfile: ProfileResponse = {
+      })
+      const updatedProfile = makeProfileResponse({
         ...profile,
-        active_company: {
-          company: { _id: 'comp1', name: 'Company 1' },
-          metrics: {},
-          tasks: [],
-          devices: [],
-          spaces: [],
-          admins: [],
-          managers: [],
-          operators: []
-        }
-      }
+        active_company: makeActiveCompany({ _id: 'comp1', name: 'Company 1' })
+      })
       const { ProfileRepository } = await import('~/composables/api/repositories/ProfileRepository')
       mockGetCurrentProfile = vi.fn().mockResolvedValue(profile)
       mockSwitchCompany = vi.fn().mockResolvedValue(updatedProfile)
-      ;(
-        ProfileRepository as typeof import('~/composables/api/repositories/ProfileRepository').ProfileRepository
-      ).mockImplementation(() => ({
+      ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
         getCurrentProfile: mockGetCurrentProfile,
         switchCompany: mockSwitchCompany
       }))
@@ -627,6 +489,170 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
         id: 'comp1',
         name: 'Company 1'
       })
+    })
+  })
+  describe('fetchProfile edge cases', () => {
+    it('concurrent fetchProfile calls getCurrentProfile once', async () => {
+      const profile = makeProfileResponse({
+        user: { _id: 'user1', email: 'a@b.c', balance: 10 },
+        active_company: makeActiveCompany({ _id: 'c1', name: 'Co' })
+      })
+      const { ProfileRepository } = await import('~/composables/api/repositories/ProfileRepository')
+      mockGetCurrentProfile = vi.fn().mockResolvedValue(profile)
+      ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
+        getCurrentProfile: mockGetCurrentProfile,
+        switchCompany: vi.fn()
+      }))
+      // Both calls start synchronously; the second should
+      // reuse the in-flight promise
+      const p1 = store.fetchProfile()
+      const p2 = store.fetchProfile()
+      const r1 = await p1
+      await p2
+      expect(mockGetCurrentProfile).toHaveBeenCalledTimes(1)
+      expect(r1.user).toEqual({
+        _id: 'user1',
+        id: 'user1',
+        email: 'a@b.c',
+        balance: 10
+      })
+    })
+
+    it(
+      'profileFetchPromise cleared after rejection — ' +
+        'second call fires fresh getCurrentProfile',
+      async () => {
+        const { ProfileRepository } = await import(
+          '~/composables/api/repositories/ProfileRepository'
+        )
+        const successProfile = makeProfileResponse({
+          user: { _id: 'u2', email: 'x@y.z', balance: 5 },
+          active_company: makeActiveCompany({ _id: 'c2', name: 'C2' })
+        })
+        mockGetCurrentProfile = vi
+          .fn()
+          .mockRejectedValueOnce(new Error('boom'))
+          .mockResolvedValueOnce(successProfile)
+        ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
+          getCurrentProfile: mockGetCurrentProfile,
+          switchCompany: vi.fn()
+        }))
+        await expect(store.fetchProfile()).rejects.toThrow('boom')
+        const result = await store.fetchProfile()
+        expect(mockGetCurrentProfile).toHaveBeenCalledTimes(2)
+        expect(result.user).toEqual({
+          _id: 'u2',
+          id: 'u2',
+          email: 'x@y.z',
+          balance: 5
+        })
+      }
+    )
+
+    it(
+      'switchCompany rejected with string "Bad Gateway" ' + '— fallback sets first company',
+      async () => {
+        vi.useFakeTimers()
+        try {
+          const profile = makeProfileResponse({
+            user: { _id: 'u3', email: 'f@g.h', balance: 0 },
+            other_companies: [
+              { _id: 'cx', name: 'FallbackCo' },
+              { _id: 'cy', name: 'Other' }
+            ]
+          })
+          const { ProfileRepository } = await import(
+            '~/composables/api/repositories/ProfileRepository'
+          )
+          mockGetCurrentProfile = vi.fn().mockResolvedValue(profile)
+          mockSwitchCompany = vi.fn().mockRejectedValue('Bad Gateway')
+          ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
+            getCurrentProfile: mockGetCurrentProfile,
+            switchCompany: mockSwitchCompany
+          }))
+          const fetchPromise = store.fetchProfile()
+          await vi.runOnlyPendingTimersAsync()
+          await vi.advanceTimersByTimeAsync(1000)
+          await vi.advanceTimersByTimeAsync(1000)
+          await vi.advanceTimersByTimeAsync(1000)
+          await fetchPromise
+          expect(mockSwitchCompany).toHaveBeenCalledTimes(4)
+          expect(store.activeCompany).toEqual({
+            _id: 'cx',
+            id: 'cx',
+            name: 'FallbackCo'
+          })
+        } finally {
+          vi.useRealTimers()
+        }
+      }
+    )
+
+    it(
+      'switchCompany rejected with fetchError-like object ' + '— fallback sets first company',
+      async () => {
+        vi.useFakeTimers()
+        try {
+          const profile = makeProfileResponse({
+            user: { _id: 'u4', email: 'h@i.j', balance: 0 },
+            other_companies: [{ _id: 'cz', name: 'FBCo' }]
+          })
+          const { ProfileRepository } = await import(
+            '~/composables/api/repositories/ProfileRepository'
+          )
+          mockGetCurrentProfile = vi.fn().mockResolvedValue(profile)
+          mockSwitchCompany = vi.fn().mockRejectedValue({
+            statusCode: 502,
+            data: { detail: 'forbidden' }
+          })
+          ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
+            getCurrentProfile: mockGetCurrentProfile,
+            switchCompany: mockSwitchCompany
+          }))
+          const fetchPromise = store.fetchProfile()
+          await vi.runOnlyPendingTimersAsync()
+          await vi.advanceTimersByTimeAsync(1000)
+          await vi.advanceTimersByTimeAsync(1000)
+          await vi.advanceTimersByTimeAsync(1000)
+          await fetchPromise
+          expect(mockSwitchCompany).toHaveBeenCalledTimes(4)
+          expect(store.activeCompany).toEqual({
+            _id: 'cz',
+            id: 'cz',
+            name: 'FBCo'
+          })
+        } finally {
+          vi.useRealTimers()
+        }
+      }
+    )
+
+    it('retry exhaustion preserves token', async () => {
+      vi.useFakeTimers()
+      try {
+        const profile = makeProfileResponse({
+          user: { _id: 'u5', email: 'k@l.m', balance: 0 },
+          other_companies: [{ _id: 'cw', name: 'KeepToken' }]
+        })
+        const { ProfileRepository } = await import(
+          '~/composables/api/repositories/ProfileRepository'
+        )
+        mockGetCurrentProfile = vi.fn().mockResolvedValue(profile)
+        mockSwitchCompany = vi.fn().mockRejectedValue(new Error('fail'))
+        ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
+          getCurrentProfile: mockGetCurrentProfile,
+          switchCompany: mockSwitchCompany
+        }))
+        const fetchPromise = store.fetchProfile()
+        await vi.runOnlyPendingTimersAsync()
+        await vi.advanceTimersByTimeAsync(1000)
+        await vi.advanceTimersByTimeAsync(1000)
+        await vi.advanceTimersByTimeAsync(1000)
+        await fetchPromise
+        expect(store.token).toBe('test-token')
+      } finally {
+        vi.useRealTimers()
+      }
     })
   })
 })

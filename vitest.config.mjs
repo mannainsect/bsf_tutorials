@@ -52,10 +52,10 @@ export default defineConfig({
       reportsDirectory: './coverage',
       exclude: ['node_modules/**', 'tests/**', '**/*.config.*', '.nuxt/**', 'dist/**'],
       thresholds: {
-        lines: 25,
+        lines: 27,
         branches: 78,
         functions: 72,
-        statements: 25
+        statements: 27
       }
     }
   },

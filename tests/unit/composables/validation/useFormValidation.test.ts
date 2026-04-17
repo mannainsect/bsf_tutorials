@@ -12,8 +12,11 @@ import {
   createRegisterSchema,
   createProfileSchema,
   createRegisterEmailPasswordSchema,
-  createProfileEditSchema
+  createProfileEditSchema,
+  createCompanyEditSchema,
+  createFallbackTranslator
 } from '~/composables/validation/useFormValidation'
+import type { TranslateFn } from '~/composables/validation/useFormValidation'
 
 describe('useFormValidation', () => {
   describe('validationSchemas', () => {
@@ -508,6 +511,81 @@ describe('useFormValidation', () => {
       if (!result.success) {
         const msgs = result.error.issues.map(i => i.message)
         expect(msgs.some(m => m.startsWith('T:'))).toBe(true)
+      }
+    })
+  })
+
+  describe('factory and composition gaps', () => {
+    it('translator returning undefined falls back to Zod defaults', () => {
+      const brokenT = (() => undefined) as unknown as TranslateFn
+      const schema = createLoginSchema(brokenT)
+      const result = schema.safeParse({
+        email: 'not-an-email',
+        password: 'x'
+      })
+      expect(result.success).toBe(false)
+      if (!result.success) {
+        // Zod uses its own English defaults when message
+        // is undefined
+        const emailIssue = result.error.issues.find(i => i.path[0] === 'email')
+        expect(emailIssue).toBeDefined()
+        expect(emailIssue!.message).toBeTruthy()
+      }
+    })
+
+    it('createFallbackTranslator produces English messages', () => {
+      const t = createFallbackTranslator()
+      const schema = createLoginSchema(t)
+      const result = schema.safeParse({
+        email: 'bad',
+        password: 'x'
+      })
+      expect(result.success).toBe(false)
+      if (!result.success) {
+        const emailMsg = result.error.issues.find(i => i.path[0] === 'email')?.message
+        expect(emailMsg).toBe('Please enter a valid email address')
+      }
+    })
+
+    it('login and register reject not-an-email ' + 'with identical messages', () => {
+      const t = createFallbackTranslator()
+      const loginS = createLoginSchema(t)
+      const registerS = createRegisterSchema(t)
+      const loginResult = loginS.safeParse({
+        email: 'not-an-email',
+        password: '12345678'
+      })
+      const registerResult = registerS.safeParse({
+        name: 'a',
+        email: 'not-an-email',
+        password: '12345678',
+        confirmPassword: '12345678'
+      })
+      expect(loginResult.success).toBe(false)
+      expect(registerResult.success).toBe(false)
+      if (!loginResult.success && !registerResult.success) {
+        const loginEmailMsg = loginResult.error.issues.find(i => i.path[0] === 'email')?.message
+        const regEmailMsg = registerResult.error.issues.find(i => i.path[0] === 'email')?.message
+        expect(loginEmailMsg).toBe(regEmailMsg)
+      }
+    })
+
+    it('profile and company emit error on missing name', () => {
+      const t = createFallbackTranslator()
+      const profileS = createProfileSchema(t)
+      const companyS = createCompanyEditSchema(t)
+      const profileResult = profileS.safeParse({
+        name: '',
+        email: 'a@b.c'
+      })
+      const companyResult = companyS.safeParse({ name: '' })
+      expect(profileResult.success).toBe(false)
+      expect(companyResult.success).toBe(false)
+      if (!profileResult.success && !companyResult.success) {
+        const profileNameErr = profileResult.error.issues.find(i => i.path[0] === 'name')
+        const companyNameErr = companyResult.error.issues.find(i => i.path[0] === 'name')
+        expect(profileNameErr).toBeDefined()
+        expect(companyNameErr).toBeDefined()
       }
     })
   })
