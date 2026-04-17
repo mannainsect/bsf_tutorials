@@ -48,7 +48,12 @@ const route = useRoute()
 const localePath = useLocalePath()
 const { loading, confirmReset } = usePasswordReset()
 
-const token = computed(() => route.query.token as string | undefined)
+const token = computed(() => {
+  const rawToken = route.query.token
+  return typeof rawToken === 'string' && rawToken.length > 0
+    ? rawToken
+    : undefined
+})
 
 const handleConfirm = async (payload: { password: string }) => {
   if (!token.value) return

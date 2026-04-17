@@ -203,7 +203,7 @@ const resendCode = async () => {
 
   try {
     await sendRegisterToken(registrationEmail as string)
-    toast.showSuccess(t('auth.verificationCodeSentSuccess'))
+    await toast.showSuccess(t('auth.verificationCodeSentSuccess'))
   } catch (err: unknown) {
     handleApiError(err as import('ofetch').FetchError, 'verify-token.resendCode')
   } finally {

@@ -88,13 +88,21 @@ test.describe('Password Reset Flow', () => {
     await passwordInputs.nth(0).locator('input').fill('NewSecurePass1')
     await passwordInputs.nth(1).locator('input').fill('NewSecurePass1')
 
+    const confirmResponse = page.waitForResponse(
+      response =>
+        response.url().includes('/reset-password/confirm') &&
+        response.request().method() === 'POST'
+    )
     await page.locator('ion-button[type="submit"]').click()
-
-    // Wait a moment for any potential navigation
-    await page.waitForTimeout(2000)
+    await confirmResponse
 
     // Should stay on confirm page (NOT redirected to /login)
     await expect(page).toHaveURL(/\/confirm/)
+
+    // Should show error toast
+    await expect(
+      page.locator('ion-toast')
+    ).toBeVisible({ timeout: 5000 })
 
     // Should NOT have navigated to login
     expect(page.url()).not.toMatch(/\/login/)

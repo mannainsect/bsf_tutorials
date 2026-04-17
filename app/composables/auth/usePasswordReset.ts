@@ -22,14 +22,24 @@ export function usePasswordReset() {
     return { success: true }
   }
 
-  const confirmReset = async ({ token, password }: { token: string; password: string }) => {
+  const confirmReset = async (
+    { token, password }: { token: string; password: string }
+  ) => {
     loading.value = true
     try {
-      await confirmPasswordReset(token, password)
-      await toast.showSuccess(t('auth.passwordReset.successToast'))
+      try {
+        await confirmPasswordReset(token, password)
+      } catch (err: unknown) {
+        handleApiError(
+          err as import('ofetch').FetchError,
+          'usePasswordReset.confirmReset'
+        )
+        return
+      }
+      await toast.showSuccess(
+        t('auth.passwordReset.successToast')
+      )
       await navigateTo(localePath('/login'))
-    } catch (err: unknown) {
-      handleApiError(err as import('ofetch').FetchError, 'usePasswordReset.confirmReset')
     } finally {
       loading.value = false
     }
