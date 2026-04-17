@@ -310,7 +310,9 @@
     "company": {
       "nameRequired": "El nombre de la empresa es obligatorio",
       "countryFormat": "País debe ser código ISO de 2 letras (ej. ES)"
-    }
+    },
+    "invalidPhone": "Por favor ingresa un número de teléfono válido",
+    "invalidUrl": "Por favor ingresa una URL válida"
   },
   "settings": {
     "title": "Configuración",

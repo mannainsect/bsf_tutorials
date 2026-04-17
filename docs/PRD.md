@@ -201,7 +201,50 @@ cp .env.example .env
 - Help modal accessibility: focus management and topic fallbacks.
 - Metrics/log instrumentation: ensure non-blocking behaviour and correct payload enrichment.
 
-## 7. Future Extensions
+## 7. Form Validation Conventions
+
+### Factory Pattern
+
+All form schemas live in
+`app/composables/validation/useFormValidation.ts` as
+factory functions that accept a translator:
+
+```ts
+const schema = createLoginSchema(t)
+```
+
+Pre-built English-default exports (`loginSchema`,
+`registerSchema`, `profileSchema`,
+`registerEmailPasswordSchema`) use
+`createFallbackTranslator()` for test compatibility.
+
+### Canonical i18n Keys
+
+From `i18n/locales/en-US.json`:
+
+| Key                                | English Value                       |
+| ---------------------------------- | ----------------------------------- |
+| `validation.required`              | This field is required              |
+| `validation.invalidEmail`          | Please enter a valid email address  |
+| `validation.minLength`             | Minimum length is {min} characters  |
+| `validation.maxLength`             | Maximum length is {max} characters  |
+| `validation.passwordMatch`         | Passwords don't match               |
+| `validation.invalidFormat`         | Invalid format                      |
+| `validation.profile.nameRequired`  | Name is required                    |
+| `validation.company.nameRequired`  | Company name is required            |
+| `validation.company.countryFormat` | Country must be a 2-letter ISO code |
+
+### Rules
+
+- Schemas call factory functions, never `useI18n()` at
+  module top level.
+- Any new validation key must also have an English
+  fallback in `fallbackMessages` inside
+  `useFormValidation.ts`.
+- Components call `createXSchema(t)` inside `<script
+setup>` where `t` comes from `useI18n()`.
+
+## 8. Future Extensions
 
 - Build authenticated video catalogue with purchase flows and progress tracking.
 - Add individual video detail pages with credit-based purchase using
