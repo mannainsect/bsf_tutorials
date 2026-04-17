@@ -689,10 +689,15 @@ describe('initializeAuth corruption handling', () => {
 
   function seedValid() {
     mockStorage['auth_token'] = 'tok-1'
+    localStorage.setItem('auth_token', JSON.stringify('tok-1'))
     mockStorage['auth_user'] = validUser
+    localStorage.setItem('auth_user', validUser)
     mockStorage['auth_active_company'] = validActiveCompany
+    localStorage.setItem('auth_active_company', validActiveCompany)
     mockStorage['auth_other_companies'] = validOtherCompanies
+    localStorage.setItem('auth_other_companies', validOtherCompanies)
     mockStorage['auth_last_profile_fetch'] = '1700000000000'
+    localStorage.setItem('auth_last_profile_fetch', JSON.stringify('1700000000000'))
   }
 
   function clearMockStorage() {
@@ -761,6 +766,7 @@ describe('initializeAuth corruption handling', () => {
 
   it('hydrates token only when others are missing', () => {
     mockStorage['auth_token'] = 'tok-1'
+    localStorage.setItem('auth_token', JSON.stringify('tok-1'))
     store.initializeAuth()
     expect(store.token).toBe('tok-1')
     expect(store.user).toBeNull()
@@ -768,14 +774,13 @@ describe('initializeAuth corruption handling', () => {
     expect(mockRemove).not.toHaveBeenCalled()
   })
 
-  // --- Corruption tests (expected to FAIL red) ---
-  // The current initializeAuth does per-field try/catch and
-  // only removes the single corrupt key. The desired behavior
-  // is a full logout that clears ALL 5 keys.
+  // Corruption in any auth key triggers full logout
+  // and clears all auth-related storage keys.
 
   it('corrupt auth_user triggers full reset ' + '(all keys removed)', () => {
     seedValid()
     mockStorage['auth_user'] = '{not-json'
+    localStorage.setItem('auth_user', '{not-json')
     store.initializeAuth()
     expect(store.token).toBeNull()
     expect(store.user).toBeNull()
@@ -786,6 +791,7 @@ describe('initializeAuth corruption handling', () => {
   it('corrupt auth_active_company triggers full reset', () => {
     seedValid()
     mockStorage['auth_active_company'] = '{bad'
+    localStorage.setItem('auth_active_company', '{bad')
     store.initializeAuth()
     expect(store.token).toBeNull()
     expect(allKeysAbsent()).toBe(true)
@@ -794,6 +800,7 @@ describe('initializeAuth corruption handling', () => {
   it('corrupt auth_other_companies triggers full reset', () => {
     seedValid()
     mockStorage['auth_other_companies'] = '[broken'
+    localStorage.setItem('auth_other_companies', '[broken')
     store.initializeAuth()
     expect(store.token).toBeNull()
     expect(allKeysAbsent()).toBe(true)
@@ -802,6 +809,7 @@ describe('initializeAuth corruption handling', () => {
   it('corrupt auth_last_profile_fetch triggers full reset', () => {
     seedValid()
     mockStorage['auth_last_profile_fetch'] = 'NaN-bad'
+    localStorage.setItem('auth_last_profile_fetch', 'NaN-bad')
     store.initializeAuth()
     expect(store.token).toBeNull()
     expect(allKeysAbsent()).toBe(true)
@@ -810,7 +818,9 @@ describe('initializeAuth corruption handling', () => {
   it('corrupt inner user JSON triggers full reset', () => {
     seedValid()
     // Valid outer string, invalid inner JSON
-    mockStorage['auth_user'] = JSON.stringify('{not-json-inner')
+    const corruptValue = JSON.stringify('{not-json-inner')
+    mockStorage['auth_user'] = corruptValue
+    localStorage.setItem('auth_user', corruptValue)
     store.initializeAuth()
     expect(store.token).toBeNull()
     expect(allKeysAbsent()).toBe(true)

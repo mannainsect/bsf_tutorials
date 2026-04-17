@@ -84,11 +84,9 @@ describe('useStorage composable', () => {
     })
   })
 
-  describe('corruption handling (contract — should fail red)', () => {
-    // These tests define the desired behavior: get() should
-    // return null and remove the key when localStorage holds
-    // unparseable data. The current implementation has no
-    // try/catch around JSON.parse so these will throw.
+  describe('corruption handling', () => {
+    // Verifies get() returns null and removes the key
+    // when localStorage holds unparseable JSON data.
 
     const corruptValues = ['{not json', 'undefined', '[1,', '{"a":}']
 
