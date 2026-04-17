@@ -5,6 +5,7 @@
 .nitro
 .cache
 dist
+.baseline
 
 # Node dependencies
 node_modules
