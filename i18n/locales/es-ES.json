@@ -84,7 +84,20 @@
     "creatingWorkspace": "Creando tu espacio de trabajo...",
     "settingUpCompany": "Configurando tu empresa y espacios...",
     "retryCreation": "Reintentar",
-    "skipForNow": "Omitir por ahora"
+    "skipForNow": "Omitir por ahora",
+    "passwordReset": {
+      "requestTitle": "Restablecer contraseña",
+      "requestSubtitle": "Ingrese su correo electrónico y le enviaremos un enlace para restablecer",
+      "requestButton": "Enviar enlace de restablecimiento",
+      "requestSuccess": "Si existe una cuenta con ese correo electrónico, recibirá un enlace para restablecer su contraseña en breve.",
+      "confirmTitle": "Establecer nueva contraseña",
+      "confirmSubtitle": "Ingrese su nueva contraseña a continuación",
+      "newPassword": "Nueva contraseña",
+      "confirmPassword": "Confirmar contraseña",
+      "submitButton": "Restablecer contraseña",
+      "successToast": "¡Contraseña restablecida con éxito! Por favor, inicie sesión.",
+      "invalidToken": "Token inválido o faltante. Por favor, solicite un nuevo enlace."
+    }
   },
   "home": {
     "title": "BSF Tutorials",

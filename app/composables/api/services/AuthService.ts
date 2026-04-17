@@ -55,6 +55,13 @@ export class AuthService {
   }
 
   /**
+   * Confirm password reset with token
+   */
+  async confirmPasswordReset(token: string, newPassword: string) {
+    return this.authRepository.confirmPasswordReset(token, newPassword)
+  }
+
+  /**
    * Verify email with token and handle authentication
    */
   async verifyEmail(token: string) {

@@ -35,6 +35,7 @@ const mockResetUserPassword = vi.fn()
 const mockLogin = vi.fn()
 const mockRegister = vi.fn()
 const mockSendPasswordReset = vi.fn()
+const mockConfirmPasswordReset = vi.fn()
 const mockVerifyEmail = vi.fn()
 const mockLoginWithToken = vi.fn()
 
@@ -47,7 +48,7 @@ vi.mock('~/composables/api/repositories/AuthRepository', () => ({
     logout: vi.fn(),
     refreshToken: vi.fn(),
     sendPasswordReset: mockSendPasswordReset,
-    confirmPasswordReset: vi.fn(),
+    confirmPasswordReset: mockConfirmPasswordReset,
     verifyEmail: mockVerifyEmail,
     loginWithToken: mockLoginWithToken
   }))
@@ -162,6 +163,26 @@ describe('AuthService', () => {
 
       expect(mockSendPasswordReset).toHaveBeenCalledWith('a@b.com')
       expect(result).toEqual(mockResponse)
+    })
+  })
+
+  describe('confirmPasswordReset', () => {
+    it('should delegate to AuthRepository.confirmPasswordReset', async () => {
+      const mockResponse = { message: 'Password reset confirmed' }
+      mockConfirmPasswordReset.mockResolvedValue(mockResponse)
+
+      const result = await service.confirmPasswordReset('reset-token', 'newPass123')
+
+      expect(mockConfirmPasswordReset).toHaveBeenCalledWith('reset-token', 'newPass123')
+      expect(result).toEqual(mockResponse)
+    })
+
+    it('should propagate rejection from repository', async () => {
+      mockConfirmPasswordReset.mockRejectedValue(new Error('Invalid token'))
+
+      await expect(service.confirmPasswordReset('bad-token', 'newPass123')).rejects.toThrow(
+        'Invalid token'
+      )
     })
   })
 

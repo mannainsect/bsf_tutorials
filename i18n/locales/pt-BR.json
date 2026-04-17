@@ -83,7 +83,20 @@
     "creatingWorkspace": "Criando seu espaço de trabalho...",
     "settingUpCompany": "Configurando sua empresa e ambientes...",
     "retryCreation": "Tentar novamente",
-    "skipForNow": "Pular por enquanto"
+    "skipForNow": "Pular por enquanto",
+    "passwordReset": {
+      "requestTitle": "Redefinir senha",
+      "requestSubtitle": "Digite seu e-mail e enviaremos um link de redefinição",
+      "requestButton": "Enviar link de redefinição",
+      "requestSuccess": "Se existir uma conta com esse e-mail, você receberá um link de redefinição em breve.",
+      "confirmTitle": "Definir nova senha",
+      "confirmSubtitle": "Digite sua nova senha abaixo",
+      "newPassword": "Nova senha",
+      "confirmPassword": "Confirmar senha",
+      "submitButton": "Redefinir senha",
+      "successToast": "Senha redefinida com sucesso! Por favor, faça login.",
+      "invalidToken": "Token inválido ou ausente. Por favor, solicite um novo link."
+    }
   },
   "home": {
     "title": "BSF Tutorials",

@@ -89,7 +89,20 @@
     "creatingWorkspace": "Creating your workspace...",
     "settingUpCompany": "Setting up your company and spaces...",
     "retryCreation": "Retry",
-    "skipForNow": "Skip for now"
+    "skipForNow": "Skip for now",
+    "passwordReset": {
+      "requestTitle": "Reset Password",
+      "requestSubtitle": "Enter your email and we'll send you a reset link",
+      "requestButton": "Send Reset Link",
+      "requestSuccess": "If an account exists with that email, you will receive a password reset link shortly.",
+      "confirmTitle": "Set New Password",
+      "confirmSubtitle": "Enter your new password below",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm Password",
+      "submitButton": "Reset Password",
+      "successToast": "Password reset successfully! Please sign in.",
+      "invalidToken": "Invalid or missing reset token. Please request a new reset link."
+    }
   },
   "home": {
     "title": "BSF Tutorials",
