@@ -50,9 +50,7 @@ const { loading, confirmReset } = usePasswordReset()
 
 const token = computed(() => {
   const rawToken = route.query.token
-  return typeof rawToken === 'string' && rawToken.length > 0
-    ? rawToken
-    : undefined
+  return typeof rawToken === 'string' && rawToken.length > 0 ? rawToken : undefined
 })
 
 const handleConfirm = async (payload: { password: string }) => {

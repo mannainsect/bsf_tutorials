@@ -90,8 +90,7 @@ test.describe('Password Reset Flow', () => {
 
     const confirmResponse = page.waitForResponse(
       response =>
-        response.url().includes('/reset-password/confirm') &&
-        response.request().method() === 'POST'
+        response.url().includes('/reset-password/confirm') && response.request().method() === 'POST'
     )
     await page.locator('ion-button[type="submit"]').click()
     await confirmResponse
@@ -100,9 +99,7 @@ test.describe('Password Reset Flow', () => {
     await expect(page).toHaveURL(/\/confirm/)
 
     // Should show error toast
-    await expect(
-      page.locator('ion-toast')
-    ).toBeVisible({ timeout: 5000 })
+    await expect(page.locator('ion-toast')).toBeVisible({ timeout: 5000 })
 
     // Should NOT have navigated to login
     expect(page.url()).not.toMatch(/\/login/)
