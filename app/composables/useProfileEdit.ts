@@ -1,16 +1,10 @@
 import { useI18n } from 'vue-i18n'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm, useField } from 'vee-validate'
-import {
-  createProfileEditSchema,
-} from '~/composables/validation/useFormValidation'
+import { createProfileEditSchema } from '~/composables/validation/useFormValidation'
 import { UserService } from './api/services/UserService'
-import type {
-  UpdateUserRequest,
-} from '../../shared/types'
-import {
-  useErrorHandler,
-} from './errors/useErrorHandler'
+import type { UpdateUserRequest } from '../../shared/types'
+import { useErrorHandler } from './errors/useErrorHandler'
 
 export type ProfileEditForm = {
   name: string

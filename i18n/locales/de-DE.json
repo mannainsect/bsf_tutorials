@@ -308,7 +308,9 @@
     "company": {
       "nameRequired": "Firmenname ist erforderlich",
       "countryFormat": "Land muss ISO-Code mit 2 Buchstaben sein (z.B. DE)"
-    }
+    },
+    "invalidPhone": "Bitte geben Sie eine gültige Telefonnummer ein",
+    "invalidUrl": "Bitte geben Sie eine gültige URL ein"
   },
   "settings": {
     "title": "Einstellungen",

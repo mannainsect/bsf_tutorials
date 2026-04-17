@@ -418,136 +418,96 @@ describe('useFormValidation', () => {
 
   describe('registerEmailPasswordSchema', () => {
     it('should validate correct data', async () => {
-      const form = useFormValidation(
-        registerEmailPasswordSchema,
-        {
-          email: 'test@example.com',
-          password: 'password123'
-        }
-      )
+      const form = useFormValidation(registerEmailPasswordSchema, {
+        email: 'test@example.com',
+        password: 'password123'
+      })
 
       await form.validate()
       expect(form.meta.value.valid).toBe(true)
     })
 
     it('should reject missing email', async () => {
-      const form = useFormValidation(
-        registerEmailPasswordSchema,
-        { email: '', password: 'password123' }
-      )
+      const form = useFormValidation(registerEmailPasswordSchema, {
+        email: '',
+        password: 'password123'
+      })
 
       await form.validate()
       expect(form.errors.value.email).toBeTruthy()
     })
 
     it('should reject invalid email', async () => {
-      const form = useFormValidation(
-        registerEmailPasswordSchema,
-        {
-          email: 'not-an-email',
-          password: 'password123'
-        }
-      )
+      const form = useFormValidation(registerEmailPasswordSchema, {
+        email: 'not-an-email',
+        password: 'password123'
+      })
 
       await form.validate()
-      expect(form.errors.value.email)
-        .toContain('valid email')
+      expect(form.errors.value.email).toContain('valid email')
     })
 
     it('should reject short password', async () => {
-      const form = useFormValidation(
-        registerEmailPasswordSchema,
-        { email: 'test@example.com', password: 'abc' }
-      )
+      const form = useFormValidation(registerEmailPasswordSchema, {
+        email: 'test@example.com',
+        password: 'abc'
+      })
 
       await form.validate()
-      expect(form.errors.value.password)
-        .toContain('8 characters')
+      expect(form.errors.value.password).toContain('8 characters')
     })
   })
 
   describe('translator injection', () => {
-    const stubT = (
-      k: string,
-      p?: Record<string, unknown>
-    ) => `T:${k}:${JSON.stringify(p ?? {})}`
+    const stubT = (k: string, p?: Record<string, unknown>) => `T:${k}:${JSON.stringify(p ?? {})}`
 
     it('createLoginSchema uses translator', () => {
       const schema = createLoginSchema(stubT)
-      const result = schema.safeParse(
-        { email: '', password: '' }
-      )
+      const result = schema.safeParse({ email: '', password: '' })
       expect(result.success).toBe(false)
       if (!result.success) {
-        const msgs = result.error.issues
-          .map((i) => i.message)
-        expect(
-          msgs.some((m) => m.startsWith('T:'))
-        ).toBe(true)
+        const msgs = result.error.issues.map(i => i.message)
+        expect(msgs.some(m => m.startsWith('T:'))).toBe(true)
       }
     })
 
     it('createRegisterSchema uses translator', () => {
       const schema = createRegisterSchema(stubT)
-      const result = schema.safeParse(
-        { name: '', email: '', password: '' }
-      )
+      const result = schema.safeParse({ name: '', email: '', password: '' })
       expect(result.success).toBe(false)
       if (!result.success) {
-        const msgs = result.error.issues
-          .map((i) => i.message)
-        expect(
-          msgs.some((m) => m.startsWith('T:'))
-        ).toBe(true)
+        const msgs = result.error.issues.map(i => i.message)
+        expect(msgs.some(m => m.startsWith('T:'))).toBe(true)
       }
     })
 
     it('createProfileSchema uses translator', () => {
       const schema = createProfileSchema(stubT)
-      const result = schema.safeParse(
-        { name: '', email: '' }
-      )
+      const result = schema.safeParse({ name: '', email: '' })
       expect(result.success).toBe(false)
       if (!result.success) {
-        const msgs = result.error.issues
-          .map((i) => i.message)
-        expect(
-          msgs.some((m) => m.startsWith('T:'))
-        ).toBe(true)
+        const msgs = result.error.issues.map(i => i.message)
+        expect(msgs.some(m => m.startsWith('T:'))).toBe(true)
       }
     })
 
-    it(
-      'createRegisterEmailPasswordSchema uses translator',
-      () => {
-        const schema =
-          createRegisterEmailPasswordSchema(stubT)
-        const result = schema.safeParse(
-          { email: '', password: '' }
-        )
-        expect(result.success).toBe(false)
-        if (!result.success) {
-          const msgs = result.error.issues
-            .map((i) => i.message)
-          expect(
-            msgs.some((m) => m.startsWith('T:'))
-          ).toBe(true)
-        }
+    it('createRegisterEmailPasswordSchema uses translator', () => {
+      const schema = createRegisterEmailPasswordSchema(stubT)
+      const result = schema.safeParse({ email: '', password: '' })
+      expect(result.success).toBe(false)
+      if (!result.success) {
+        const msgs = result.error.issues.map(i => i.message)
+        expect(msgs.some(m => m.startsWith('T:'))).toBe(true)
       }
-    )
+    })
 
     it('createProfileEditSchema uses translator', () => {
       const schema = createProfileEditSchema(stubT)
-      const result = schema.safeParse(
-        { name: '', email: '' }
-      )
+      const result = schema.safeParse({ name: '', city: '', country: '' })
       expect(result.success).toBe(false)
       if (!result.success) {
-        const msgs = result.error.issues
-          .map((i) => i.message)
-        expect(
-          msgs.some((m) => m.startsWith('T:'))
-        ).toBe(true)
+        const msgs = result.error.issues.map(i => i.message)
+        expect(msgs.some(m => m.startsWith('T:'))).toBe(true)
       }
     })
   })

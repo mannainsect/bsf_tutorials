@@ -222,16 +222,16 @@ Pre-built English-default exports (`loginSchema`,
 
 From `i18n/locales/en-US.json`:
 
-| Key | English Value |
-|-----|---------------|
-| `validation.required` | This field is required |
-| `validation.invalidEmail` | Please enter a valid email address |
-| `validation.minLength` | Minimum length is {min} characters |
-| `validation.maxLength` | Maximum length is {max} characters |
-| `validation.passwordMatch` | Passwords don't match |
-| `validation.invalidFormat` | Invalid format |
-| `validation.profile.nameRequired` | Name is required |
-| `validation.company.nameRequired` | Company name is required |
+| Key                                | English Value                       |
+| ---------------------------------- | ----------------------------------- |
+| `validation.required`              | This field is required              |
+| `validation.invalidEmail`          | Please enter a valid email address  |
+| `validation.minLength`             | Minimum length is {min} characters  |
+| `validation.maxLength`             | Maximum length is {max} characters  |
+| `validation.passwordMatch`         | Passwords don't match               |
+| `validation.invalidFormat`         | Invalid format                      |
+| `validation.profile.nameRequired`  | Name is required                    |
+| `validation.company.nameRequired`  | Company name is required            |
 | `validation.company.countryFormat` | Country must be a 2-letter ISO code |
 
 ### Rules
@@ -242,7 +242,7 @@ From `i18n/locales/en-US.json`:
   fallback in `fallbackMessages` inside
   `useFormValidation.ts`.
 - Components call `createXSchema(t)` inside `<script
-  setup>` where `t` comes from `useI18n()`.
+setup>` where `t` comes from `useI18n()`.
 
 ## 8. Future Extensions
 

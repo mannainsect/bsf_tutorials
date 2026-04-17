@@ -37,13 +37,8 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import type {
-  LoginCredentials,
-} from '../../../shared/types'
-import {
-  createLoginSchema,
-  useFormValidation,
-} from '~/composables/validation/useFormValidation'
+import type { LoginCredentials } from '../../../shared/types'
+import { createLoginSchema, useFormValidation } from '~/composables/validation/useFormValidation'
 
 interface Props {
   loading?: boolean
@@ -63,14 +58,9 @@ const emit = defineEmits<Emits>()
 
 const { t } = useI18n()
 const schema = createLoginSchema(t)
-const {
-  handleSubmit,
-  defineField,
-  errors,
-  isValid,
-} = useFormValidation(schema, {
+const { handleSubmit, defineField, errors, isValid } = useFormValidation(schema, {
   email: '',
-  password: '',
+  password: ''
 })
 
 const [email] = defineField('email' as const)

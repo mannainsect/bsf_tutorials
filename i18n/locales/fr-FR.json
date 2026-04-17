@@ -308,7 +308,9 @@
     "company": {
       "nameRequired": "Le nom de l'entreprise est obligatoire",
       "countryFormat": "Pays doit être code ISO 2 lettres (ex. FR)"
-    }
+    },
+    "invalidPhone": "Veuillez entrer un numéro de téléphone valide",
+    "invalidUrl": "Veuillez entrer une URL valide"
   },
   "settings": {
     "title": "Paramètres",

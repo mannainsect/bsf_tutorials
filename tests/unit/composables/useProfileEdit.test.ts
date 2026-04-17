@@ -1,19 +1,14 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { computed, ref } from 'vue'
-import {
-  useAuthStore as realUseAuthStore
-} from '~/stores/auth'
+import { useAuthStore as realUseAuthStore } from '~/stores/auth'
 import { useProfileEdit } from '~/composables/useProfileEdit'
-import { UserService } from
-  '~/composables/api/services/UserService'
+import { UserService } from '~/composables/api/services/UserService'
 
 // Create a shared form state for vee-validate mocks
 let mockFormValues: Record<string, unknown> = {}
 let mockFieldRefs: Record<string, unknown> = {}
-const mockFormMeta = ref(
-  { valid: true, dirty: false, touched: false }
-)
+const mockFormMeta = ref({ valid: true, dirty: false, touched: false })
 
 // Mock vee-validate
 vi.mock('vee-validate', () => ({
@@ -23,50 +18,33 @@ vi.mock('vee-validate', () => ({
         return mockFormValues
       },
       meta: mockFormMeta,
-      setValues: (
-        values: Record<string, unknown>
-      ) => {
+      setValues: (values: Record<string, unknown>) => {
         mockFormValues = {}
         Object.assign(mockFormValues, values)
         Object.keys(values).forEach(key => {
           if (mockFieldRefs[key]) {
-            ;(
-              mockFieldRefs[key] as
-              { value: unknown }
-            ).value = values[key]
+            ;(mockFieldRefs[key] as { value: unknown }).value = values[key]
           }
         })
       },
-      resetForm: (
-        opts?: { values?: Record<string, unknown> }
-      ) => {
+      resetForm: (opts?: { values?: Record<string, unknown> }) => {
         if (opts?.values) {
           mockFormValues = {}
           Object.assign(mockFormValues, opts.values)
           Object.keys(opts.values).forEach(key => {
             if (mockFieldRefs[key]) {
-              ;(
-                mockFieldRefs[key] as
-                { value: unknown }
-              ).value = opts.values[key]
+              ;(mockFieldRefs[key] as { value: unknown }).value = opts.values[key]
             }
           })
         }
       },
-      setFieldValue: (
-        name: string, value: unknown
-      ) => {
+      setFieldValue: (name: string, value: unknown) => {
         mockFormValues[name] = value
         if (mockFieldRefs[name]) {
-          ;(
-            mockFieldRefs[name] as
-            { value: unknown }
-          ).value = value
+          ;(mockFieldRefs[name] as { value: unknown }).value = value
         }
       },
-      handleSubmit: (
-        fn: (...args: unknown[]) => unknown
-      ) => fn
+      handleSubmit: (fn: (...args: unknown[]) => unknown) => fn
     }
     return formInstance
   }),
@@ -75,10 +53,7 @@ vi.mock('vee-validate', () => ({
       const fieldRef = ref('')
       mockFieldRefs[name] = fieldRef
 
-      const originalSetter = Object
-        .getOwnPropertyDescriptor(
-          fieldRef, 'value'
-        )?.set
+      const originalSetter = Object.getOwnPropertyDescriptor(fieldRef, 'value')?.set
       Object.defineProperty(fieldRef, 'value', {
         get() {
           return mockFormValues[name] ?? ''
@@ -107,33 +82,19 @@ vi.mock('@vee-validate/zod', () => ({
 vi.mock('~/composables/api/services/UserService')
 
 // Mock useErrorHandler
-vi.mock(
-  '~/composables/errors/useErrorHandler',
-  () => ({
-    useErrorHandler: () => ({
-      normalizeError: vi.fn(
-        (error: unknown) => error
-      ),
-      handleError: vi.fn(
-        (error: unknown) => error
-      ),
-      handleApiError: vi.fn(
-        (error: unknown) => error
-      ),
-      handleValidationError: vi.fn(
-        (error: unknown) => error
-      ),
-      handleSilentError: vi.fn(
-        (error: unknown) => error
-      )
-    })
+vi.mock('~/composables/errors/useErrorHandler', () => ({
+  useErrorHandler: () => ({
+    normalizeError: vi.fn((error: unknown) => error),
+    handleError: vi.fn((error: unknown) => error),
+    handleApiError: vi.fn((error: unknown) => error),
+    handleValidationError: vi.fn((error: unknown) => error),
+    handleSilentError: vi.fn((error: unknown) => error)
   })
-)
+}))
 
 describe('useProfileEdit', () => {
   let authStore: ReturnType<typeof realUseAuthStore>
-  const mockRefreshProfile = vi.fn()
-    .mockResolvedValue({})
+  const mockRefreshProfile = vi.fn().mockResolvedValue({})
 
   const mockUser = {
     _id: 'user1',
@@ -151,7 +112,9 @@ describe('useProfileEdit', () => {
     mockFormValues = {}
     mockFieldRefs = {}
     mockFormMeta.value = {
-      valid: true, dirty: false, touched: false
+      valid: true,
+      dirty: false,
+      touched: false
     }
 
     setActivePinia(createPinia())
@@ -181,8 +144,7 @@ describe('useProfileEdit', () => {
   })
 
   it('startEdit toggles isEditing', () => {
-    const { startEdit, isEditing } =
-      useProfileEdit()
+    const { startEdit, isEditing } = useProfileEdit()
 
     expect(isEditing.value).toBe(false)
     startEdit()
@@ -190,42 +152,37 @@ describe('useProfileEdit', () => {
   })
 
   it('empty name produces nameError', () => {
-    const { startEdit, name, hasErrors } =
-      useProfileEdit()
+    const { startEdit, name, hasErrors } = useProfileEdit()
 
     startEdit()
     name.value = ''
     mockFormMeta.value = {
-      valid: false, dirty: true, touched: true
+      valid: false,
+      dirty: true,
+      touched: true
     }
 
     expect(hasErrors.value).toBe(true)
   })
 
-  it(
-    'handleSubmit posts only dirty fields',
-    async () => {
-      const mockUpdateCurrentUser = vi.fn()
-        .mockResolvedValue({ user: mockUser })
+  it('handleSubmit posts only dirty fields', async () => {
+    const mockUpdateCurrentUser = vi.fn().mockResolvedValue({ user: mockUser })
 
-      vi.mocked(UserService).mockImplementation(
-        () =>
-          ({
-            updateCurrentUser: mockUpdateCurrentUser
-          }) as unknown as UserService
-      )
+    vi.mocked(UserService).mockImplementation(
+      () =>
+        ({
+          updateCurrentUser: mockUpdateCurrentUser
+        }) as unknown as UserService
+    )
 
-      const { startEdit, name, saveProfile } =
-        useProfileEdit()
+    const { startEdit, name, saveProfile } = useProfileEdit()
 
-      startEdit()
-      name.value = 'Updated Name'
-      await saveProfile()
+    startEdit()
+    name.value = 'Updated Name'
+    await saveProfile()
 
-      expect(mockUpdateCurrentUser)
-        .toHaveBeenCalledWith({
-          name: 'Updated Name'
-        })
-    }
-  )
+    expect(mockUpdateCurrentUser).toHaveBeenCalledWith({
+      name: 'Updated Name'
+    })
+  })
 })

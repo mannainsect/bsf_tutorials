@@ -10,10 +10,7 @@
         :placeholder="$t('auth.enterEmail')"
         :disabled="submitting"
       />
-      <ion-note
-        v-if="errors.email"
-        color="danger"
-      >
+      <ion-note v-if="errors.email" color="danger">
         {{ errors.email }}
       </ion-note>
     </ion-item>
@@ -28,10 +25,7 @@
         :placeholder="$t('auth.enterPassword')"
         :disabled="submitting"
       />
-      <ion-note
-        v-if="errors.password"
-        color="danger"
-      >
+      <ion-note v-if="errors.password" color="danger">
         {{ errors.password }}
       </ion-note>
     </ion-item>
@@ -43,21 +37,14 @@
         :disabled="submitting || !isValid"
         class="ion-margin-top"
       >
-        <ion-spinner
-          v-if="submitting"
-          name="crescent"
-        />
+        <ion-spinner v-if="submitting" name="crescent" />
         <span v-else>
           {{ $t('auth.registerButton') }}
         </span>
       </ion-button>
     </div>
 
-    <ion-text
-      v-if="error"
-      color="danger"
-      class="ion-margin-top"
-    >
+    <ion-text v-if="error" color="danger" class="ion-margin-top">
       <p>{{ error }}</p>
     </ion-text>
   </form>
@@ -67,7 +54,7 @@
 import { useI18n } from 'vue-i18n'
 import {
   createRegisterEmailPasswordSchema,
-  useFormValidation,
+  useFormValidation
 } from '~/composables/validation/useFormValidation'
 
 interface Props {
@@ -76,14 +63,12 @@ interface Props {
 }
 
 interface Emits {
-  submit: [
-    formData: { email: string; password: string },
-  ]
+  submit: [formData: { email: string; password: string }]
 }
 
 withDefaults(defineProps<Props>(), {
   submitting: false,
-  error: '',
+  error: ''
 })
 
 const emit = defineEmits<Emits>()
@@ -94,10 +79,10 @@ const {
   handleSubmit: formSubmit,
   defineField,
   errors,
-  isValid,
+  isValid
 } = useFormValidation(schema, {
   email: '',
-  password: '',
+  password: ''
 })
 
 const [email] = defineField('email' as const)
@@ -106,7 +91,7 @@ const [password] = defineField('password' as const)
 const onSubmit = formSubmit(values => {
   emit('submit', {
     email: values.email as string,
-    password: values.password as string,
+    password: values.password as string
   })
 })
 </script>

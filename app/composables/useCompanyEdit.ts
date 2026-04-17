@@ -1,12 +1,8 @@
 import { useI18n } from 'vue-i18n'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm, useField } from 'vee-validate'
-import {
-  createCompanyEditSchema,
-} from '~/composables/validation/useFormValidation'
-import type {
-  CompanyEditForm,
-} from '~/composables/validation/useFormValidation'
+import { createCompanyEditSchema } from '~/composables/validation/useFormValidation'
+import type { CompanyEditForm } from '~/composables/validation/useFormValidation'
 import { CompanyRepository } from './api/repositories/CompanyRepository'
 import type { UpdateCompanyRequest } from './api/repositories/CompanyRepository'
 import { useErrorHandler } from './errors/useErrorHandler'
