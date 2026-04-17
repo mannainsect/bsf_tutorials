@@ -1,10 +1,16 @@
 import { useI18n } from 'vue-i18n'
-import { z } from 'zod'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm, useField } from 'vee-validate'
+import {
+  createProfileEditSchema,
+} from '~/composables/validation/useFormValidation'
 import { UserService } from './api/services/UserService'
-import type { UpdateUserRequest } from '../../shared/types'
-import { useErrorHandler } from './errors/useErrorHandler'
+import type {
+  UpdateUserRequest,
+} from '../../shared/types'
+import {
+  useErrorHandler,
+} from './errors/useErrorHandler'
 
 export type ProfileEditForm = {
   name: string
@@ -18,11 +24,7 @@ export const useProfileEdit = () => {
   const userService = new UserService()
   const { handleSilentError } = useErrorHandler()
 
-  const profileEditSchema = z.object({
-    name: z.string().min(1, t('validation.profile.nameRequired')),
-    city: z.string().optional(),
-    country: z.string().optional()
-  })
+  const profileEditSchema = createProfileEditSchema(t)
 
   // Edit state
   const isEditing = ref(false)
