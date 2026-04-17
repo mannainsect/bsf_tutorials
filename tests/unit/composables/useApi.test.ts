@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { useAuthStore } from '~/stores/auth'
+import { API_TIMEOUT } from '~/utils/constants'
 
 // Mock useErrorHandler BEFORE importing useApi
 const mockHandleSilentError = vi.fn()
@@ -52,9 +53,9 @@ describe('useApi', () => {
   }
 
   describe('config', () => {
-    it('sets timeout to API_TIMEOUT (10000)', async () => {
+    it('sets timeout to API_TIMEOUT', async () => {
       await loadUseApi()
-      expect(captured.timeout).toBe(10000)
+      expect(captured.timeout).toBe(API_TIMEOUT)
     })
 
     it('sets retry to 2', async () => {
@@ -130,17 +131,19 @@ describe('useApi', () => {
     it('throws createError with statusCode 500', async () => {
       await loadUseApi()
       const err = new Error('net fail')
-      expect(() => captured.onRequestError({ error: err })).toThrow()
+      let thrown: unknown
       try {
         captured.onRequestError({ error: err })
-      } catch (thrown: unknown) {
-        const e = thrown as Error & {
-          statusCode: number
-          statusMessage: string
-        }
-        expect(e.statusCode).toBe(500)
-        expect(e.statusMessage).toContain('Network connection error')
+      } catch (e) {
+        thrown = e
       }
+      expect(thrown).toBeDefined()
+      const e = thrown as Error & {
+        statusCode: number
+        statusMessage: string
+      }
+      expect(e.statusCode).toBe(500)
+      expect(e.statusMessage).toContain('Network connection error')
     })
   })
 

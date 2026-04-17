@@ -553,35 +553,38 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       'switchCompany rejected with string "Bad Gateway" ' + '— fallback sets first company',
       async () => {
         vi.useFakeTimers()
-        const profile = makeProfileResponse({
-          user: { _id: 'u3', email: 'f@g.h', balance: 0 },
-          other_companies: [
-            { _id: 'cx', name: 'FallbackCo' },
-            { _id: 'cy', name: 'Other' }
-          ]
-        })
-        const { ProfileRepository } = await import(
-          '~/composables/api/repositories/ProfileRepository'
-        )
-        mockGetCurrentProfile = vi.fn().mockResolvedValue(profile)
-        mockSwitchCompany = vi.fn().mockRejectedValue('Bad Gateway')
-        ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
-          getCurrentProfile: mockGetCurrentProfile,
-          switchCompany: mockSwitchCompany
-        }))
-        const fetchPromise = store.fetchProfile()
-        await vi.runOnlyPendingTimersAsync()
-        await vi.advanceTimersByTimeAsync(1000)
-        await vi.advanceTimersByTimeAsync(1000)
-        await vi.advanceTimersByTimeAsync(1000)
-        await fetchPromise
-        expect(mockSwitchCompany).toHaveBeenCalledTimes(4)
-        expect(store.activeCompany).toEqual({
-          _id: 'cx',
-          id: 'cx',
-          name: 'FallbackCo'
-        })
-        vi.useRealTimers()
+        try {
+          const profile = makeProfileResponse({
+            user: { _id: 'u3', email: 'f@g.h', balance: 0 },
+            other_companies: [
+              { _id: 'cx', name: 'FallbackCo' },
+              { _id: 'cy', name: 'Other' }
+            ]
+          })
+          const { ProfileRepository } = await import(
+            '~/composables/api/repositories/ProfileRepository'
+          )
+          mockGetCurrentProfile = vi.fn().mockResolvedValue(profile)
+          mockSwitchCompany = vi.fn().mockRejectedValue('Bad Gateway')
+          ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
+            getCurrentProfile: mockGetCurrentProfile,
+            switchCompany: mockSwitchCompany
+          }))
+          const fetchPromise = store.fetchProfile()
+          await vi.runOnlyPendingTimersAsync()
+          await vi.advanceTimersByTimeAsync(1000)
+          await vi.advanceTimersByTimeAsync(1000)
+          await vi.advanceTimersByTimeAsync(1000)
+          await fetchPromise
+          expect(mockSwitchCompany).toHaveBeenCalledTimes(4)
+          expect(store.activeCompany).toEqual({
+            _id: 'cx',
+            id: 'cx',
+            name: 'FallbackCo'
+          })
+        } finally {
+          vi.useRealTimers()
+        }
       }
     )
 
@@ -589,18 +592,53 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
       'switchCompany rejected with fetchError-like object ' + '— fallback sets first company',
       async () => {
         vi.useFakeTimers()
+        try {
+          const profile = makeProfileResponse({
+            user: { _id: 'u4', email: 'h@i.j', balance: 0 },
+            other_companies: [{ _id: 'cz', name: 'FBCo' }]
+          })
+          const { ProfileRepository } = await import(
+            '~/composables/api/repositories/ProfileRepository'
+          )
+          mockGetCurrentProfile = vi.fn().mockResolvedValue(profile)
+          mockSwitchCompany = vi.fn().mockRejectedValue({
+            statusCode: 502,
+            data: { detail: 'forbidden' }
+          })
+          ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
+            getCurrentProfile: mockGetCurrentProfile,
+            switchCompany: mockSwitchCompany
+          }))
+          const fetchPromise = store.fetchProfile()
+          await vi.runOnlyPendingTimersAsync()
+          await vi.advanceTimersByTimeAsync(1000)
+          await vi.advanceTimersByTimeAsync(1000)
+          await vi.advanceTimersByTimeAsync(1000)
+          await fetchPromise
+          expect(mockSwitchCompany).toHaveBeenCalledTimes(4)
+          expect(store.activeCompany).toEqual({
+            _id: 'cz',
+            id: 'cz',
+            name: 'FBCo'
+          })
+        } finally {
+          vi.useRealTimers()
+        }
+      }
+    )
+
+    it('retry exhaustion preserves token', async () => {
+      vi.useFakeTimers()
+      try {
         const profile = makeProfileResponse({
-          user: { _id: 'u4', email: 'h@i.j', balance: 0 },
-          other_companies: [{ _id: 'cz', name: 'FBCo' }]
+          user: { _id: 'u5', email: 'k@l.m', balance: 0 },
+          other_companies: [{ _id: 'cw', name: 'KeepToken' }]
         })
         const { ProfileRepository } = await import(
           '~/composables/api/repositories/ProfileRepository'
         )
         mockGetCurrentProfile = vi.fn().mockResolvedValue(profile)
-        mockSwitchCompany = vi.fn().mockRejectedValue({
-          statusCode: 502,
-          data: { detail: 'forbidden' }
-        })
+        mockSwitchCompany = vi.fn().mockRejectedValue(new Error('fail'))
         ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
           getCurrentProfile: mockGetCurrentProfile,
           switchCompany: mockSwitchCompany
@@ -611,37 +649,10 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
         await vi.advanceTimersByTimeAsync(1000)
         await vi.advanceTimersByTimeAsync(1000)
         await fetchPromise
-        expect(mockSwitchCompany).toHaveBeenCalledTimes(4)
-        expect(store.activeCompany).toEqual({
-          _id: 'cz',
-          id: 'cz',
-          name: 'FBCo'
-        })
+        expect(store.token).toBe('test-token')
+      } finally {
         vi.useRealTimers()
       }
-    )
-
-    it('retry exhaustion preserves token', async () => {
-      vi.useFakeTimers()
-      const profile = makeProfileResponse({
-        user: { _id: 'u5', email: 'k@l.m', balance: 0 },
-        other_companies: [{ _id: 'cw', name: 'KeepToken' }]
-      })
-      const { ProfileRepository } = await import('~/composables/api/repositories/ProfileRepository')
-      mockGetCurrentProfile = vi.fn().mockResolvedValue(profile)
-      mockSwitchCompany = vi.fn().mockRejectedValue(new Error('fail'))
-      ;(ProfileRepository as MockProfileRepo).mockImplementation(() => ({
-        getCurrentProfile: mockGetCurrentProfile,
-        switchCompany: mockSwitchCompany
-      }))
-      const fetchPromise = store.fetchProfile()
-      await vi.runOnlyPendingTimersAsync()
-      await vi.advanceTimersByTimeAsync(1000)
-      await vi.advanceTimersByTimeAsync(1000)
-      await vi.advanceTimersByTimeAsync(1000)
-      await fetchPromise
-      expect(store.token).toBe('test-token')
-      vi.useRealTimers()
     })
   })
 })
