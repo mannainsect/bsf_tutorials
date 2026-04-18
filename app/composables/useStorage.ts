@@ -10,7 +10,13 @@ export const useStorage = () => {
   const get = <T extends JsonSerializable>(key: string): T | null => {
     if (import.meta.client) {
       const item = localStorage.getItem(key)
-      return item ? (JSON.parse(item) as T) : null
+      if (item === null) return null
+      try {
+        return JSON.parse(item) as T
+      } catch {
+        localStorage.removeItem(key)
+        return null
+      }
     }
     return null
   }

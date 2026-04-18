@@ -74,6 +74,29 @@ export const useAuthStore = defineStore('auth', () => {
 
   const initializeAuth = () => {
     const storage = useStorage()
+
+    // Detect corrupt outer JSON before hydration
+    if (import.meta.client) {
+      const authKeys = [
+        'auth_token',
+        'auth_user',
+        'auth_active_company',
+        'auth_other_companies',
+        'auth_last_profile_fetch'
+      ]
+      for (const key of authKeys) {
+        const raw = localStorage.getItem(key)
+        if (raw === null) continue
+        try {
+          JSON.parse(raw)
+        } catch {
+          handleSilentError(new Error('auth storage corrupted'), 'authStore.hydrate')
+          logout()
+          return
+        }
+      }
+    }
+
     const savedToken = storage.get<string>('auth_token')
     const savedUser = storage.get<string>('auth_user')
     const savedActiveCompany = storage.get<string>('auth_active_company')
@@ -86,38 +109,54 @@ export const useAuthStore = defineStore('auth', () => {
 
     if (savedUser) {
       try {
-        user.value = JSON.parse(savedUser)
-      } catch (error) {
-        handleSilentError(error, 'authStore.hydrate')
-        storage.remove('auth_user')
+        const parsed = JSON.parse(savedUser)
+        if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) {
+          throw new Error('not an object')
+        }
+        user.value = parsed
+      } catch {
+        handleSilentError(new Error('auth storage corrupted'), 'authStore.hydrate')
+        logout()
+        return
       }
     }
 
     if (savedActiveCompany) {
       try {
-        activeCompany.value = JSON.parse(savedActiveCompany)
-      } catch (error) {
-        handleSilentError(error, 'authStore.hydrate')
-        storage.remove('auth_active_company')
+        const parsed = JSON.parse(savedActiveCompany)
+        if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) {
+          throw new Error('not an object')
+        }
+        activeCompany.value = parsed
+      } catch {
+        handleSilentError(new Error('auth storage corrupted'), 'authStore.hydrate')
+        logout()
+        return
       }
     }
 
     if (savedOtherCompanies) {
       try {
-        otherCompanies.value = JSON.parse(savedOtherCompanies)
-      } catch (error) {
-        handleSilentError(error, 'authStore.hydrate')
-        storage.remove('auth_other_companies')
+        const parsed = JSON.parse(savedOtherCompanies)
+        if (!Array.isArray(parsed)) {
+          throw new Error('not an array')
+        }
+        otherCompanies.value = parsed
+      } catch {
+        handleSilentError(new Error('auth storage corrupted'), 'authStore.hydrate')
+        logout()
+        return
       }
     }
 
     if (savedLastProfileFetch) {
-      try {
-        lastProfileFetch.value = parseInt(savedLastProfileFetch) || 0
-      } catch (error) {
-        handleSilentError(error, 'authStore.hydrate')
-        storage.remove('auth_last_profile_fetch')
+      const parsed = parseInt(savedLastProfileFetch, 10)
+      if (Number.isNaN(parsed) || parsed <= 0) {
+        handleSilentError(new Error('auth storage corrupted'), 'authStore.hydrate')
+        logout()
+        return
       }
+      lastProfileFetch.value = parsed
     }
   }
 

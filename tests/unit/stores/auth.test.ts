@@ -656,3 +656,173 @@ describe('Auth Store - Auto-select Active Company Feature', () => {
     })
   })
 })
+
+describe('initializeAuth corruption handling', () => {
+  // This block tests that initializeAuth performs a full
+  // logout when any stored value is corrupt, rather than
+  // silently skipping individual fields.
+
+  const AUTH_KEYS = [
+    'auth_token',
+    'auth_user',
+    'auth_active_company',
+    'auth_other_companies',
+    'auth_last_profile_fetch'
+  ] as const
+
+  let store: ReturnType<typeof useAuthStore>
+  let mockRemove: ReturnType<typeof vi.fn>
+
+  // Valid seed values — these simulate what storage.get()
+  // returns AFTER a safe JSON.parse. The mock get() returns
+  // these directly (no parse).
+  const validUser = JSON.stringify({
+    _id: 'u1',
+    email: 'a@b.c',
+    balance: 0
+  })
+  const validActiveCompany = JSON.stringify({
+    _id: 'c1',
+    name: 'Co'
+  })
+  const validOtherCompanies = JSON.stringify([{ _id: 'c2', name: 'Other' }])
+
+  function seedValid() {
+    mockStorage['auth_token'] = 'tok-1'
+    localStorage.setItem('auth_token', JSON.stringify('tok-1'))
+    mockStorage['auth_user'] = validUser
+    localStorage.setItem('auth_user', validUser)
+    mockStorage['auth_active_company'] = validActiveCompany
+    localStorage.setItem('auth_active_company', validActiveCompany)
+    mockStorage['auth_other_companies'] = validOtherCompanies
+    localStorage.setItem('auth_other_companies', validOtherCompanies)
+    mockStorage['auth_last_profile_fetch'] = '1700000000000'
+    localStorage.setItem('auth_last_profile_fetch', JSON.stringify('1700000000000'))
+  }
+
+  function clearMockStorage() {
+    const keys = Object.keys(mockStorage)
+    keys.forEach(key => {
+      if (Object.prototype.hasOwnProperty.call(mockStorage, key)) {
+        // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+        delete mockStorage[key]
+      }
+    })
+  }
+
+  function allKeysAbsent(): boolean {
+    return AUTH_KEYS.every(k => mockStorage[k] === undefined)
+  }
+
+  beforeEach(() => {
+    vi.clearAllMocks()
+    clearMockStorage()
+    setActivePinia(createPinia())
+    store = useAuthStore()
+    mockRemove = vi.fn((key: string) => {
+      const keys = Object.keys(mockStorage)
+      keys.forEach(k => {
+        if (k === key && Object.prototype.hasOwnProperty.call(mockStorage, k)) {
+          // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+          delete mockStorage[k]
+        }
+      })
+    })
+    // Override the global mock's remove to track calls
+    const prevGet = global.useStorage().get
+    const prevSet = global.useStorage().set
+    const prevClear = global.useStorage().clear
+    global.useStorage = () => ({
+      get: prevGet,
+      set: prevSet,
+      remove: mockRemove,
+      clear: prevClear
+    })
+  })
+
+  it('hydrates all fields when all keys are valid', () => {
+    seedValid()
+    store.initializeAuth()
+    expect(store.token).toBe('tok-1')
+    expect(store.user).toBeTruthy()
+    expect(store.activeCompany).toBeTruthy()
+    expect(store.otherCompanies.length).toBeGreaterThan(0)
+    expect(store.lastProfileFetch).toBeGreaterThan(0)
+    // All keys still present
+    AUTH_KEYS.forEach(k => {
+      expect(mockStorage[k]).toBeDefined()
+    })
+  })
+
+  it('stays at initial values when no keys exist', () => {
+    store.initializeAuth()
+    expect(store.token).toBeNull()
+    expect(store.user).toBeNull()
+    expect(store.activeCompany).toBeNull()
+    expect(store.otherCompanies).toEqual([])
+    expect(store.lastProfileFetch).toBe(0)
+    expect(mockRemove).not.toHaveBeenCalled()
+  })
+
+  it('hydrates token only when others are missing', () => {
+    mockStorage['auth_token'] = 'tok-1'
+    localStorage.setItem('auth_token', JSON.stringify('tok-1'))
+    store.initializeAuth()
+    expect(store.token).toBe('tok-1')
+    expect(store.user).toBeNull()
+    // No reset triggered — remove not called
+    expect(mockRemove).not.toHaveBeenCalled()
+  })
+
+  // Corruption in any auth key triggers full logout
+  // and clears all auth-related storage keys.
+
+  it('corrupt auth_user triggers full reset ' + '(all keys removed)', () => {
+    seedValid()
+    mockStorage['auth_user'] = '{not-json'
+    localStorage.setItem('auth_user', '{not-json')
+    store.initializeAuth()
+    expect(store.token).toBeNull()
+    expect(store.user).toBeNull()
+    expect(store.activeCompany).toBeNull()
+    expect(allKeysAbsent()).toBe(true)
+  })
+
+  it('corrupt auth_active_company triggers full reset', () => {
+    seedValid()
+    mockStorage['auth_active_company'] = '{bad'
+    localStorage.setItem('auth_active_company', '{bad')
+    store.initializeAuth()
+    expect(store.token).toBeNull()
+    expect(allKeysAbsent()).toBe(true)
+  })
+
+  it('corrupt auth_other_companies triggers full reset', () => {
+    seedValid()
+    mockStorage['auth_other_companies'] = '[broken'
+    localStorage.setItem('auth_other_companies', '[broken')
+    store.initializeAuth()
+    expect(store.token).toBeNull()
+    expect(allKeysAbsent()).toBe(true)
+  })
+
+  it('corrupt auth_last_profile_fetch triggers full reset', () => {
+    seedValid()
+    mockStorage['auth_last_profile_fetch'] = 'NaN-bad'
+    localStorage.setItem('auth_last_profile_fetch', 'NaN-bad')
+    store.initializeAuth()
+    expect(store.token).toBeNull()
+    expect(allKeysAbsent()).toBe(true)
+  })
+
+  it('corrupt inner user JSON triggers full reset', () => {
+    seedValid()
+    // Valid outer string, invalid inner JSON
+    const corruptValue = JSON.stringify('{not-json-inner')
+    mockStorage['auth_user'] = corruptValue
+    localStorage.setItem('auth_user', corruptValue)
+    store.initializeAuth()
+    expect(store.token).toBeNull()
+    expect(allKeysAbsent()).toBe(true)
+  })
+})
