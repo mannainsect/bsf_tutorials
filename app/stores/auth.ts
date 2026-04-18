@@ -78,7 +78,8 @@ export const useAuthStore = defineStore('auth', () => {
     // Detect corrupt outer JSON before hydration
     if (import.meta.client) {
       const authKeys = [
-        'auth_token', 'auth_user',
+        'auth_token',
+        'auth_user',
         'auth_active_company',
         'auth_other_companies',
         'auth_last_profile_fetch'
@@ -89,10 +90,7 @@ export const useAuthStore = defineStore('auth', () => {
         try {
           JSON.parse(raw)
         } catch {
-          handleSilentError(
-            new Error('auth storage corrupted'),
-            'authStore.hydrate'
-          )
+          handleSilentError(new Error('auth storage corrupted'), 'authStore.hydrate')
           logout()
           return
         }
@@ -112,11 +110,7 @@ export const useAuthStore = defineStore('auth', () => {
     if (savedUser) {
       try {
         const parsed = JSON.parse(savedUser)
-        if (
-          typeof parsed !== 'object'
-          || parsed === null
-          || Array.isArray(parsed)
-        ) {
+        if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) {
           throw new Error('not an object')
         }
         user.value = parsed
@@ -130,11 +124,7 @@ export const useAuthStore = defineStore('auth', () => {
     if (savedActiveCompany) {
       try {
         const parsed = JSON.parse(savedActiveCompany)
-        if (
-          typeof parsed !== 'object'
-          || parsed === null
-          || Array.isArray(parsed)
-        ) {
+        if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) {
           throw new Error('not an object')
         }
         activeCompany.value = parsed
