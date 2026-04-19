@@ -80,9 +80,9 @@ async function mountPage(
           template:
             '<div class="error-stub">' +
             '<button class="retry" ' +
-            '@click="$attrs[\'retry-action\']()">' +
+            '@click="$emit(\'retry\')">' +
             'retry</button></div>',
-          inheritAttrs: false
+          emits: ['retry']
         },
         VideoCard: {
           template: '<div class="video-card-stub">' + '{{ video.title }}</div>',

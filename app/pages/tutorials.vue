@@ -29,8 +29,8 @@
         <ion-col size="12" size-md="8" size-lg="6">
           <ErrorCard
             :message="t('tutorials.error.title')"
-            :retry-action="retryLoad"
             :retry-label="t('tutorials.error.retry')"
+            @retry="retryLoad"
           />
         </ion-col>
       </ion-row>
