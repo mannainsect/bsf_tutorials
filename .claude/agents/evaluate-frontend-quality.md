@@ -3,7 +3,7 @@ name: frontend-quality-evaluator
 description: UI/UX and frontend code quality evaluator
   focused on modularity, accessibility, and maintainability
 tools: Glob, Grep, Read, WebFetch, TodoWrite, WebSearch,
-  BashOutput, KillShell,
+  Bash, BashOutput, KillShell,
   mcp__context7__resolve-library-id,
   mcp__context7__get-library-docs
 model: opus

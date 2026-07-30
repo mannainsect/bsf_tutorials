@@ -3,7 +3,7 @@ name: issue-analyzer-careful
 description: Analyzes issues for minimal side effects
   and maximum safety
 tools: Glob, Grep, Read, WebFetch, TodoWrite, WebSearch,
-  BashOutput, KillShell,
+  Bash, BashOutput, KillShell,
   mcp__context7__resolve-library-id,
   mcp__context7__get-library-docs
 model: opus
